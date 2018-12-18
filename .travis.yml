@@ -1,0 +1,20 @@
+language: node_js
+node_js:
+- stable
+cache:
+  directories:
+  - node_modules
+script:
+- npm run lint
+- npm run test
+- npm run build
+after_success:
+- COVERALLS_REPO_TOKEN=$coveralls_repo_token npm run coveralls
+deploy:
+  - provider: heroku
+    api_key:
+      secure: NW5OMqF5cDH+ZcIr/StdaAOj6HGkkZpi3AXmy0JZSdd4moeRoract9IGaE30ILb4/wgvyuhyj5uBWTndDKcNliuYXvKpyBSk/z10LPNg3F0JMjVmYLLkLL0BnihID+YxmIo1Ww/Wo+S8gVh8V/yLVN/RePByKHucBqZPGeVv1E8B1+awjnL2Ow/ea+sA8iiB6sDtDCYn6KMTRugjdpOSRp8hP5utNTSFead/FAoZAmcZM9bm5Jxeft8Wqu+AfMqCxBwD1bOZYtVEZDqytFCjYXOOY0l7ciAATcyBd/K2EJta7ORApLhHWPOVt8KzLWq2f8pyuMOdiDRfHDeHZPRbR9Ac5/K93AQ00Sx4jEKPm0ADDohrLWfKt3JYmWrLtAUnzDNtV721bBWI6zuHdbk+WyzFW6pLaJOLobIVbiPc3PIPYMMEiqTgDOKbkjynEGcqrkhJX1xeOOodMgEzEDQ0izyrMjtDZCxlEEU6UosngWmWFwgLni8dYAR26YnHfj5I92uMbUQT9JcKy6+t40WhXLDVadkzzGb9J+hLAtKlkew63faSAHeSIPTs6ze5dETL/qqEZ6/2+ckl3irwG1mbCrfkrew7KVTQn6Gk3eceCDZuI31ZyVxNST0j+PxTHT9Eyd2h0/9VGa1nnI0r1Oit74RZcUeWevZZZZdZ8enJNV4=
+    app: livepeer-alerts-frontend
+    on:
+      branch: master
+      repo: protofire/livepeer-alerts-frontend
