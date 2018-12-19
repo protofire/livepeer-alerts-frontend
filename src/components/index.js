@@ -1,3 +1,3 @@
-export { AccountSummaryComponent } from './AccountSummary'
+export { AccountSummaryComponent } from './AccountSummary/accountSummary'
 export { HomeComponent } from './Home/home'
-export { SubscriptionComponent } from './Subscription'
+export { SubscriptionComponent } from './Subscription/subscription'
