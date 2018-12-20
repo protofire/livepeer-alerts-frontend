@@ -7,9 +7,9 @@ export class PrivateRoute extends Component {
 
     return (
       <Route
-        {...props}
+        {...this.props}
         render={props =>
-          this.props.authenticated ? <Component {...props} /> : <Redirect to="/" />
+          this.props.authenticated ? <Component {...this.props} /> : <Redirect to="/" />
         }
       />
     )

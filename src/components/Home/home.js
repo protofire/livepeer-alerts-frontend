@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import './home.css'
 
 export class HomeComponent extends Component {
-  /*  onGetStartedBtnHandler = () => {
+    onGetStartedBtnHandler = () => {
     const { web3 } = this.props;
     console.log("[Home.js] web3: ", web3);
     if(!web3){
@@ -17,7 +17,7 @@ export class HomeComponent extends Component {
       console.log("Web3 connected ", web3.isConnected())
       this.props.history.push('/account');
     }
-  };*/
+  };
 
   render() {
     let content
