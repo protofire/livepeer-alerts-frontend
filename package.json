@@ -20,6 +20,7 @@
     "web3": "^1.0.0-beta.37"
   },
   "devDependencies": {
+    "babel-eslint": "^9.0.0",
     "coveralls": "^3.0.2",
     "enzyme": "^3.8.0",
     "enzyme-adapter-react-16": "^1.7.1",
@@ -40,9 +41,7 @@
     "lint": "eslint . src/**/*.js",
     "coveralls": "cat ./coverage/lcov.info | coveralls"
   },
-  "eslintConfig": {
-    "extends": "react-app"
-  },
+  "eslintConfig": {},
   "browserslist": [
     ">0.2%",
     "not dead",
