@@ -4,23 +4,43 @@ import 'react-toastify/dist/ReactToastify.css'
 import './home.css'
 
 export class HomeComponent extends Component {
+
+    state = {
+      toastId: 1
+    }
+
     onGetStartedBtnHandler = () => {
     const { web3 } = this.props;
-    console.log("[Home.js] web3: ", web3);
+    console.log("[Home.js] props: ", this.props);
+    console.log("Web3: ", web3);
     if(!web3){
-      toast.error("Please install metamask and come back!", {
-        position: toast.POSITION.TOP_RIGHT,
-        progressClassName: 'Toast-progress-bar'
-      });
+      this.sendToastError();
     }
     else {
-      console.log("Web3 connected ", web3.isConnected())
+      console.log("Web3 connected ", web3.currentProvider.isConnected())
       this.props.history.push('/account');
     }
   };
 
+    sendToastError = (toastTime) =>{
+      if(!toast.isActive(this.state.toastId)) {
+        toast.error("Please install metamask and come back!", {
+          position: toast.POSITION.TOP_RIGHT,
+          progressClassName: 'Toast-progress-bar',
+          autoClose: toastTime,
+          toastId: this.state.toastId
+        });
+      }
+    };
+
+    componentDidMount() {
+      if(!this.props.web3){
+          this.sendToastError(6000);
+        }
+      }
+
   render() {
-    let content
+    let content;
 
     content = (
       <>
@@ -33,6 +53,7 @@ export class HomeComponent extends Component {
         <ToastContainer autoClose={3000} />
       </>
     )
+
     return <div>{content}</div>
   }
 }
