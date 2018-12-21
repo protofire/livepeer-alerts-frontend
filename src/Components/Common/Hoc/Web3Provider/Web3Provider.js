@@ -28,24 +28,27 @@ const withWeb3Provider = WrappedComponent => {
           /** Request access to the user **/
           console.log('[Web3Provider.js] requesting user permissions')
           await window.ethereum.enable()
-          userAddress = await web3Instance.eth.getAccounts()
-          userAddress = userAddress[0]
-          userNetwork = await web3Instance.eth.net.getId()
-          console.log('[Web3Provider.js] user with web3 ethereum authenticated')
-          /** The user accepted the app, now it's authenticated **/
-          this.setState({
-            web3: web3Instance,
-            userData: {
-              authenticated: true,
-              address: userAddress,
-              currentNetwork: userNetwork
-            },
-            render: true
-          })
-          /** We subscribe to the event that detects if the user has changed the account **/
-          web3Instance.currentProvider.publicConfigStore.on(
-            'update',
-            this.onUserAccountChangeHandler
+          Promise.all([web3Instance.eth.getAccounts(), web3Instance.eth.net.getId()]).then(
+            results => {
+              userAddress = results[0]
+              userNetwork = results[0]
+              console.log('[Web3Provider.js] user with web3 ethereum authenticated')
+              /** The user accepted the app, now it's authenticated **/
+              this.setState({
+                web3: web3Instance,
+                userData: {
+                  authenticated: true,
+                  address: userAddress,
+                  currentNetwork: userNetwork
+                },
+                render: true
+              })
+              /** We subscribe to the event that detects if the user has changed the account **/
+              web3Instance.currentProvider.publicConfigStore.on(
+                'update',
+                this.onUserAccountChangeHandler
+              )
+            }
           )
         } catch (error) {
           /** The user denied the app, it's not authenticated **/
@@ -63,21 +66,27 @@ const withWeb3Provider = WrappedComponent => {
       } else if (window.web3) {
         console.log('[Web3Provider.js] getting web3 legacy instance')
         web3Instance = new Web3(window.web3.currentProvider)
-        userAddress = await web3Instance.eth.getAccounts()
-        userAddress = userAddress[0]
-        userNetwork = await web3Instance.eth.net.getId()
-        this.setState({
-          web3: web3Instance,
-          userData: {
-            authenticated: true,
-            address: userAddress,
-            currentNetwork: userNetwork
-          },
-          render: true
-        })
-        console.log('[Web3Provider.js] user with web3 legacy authenticated')
-        /** We subscribe to the event that detects if the user has changed the account **/
-        web3Instance.currentProvider.publicConfigStore.on('update', this.onUserAccountChangeHandler)
+        Promise.all([web3Instance.eth.getAccounts(), web3Instance.eth.net.getId()]).then(
+          results => {
+            userAddress = results[0]
+            userNetwork = results[0]
+            this.setState({
+              web3: web3Instance,
+              userData: {
+                authenticated: true,
+                address: userAddress,
+                currentNetwork: userNetwork
+              },
+              render: true
+            })
+            console.log('[Web3Provider.js] user with web3 legacy authenticated')
+            /** We subscribe to the event that detects if the user has changed the account **/
+            web3Instance.currentProvider.publicConfigStore.on(
+              'update',
+              this.onUserAccountChangeHandler
+            )
+          }
+        )
       } else {
         /** The user does not have web3 **/
         this.setState({
@@ -108,16 +117,7 @@ const withWeb3Provider = WrappedComponent => {
     }
 
     render() {
-      let content
-      /*        if (this.state.web3) {
-          console.log("[Web3Provider.js] rendering first case");
-          content = <WrappedComponent {...this.props} web3={this.state.web3} authenticated/>
-        } else {
-          console.log("[Web3Provider.js] rendering second case");
-          content = <h1>Please install metamask and come back!</h1>
-        }*/
-
-      content = (
+      return (
         <WrappedComponent
           {...this.props}
           web3={this.state.web3}
@@ -125,7 +125,6 @@ const withWeb3Provider = WrappedComponent => {
           render={this.state.render}
         />
       )
-      return content
     }
   }
 }
