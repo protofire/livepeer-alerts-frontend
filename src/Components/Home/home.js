@@ -11,8 +11,7 @@ export class HomeComponent extends Component {
   onGetStartedBtnHandler = () => {
     const { web3 } = this.props
     console.log('[Home.js] props: ', this.props)
-    console.log('Web3: ', web3)
-    if (typeof web3 === 'undefined') {
+    if (!web3) {
       this.sendToastError()
     } else {
       console.log('Web3 connected ', web3.currentProvider.isConnected())
@@ -21,7 +20,7 @@ export class HomeComponent extends Component {
   }
 
   sendToastError = toastTime => {
-    if (!toast.isActive(this.state.toastId)) {
+    if (!toast.isActive(this.state.toastId) && this.props.render) {
       toast.error('Please install metamask and come back!', {
         position: toast.POSITION.TOP_RIGHT,
         progressClassName: 'Toast-progress-bar',
@@ -32,6 +31,7 @@ export class HomeComponent extends Component {
   }
 
   componentDidMount() {
+    console.log('[Home.js] componentDidMount, props: ', this.props)
     if (!this.props.web3) {
       this.sendToastError(6000)
     }
