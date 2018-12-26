@@ -16,7 +16,7 @@ export class HomeComponent extends Component {
     if (!web3 || (web3 && !this.props.userData.authenticated)) {
       this.sendToastError()
     } else {
-      console.log('Web3 connected ', web3.currentProvider.isConnected())
+      console.log('[Home.js] userAuthenticated, routing to /account: ', this.props.userData)
       this.props.history.push('/account')
     }
   }
@@ -44,9 +44,7 @@ export class HomeComponent extends Component {
     }
 
     if (!toast.isActive(this.state.toastId) && this.props.render) {
-      console.log("Opening toast with fn : ", this.props.toastOpenedHandler);
-
-      toast.error(errorMsg, {
+       toast.error(errorMsg, {
         position: toast.POSITION.TOP_RIGHT,
         progressClassName: 'Toast-progress-bar',
         autoClose: toastTime,
