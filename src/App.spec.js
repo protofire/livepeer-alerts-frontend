@@ -4,8 +4,7 @@ import { configure, mount, shallow } from 'enzyme'
 import App from '../src/App'
 import Adapter from 'enzyme-adapter-react-16/build'
 import { AccountSummaryComponent, HomeComponent } from './Components'
-import * as failReasons from './Components/Common/Hoc/Web3Provider/Web3FailReasons'
-import * as texts from './Components/Common/UI/Texts/Texts'
+import spinner from './Components/Common/UI/Spinner/Spinner'
 
 /*it('renders welcome message', () => {
   const wrapper = mount(<App />)
