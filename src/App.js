@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import './App.css'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { HomeComponent, AccountSummaryComponent } from './Components'
 import PrivateRoute from './Components/Common/Hoc/PrivateRoute/PrivateRoute'
 import withWeb3Provider from './Components/Common/Hoc/Web3Provider/Web3Provider'
@@ -13,17 +13,19 @@ export class App extends Component {
     if (this.props.render) {
       content = (
         <>
-          <Route
-            exact
-            path="/"
-            render={routeProps => <HomeComponent {...this.props} {...routeProps} />}
-          />
-          <PrivateRoute
-            authenticated={this.props.userData.authenticated}
-            exact
-            path="/account"
-            component={AccountSummaryComponent}
-          />
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={routeProps => <HomeComponent {...this.props} {...routeProps} />}
+            />
+            <PrivateRoute
+              authenticated={this.props.userData.authenticated}
+              exact
+              path="/account"
+              component={AccountSummaryComponent}
+            />
+          </Switch>
         </>
       )
     }
