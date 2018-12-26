@@ -44,7 +44,7 @@ export class HomeComponent extends Component {
     }
 
     if (!toast.isActive(this.state.toastId) && this.props.render) {
-       toast.error(errorMsg, {
+      toast.error(errorMsg, {
         position: toast.POSITION.TOP_RIGHT,
         progressClassName: 'Toast-progress-bar',
         autoClose: toastTime,
@@ -57,7 +57,6 @@ export class HomeComponent extends Component {
       }
     }
   }
-
 
   componentDidMount() {
     console.log('[Home.js] componentDidMount, props: ', this.props)

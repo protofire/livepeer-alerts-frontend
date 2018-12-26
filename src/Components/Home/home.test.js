@@ -29,7 +29,7 @@ describe('Renders home message', () => {
       web3: [],
       userData: {
         authenticated: false,
-        reason: failReasons.NO_PERMISSIONS,
+        reason: failReasons.NO_PERMISSIONS
       },
       render: true,
       toastOpenedHandlerTest: toastFn
