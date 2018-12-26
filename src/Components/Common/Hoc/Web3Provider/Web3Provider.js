@@ -101,9 +101,10 @@ const withWeb3Provider = WrappedComponent => {
     }
 
     onUserAccountChangeHandler = userAuthData => {
-      console.log('[Web3Provider.js] onUserAccountChangeHandler with data', userAuthData)
+      //console.log('[Web3Provider.js] onUserAccountChangeHandler with data', userAuthData)
       this.setState({
         userData: {
+          ...this.state.userData,
           address: userAuthData.selectedAddress,
           currentNetwork: userAuthData.networkVersion
         }
