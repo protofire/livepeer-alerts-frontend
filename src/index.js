@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
+import axios from 'axios'
+
+/** Axios default cfg **/
+axios.defaults.baseURL = 'http://127.0.0.1:4040/api/subscribers'
 
 ReactDOM.render(<App />, document.getElementById('root'))
 

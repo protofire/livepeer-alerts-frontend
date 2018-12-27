@@ -7,6 +7,16 @@ import withWeb3Provider from './Components/Common/Hoc/Web3Provider/Web3Provider'
 import Spinner from './Components/Common/UI/Spinner/Spinner'
 
 export class App extends Component {
+  shouldComponentUpdate(nextProps, nextState, nextContext) {
+    console.log('[App.js] shouldComponentUpdate')
+    let shouldUpdate =
+      this.props.render !== nextProps.render ||
+      this.props.userData.authenticated !== nextProps.userData.authenticated ||
+      this.props.userData.address !== nextProps.userData.address ||
+      this.props.userData.currentNetwork !== nextProps.userData.currentNetwork
+    return shouldUpdate
+  }
+
   render() {
     console.log('[App.js] props', this.props)
     let content = <Spinner />
