@@ -8,7 +8,7 @@ import UserNotSubscribed from './UserNotSubscribed/UserNotSubscribed'
 export class AccountSummaryComponent extends Component {
   state = {
     userData: {
-      address: this.props.userData.address[0],
+      address: null,
       isSubscribed: false,
       activated: null,
       id: null,
@@ -21,9 +21,19 @@ export class AccountSummaryComponent extends Component {
     displayMsg: displayTexts.LOADING_USER_DATA
   }
 
+  initState = async () => {
+    this.setState({
+      userData: {
+        ...this.state.userData,
+        address: this.props.userData.address
+      }
+    })
+  }
+
   componentDidMount = async () => {
-    console.log('[AccountSummaryComponent.js] componentDidMount, userData: ', this.state.userData)
+    console.log('[AccountSummaryComponent.js] componentDidMount, userData: ', this.props.userData)
     let response
+    await this.initState()
     try {
       response = await axios.get('/address/' + this.state.userData.address)
       this.setState({
@@ -138,6 +148,8 @@ export class AccountSummaryComponent extends Component {
     }
   }
 
+  onSubscriptionChangeHandler = () => {}
+
   render() {
     let content = (
       <>
@@ -151,13 +163,16 @@ export class AccountSummaryComponent extends Component {
           email: this.state.userData.email,
           frequency: this.state.userData.frequency,
           id: this.state.userData.id,
-          address: this.state.userData.address
+          address: this.state.userData.address,
+          activated: this.state.userData.activated,
+          createdAt: this.state.userData.createdAt
         }
         content = (
           <>
             <UserSubscribed
               userData={userData}
               onUnSubscribeBtnHandler={this.onUnSubscribeBtnHandler}
+              onSubscriptionChangeHandler={this.onSubscriptionChangeHandler}
             />
           </>
         )

@@ -31,18 +31,19 @@ const withWeb3Provider = WrappedComponent => {
           Promise.all([web3Instance.eth.getAccounts(), web3Instance.eth.net.getId()]).then(
             results => {
               userAddress = results[0]
-              userNetwork = results[0]
+              userNetwork = results[1]
               console.log('[Web3Provider.js] user with web3 ethereum authenticated')
               /** The user accepted the app, now it's authenticated **/
               this.setState({
                 web3: web3Instance,
                 userData: {
                   authenticated: true,
-                  address: userAddress,
+                  address: userAddress[0],
                   currentNetwork: userNetwork
                 },
                 render: true
               })
+
               /** We subscribe to the event that detects if the user has changed the account **/
               web3Instance.currentProvider.publicConfigStore.on(
                 'update',
