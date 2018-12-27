@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import axios from 'axios'
 import Spinner from '../Common/UI/Spinner/Spinner'
+import * as displayTexts from './AccountSummaryTexts'
 
 export class AccountSummaryComponent extends Component {
   state = {
@@ -15,39 +16,55 @@ export class AccountSummaryComponent extends Component {
       createdAt: null
     },
     render: false,
-    loadingMsg: 'Loading user data'
+    displayMsg: displayTexts.LOADING_USER_DATA
   }
 
   componentDidMount = async () => {
     console.log('[AccountSummaryComponent.js] componentDidMount, userData: ', this.state.userData)
     let response
     try {
-      /** Todo change once id is available **/
-      response = await axios.get('/summary/' + this.state.userData.address)
-      console.log('Recovered user subscribed: ', response.data)
+      response = await axios.get('/address/' + this.state.userData.address)
       this.setState({
         userData: {
           ...this.state.userData,
-          isSubscribed: true
+          isSubscribed: true,
+          activated: response.data.activated,
+          id: response.data._id,
+          activatedCode: response.data.activatedCode,
+          createdAt: response.data.createdAt
         },
-        render: true
+        render: true,
+        displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email
       })
-    } catch (exception) {
-      /** Check for 404 not found instead of simple exception **/
-      console.log('[AccountSummary.js] exception on getRequest', exception)
-      this.setState({
-        userData: {
-          ...this.state.userData,
-          isSubscribed: false
-        },
-        render: true
-      })
+    } catch (error) {
+      console.log('[AccountSummary.js] exception on getRequest')
+      /** Subscription not found **/
+      if (error.response.status === 404) {
+        console.log('Subscription not found')
+        this.setState({
+          userData: {
+            ...this.state.userData,
+            isSubscribed: false
+          },
+          render: true,
+          displayMsg: displayTexts.WELCOME_NOT_SUBSCRIBED
+        })
+      } else {
+        this.setState({
+          render: true,
+          displayMsg: displayTexts.FAIL_NO_REASON
+        })
+      }
     }
   }
 
   onSubscribeBtnHandler = async () => {
     console.log('[AccountSummary.js] subscribe btnHandler')
     let response
+    this.setState({
+      render: false,
+      displayMsg: displayTexts.LOADING_SUBSCRIPTION
+    })
     const data = {
       email: this.state.userData.email,
       address: this.state.userData.address,
@@ -64,11 +81,17 @@ export class AccountSummaryComponent extends Component {
           activatedCode: response.data.activated,
           createdAt: response.data.createdAt,
           isSubscribed: true
-        }
+        },
+        render: true,
+        displayMsg: displayTexts.WELCOME_NEW_SUBSCRIBER + this.state.userData.email
       })
       console.log('Final state: ', this.state.userData)
     } catch (exception) {
       console.log('[AccountSummary.js] exception on postSubscription', exception)
+      this.setState({
+        render: true,
+        displayMsg: displayTexts.FAIL_NO_REASON
+      })
     }
   }
 
@@ -76,30 +99,48 @@ export class AccountSummaryComponent extends Component {
     console.log('[AccountSummary.js] unsubscribe btnHandler')
     this.setState({
       render: false,
-      loadingMsg: 'Please wait while we process your unsubscription'
+      displayMsg: displayTexts.LOADING_UNSUBSCRIPTION
     })
     const data = {
       username: 'test'
     }
     try {
-      console.log('userdata id: ', this.state.userData.id)
       await axios.delete('/' + this.state.userData.id, data)
       console.log('User unsubscribed')
-    } catch (exception) {
-      console.log('[AccountSummary.js] exception on deleteSubscription', exception)
       this.setState({
-        render: true
+        render: true,
+        displayMsg: displayTexts.WELCOME_NOT_SUBSCRIBED,
+        userData: {
+          ...this.state.userData,
+          isSubscribed: false,
+          activated: null,
+          id: null,
+          activatedCode: null,
+          createdAt: null
+        }
       })
+    } catch (exception) {
+      console.log('[AccountSummary.js] exception on deleteSubscription')
+      if (exception.response.status === 404) {
+        /** User with that id not found **/
+        this.setState({
+          render: true,
+          displayMsg: displayTexts.WELCOME_NOT_SUBSCRIBED
+        })
+      } else {
+        this.setState({
+          render: true,
+          displayMsg: displayTexts.FAIL_NO_REASON
+        })
+      }
     }
   }
 
   render() {
-    console.log('[AccountSummaryComponent.js] props: ', this.props)
-    const { web3 } = this.props
-    console.log('[AccountSummaryComponent.js]', web3)
+    // console.log('[AccountSummaryComponent.js] props: ', this.props)
     let content = (
       <>
-        <h3>{this.state.loadingMsg}</h3>
+        <h3>{this.state.displayMsg}</h3>
         <Spinner />
       </>
     )
@@ -107,14 +148,14 @@ export class AccountSummaryComponent extends Component {
       if (this.state.userData.isSubscribed) {
         content = (
           <>
-            <h3>Welcome again! {this.state.userData.email}</h3>
+            <h3>{this.state.displayMsg}</h3>
             <button onClick={this.onUnSubscribeBtnHandler}>Unsubscribe</button>
           </>
         )
       } else {
         content = (
           <>
-            <h3>Welcome to Livepeer!</h3>
+            <h3>{this.state.displayMsg}</h3>
             <button onClick={this.onSubscribeBtnHandler}>Subscribe</button>
           </>
         )

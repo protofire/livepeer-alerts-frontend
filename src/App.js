@@ -18,7 +18,6 @@ export class App extends Component {
   }
 
   render() {
-    console.log('[App.js] props', this.props)
     let content = <Spinner />
     if (this.props.render) {
       content = (
