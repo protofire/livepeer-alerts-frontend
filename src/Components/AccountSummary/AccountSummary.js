@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Spinner from '../Common/UI/Spinner/Spinner'
 import * as displayTexts from './AccountSummaryTexts'
+import UserSubscribed from './UserSubscribed/UserSubscribed'
+import UserNotSubscribed from './UserNotSubscribed/UserNotSubscribed'
 
 export class AccountSummaryComponent extends Component {
   state = {
@@ -137,7 +139,6 @@ export class AccountSummaryComponent extends Component {
   }
 
   render() {
-    // console.log('[AccountSummaryComponent.js] props: ', this.props)
     let content = (
       <>
         <h3>{this.state.displayMsg}</h3>
@@ -146,17 +147,24 @@ export class AccountSummaryComponent extends Component {
     )
     if (this.state.render) {
       if (this.state.userData.isSubscribed) {
+        const userData = {
+          email: this.state.userData.email,
+          frequency: this.state.userData.frequency,
+          id: this.state.userData.id,
+          address: this.state.userData.address
+        }
         content = (
           <>
-            <h3>{this.state.displayMsg}</h3>
-            <button onClick={this.onUnSubscribeBtnHandler}>Unsubscribe</button>
+            <UserSubscribed
+              userData={userData}
+              onUnSubscribeBtnHandler={this.onUnSubscribeBtnHandler}
+            />
           </>
         )
       } else {
         content = (
           <>
-            <h3>{this.state.displayMsg}</h3>
-            <button onClick={this.onSubscribeBtnHandler}>Subscribe</button>
+            <UserNotSubscribed onSubscribeBtnHandler={this.onSubscribeBtnHandler} />
           </>
         )
       }
