@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import axios from 'axios'
+import Spinner from '../Common/UI/Spinner/Spinner'
 
 export class AccountSummaryComponent extends Component {
   state = {
@@ -12,7 +13,9 @@ export class AccountSummaryComponent extends Component {
       frequency: 'weekly',
       activatedCode: null,
       createdAt: null
-    }
+    },
+    render: false,
+    loadingMsg: 'Loading user data'
   }
 
   componentDidMount = async () => {
@@ -26,7 +29,8 @@ export class AccountSummaryComponent extends Component {
         userData: {
           ...this.state.userData,
           isSubscribed: true
-        }
+        },
+        render: true
       })
     } catch (exception) {
       /** Check for 404 not found instead of simple exception **/
@@ -35,7 +39,8 @@ export class AccountSummaryComponent extends Component {
         userData: {
           ...this.state.userData,
           isSubscribed: false
-        }
+        },
+        render: true
       })
     }
   }
@@ -69,14 +74,22 @@ export class AccountSummaryComponent extends Component {
 
   onUnSubscribeBtnHandler = async () => {
     console.log('[AccountSummary.js] unsubscribe btnHandler')
+    this.setState({
+      render: false,
+      loadingMsg: 'Please wait while we process your unsubscription'
+    })
     const data = {
       username: 'test'
     }
     try {
+      console.log('userdata id: ', this.state.userData.id)
       await axios.delete('/' + this.state.userData.id, data)
       console.log('User unsubscribed')
     } catch (exception) {
       console.log('[AccountSummary.js] exception on deleteSubscription', exception)
+      this.setState({
+        render: true
+      })
     }
   }
 
@@ -84,17 +97,30 @@ export class AccountSummaryComponent extends Component {
     console.log('[AccountSummaryComponent.js] props: ', this.props)
     const { web3 } = this.props
     console.log('[AccountSummaryComponent.js]', web3)
-    let content
-    if (this.state.userData.isSubscribed) {
-      content = <button onClick={this.onUnSubscribeBtnHandler}>Unsubscribe</button>
-    } else {
-      content = <button onClick={this.onSubscribeBtnHandler}>Subscribe</button>
-    }
-    return (
-      <div>
-        <h3>Account Summary Component</h3>
-        {content}
-      </div>
+    let content = (
+      <>
+        <h3>{this.state.loadingMsg}</h3>
+        <Spinner />
+      </>
     )
+    if (this.state.render) {
+      if (this.state.userData.isSubscribed) {
+        content = (
+          <>
+            <h3>Welcome again! {this.state.userData.email}</h3>
+            <button onClick={this.onUnSubscribeBtnHandler}>Unsubscribe</button>
+          </>
+        )
+      } else {
+        content = (
+          <>
+            <h3>Welcome to Livepeer!</h3>
+            <button onClick={this.onSubscribeBtnHandler}>Subscribe</button>
+          </>
+        )
+      }
+    }
+
+    return <div>{content}</div>
   }
 }
