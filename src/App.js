@@ -23,6 +23,8 @@ export class App extends Component {
               authenticated={this.props.userData.authenticated}
               exact
               path="/account"
+              web3={this.props.web3}
+              userData={this.props.userData}
               component={AccountSummaryComponent}
             />
           </Switch>
