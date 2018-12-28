@@ -74,37 +74,40 @@ const withWeb3Provider = WrappedComponent => {
       Promise.all([web3Instance.eth.getAccounts(), web3Instance.eth.net.getId()]).then(results => {
         userAddress = results[0]
         userNetwork = results[1]
-        this.setState({
-          web3: web3Instance,
-          userData: {
-            authenticated: true,
-            address: userAddress[0],
-            currentNetwork: userNetwork
-          },
-          render: true
-        })
-
-        /** We subscribe to the event that detects if the user has changed the account **/
-        window.ethereum.on('accountsChanged', accounts => {
-          console.log('ETHEREUM CHANGED')
-          console.log('ACCOUNTS ', accounts)
+        web3Instance.eth.getBalance(userAddress[0]).then(balance => {
           this.setState({
+            web3: web3Instance,
             userData: {
-              ...this.state.userData,
-              address: accounts[0]
-            }
+              authenticated: true,
+              address: userAddress[0],
+              currentNetwork: userNetwork,
+              ethBalance: balance
+            },
+            render: true
           })
-        })
 
-        /** We subscribe to the event that detects if the user has changed the network **/
-        window.ethereum.on('networkChanged', network => {
-          console.log('NETWORK CHANGED')
-          console.log('NETWORK ', network)
-          this.setState({
-            userData: {
-              ...this.state.userData,
-              currentNetwork: network
-            }
+          /** We subscribe to the event that detects if the user has changed the account **/
+          window.ethereum.on('accountsChanged', accounts => {
+            console.log('ETHEREUM CHANGED')
+            console.log('ACCOUNTS ', accounts)
+            this.setState({
+              userData: {
+                ...this.state.userData,
+                address: accounts[0]
+              }
+            })
+          })
+
+          /** We subscribe to the event that detects if the user has changed the network **/
+          window.ethereum.on('networkChanged', network => {
+            console.log('NETWORK CHANGED')
+            console.log('NETWORK ', network)
+            this.setState({
+              userData: {
+                ...this.state.userData,
+                currentNetwork: network
+              }
+            })
           })
         })
       })

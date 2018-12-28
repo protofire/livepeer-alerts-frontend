@@ -9,16 +9,7 @@ import AccountSummaryData from '../AccountSummaryData/AccountSummaryData'
 export class UserSubscribed extends Component {
   state = {
     render: false,
-    displayMsg: displayTexts.LOADING_SUBSCRIPTION_DATA,
-    summary: {
-      bondedAmount: '',
-      delegateAddress: '',
-      fees: '',
-      lastClaimRound: '',
-      startRound: '',
-      status: '',
-      withdrawRound: ''
-    }
+    displayMsg: displayTexts.LOADING_SUBSCRIPTION_DATA
   }
 
   componentDidMount = async () => {
@@ -29,8 +20,8 @@ export class UserSubscribed extends Component {
       this.setState({
         render: true,
         summary: {
+          ...this.props.summary,
           bondedAmount: response.data.bondedAmount,
-          delegateAddress: response.data.delegateAddress,
           fees: response.data.fees,
           lastClaimRound: response.data.lastClaimRound,
           startRound: response.data.startRound,
@@ -96,6 +87,10 @@ export class UserSubscribed extends Component {
                       <tr>
                         <td>Subscription frequency</td>
                         <td>{this.props.userData.frequency}</td>
+                      </tr>
+                      <tr>
+                        <td>ETH Balance</td>
+                        <td>{this.props.userData.ethBalance}</td>
                       </tr>
                     </tbody>
                   </table>

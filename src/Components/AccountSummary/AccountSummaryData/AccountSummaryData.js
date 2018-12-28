@@ -16,10 +16,6 @@ const AccountSummaryData = props => {
             <td>{props.summary.bondedAmount} </td>
           </tr>
           <tr>
-            <td>DelegateAddress</td>
-            <td>{props.summary.delegateAddress}</td>
-          </tr>
-          <tr>
             <td>Fees</td>
             <td>{props.summary.fees}</td>
           </tr>

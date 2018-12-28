@@ -17,6 +17,14 @@ export class AccountSummaryComponent extends Component {
       activatedCode: null,
       createdAt: null
     },
+    summary: {
+      bondedAmount: '',
+      fees: '',
+      lastClaimRound: '',
+      startRound: '',
+      status: 'Bonded',
+      withdrawRound: ''
+    },
     render: false,
     displayMsg: displayTexts.LOADING_USER_DATA
   }
@@ -31,7 +39,7 @@ export class AccountSummaryComponent extends Component {
   }
 
   componentDidMount = async () => {
-    console.log('[AccountSummaryComponent.js] componentDidMount, userData: ', this.props.userData)
+    console.log('[AccountSummaryComponent.js] componentDidMount')
     let response
     await this.initState()
     try {
@@ -39,11 +47,14 @@ export class AccountSummaryComponent extends Component {
       this.setState({
         userData: {
           ...this.state.userData,
+          ...this.props.userData,
           isSubscribed: true,
           activated: response.data.activated,
           id: response.data._id,
           activatedCode: response.data.activatedCode,
-          createdAt: response.data.createdAt
+          createdAt: response.data.createdAt,
+          email: response.data.email,
+          frequency: response.data.frequency
         },
         render: true,
         displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email
@@ -89,6 +100,7 @@ export class AccountSummaryComponent extends Component {
       this.setState({
         userData: {
           ...this.state.userData,
+          ...this.props.userData,
           activated: response.data.activated,
           id: response.data._id,
           activatedCode: response.data.activated,
@@ -98,9 +110,9 @@ export class AccountSummaryComponent extends Component {
         render: true,
         displayMsg: displayTexts.WELCOME_NEW_SUBSCRIBER + this.state.userData.email
       })
-      console.log('Final state: ', this.state.userData)
     } catch (exception) {
       console.log('[AccountSummary.js] exception on postSubscription', exception)
+      /** TODO -- PARSE WHEN EMAIL ALREADY EXISTS **/
       this.setState({
         render: true,
         displayMsg: displayTexts.FAIL_NO_REASON
@@ -125,6 +137,7 @@ export class AccountSummaryComponent extends Component {
         displayMsg: displayTexts.WELCOME_NOT_SUBSCRIBED,
         userData: {
           ...this.state.userData,
+          ...this.props.userData,
           isSubscribed: false,
           activated: null,
           id: null,
@@ -160,27 +173,27 @@ export class AccountSummaryComponent extends Component {
     )
     if (this.state.render) {
       if (this.state.userData.isSubscribed) {
-        const userData = {
-          email: this.state.userData.email,
-          frequency: this.state.userData.frequency,
-          id: this.state.userData.id,
-          address: this.state.userData.address,
-          activated: this.state.userData.activated,
-          createdAt: this.state.userData.createdAt
-        }
         content = (
           <>
             <UserSubscribed
-              userData={userData}
               onUnSubscribeBtnHandler={this.onUnSubscribeBtnHandler}
               onSubscriptionChangeHandler={this.onSubscriptionChangeHandler}
+              web3={this.props.web3}
+              userData={this.state.userData}
             />
           </>
         )
-      } else {
+        /** If the user is not subscribed he can only subscribe if his status is bounded **/
+      } else if (this.state.summary.status === 'Bonded') {
         content = (
           <>
             <UserNotSubscribed onSubscribeBtnHandler={this.onSubscribeBtnHandler} />
+          </>
+        )
+      } /** Otherwise we notify the user about that  **/ else {
+        content = (
+          <>
+            <p>In order to subscribe you need to be on BOUNDED status</p>
           </>
         )
       }
