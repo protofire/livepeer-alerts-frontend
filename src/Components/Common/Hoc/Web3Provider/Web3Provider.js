@@ -78,7 +78,7 @@ const withWeb3Provider = WrappedComponent => {
           web3: web3Instance,
           userData: {
             authenticated: true,
-            address: userAddress,
+            address: userAddress[0],
             currentNetwork: userNetwork
           },
           render: true
