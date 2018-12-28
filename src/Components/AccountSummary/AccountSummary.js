@@ -49,7 +49,6 @@ export class AccountSummaryComponent extends Component {
         displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email
       })
     } catch (error) {
-      console.log('[AccountSummary.js] exception on getRequest')
       /** Subscription not found **/
       if (error.response.status === 404) {
         console.log('Subscription not found')
@@ -62,6 +61,7 @@ export class AccountSummaryComponent extends Component {
           displayMsg: displayTexts.WELCOME_NOT_SUBSCRIBED
         })
       } else {
+        console.log('[AccountSummary.js] exception on getRequest', error)
         this.setState({
           render: true,
           displayMsg: displayTexts.FAIL_NO_REASON
@@ -83,6 +83,7 @@ export class AccountSummaryComponent extends Component {
       frequency: this.state.userData.frequency
     }
     try {
+      console.log('Creating new subscriber with data: ', data)
       response = await axios.post('', data)
       console.log('User subscribed, response data: ', response.data)
       this.setState({

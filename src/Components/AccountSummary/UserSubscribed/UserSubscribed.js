@@ -4,6 +4,7 @@ import './UserSubscribed.css'
 import Button from '../../Common/UI/Button/Button'
 import axios from 'axios'
 import Spinner from '../../Common/UI/Spinner/Spinner'
+import AccountSummaryData from '../AccountSummaryData/AccountSummaryData'
 
 export class UserSubscribed extends Component {
   state = {
@@ -64,17 +65,47 @@ export class UserSubscribed extends Component {
       content = (
         <>
           <h1>{displayTexts.WELCOME_AGAIN}</h1>
-          <p>{this.props.userData.email}</p>
-          <p>Subscription frequency: {this.props.userData.frequency}</p>
-          <p>Activated: {contentActivated}</p>
-          <p>Created at: {time}</p>
-          <p>BondedAmount {this.state.summary.bondedAmount}</p>
-          <p>DelegateAddress {this.state.summary.delegateAddress}</p>
-          <p>Fees {this.state.summary.fees}</p>
-          <p>LastClaimRound {this.state.summary.lastClaimRound}</p>
-          <p>StartRound {this.state.summary.startRound}</p>
-          <p>Status {this.state.summary.status}</p>
-          <p>WithdrawRound {this.state.summary.withdrawRound}</p>
+          <table>
+            <thead>
+              <tr>
+                <th colSpan="2">Account Summary</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>
+                  <table className="subscriberInfoTable">
+                    <thead>
+                      <tr>
+                        <th colSpan="2">Subscriber Information</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>Email</td>
+                        <td>{this.props.userData.email}</td>
+                      </tr>
+                      <tr>
+                        <td>Activated</td>
+                        <td>{contentActivated}</td>
+                      </tr>
+                      <tr>
+                        <td>Created at</td>
+                        <td>{time}</td>
+                      </tr>
+                      <tr>
+                        <td>Subscription frequency</td>
+                        <td>{this.props.userData.frequency}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+                <td>
+                  <AccountSummaryData summary={this.state.summary} />
+                </td>
+              </tr>
+            </tbody>
+          </table>
 
           <div className="subscriptionBtn">
             <Button clicked={this.props.onSubscriptionChangeHandler}>Change Subscription</Button>
