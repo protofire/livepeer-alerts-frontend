@@ -21,14 +21,15 @@ export class UserSubscribed extends Component {
         render: true,
         summary: {
           ...this.props.summary,
-          bondedAmount: response.data.bondedAmount,
-          fees: response.data.fees,
-          lastClaimRound: response.data.lastClaimRound,
-          startRound: response.data.startRound,
-          status: response.data.status,
-          withdrawRound: response.data.withdrawRound,
-          stake: response.data.totalStake
-        }
+          bondedAmount: response.data.summary.bondedAmount,
+          fees: response.data.summary.fees,
+          lastClaimRound: response.data.summary.lastClaimRound,
+          startRound: response.data.summary.startRound,
+          status: response.data.summary.status,
+          withdrawRound: response.data.summary.withdrawRound,
+          stake: response.data.summary.totalStake
+        },
+        lpBalance: response.data.balance
       })
       console.log('Response data: ', response)
     } catch (exception) {
@@ -91,6 +92,10 @@ export class UserSubscribed extends Component {
                       <tr>
                         <td>ETH Balance</td>
                         <td>{this.props.userData.ethBalance}</td>
+                      </tr>
+                      <tr>
+                        <td>LivePeer Balance</td>
+                        <td>{this.state.lpBalance}</td>
                       </tr>
                     </tbody>
                   </table>

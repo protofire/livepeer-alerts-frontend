@@ -6,7 +6,7 @@ import * as serviceWorker from './serviceWorker'
 import axios from 'axios'
 
 /** Axios default cfg **/
-axios.defaults.baseURL = 'http://127.0.0.1:4040/api/subscribers'
+axios.defaults.baseURL = 'https://livepeer-alerts-backend.herokuapp.com/api/subscribers'
 
 ReactDOM.render(<App />, document.getElementById('root'))
 

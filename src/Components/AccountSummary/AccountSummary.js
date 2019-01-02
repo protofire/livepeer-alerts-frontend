@@ -45,6 +45,7 @@ export class AccountSummaryComponent extends Component {
   componentDidMount = async () => {
     console.log('[AccountSummaryComponent.js] componentDidMount')
     let response
+    let userDataPromise, summaryPromise
     await this.initState()
     try {
       response = await axios.get('/address/' + this.state.userData.address)
