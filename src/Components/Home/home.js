@@ -46,15 +46,17 @@ export class HomeComponent extends Component {
         break
       }
     }
-
     if (!toast.isActive(this.state.toastId) && this.props.render) {
       toast.error(errorMsg, {
         position: toast.POSITION.TOP_RIGHT,
         progressClassName: 'Toast-progress-bar',
         autoClose: time,
-        toastId: this.state.toastId,
-        onOpen: this.props.toastOpenedHandler
+        toastId: this.state.toastId
       })
+      /** TODO -- CHECK IF THERE IS ANOTHER WAY TO USE THIS, THIS IS FOR TESTING THAT THE TOAST IS CALLED **/
+      if (this.props.toastOpenedHandlerTest) {
+        this.props.toastOpenedHandlerTest(errorMsg)
+      }
     }
   }
 

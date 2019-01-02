@@ -24,7 +24,8 @@ export class AccountSummaryComponent extends Component {
       lastClaimRound: '',
       startRound: '',
       status: 'Bonded',
-      withdrawRound: ''
+      withdrawRound: '',
+      stake: ''
     },
     render: false,
     displayMsg: displayTexts.LOADING_USER_DATA,

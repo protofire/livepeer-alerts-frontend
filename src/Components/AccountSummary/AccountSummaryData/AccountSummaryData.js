@@ -35,6 +35,10 @@ const AccountSummaryData = props => {
             <td>WithdrawRound</td>
             <td>{props.summary.withdrawRound}</td>
           </tr>
+          <tr>
+            <td>Stake</td>
+            <td>{props.summary.stake}</td>
+          </tr>
         </tbody>
       </table>
     </>

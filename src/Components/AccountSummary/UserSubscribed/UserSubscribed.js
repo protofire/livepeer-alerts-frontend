@@ -26,7 +26,8 @@ export class UserSubscribed extends Component {
           lastClaimRound: response.data.lastClaimRound,
           startRound: response.data.startRound,
           status: response.data.status,
-          withdrawRound: response.data.withdrawRound
+          withdrawRound: response.data.withdrawRound,
+          stake: response.data.totalStake
         }
       })
       console.log('Response data: ', response)
