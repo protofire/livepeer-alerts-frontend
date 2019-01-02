@@ -12,7 +12,6 @@ export class HomeComponent extends Component {
 
   onGetStartedBtnHandler = () => {
     const { web3 } = this.props
-    console.log('[Home.js] props: ', this.props)
     if (!web3 || (web3 && !this.props.userData.authenticated)) {
       this.sendToastError()
     } else {
@@ -22,6 +21,10 @@ export class HomeComponent extends Component {
   }
 
   sendToastError = toastTime => {
+    let time = 6000
+    if (toastTime) {
+      time = toastTime
+    }
     let cause = this.props.userData.reason
     let errorMsg
     switch (cause) {
@@ -42,16 +45,14 @@ export class HomeComponent extends Component {
         break
       }
     }
-
     if (!toast.isActive(this.state.toastId) && this.props.render) {
       toast.error(errorMsg, {
         position: toast.POSITION.TOP_RIGHT,
         progressClassName: 'Toast-progress-bar',
-        autoClose: toastTime,
-        toastId: this.state.toastId,
-        onOpen: this.props.toastOpenedHandler
+        autoClose: time,
+        toastId: this.state.toastId
       })
-      /** For testing purposes, TODO -- Check if another way is available for react tostify **/
+      /** TODO -- CHECK IF THERE IS ANOTHER WAY TO USE THIS, THIS IS FOR TESTING THAT THE TOAST IS CALLED **/
       if (this.props.toastOpenedHandlerTest) {
         this.props.toastOpenedHandlerTest(errorMsg)
       }

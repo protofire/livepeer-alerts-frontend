@@ -3,6 +3,10 @@ import ReactDOM from 'react-dom'
 import './index.css'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
+import axios from 'axios'
+
+/** Axios default cfg **/
+axios.defaults.baseURL = 'https://livepeer-alerts-backend.herokuapp.com/api/subscribers'
 
 ReactDOM.render(<App />, document.getElementById('root'))
 
