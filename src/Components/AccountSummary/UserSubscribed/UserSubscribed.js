@@ -109,7 +109,6 @@ export class UserSubscribed extends Component {
         </>
       )
     }
-
     return <div>{content}</div>
   }
 }
