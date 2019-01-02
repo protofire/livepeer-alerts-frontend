@@ -7,3 +7,4 @@ export const LOADING_UNSUBSCRIPTION = 'Please wait while we process your unsubsc
 export const LOADING_SUBSCRIPTION = 'Please wait while we process your subscription'
 export const LOADING_SUBSCRIPTION_DATA =
   'Please wait while we get the information of your subscription'
+export const UNSUBSCRIPTION_SUCCESSFUL = 'You were successful unsubscribed!'

@@ -4,8 +4,6 @@ import Spinner from '../Common/UI/Spinner/Spinner'
 import * as displayTexts from './AccountSummaryTexts'
 import UserSubscribed from './UserSubscribed/UserSubscribed'
 import UserNotSubscribed from './UserNotSubscribed/UserNotSubscribed'
-import * as failReasons from '../Common/Hoc/Web3Provider/Web3FailReasons'
-import * as texts from '../Common/UI/Texts/Texts'
 import { toast, ToastContainer } from 'react-toastify'
 
 export class AccountSummaryComponent extends Component {
@@ -30,7 +28,8 @@ export class AccountSummaryComponent extends Component {
     },
     render: false,
     displayMsg: displayTexts.LOADING_USER_DATA,
-    toastId: 1
+    toastId: 1,
+    error: false
   }
 
   initState = async () => {
@@ -61,7 +60,8 @@ export class AccountSummaryComponent extends Component {
           frequency: response.data.frequency
         },
         render: true,
-        displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email
+        displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email,
+        error: false
       })
     } catch (error) {
       /** Subscription not found **/
@@ -73,36 +73,47 @@ export class AccountSummaryComponent extends Component {
             isSubscribed: false
           },
           render: true,
-          displayMsg: displayTexts.WELCOME_NOT_SUBSCRIBED
+          displayMsg: displayTexts.WELCOME_NOT_SUBSCRIBED,
+          error: true
         })
       } else {
         console.log('[AccountSummary.js] exception on getRequest', error)
         this.setState(
           {
             render: true,
-            displayMsg: displayTexts.FAIL_NO_REASON
+            displayMsg: displayTexts.FAIL_NO_REASON,
+            error: true
           },
-          () => this.sendToastError()
+          () => this.sendToast()
         )
       }
     }
   }
 
-  sendToastError = toastTime => {
+  sendToast = toastTime => {
     console.log('Sending toast')
     let time = 6000
     if (toastTime) {
       time = toastTime
     }
-    let errorMsg = this.state.displayMsg
+    let displayMsg = this.state.displayMsg
 
     if (!toast.isActive(this.state.toastId) && this.state.render) {
-      toast.error(errorMsg, {
-        position: toast.POSITION.TOP_RIGHT,
-        progressClassName: 'Toast-progress-bar',
-        autoClose: time,
-        toastId: this.state.toastId
-      })
+      if (this.state.error) {
+        toast.error(displayMsg, {
+          position: toast.POSITION.TOP_RIGHT,
+          progressClassName: 'Toast-progress-bar',
+          autoClose: time,
+          toastId: this.state.toastId
+        })
+      } else {
+        toast.success(displayMsg, {
+          position: toast.POSITION.TOP_RIGHT,
+          progressClassName: 'Toast-progress-bar',
+          autoClose: time,
+          toastId: this.state.toastId
+        })
+      }
     }
   }
 
@@ -133,6 +144,7 @@ export class AccountSummaryComponent extends Component {
           isSubscribed: true
         },
         render: true,
+        error: false,
         displayMsg: displayTexts.WELCOME_NEW_SUBSCRIBER + this.state.userData.email
       })
     } catch (exception) {
@@ -141,9 +153,10 @@ export class AccountSummaryComponent extends Component {
       this.setState(
         {
           render: true,
-          displayMsg: displayTexts.FAIL_NO_REASON
+          displayMsg: displayTexts.FAIL_NO_REASON,
+          error: true
         },
-        () => this.sendToastError()
+        () => this.sendToast()
       )
     }
   }
@@ -160,37 +173,51 @@ export class AccountSummaryComponent extends Component {
     try {
       await axios.delete('/' + this.state.userData.id, data)
       console.log('User unsubscribed')
-      this.setState({
-        render: true,
-        displayMsg: displayTexts.WELCOME_NOT_SUBSCRIBED,
-        userData: {
-          ...this.state.userData,
-          ...this.props.userData,
-          isSubscribed: false,
-          activated: null,
-          id: null,
-          activatedCode: null,
-          createdAt: null
-        }
-      })
+      this.setState(
+        {
+          render: true,
+          displayMsg: displayTexts.UNSUBSCRIPTION_SUCCESSFUL,
+          userData: {
+            ...this.state.userData,
+            ...this.props.userData,
+            isSubscribed: false,
+            activated: null,
+            id: null,
+            activatedCode: null,
+            createdAt: null,
+            error: false
+          }
+        },
+        () => this.sendToast()
+      )
     } catch (exception) {
       console.log('[AccountSummary.js] exception on deleteSubscription')
       if (exception.response.status === 404) {
         /** User with that id not found **/
-        this.setState({
-          render: true,
-          displayMsg: displayTexts.WELCOME_NOT_SUBSCRIBED
-        })
+        this.setState(
+          {
+            render: true,
+            displayMsg: displayTexts.WELCOME_NOT_SUBSCRIBED,
+            error: true
+          },
+          () => this.sendToast()
+        )
       } else {
-        this.setState({
-          render: true,
-          displayMsg: displayTexts.FAIL_NO_REASON
-        })
+        this.setState(
+          {
+            render: true,
+            displayMsg: displayTexts.FAIL_NO_REASON,
+            error: true
+          },
+          () => this.sendToast()
+        )
       }
     }
   }
 
-  onSubscriptionChangeHandler = () => {}
+  onSubscriptionChangeHandler = () => {
+    console.log('[AccountSummary.js] onSubscriptionChangeHandler')
+  }
 
   render() {
     let content = (
