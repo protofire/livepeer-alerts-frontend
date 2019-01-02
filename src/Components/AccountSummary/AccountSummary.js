@@ -48,22 +48,41 @@ export class AccountSummaryComponent extends Component {
     let userDataPromise, summaryPromise
     await this.initState()
     try {
-      response = await axios.get('/address/' + this.state.userData.address)
-      this.setState({
-        userData: {
-          ...this.state.userData,
-          ...this.props.userData,
-          isSubscribed: true,
-          activated: response.data.activated,
-          id: response.data._id,
-          activatedCode: response.data.activatedCode,
-          createdAt: response.data.createdAt,
-          email: response.data.email,
-          frequency: response.data.frequency
-        },
-        render: true,
-        displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email,
-        error: false
+      userDataPromise = axios.get('/address/' + this.state.userData.address)
+      summaryPromise = axios.get('/summary/' + this.state.userData.address)
+      Promise.all([userDataPromise, summaryPromise]).then(resultValues => {
+        let userData = resultValues[0]
+        let summaryData = resultValues[1]
+        console.log('Promise all finished')
+        this.setState(
+          {
+            userData: {
+              ...this.state.userData,
+              ...this.props.userData,
+              isSubscribed: true,
+              activated: userData.data.activated,
+              id: userData.data._id,
+              activatedCode: userData.data.activatedCode,
+              createdAt: userData.data.createdAt,
+              email: userData.data.email,
+              frequency: userData.data.frequency
+            },
+            summary: {
+              bondedAmount: summaryData.data.summary.bondedAmount,
+              fees: summaryData.data.summary.fees,
+              lastClaimRound: summaryData.data.summary.lastClaimRound,
+              startRound: summaryData.data.summary.startRound,
+              status: summaryData.data.summary.status,
+              withdrawRound: summaryData.data.summary.withdrawRound,
+              stake: summaryData.data.summary.totalStake
+            },
+            render: true,
+            displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email,
+            error: false,
+            lpBalance: summaryData.data.balance
+          },
+          () => console.log('setting state finished ', this.state)
+        )
       })
     } catch (error) {
       /** Subscription not found **/
@@ -238,6 +257,8 @@ export class AccountSummaryComponent extends Component {
               onSubscriptionChangeHandler={this.onSubscriptionChangeHandler}
               web3={this.props.web3}
               userData={this.state.userData}
+              summary={this.state.summary}
+              lpBalance={this.state.lpBalance}
             />
           </>
         )
