@@ -227,6 +227,7 @@ export class AccountSummaryComponent extends Component {
         <Spinner />
       </>
     )
+    console.log('Should RENDER ', this.state.render)
     if (this.state.render) {
       if (this.state.userData.isSubscribed) {
         content = (
@@ -249,7 +250,7 @@ export class AccountSummaryComponent extends Component {
       } /** Otherwise we notify the user about that  **/ else {
         content = (
           <>
-            <p>In order to subscribe you need to be on BOUNDED status</p>
+            <p>{displayTexts.BOUNDED_STATUS_NEEDED}</p>
           </>
         )
       }

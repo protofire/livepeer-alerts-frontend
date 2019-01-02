@@ -8,3 +8,4 @@ export const LOADING_SUBSCRIPTION = 'Please wait while we process your subscript
 export const LOADING_SUBSCRIPTION_DATA =
   'Please wait while we get the information of your subscription'
 export const UNSUBSCRIPTION_SUCCESSFUL = 'You were successful unsubscribed!'
+export const BOUNDED_STATUS_NEEDED = 'In order to subscribe you need to be on BOUNDED status'
