@@ -173,7 +173,6 @@ export class AccountSummaryComponent extends Component {
     try {
       console.log('Creating new subscriber with data: ', data)
       response = await axios.post('', data)
-      console.log('User subscribed, response data: ', response.data)
       this.setState({
         userData: {
           ...this.state.userData,
@@ -265,8 +264,6 @@ export class AccountSummaryComponent extends Component {
         <Spinner />
       </>
     )
-    console.log('Should RENDER ', this.state.render)
-    console.log('state ', this.state)
     if (this.state.render) {
       content = (
         <>

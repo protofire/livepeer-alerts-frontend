@@ -12,7 +12,6 @@ export class HomeComponent extends Component {
 
   onGetStartedBtnHandler = () => {
     const { web3 } = this.props
-    console.log('[Home.js] props: ', this.props)
     if (!web3 || (web3 && !this.props.userData.authenticated)) {
       this.sendToastError()
     } else {

@@ -1,7 +1,6 @@
 import React from 'react'
 import './AccountSummaryData.css'
 const AccountSummaryData = props => {
-  console.log('summary: ', props)
   return (
     <>
       <table className="accountSummaryDataTable">
