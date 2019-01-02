@@ -66,12 +66,11 @@ export class UserSubscribed extends Component {
               <tr>
                 <td>
                   <table className="subscriberInfoTable">
-                    <thead>
-                      <tr>
-                        <th colSpan="2">Subscriber Information</th>
-                      </tr>
-                    </thead>
                     <tbody>
+                      <tr>
+                        <td>Address</td>
+                        <td>{this.props.userData.address}</td>
+                      </tr>
                       <tr>
                         <td>Email</td>
                         <td>{this.props.userData.email}</td>
