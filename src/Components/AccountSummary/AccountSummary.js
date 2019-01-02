@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import Spinner from '../Common/UI/Spinner/Spinner'
 import * as displayTexts from './AccountSummaryTexts'
-import UserSubscribed from './UserSubscribed/UserSubscribed'
+import AccountSummaryHome from './AccountSummaryHome/AccountSummaryHome'
 import { toast, ToastContainer } from 'react-toastify'
 
 export class AccountSummaryComponent extends Component {
@@ -160,44 +160,7 @@ export class AccountSummaryComponent extends Component {
 
   onSubscribeBtnHandler = async () => {
     console.log('[AccountSummary.js] subscribe btnHandler')
-    let response
-    this.setState({
-      render: false,
-      displayMsg: displayTexts.LOADING_SUBSCRIPTION
-    })
-    const data = {
-      email: this.state.userData.email,
-      address: this.state.userData.address,
-      frequency: this.state.userData.frequency
-    }
-    try {
-      console.log('Creating new subscriber with data: ', data)
-      response = await axios.post('', data)
-      this.setState({
-        userData: {
-          ...this.state.userData,
-          activated: response.data.activated,
-          id: response.data._id,
-          activatedCode: response.data.activated,
-          createdAt: response.data.createdAt,
-          isSubscribed: true
-        },
-        render: true,
-        error: false,
-        displayMsg: displayTexts.WELCOME_NEW_SUBSCRIBER + this.state.userData.email
-      })
-    } catch (exception) {
-      console.log('[AccountSummary.js] exception on postSubscription', exception)
-      /** TODO -- PARSE WHEN EMAIL ALREADY EXISTS **/
-      this.setState(
-        {
-          render: true,
-          displayMsg: displayTexts.FAIL_NO_REASON,
-          error: true
-        },
-        () => this.sendToast()
-      )
-    }
+    this.props.history.push('/account/subscription')
   }
 
   onUnSubscribeBtnHandler = async () => {
@@ -267,9 +230,10 @@ export class AccountSummaryComponent extends Component {
     if (this.state.render) {
       content = (
         <>
-          <UserSubscribed
+          <AccountSummaryHome
             onUnSubscribeBtnHandler={this.onUnSubscribeBtnHandler}
             onSubscriptionChangeHandler={this.onSubscriptionChangeHandler}
+            onSubscribeBtnHandler={this.onSubscribeBtnHandler}
             web3={this.props.web3}
             userData={this.state.userData}
             summary={this.state.summary}

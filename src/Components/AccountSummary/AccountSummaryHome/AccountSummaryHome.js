@@ -1,11 +1,13 @@
 import React from 'react'
 import * as displayTexts from '../AccountSummaryTexts'
-import './UserSubscribed.css'
+import './AccountSummaryHome.css'
 import Button from '../../Common/UI/Button/Button'
 import AccountSummaryData from '../AccountSummaryData/AccountSummaryData'
 
-const UserSubscribed = props => {
-  let disabledBtn = props.summary.status !== 'Bonded'
+const AccountSummaryHome = props => {
+  /** TODO ENABLE AGAIN ONCE FINISHED **/
+  let disabledBtn
+  //let disabledBtn = props.summary.status !== 'Bonded'
   let subscriptionBtn
   if (props.userData.isSubscribed) {
     subscriptionBtn = (
@@ -62,4 +64,4 @@ const UserSubscribed = props => {
     </>
   )
 }
-export default UserSubscribed
+export default AccountSummaryHome

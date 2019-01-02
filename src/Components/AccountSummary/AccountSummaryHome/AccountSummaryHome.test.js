@@ -1,7 +1,7 @@
 import React from 'react'
 import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import UserSubscribed from './UserSubscribed'
+import AccountSummaryHome from './AccountSummaryHome'
 import Spinner from '../../Common/UI/Spinner/Spinner'
 import * as jest from 'jest'
 import axios from 'axios'
@@ -52,47 +52,47 @@ describe('Renders userSubscribed data', () => {
   /*  it('Shows Welcome Message', () => {
     const message = displayTexts.WELCOME_AGAIN
     axios.get.mockResolvedValue(response)
-    let wrapper = shallow(<UserSubscribed {...props} />)
+    let wrapper = shallow(<AccountSummaryHome {...props} />)
     wrapper = wrapper.update()
     console.log("testing debug wrapper" , wrapper.debug())
     expect(wrapper.contains(message)).toEqual(true)
   })
   it('Shows address', () => {
     const message = 'Address'
-    let wrapper = shallow(<UserSubscribed {...props} />)
+    let wrapper = shallow(<AccountSummaryHome {...props} />)
     expect(wrapper.contains(message)).toEqual(true)
   })
   it('Shows Email', () => {
     const message = 'Email'
-    let wrapper = shallow(<UserSubscribed {...props} />)
+    let wrapper = shallow(<AccountSummaryHome {...props} />)
     expect(wrapper.contains(message)).toEqual(true)
   })
   it('Shows Activated status', () => {
     const message = 'Activated'
-    let wrapper = shallow(<UserSubscribed {...props} />)
+    let wrapper = shallow(<AccountSummaryHome {...props} />)
     expect(wrapper.contains(message)).toEqual(true)
   })
   it('Shows created at', () => {
     const message = 'Created at'
-    let wrapper = shallow(<UserSubscribed {...props} />)
+    let wrapper = shallow(<AccountSummaryHome {...props} />)
     expect(wrapper.contains(message)).toEqual(true)
   })
   it('Shows Subscription frequency', () => {
     const message = 'Subscription frequency'
-    let wrapper = shallow(<UserSubscribed {...props} />)
+    let wrapper = shallow(<AccountSummaryHome {...props} />)
     expect(wrapper.contains(message)).toEqual(true)
   })
   it('Shows ETH Balance', () => {
     const message = 'ETH Balance'
-    let wrapper = shallow(<UserSubscribed {...props} />)
+    let wrapper = shallow(<AccountSummaryHome {...props} />)
     expect(wrapper.contains(message)).toEqual(true)
   })
   it('Renders account summary data child component', () => {
-    let wrapper = shallow(<UserSubscribed {...props} />)
+    let wrapper = shallow(<AccountSummaryHome {...props} />)
     expect(wrapper.contains(<AccountSummaryData summary={props.summary} />)).toBe(true)
   })
   it('Renders change subscription button', () => {
-    let wrapper = shallow(<UserSubscribed {...props} />)
+    let wrapper = shallow(<AccountSummaryHome {...props} />)
     expect(
       wrapper.contains(
         <Button clicked={props.onSubscriptionChangeHandler}>Change Subscription</Button>
@@ -100,7 +100,7 @@ describe('Renders userSubscribed data', () => {
     ).toBe(true)
   })
   it('Renders delete subscription button', () => {
-    let wrapper = shallow(<UserSubscribed {...props} />)
+    let wrapper = shallow(<AccountSummaryHome {...props} />)
     expect(
       wrapper.contains(<Button clicked={props.onUnSubscribeBtnHandler}>Unsubscribe</Button>)
     ).toBe(true)

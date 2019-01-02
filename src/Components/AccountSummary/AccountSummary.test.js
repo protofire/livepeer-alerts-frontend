@@ -67,7 +67,7 @@ describe('Renders AccountSummary data', () => {
     // expect(wrapper.contains(message)).toEqual(true)
     expect(
       wrapper.contains(
-        <UserSubscribed
+        <AccountSummaryHome
           onUnSubscribeBtnHandler
           onSubscriptionChangeHandler
           web3={props.web3}

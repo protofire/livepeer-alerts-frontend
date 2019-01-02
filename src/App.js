@@ -5,6 +5,7 @@ import { HomeComponent, AccountSummaryComponent } from './Components'
 import PrivateRoute from './Components/Common/Hoc/PrivateRoute/PrivateRoute'
 import withWeb3Provider from './Components/Common/Hoc/Web3Provider/Web3Provider'
 import Spinner from './Components/Common/UI/Spinner/Spinner'
+import { AccountSummarySubscriptionForm } from './Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummarySubscriptionForm'
 
 export class App extends Component {
   shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -36,6 +37,14 @@ export class App extends Component {
               web3={this.props.web3}
               userData={this.props.userData}
               component={AccountSummaryComponent}
+            />
+            <PrivateRoute
+              authenticated={this.props.userData.authenticated}
+              exact
+              path="/account/subscription"
+              web3={this.props.web3}
+              userData={this.props.userData}
+              component={AccountSummarySubscriptionForm}
             />
           </Switch>
         </>
