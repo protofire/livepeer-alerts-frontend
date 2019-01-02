@@ -3,7 +3,6 @@ import axios from 'axios'
 import Spinner from '../Common/UI/Spinner/Spinner'
 import * as displayTexts from './AccountSummaryTexts'
 import UserSubscribed from './UserSubscribed/UserSubscribed'
-import UserNotSubscribed from './UserNotSubscribed/UserNotSubscribed'
 import { toast, ToastContainer } from 'react-toastify'
 
 export class AccountSummaryComponent extends Component {
@@ -47,44 +46,44 @@ export class AccountSummaryComponent extends Component {
     let userDataPromise, summaryPromise
     await this.initState()
     try {
+      console.log('ADDRESS ', this.state.userData.address)
       userDataPromise = axios.get('/address/' + this.state.userData.address)
       summaryPromise = axios.get('/summary/' + this.state.userData.address)
-      Promise.all([userDataPromise, summaryPromise]).then(resultValues => {
-        let userData = resultValues[0]
-        let summaryData = resultValues[1]
-        console.log('Promise all finished')
-        this.setState(
-          {
-            userData: {
-              ...this.state.userData,
-              ...this.props.userData,
-              isSubscribed: true,
-              activated: userData.data.activated,
-              id: userData.data._id,
-              activatedCode: userData.data.activatedCode,
-              createdAt: userData.data.createdAt,
-              email: userData.data.email,
-              frequency: userData.data.frequency
-            },
-            summary: {
-              bondedAmount: summaryData.data.summary.bondedAmount,
-              fees: summaryData.data.summary.fees,
-              lastClaimRound: summaryData.data.summary.lastClaimRound,
-              startRound: summaryData.data.summary.startRound,
-              status: summaryData.data.summary.status,
-              withdrawRound: summaryData.data.summary.withdrawRound,
-              stake: summaryData.data.summary.totalStake
-            },
-            render: true,
-            displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email,
-            error: false,
-            lpBalance: summaryData.data.balance
+      let resultValues = await Promise.all([userDataPromise, summaryPromise])
+      let userData = resultValues[0]
+      let summaryData = resultValues[1]
+      console.log('Promise all finished')
+      this.setState(
+        {
+          userData: {
+            ...this.state.userData,
+            isSubscribed: true,
+            activated: userData.data.activated,
+            id: userData.data._id,
+            activatedCode: userData.data.activatedCode,
+            createdAt: userData.data.createdAt,
+            email: userData.data.email,
+            frequency: userData.data.frequency
           },
-          () => console.log('setting state finished ', this.state)
-        )
-      })
+          summary: {
+            bondedAmount: summaryData.data.summary.bondedAmount,
+            fees: summaryData.data.summary.fees,
+            lastClaimRound: summaryData.data.summary.lastClaimRound,
+            startRound: summaryData.data.summary.startRound,
+            status: summaryData.data.summary.status,
+            withdrawRound: summaryData.data.summary.withdrawRound,
+            stake: summaryData.data.summary.totalStake
+          },
+          render: true,
+          displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email,
+          error: false,
+          lpBalance: summaryData.data.balance
+        },
+        () => console.log('setting state finished ', this.state)
+      )
     } catch (error) {
       /** Subscription not found **/
+      console.log('subscription not found')
       if (error.response && error.response.status === 404) {
         console.log('Subscription not found')
         this.setState({
@@ -96,6 +95,7 @@ export class AccountSummaryComponent extends Component {
           displayMsg: displayTexts.WELCOME_NOT_SUBSCRIBED,
           error: true
         })
+        await this.fetchAccountSummaryData()
       } else {
         console.log('[AccountSummary.js] exception on getRequest', error)
         this.setState(
@@ -137,6 +137,26 @@ export class AccountSummaryComponent extends Component {
     }
   }
 
+  fetchAccountSummaryData = async () => {
+    try {
+      let summaryData = await axios.get('/summary/' + this.state.userData.address)
+      console.log('summary data ')
+      this.setState({
+        summary: {
+          bondedAmount: summaryData.data.summary.bondedAmount,
+          fees: summaryData.data.summary.fees,
+          lastClaimRound: summaryData.data.summary.lastClaimRound,
+          startRound: summaryData.data.summary.startRound,
+          status: summaryData.data.summary.status,
+          withdrawRound: summaryData.data.summary.withdrawRound,
+          stake: summaryData.data.summary.totalStake
+        }
+      })
+    } catch (exception) {
+      console.log('Exception fetching account summary ', exception)
+    }
+  }
+
   onSubscribeBtnHandler = async () => {
     console.log('[AccountSummary.js] subscribe btnHandler')
     let response
@@ -156,7 +176,6 @@ export class AccountSummaryComponent extends Component {
       this.setState({
         userData: {
           ...this.state.userData,
-          ...this.props.userData,
           activated: response.data.activated,
           id: response.data._id,
           activatedCode: response.data.activated,
@@ -199,7 +218,6 @@ export class AccountSummaryComponent extends Component {
           displayMsg: displayTexts.UNSUBSCRIPTION_SUCCESSFUL,
           userData: {
             ...this.state.userData,
-            ...this.props.userData,
             isSubscribed: false,
             activated: null,
             id: null,
@@ -247,36 +265,21 @@ export class AccountSummaryComponent extends Component {
       </>
     )
     console.log('Should RENDER ', this.state.render)
+    console.log('state ', this.state)
     if (this.state.render) {
-      if (this.state.userData.isSubscribed) {
-        content = (
-          <>
-            <UserSubscribed
-              onUnSubscribeBtnHandler={this.onUnSubscribeBtnHandler}
-              onSubscriptionChangeHandler={this.onSubscriptionChangeHandler}
-              web3={this.props.web3}
-              userData={this.state.userData}
-              summary={this.state.summary}
-              lpBalance={this.state.lpBalance}
-            />
-          </>
-        )
-        /** If the user is not subscribed he can only subscribe if his status is bounded **/
-      } else if (this.state.summary.status === 'Bonded') {
-        content = (
-          <>
-            <UserNotSubscribed onSubscribeBtnHandler={this.onSubscribeBtnHandler} />
-          </>
-        )
-      } /** Otherwise we notify the user about that  **/ else {
-        content = (
-          <>
-            <p>{displayTexts.BOUNDED_STATUS_NEEDED}</p>
-          </>
-        )
-      }
+      content = (
+        <>
+          <UserSubscribed
+            onUnSubscribeBtnHandler={this.onUnSubscribeBtnHandler}
+            onSubscriptionChangeHandler={this.onSubscriptionChangeHandler}
+            web3={this.props.web3}
+            userData={this.state.userData}
+            summary={this.state.summary}
+            lpBalance={this.state.lpBalance}
+          />
+        </>
+      )
     }
-
     return (
       <div>
         {content}

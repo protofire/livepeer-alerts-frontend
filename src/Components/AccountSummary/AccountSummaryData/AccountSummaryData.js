@@ -37,7 +37,7 @@ const AccountSummaryData = props => {
           </tr>
           <tr>
             <td>Stake</td>
-            <td>{props.summary.stake}</td>
+            <td>{props.summary.totalStake}</td>
           </tr>
         </tbody>
       </table>

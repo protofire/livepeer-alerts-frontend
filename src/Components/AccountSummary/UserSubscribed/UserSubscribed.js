@@ -5,6 +5,7 @@ import Button from '../../Common/UI/Button/Button'
 import AccountSummaryData from '../AccountSummaryData/AccountSummaryData'
 
 const UserSubscribed = props => {
+  let disabledBtn = props.summary.status !== 'Bonded'
   return (
     <>
       <h1>{displayTexts.WELCOME_AGAIN}</h1>
@@ -43,7 +44,9 @@ const UserSubscribed = props => {
 
       <div className="subscriptionBtn">
         <Button clicked={props.onSubscriptionChangeHandler}>Change Subscription</Button>
-        <Button clicked={props.onUnSubscribeBtnHandler}>Unsubscribe</Button>
+        <Button clicked={props.onUnSubscribeBtnHandler} disabled={disabledBtn}>
+          Unsubscribe
+        </Button>
       </div>
     </>
   )
