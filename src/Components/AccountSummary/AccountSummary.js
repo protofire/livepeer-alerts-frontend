@@ -4,6 +4,9 @@ import Spinner from '../Common/UI/Spinner/Spinner'
 import * as displayTexts from './AccountSummaryTexts'
 import UserSubscribed from './UserSubscribed/UserSubscribed'
 import UserNotSubscribed from './UserNotSubscribed/UserNotSubscribed'
+import * as failReasons from '../Common/Hoc/Web3Provider/Web3FailReasons'
+import * as texts from '../Common/UI/Texts/Texts'
+import { toast } from 'react-toastify'
 
 export class AccountSummaryComponent extends Component {
   state = {
@@ -26,7 +29,8 @@ export class AccountSummaryComponent extends Component {
       withdrawRound: ''
     },
     render: false,
-    displayMsg: displayTexts.LOADING_USER_DATA
+    displayMsg: displayTexts.LOADING_USER_DATA,
+    toastId: 1
   }
 
   initState = async () => {
@@ -61,7 +65,7 @@ export class AccountSummaryComponent extends Component {
       })
     } catch (error) {
       /** Subscription not found **/
-      if (error.response.status === 404) {
+      if (error.response && error.response.status === 404) {
         console.log('Subscription not found')
         this.setState({
           userData: {
@@ -73,11 +77,32 @@ export class AccountSummaryComponent extends Component {
         })
       } else {
         console.log('[AccountSummary.js] exception on getRequest', error)
-        this.setState({
-          render: true,
-          displayMsg: displayTexts.FAIL_NO_REASON
-        })
+        this.setState(
+          {
+            render: true,
+            displayMsg: displayTexts.FAIL_NO_REASON
+          },
+          () => this.sendToastError()
+        )
       }
+    }
+  }
+
+  sendToastError = toastTime => {
+    let time = 6000
+    if (toastTime) {
+      time = toastTime
+    }
+    let errorMsg = this.state.displayMsg
+
+    if (!toast.isActive(this.state.toastId) && this.props.render) {
+      toast.error(errorMsg, {
+        position: toast.POSITION.TOP_RIGHT,
+        progressClassName: 'Toast-progress-bar',
+        autoClose: time,
+        toastId: this.state.toastId,
+        onOpen: this.props.toastOpenedHandler
+      })
     }
   }
 

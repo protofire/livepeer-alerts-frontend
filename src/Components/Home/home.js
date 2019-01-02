@@ -22,6 +22,10 @@ export class HomeComponent extends Component {
   }
 
   sendToastError = toastTime => {
+    let time = 6000
+    if (toastTime) {
+      time = toastTime
+    }
     let cause = this.props.userData.reason
     let errorMsg
     switch (cause) {
@@ -47,14 +51,10 @@ export class HomeComponent extends Component {
       toast.error(errorMsg, {
         position: toast.POSITION.TOP_RIGHT,
         progressClassName: 'Toast-progress-bar',
-        autoClose: toastTime,
+        autoClose: time,
         toastId: this.state.toastId,
         onOpen: this.props.toastOpenedHandler
       })
-      /** For testing purposes, TODO -- Check if another way is available for react tostify **/
-      if (this.props.toastOpenedHandlerTest) {
-        this.props.toastOpenedHandlerTest(errorMsg)
-      }
     }
   }
 
