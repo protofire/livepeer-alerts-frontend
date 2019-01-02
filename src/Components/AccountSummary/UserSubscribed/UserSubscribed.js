@@ -8,7 +8,12 @@ const UserSubscribed = props => {
   let disabledBtn = props.summary.status !== 'Bonded'
   let subscriptionBtn
   if (props.userData.isSubscribed) {
-    subscriptionBtn = <Button clicked={props.onUnSubscribeBtnHandler}>Unsubscribe</Button>
+    subscriptionBtn = (
+      <>
+        <Button clicked={props.onSubscriptionChangeHandler}>Change Subscription</Button>
+        <Button clicked={props.onUnSubscribeBtnHandler}>Unsubscribe</Button>
+      </>
+    )
   } else {
     subscriptionBtn = (
       <Button clicked={props.onSubscribeBtnHandler} disabled={disabledBtn}>
@@ -53,10 +58,7 @@ const UserSubscribed = props => {
         </tbody>
       </table>
 
-      <div className="subscriptionBtn">
-        <Button clicked={props.onSubscriptionChangeHandler}>Change Subscription</Button>
-        {subscriptionBtn}
-      </div>
+      <div className="subscriptionBtn">{subscriptionBtn}</div>
     </>
   )
 }
