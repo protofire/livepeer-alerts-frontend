@@ -44,7 +44,6 @@ export class AccountSummaryComponent extends Component {
 
   componentDidMount = async () => {
     console.log('[AccountSummaryComponent.js] componentDidMount')
-    let response
     let userDataPromise, summaryPromise
     await this.initState()
     try {
