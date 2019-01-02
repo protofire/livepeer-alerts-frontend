@@ -6,7 +6,7 @@ import UserSubscribed from './UserSubscribed/UserSubscribed'
 import UserNotSubscribed from './UserNotSubscribed/UserNotSubscribed'
 import * as failReasons from '../Common/Hoc/Web3Provider/Web3FailReasons'
 import * as texts from '../Common/UI/Texts/Texts'
-import { toast } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 
 export class AccountSummaryComponent extends Component {
   state = {
@@ -89,19 +89,19 @@ export class AccountSummaryComponent extends Component {
   }
 
   sendToastError = toastTime => {
+    console.log('Sending toast')
     let time = 6000
     if (toastTime) {
       time = toastTime
     }
     let errorMsg = this.state.displayMsg
 
-    if (!toast.isActive(this.state.toastId) && this.props.render) {
+    if (!toast.isActive(this.state.toastId) && this.state.render) {
       toast.error(errorMsg, {
         position: toast.POSITION.TOP_RIGHT,
         progressClassName: 'Toast-progress-bar',
         autoClose: time,
-        toastId: this.state.toastId,
-        onOpen: this.props.toastOpenedHandler
+        toastId: this.state.toastId
       })
     }
   }
@@ -138,10 +138,13 @@ export class AccountSummaryComponent extends Component {
     } catch (exception) {
       console.log('[AccountSummary.js] exception on postSubscription', exception)
       /** TODO -- PARSE WHEN EMAIL ALREADY EXISTS **/
-      this.setState({
-        render: true,
-        displayMsg: displayTexts.FAIL_NO_REASON
-      })
+      this.setState(
+        {
+          render: true,
+          displayMsg: displayTexts.FAIL_NO_REASON
+        },
+        () => this.sendToastError()
+      )
     }
   }
 
@@ -224,6 +227,11 @@ export class AccountSummaryComponent extends Component {
       }
     }
 
-    return <div>{content}</div>
+    return (
+      <div>
+        {content}
+        <ToastContainer autoClose={3000} />
+      </div>
+    )
   }
 }
