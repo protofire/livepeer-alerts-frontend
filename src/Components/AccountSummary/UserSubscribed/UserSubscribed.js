@@ -16,6 +16,7 @@ const UserSubscribed = props => {
       </Button>
     )
   }
+
   return (
     <>
       <h1>{displayTexts.WELCOME_AGAIN}</h1>

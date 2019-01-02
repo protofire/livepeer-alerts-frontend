@@ -36,7 +36,8 @@ export class AccountSummaryComponent extends Component {
     this.setState({
       userData: {
         ...this.state.userData,
-        address: this.props.userData.address
+        address: this.props.userData.address,
+        ethBalance: this.props.userData.ethBalance
       }
     })
   }
@@ -46,7 +47,6 @@ export class AccountSummaryComponent extends Component {
     let userDataPromise, summaryPromise
     await this.initState()
     try {
-      console.log('ADDRESS ', this.state.userData.address)
       userDataPromise = axios.get('/address/' + this.state.userData.address)
       summaryPromise = axios.get('/summary/' + this.state.userData.address)
       let resultValues = await Promise.all([userDataPromise, summaryPromise])
@@ -140,7 +140,7 @@ export class AccountSummaryComponent extends Component {
   fetchAccountSummaryData = async () => {
     try {
       let summaryData = await axios.get('/summary/' + this.state.userData.address)
-      console.log('summary data ')
+      console.log('summary data ', summaryData)
       this.setState({
         summary: {
           bondedAmount: summaryData.data.summary.bondedAmount,
@@ -150,7 +150,8 @@ export class AccountSummaryComponent extends Component {
           status: summaryData.data.summary.status,
           withdrawRound: summaryData.data.summary.withdrawRound,
           stake: summaryData.data.summary.totalStake
-        }
+        },
+        lpBalance: summaryData.data.balance
       })
     } catch (exception) {
       console.log('Exception fetching account summary ', exception)
