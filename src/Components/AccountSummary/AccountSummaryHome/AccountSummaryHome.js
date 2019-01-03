@@ -23,6 +23,7 @@ const AccountSummaryHome = props => {
       </Button>
     )
   }
+  let isSubscribed = props.userData.isSubscribed ? 'yes' : 'no'
   return (
     <>
       <h1>{displayTexts.WELCOME_AGAIN}</h1>
@@ -51,7 +52,7 @@ const AccountSummaryHome = props => {
                   </tr>
                   <tr>
                     <td>Subscribed</td>
-                    <td>{props.userData.isSubscribed}</td>
+                    <td>{isSubscribed}</td>
                   </tr>
                 </tbody>
               </table>

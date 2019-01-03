@@ -47,8 +47,7 @@ export class AccountSummaryComponent extends Component {
 
   componentWillReceiveProps(nextProps, nextContext) {
     console.log('[AccountSummary.js] componentWillReceive props ', nextProps)
-    let propsChanged = false
-    propsChanged =
+    let propsChanged =
       this.props.render !== nextProps.render ||
       this.props.userData.authenticated !== nextProps.userData.authenticated ||
       this.props.userData.address !== nextProps.userData.address ||
@@ -120,15 +119,20 @@ export class AccountSummaryComponent extends Component {
       try {
         console.log('address to fetch subscription data ', this.state.userData.address)
         userData = await axios.get('/address/' + this.state.userData.address)
+        console.log('subscription detected, data: ', userData)
         this.setState(
           {
             userData: {
               ...this.state.userData,
               isSubscribed: true,
+              id: userData.data._id,
               ...userData.data
             }
           },
-          () => resolve(this.state)
+          () => {
+            console.log('before all', this.state)
+            resolve(this.state)
+          }
         )
       } catch (error) {
         /** Subscription not found **/
@@ -275,11 +279,9 @@ export class AccountSummaryComponent extends Component {
       render: false,
       displayMsg: displayTexts.LOADING_UNSUBSCRIPTION
     })
-    const data = {
-      username: 'test'
-    }
     try {
-      await axios.delete('/' + this.state.userData.id, data)
+      console.log('unsubscribing user with id ', this.state.userData)
+      await axios.delete('/' + this.state.userData.id)
       console.log('User unsubscribed')
       this.setState(
         {

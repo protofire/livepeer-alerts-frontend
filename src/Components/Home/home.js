@@ -60,7 +60,7 @@ export class HomeComponent extends Component {
   }
 
   componentDidMount() {
-    console.log('[Home.js] componentDidMount, props: ', this.props)
+    //console.log('[Home.js] componentDidMount, props: ', this.props)
     if (!this.props.web3 || !this.props.userData.authenticated) {
       this.sendToastError(6000)
     }

@@ -16,7 +16,7 @@ const withWeb3Provider = WrappedComponent => {
     }
 
     loadWeb3 = async () => {
-      console.log('[Web3Provider.js] loadWeb3')
+      //console.log('[Web3Provider.js] loadWeb3')
       /** We check if metamask is installed, either the new version or the legacy one **/
       if (window.ethereum) {
         await this.loadWeb3LastVersion()
@@ -24,7 +24,7 @@ const withWeb3Provider = WrappedComponent => {
         await this.loadWeb3Legacy()
       } else {
         /** The user does not have web3 **/
-        console.log('[Web3Provider.js] user does not have web3')
+        //console.log('[Web3Provider.js] user does not have web3')
         this.setState({
           render: true,
           userData: {
@@ -36,26 +36,26 @@ const withWeb3Provider = WrappedComponent => {
     }
 
     loadWeb3Legacy = async () => {
-      console.log('[Web3Provider.js] getting web3 legacy instance')
+      //console.log('[Web3Provider.js] getting web3 legacy instance')
       let web3Instance
       web3Instance = new Web3(window.web3.currentProvider)
       await this.loadUserDataFromWeb3(web3Instance)
     }
 
     loadWeb3LastVersion = async () => {
-      console.log('[Web3Provider.js] getting web3 new instance')
+      //console.log('[Web3Provider.js] getting web3 new instance')
       let web3Instance
       web3Instance = new Web3(window.ethereum)
       try {
         /** Request access to the user **/
-        console.log('[Web3Provider.js] requesting user permissions')
+        //console.log('[Web3Provider.js] requesting user permissions')
         await window.ethereum.enable()
-        console.log('[Web3Provider.js] user with web3 ethereum authenticated')
+        //console.log('[Web3Provider.js] user with web3 ethereum authenticated')
         /** The user accepted the app, now it's authenticated **/
         await this.loadUserDataFromWeb3(web3Instance)
       } catch (error) {
         /** The user denied the app, it's not authenticated **/
-        console.log('[Web3Provider.js] user denied access')
+        //console.log('[Web3Provider.js] user denied access')
         this.setState({
           web3: web3Instance,
           userData: {
@@ -64,7 +64,7 @@ const withWeb3Provider = WrappedComponent => {
           },
           render: true
         })
-        console.log('[Web3Provider.js] user with ethereum denied the access')
+        //console.log('[Web3Provider.js] user with ethereum denied the access')
       }
     }
 
@@ -116,7 +116,6 @@ const withWeb3Provider = WrappedComponent => {
     async componentDidMount() {
       console.log('[Web3Provider.js] componentDidMount')
       await this.loadWeb3()
-      console.log('[Web3Provider.js] await finished')
     }
 
     /** Converts the address from uppercase to lowercase (checksum format) in order to avoid metamask bug of using both address **/
