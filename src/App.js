@@ -43,7 +43,7 @@ export class App extends Component {
   }
 
   render() {
-    console.log('[App.js] render, web3 address: ', this.state.userData.address)
+    //console.log('[App.js] render, web3 address: ', this.state.userData.address)
     let content = <Spinner />
     if (this.props.render) {
       content = (

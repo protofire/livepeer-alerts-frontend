@@ -23,7 +23,6 @@ const AccountSummaryHome = props => {
       </Button>
     )
   }
-
   return (
     <>
       <h1>{displayTexts.WELCOME_AGAIN}</h1>
@@ -49,6 +48,10 @@ const AccountSummaryHome = props => {
                   <tr>
                     <td>LivePeer Balance</td>
                     <td>{props.lpBalance}</td>
+                  </tr>
+                  <tr>
+                    <td>Subscribed</td>
+                    <td>{props.userData.isSubscribed}</td>
                   </tr>
                 </tbody>
               </table>

@@ -79,7 +79,7 @@ const withWeb3Provider = WrappedComponent => {
             web3: web3Instance,
             userData: {
               authenticated: true,
-              address: userAddress[0],
+              address: this.toChecksumAddress(web3Instance, userAddress[0]),
               currentNetwork: userNetwork,
               ethBalance: balance
             },
@@ -93,7 +93,7 @@ const withWeb3Provider = WrappedComponent => {
             this.setState({
               userData: {
                 ...this.state.userData,
-                address: accounts[0]
+                address: this.toChecksumAddress(web3Instance, accounts[0])
               }
             })
           })
@@ -117,6 +117,26 @@ const withWeb3Provider = WrappedComponent => {
       console.log('[Web3Provider.js] componentDidMount')
       await this.loadWeb3()
       console.log('[Web3Provider.js] await finished')
+    }
+
+    /** Converts the address from uppercase to lowercase (checksum format) in order to avoid metamask bug of using both address **/
+    toChecksumAddress = (web3, address) => {
+      let checksumAddress = '0x'
+      address = address.toLowerCase().replace('0x', '')
+
+      // creates the case map using the binary form of the hash of the address
+      let caseMap = parseInt(web3.utils.sha3('0x' + address), 16)
+        .toString(2)
+        .substring(0, 40)
+
+      for (let i = 0; i < address.length; i++) {
+        if (caseMap[i] === '1') {
+          checksumAddress += address[i].toUpperCase()
+        } else {
+          checksumAddress += address[i]
+        }
+      }
+      return checksumAddress
     }
 
     render() {
