@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import * as displayTexts from '../AccountSummaryTexts'
 import axios from 'axios'
-import { toast } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 import Input from '../../Common/UI/Input/Input'
 import Button from '../../Common/UI/Button/Button'
 import validator from 'validator'
@@ -201,6 +201,11 @@ export class AccountSummarySubscriptionForm extends Component {
         </>
       )
     }
-    return <div>{content}</div>
+    return (
+      <div>
+        {content}
+        <ToastContainer autoClose={3000} />
+      </div>
+    )
   }
 }
