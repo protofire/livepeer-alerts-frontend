@@ -241,7 +241,7 @@ export class AccountSummaryComponent extends Component {
       }
     }*/
 
-  sendToast = toastTime => {
+  sendToast = (toastTime, callback) => {
     console.log('Sending toast')
     let time = 6000
     if (toastTime) {
@@ -255,14 +255,16 @@ export class AccountSummaryComponent extends Component {
           position: toast.POSITION.TOP_RIGHT,
           progressClassName: 'Toast-progress-bar',
           autoClose: time,
-          toastId: this.state.toastId
+          toastId: this.state.toastId,
+          onClose: callback
         })
       } else {
         toast.success(displayMsg, {
           position: toast.POSITION.TOP_RIGHT,
           progressClassName: 'Toast-progress-bar',
           autoClose: time,
-          toastId: this.state.toastId
+          toastId: this.state.toastId,
+          onClose: callback
         })
       }
     }

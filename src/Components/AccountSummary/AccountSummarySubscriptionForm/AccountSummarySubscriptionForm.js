@@ -34,7 +34,7 @@ export class AccountSummarySubscriptionForm extends Component {
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
-    console.log('[AccountSummarySubscriptionForm.js] componentWillReceive props ')
+    console.log('[SummarySubscriptionForm] componentWillReceive props ')
     this.setState({
       ...this.state,
       address: nextProps.userData.address
@@ -42,10 +42,7 @@ export class AccountSummarySubscriptionForm extends Component {
   }
 
   componentDidMount() {
-    console.log(
-      '[AccountSummarySubscriptionForm.js] componentDidMount with address',
-      this.props.userData
-    )
+    console.log('[SummarySubscriptionForm] componentDidMount')
     this.setState({
       address: this.props.userData.address,
       render: true
@@ -54,78 +51,95 @@ export class AccountSummarySubscriptionForm extends Component {
 
   onSubmitBtnHandler = async event => {
     event.preventDefault()
-    console.log('[AccountSummarySubscriptionForm.js] submit btnHandler')
+    console.log('[SummarySubscriptionForm] submit btnHandler')
     let data = {
       address: this.state.address,
       frequency: this.state.frequency,
       email: this.state.form.email.value
     }
-    this.setState({
-      render: false,
-      displayMsg: displayTexts.GENERATING_SUBSCRIPTION
-    })
-
-    await this.generateSubscription(data)
+    this.setState(
+      {
+        render: false,
+        displayMsg: displayTexts.GENERATING_SUBSCRIPTION
+      },
+      async () => {
+        await this.generateSubscription(data, () => {
+          this.props.history.push('/account')
+        })
+      }
+    )
   }
 
-  generateSubscription = async data => {
+  generateSubscription = async (data, callback) => {
     let response
     try {
       console.log('Creating new subscriber with data: ', data)
       response = await axios.post('', data)
-      this.setState({
-        userData: {
-          ...this.props.userData,
-          activated: response.data.activated,
-          id: response.data._id,
-          activatedCode: response.data.activated,
-          createdAt: response.data.createdAt,
-          isSubscribed: true
+      let userEmail = this.state.form.email.value
+      this.setState(
+        {
+          userData: {
+            ...this.props.userData,
+            activated: response.data.activated,
+            id: response.data._id,
+            activatedCode: response.data.activated,
+            createdAt: response.data.createdAt,
+            isSubscribed: true
+          },
+          render: false,
+          error: false,
+          displayMsg: displayTexts.WELCOME_NEW_SUBSCRIBER + userEmail
         },
-        render: true,
-        error: false,
-        displayMsg: displayTexts.WELCOME_NEW_SUBSCRIBER + this.state.form.email.value
-      })
-      /** TODO -- CHECK URL **/
-      this.sendToast(displayTexts.SUBSCRIPTION_SUCCESSFUL)
-      this.props.history.push('/account')
+        () => {
+          this.sendToast(null, callback)
+        }
+      )
     } catch (exception) {
-      console.log('[AccountSummary.js] exception on postSubscription', exception)
-      this.sendToast(displayTexts.EMAIL_ALREADY_EXISTS)
-      /** TODO -- PARSE WHEN EMAIL ALREADY EXISTS **/
+      console.log('[AccountSummary.js] exception on postSubscription')
+      let responseMsg = exception.response.data.message
+      let displayMsg
+      /** Email already exists **/
+      if (responseMsg && responseMsg === displayTexts.FAIL_EMAIL_ALREADY_EXISTS_RESPONSE) {
+        displayMsg = displayTexts.EMAIL_ALREADY_EXISTS
+      } else {
+        displayMsg = displayTexts.FAIL_NO_REASON
+      }
       this.setState(
         {
           render: true,
-          displayMsg: displayTexts.FAIL_NO_REASON,
+          displayMsg: displayMsg,
           error: true
         },
-        () => this.sendToast()
+        () => {
+          this.sendToast()
+        }
       )
     }
   }
 
-  sendToast = toastTime => {
-    console.log('Sending toast')
-    let time = 6000
+  sendToast = (toastTime, callback) => {
+    let time = 2000
     if (toastTime) {
       time = toastTime
     }
     let displayMsg = this.state.displayMsg
 
-    if (!toast.isActive(this.state.toastId) && this.state.render) {
+    if (!toast.isActive(this.state.toastId)) {
       if (this.state.error) {
         toast.error(displayMsg, {
           position: toast.POSITION.TOP_RIGHT,
           progressClassName: 'Toast-progress-bar',
           autoClose: time,
-          toastId: this.state.toastId
+          toastId: this.state.toastId,
+          onClose: callback
         })
       } else {
         toast.success(displayMsg, {
           position: toast.POSITION.TOP_RIGHT,
           progressClassName: 'Toast-progress-bar',
           autoClose: time,
-          toastId: this.state.toastId
+          toastId: this.state.toastId,
+          onClose: callback
         })
       }
     }
