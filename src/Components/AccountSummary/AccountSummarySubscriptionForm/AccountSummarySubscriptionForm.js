@@ -4,6 +4,7 @@ import axios from 'axios'
 import { toast } from 'react-toastify'
 import Input from '../../Common/UI/Input/Input'
 import Button from '../../Common/UI/Button/Button'
+import validator from 'validator'
 
 export class AccountSummarySubscriptionForm extends Component {
   state = {
@@ -15,7 +16,8 @@ export class AccountSummarySubscriptionForm extends Component {
           placeholder: 'Your E-Mail'
         },
         validation: {
-          required: true
+          required: true,
+          emailCheck: true
         },
         value: '',
         touched: false,
@@ -110,7 +112,7 @@ export class AccountSummarySubscriptionForm extends Component {
     if (!rules) {
       return true
     }
-    console.log('checking validity with rules ', rules)
+
     if (rules.required) {
       isValid = value.trim() !== '' && isValid
     }
@@ -119,6 +121,9 @@ export class AccountSummarySubscriptionForm extends Component {
     }
     if (rules.maxLength) {
       isValid = value.length <= rules.maxLength && isValid
+    }
+    if (rules.emailCheck) {
+      isValid = validator.isEmail(value) && isValid
     }
     return isValid
   }
@@ -140,7 +145,8 @@ export class AccountSummarySubscriptionForm extends Component {
 
     let formIsValid = true
     formIsValid = updatedForm[inputIdentifier].valid && formIsValid
-    this.setState({ form: updatedForm, formIsValid: formIsValid })
+    updatedForm.formIsValid = formIsValid
+    this.setState({ form: updatedForm })
   }
 
   render() {
