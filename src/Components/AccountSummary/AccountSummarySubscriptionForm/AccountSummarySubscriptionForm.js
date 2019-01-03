@@ -2,20 +2,50 @@ import React, { Component } from 'react'
 import * as displayTexts from '../AccountSummaryTexts'
 import axios from 'axios'
 import { toast } from 'react-toastify'
+import Input from '../../Common/UI/Input/Input'
+import Button from '../../Common/UI/Button/Button'
 
 export class AccountSummarySubscriptionForm extends Component {
-  onSubmitBtnHandler = async () => {
+  state = {
+    form: {
+      email: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'email',
+          placeholder: 'Your E-Mail'
+        },
+        validation: {
+          required: true
+        },
+        value: '',
+        touched: false,
+        valid: false
+      },
+      formIsValid: false
+    },
+    address: null,
+    frequency: 'weekly'
+  }
+
+  componentDidMount() {
+    this.setState({
+      address: this.props.userData.address
+    })
+  }
+
+  onSubmitBtnHandler = async event => {
+    event.preventDefault()
     console.log('[AccountSummarySubscriptionForm.js] submit btnHandler')
     let response
+    let data = {
+      address: this.state.address,
+      frequency: this.state.frequency,
+      email: this.state.form.email.value
+    }
     this.setState({
       render: false,
       displayMsg: displayTexts.LOADING_SUBSCRIPTION
     })
-    const data = {
-      email: this.props.userData.email,
-      address: this.props.userData.address,
-      frequency: this.props.userData.frequency
-    }
     try {
       console.log('Creating new subscriber with data: ', data)
       response = await axios.post('', data)
@@ -32,6 +62,8 @@ export class AccountSummarySubscriptionForm extends Component {
         error: false,
         displayMsg: displayTexts.WELCOME_NEW_SUBSCRIBER + this.props.userData.email
       })
+      /** TODO -- CHECK URL **/
+      //this.props.history.push('/');
     } catch (exception) {
       console.log('[AccountSummary.js] exception on postSubscription', exception)
       /** TODO -- PARSE WHEN EMAIL ALREADY EXISTS **/
@@ -73,16 +105,61 @@ export class AccountSummarySubscriptionForm extends Component {
     }
   }
 
+  checkValidity = (value, rules) => {
+    let isValid = true
+    if (!rules) {
+      return true
+    }
+    console.log('checking validity with rules ', rules)
+    if (rules.required) {
+      isValid = value.trim() !== '' && isValid
+    }
+    if (rules.minLength) {
+      isValid = value.length >= rules.minLength && isValid
+    }
+    if (rules.maxLength) {
+      isValid = value.length <= rules.maxLength && isValid
+    }
+    return isValid
+  }
+
+  inputChangedHandler = (event, inputIdentifier) => {
+    const updatedForm = {
+      ...this.state.form
+    }
+    const updatedFormElement = {
+      ...updatedForm[inputIdentifier],
+      value: event.target.value
+    }
+    updatedFormElement.valid = this.checkValidity(
+      updatedFormElement.value,
+      updatedFormElement.validation
+    )
+    updatedFormElement.touched = true
+    updatedForm[inputIdentifier] = updatedFormElement
+
+    let formIsValid = true
+    formIsValid = updatedForm[inputIdentifier].valid && formIsValid
+    this.setState({ form: updatedForm, formIsValid: formIsValid })
+  }
+
   render() {
     let content = (
       <>
         <h1>Welcome to subscription form</h1>
-        <form>
-          <label>
-            Email:
-            <input type="text" name="email" />
-          </label>
-          <input type="submit" value="Submit" />
+        <form onSubmit={this.onSubmitBtnHandler}>
+          <Input
+            elementType={this.state.form.email.elementType}
+            elementConfig={this.state.form.email.elementConfig}
+            value={this.state.form.email.value}
+            invalid={!this.state.form.email.valid}
+            shouldValidate={this.state.form.email.validation}
+            touched={this.state.form.email.touched}
+            changed={event => this.inputChangedHandler(event, 'email')}
+          />
+          <Button btnType="Success" disabled={!this.state.form.formIsValid}>
+            Subscribe
+          </Button>
         </form>
       </>
     )
