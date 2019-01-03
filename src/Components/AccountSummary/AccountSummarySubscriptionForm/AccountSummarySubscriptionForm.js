@@ -5,6 +5,7 @@ import { toast } from 'react-toastify'
 import Input from '../../Common/UI/Input/Input'
 import Button from '../../Common/UI/Button/Button'
 import validator from 'validator'
+import Spinner from '../../Common/UI/Spinner/Spinner'
 
 export class AccountSummarySubscriptionForm extends Component {
   state = {
@@ -26,19 +27,34 @@ export class AccountSummarySubscriptionForm extends Component {
       formIsValid: false
     },
     address: null,
-    frequency: 'weekly'
+    frequency: 'weekly',
+    render: false,
+    toastId: '1',
+    displayMsg: displayTexts.LOADING_SUBSCRIPTION_DATA
+  }
+
+  componentWillReceiveProps(nextProps, nextContext) {
+    console.log('[AccountSummarySubscriptionForm.js] componentWillReceive props ')
+    this.setState({
+      ...this.state,
+      address: nextProps.userData.address
+    })
   }
 
   componentDidMount() {
+    console.log(
+      '[AccountSummarySubscriptionForm.js] componentDidMount with address',
+      this.props.userData
+    )
     this.setState({
-      address: this.props.userData.address
+      address: this.props.userData.address,
+      render: true
     })
   }
 
   onSubmitBtnHandler = async event => {
     event.preventDefault()
     console.log('[AccountSummarySubscriptionForm.js] submit btnHandler')
-    let response
     let data = {
       address: this.state.address,
       frequency: this.state.frequency,
@@ -46,8 +62,14 @@ export class AccountSummarySubscriptionForm extends Component {
     }
     this.setState({
       render: false,
-      displayMsg: displayTexts.LOADING_SUBSCRIPTION
+      displayMsg: displayTexts.GENERATING_SUBSCRIPTION
     })
+
+    await this.generateSubscription(data)
+  }
+
+  generateSubscription = async data => {
+    let response
     try {
       console.log('Creating new subscriber with data: ', data)
       response = await axios.post('', data)
@@ -62,12 +84,14 @@ export class AccountSummarySubscriptionForm extends Component {
         },
         render: true,
         error: false,
-        displayMsg: displayTexts.WELCOME_NEW_SUBSCRIBER + this.props.userData.email
+        displayMsg: displayTexts.WELCOME_NEW_SUBSCRIBER + this.state.form.email.value
       })
       /** TODO -- CHECK URL **/
-      //this.props.history.push('/');
+      this.sendToast(displayTexts.SUBSCRIPTION_SUCCESSFUL)
+      this.props.history.push('/account')
     } catch (exception) {
       console.log('[AccountSummary.js] exception on postSubscription', exception)
+      this.sendToast(displayTexts.EMAIL_ALREADY_EXISTS)
       /** TODO -- PARSE WHEN EMAIL ALREADY EXISTS **/
       this.setState(
         {
@@ -152,23 +176,31 @@ export class AccountSummarySubscriptionForm extends Component {
   render() {
     let content = (
       <>
-        <h1>Welcome to subscription form</h1>
-        <form onSubmit={this.onSubmitBtnHandler}>
-          <Input
-            elementType={this.state.form.email.elementType}
-            elementConfig={this.state.form.email.elementConfig}
-            value={this.state.form.email.value}
-            invalid={!this.state.form.email.valid}
-            shouldValidate={this.state.form.email.validation}
-            touched={this.state.form.email.touched}
-            changed={event => this.inputChangedHandler(event, 'email')}
-          />
-          <Button btnType="Success" disabled={!this.state.form.formIsValid}>
-            Subscribe
-          </Button>
-        </form>
+        <h3>{this.state.displayMsg}</h3>
+        <Spinner />
       </>
     )
+    if (this.state.render) {
+      content = (
+        <>
+          <h1>Welcome to subscription form</h1>
+          <form onSubmit={this.onSubmitBtnHandler}>
+            <Input
+              elementType={this.state.form.email.elementType}
+              elementConfig={this.state.form.email.elementConfig}
+              value={this.state.form.email.value}
+              invalid={!this.state.form.email.valid}
+              shouldValidate={this.state.form.email.validation}
+              touched={this.state.form.email.touched}
+              changed={event => this.inputChangedHandler(event, 'email')}
+            />
+            <Button btnType="Success" disabled={!this.state.form.formIsValid}>
+              Subscribe
+            </Button>
+          </form>
+        </>
+      )
+    }
     return <div>{content}</div>
   }
 }
