@@ -8,6 +8,14 @@ import Spinner from './Components/Common/UI/Spinner/Spinner'
 import { AccountSummarySubscriptionForm } from './Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummarySubscriptionForm'
 
 export class App extends Component {
+  state = {
+    userData: {
+      address: null,
+      authenticated: false,
+      currentNetwork: ''
+    }
+  }
+
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     console.log('[App.js] shouldComponentUpdate')
     let shouldUpdate =
@@ -18,8 +26,24 @@ export class App extends Component {
     return shouldUpdate
   }
 
+  componentWillReceiveProps(nextProps, nextContext) {
+    this.setState({
+      ...nextProps
+    })
+  }
+
+  componentDidMount() {
+    this.setState({
+      userData: {
+        address: this.props.userData.address,
+        authenticated: this.props.userData.authenticated,
+        currentNetwork: this.props.userData.currentNetwork
+      }
+    })
+  }
+
   render() {
-    console.log('[App.js] render, web3 address: ', this.props.userData.address)
+    console.log('[App.js] render, web3 address: ', this.state.userData.address)
     let content = <Spinner />
     if (this.props.render) {
       content = (
@@ -28,22 +52,24 @@ export class App extends Component {
             <Route
               exact
               path="/"
-              render={routeProps => <HomeComponent {...this.props} {...routeProps} />}
+              render={routeProps => (
+                <HomeComponent {...this.state} {...this.props} {...routeProps} />
+              )}
             />
             <PrivateRoute
-              authenticated={this.props.userData.authenticated}
+              authenticated={this.state.userData.authenticated}
               exact
               path="/account"
               web3={this.props.web3}
-              userData={this.props.userData}
+              userData={this.state.userData}
               component={AccountSummaryComponent}
             />
             <PrivateRoute
-              authenticated={this.props.userData.authenticated}
+              authenticated={this.state.userData.authenticated}
               exact
               path="/account/subscription"
               web3={this.props.web3}
-              userData={this.props.userData}
+              userData={this.state.userData}
               component={AccountSummarySubscriptionForm}
             />
           </Switch>

@@ -42,6 +42,14 @@ export class AccountSummaryComponent extends Component {
     })
   }
 
+  componentWillReceiveProps(nextProps, nextContext) {
+    console.log('[AccountSummary.js] componentWillReceive props ', nextProps)
+    this.setState({
+      ...this.state,
+      ...nextProps
+    })
+  }
+
   componentDidMount = async () => {
     console.log('[AccountSummaryComponent.js] componentDidMount')
     let userDataPromise, summaryPromise
@@ -52,38 +60,33 @@ export class AccountSummaryComponent extends Component {
       let resultValues = await Promise.all([userDataPromise, summaryPromise])
       let userData = resultValues[0]
       let summaryData = resultValues[1]
-      console.log('Promise all finished')
-      this.setState(
-        {
-          userData: {
-            ...this.state.userData,
-            isSubscribed: true,
-            activated: userData.data.activated,
-            id: userData.data._id,
-            activatedCode: userData.data.activatedCode,
-            createdAt: userData.data.createdAt,
-            email: userData.data.email,
-            frequency: userData.data.frequency
-          },
-          summary: {
-            bondedAmount: summaryData.data.summary.bondedAmount,
-            fees: summaryData.data.summary.fees,
-            lastClaimRound: summaryData.data.summary.lastClaimRound,
-            startRound: summaryData.data.summary.startRound,
-            status: summaryData.data.summary.status,
-            withdrawRound: summaryData.data.summary.withdrawRound,
-            stake: summaryData.data.summary.totalStake
-          },
-          render: true,
-          displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email,
-          error: false,
-          lpBalance: summaryData.data.balance
+      this.setState({
+        userData: {
+          ...this.state.userData,
+          isSubscribed: true,
+          activated: userData.data.activated,
+          id: userData.data._id,
+          activatedCode: userData.data.activatedCode,
+          createdAt: userData.data.createdAt,
+          email: userData.data.email,
+          frequency: userData.data.frequency
         },
-        () => console.log('setting state finished ', this.state)
-      )
+        summary: {
+          bondedAmount: summaryData.data.summary.bondedAmount,
+          fees: summaryData.data.summary.fees,
+          lastClaimRound: summaryData.data.summary.lastClaimRound,
+          startRound: summaryData.data.summary.startRound,
+          status: summaryData.data.summary.status,
+          withdrawRound: summaryData.data.summary.withdrawRound,
+          stake: summaryData.data.summary.totalStake
+        },
+        render: true,
+        displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email,
+        error: false,
+        lpBalance: summaryData.data.balance
+      })
     } catch (error) {
       /** Subscription not found **/
-      console.log('subscription not found')
       if (error.response && error.response.status === 404) {
         console.log('Subscription not found')
         this.setState({
@@ -140,7 +143,6 @@ export class AccountSummaryComponent extends Component {
   fetchAccountSummaryData = async () => {
     try {
       let summaryData = await axios.get('/summary/' + this.state.userData.address)
-      console.log('summary data ', summaryData)
       this.setState({
         summary: {
           bondedAmount: summaryData.data.summary.bondedAmount,
