@@ -89,6 +89,7 @@ export class AccountSummaryComponent extends Component {
       /** Subscription not found **/
       if (error.response && error.response.status === 404) {
         console.log('Subscription not found')
+        await this.fetchAccountSummaryData()
         this.setState({
           userData: {
             ...this.state.userData,
@@ -98,7 +99,6 @@ export class AccountSummaryComponent extends Component {
           displayMsg: displayTexts.WELCOME_NOT_SUBSCRIBED,
           error: true
         })
-        await this.fetchAccountSummaryData()
       } else {
         console.log('[AccountSummary.js] exception on getRequest', error)
         this.setState(
@@ -143,18 +143,21 @@ export class AccountSummaryComponent extends Component {
   fetchAccountSummaryData = async () => {
     try {
       let summaryData = await axios.get('/summary/' + this.state.userData.address)
-      this.setState({
-        summary: {
-          bondedAmount: summaryData.data.summary.bondedAmount,
-          fees: summaryData.data.summary.fees,
-          lastClaimRound: summaryData.data.summary.lastClaimRound,
-          startRound: summaryData.data.summary.startRound,
-          status: summaryData.data.summary.status,
-          withdrawRound: summaryData.data.summary.withdrawRound,
-          stake: summaryData.data.summary.totalStake
+      this.setState(
+        {
+          summary: {
+            bondedAmount: summaryData.data.summary.bondedAmount,
+            fees: summaryData.data.summary.fees,
+            lastClaimRound: summaryData.data.summary.lastClaimRound,
+            startRound: summaryData.data.summary.startRound,
+            status: summaryData.data.summary.status,
+            withdrawRound: summaryData.data.summary.withdrawRound,
+            stake: summaryData.data.summary.totalStake
+          },
+          lpBalance: summaryData.data.balance
         },
-        lpBalance: summaryData.data.balance
-      })
+        () => console.log('State fetched cmpleted ', this.state)
+      )
     } catch (exception) {
       console.log('Exception fetching account summary ', exception)
     }
