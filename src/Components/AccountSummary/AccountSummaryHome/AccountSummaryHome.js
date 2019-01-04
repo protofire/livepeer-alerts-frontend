@@ -12,7 +12,6 @@ const AccountSummaryHome = props => {
   if (props.userData.isSubscribed) {
     subscriptionBtn = (
       <>
-        <Button clicked={props.onSubscriptionChangeHandler}>Change Subscription</Button>
         <Button clicked={props.onUnSubscribeBtnHandler}>Unsubscribe</Button>
       </>
     )

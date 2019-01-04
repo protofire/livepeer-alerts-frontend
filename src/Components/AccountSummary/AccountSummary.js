@@ -178,69 +178,6 @@ export class AccountSummaryComponent extends Component {
     })
   }
 
-  /*  componentDidMount = async () => {
-      console.log('[AccountSummaryComponent.js] componentDidMount')
-      let userDataPromise, summaryPromise
-      await this.initState()
-      try {
-        userDataPromise = axios.get('/address/' + this.state.userData.address)
-        summaryPromise = axios.get('/summary/' + this.state.userData.address)
-        let resultValues = await Promise.all([userDataPromise, summaryPromise])
-        let userData = resultValues[0]
-        let summaryData = resultValues[1]
-        this.setState({
-          userData: {
-            ...this.state.userData,
-            isSubscribed: true,
-            activated: userData.data.activated,
-            id: userData.data._id,
-            activatedCode: userData.data.activatedCode,
-            createdAt: userData.data.createdAt,
-            email: userData.data.email,
-            frequency: userData.data.frequency
-          },
-          summary: {
-            bondedAmount: summaryData.data.summary.bondedAmount,
-            fees: summaryData.data.summary.fees,
-            lastClaimRound: summaryData.data.summary.lastClaimRound,
-            startRound: summaryData.data.summary.startRound,
-            status: summaryData.data.summary.status,
-            withdrawRound: summaryData.data.summary.withdrawRound,
-            stake: summaryData.data.summary.totalStake
-          },
-          render: true,
-          displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email,
-          error: false,
-          lpBalance: summaryData.data.balance
-        })
-      } catch (error) {
-        /!** Subscription not found **!/
-        if (error.response && error.response.status === 404) {
-          console.log('Subscription not found')
-          await this.fetchAccountSummaryData()
-          this.setState({
-            userData: {
-              ...this.state.userData,
-              isSubscribed: false
-            },
-            render: true,
-            displayMsg: displayTexts.WELCOME_NOT_SUBSCRIBED,
-            error: true
-          })
-        } else {
-          console.log('[AccountSummary.js] exception on getRequest', error)
-          this.setState(
-            {
-              render: true,
-              displayMsg: displayTexts.FAIL_NO_REASON,
-              error: true
-            },
-            () => this.sendToast()
-          )
-        }
-      }
-    }*/
-
   sendToast = (toastTime, callback) => {
     console.log('Sending toast')
     let time = 6000
@@ -342,7 +279,6 @@ export class AccountSummaryComponent extends Component {
         <>
           <AccountSummaryHome
             onUnSubscribeBtnHandler={this.onUnSubscribeBtnHandler}
-            onSubscriptionChangeHandler={this.onSubscriptionChangeHandler}
             onSubscribeBtnHandler={this.onSubscribeBtnHandler}
             web3={this.props.web3}
             userData={this.state.userData}
