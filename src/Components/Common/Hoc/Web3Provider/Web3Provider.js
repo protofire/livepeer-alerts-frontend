@@ -75,6 +75,8 @@ const withWeb3Provider = WrappedComponent => {
         userAddress = results[0]
         userNetwork = results[1]
         web3Instance.eth.getBalance(userAddress[0]).then(balance => {
+          /** Convert balance to eth **/
+          balance = web3Instance.utils.fromWei(balance, 'ether')
           this.setState({
             web3: web3Instance,
             userData: {
