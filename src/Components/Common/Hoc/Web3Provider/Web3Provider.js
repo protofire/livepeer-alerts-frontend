@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import Web3 from 'web3'
 import * as failReasons from './Web3FailReasons'
 import * as texts from '../../UI/Texts/Texts'
-import Spinner from '../../../AccountSummary/AccountSummary'
+import Spinner from '../../UI/Spinner/Spinner'
 
 class Web3Provider extends Component {
   state = {
@@ -166,7 +166,9 @@ class Web3Provider extends Component {
             authenticated: true
           })
         )
-        return <div>{childrenWithProps}</div>
+        content = <div>{childrenWithProps}</div>
+      } else {
+        content = <h2>{texts.NO_PERMISSIONS}</h2>
       }
     }
 
@@ -175,7 +177,7 @@ class Web3Provider extends Component {
       return <Web3UnavailableScreen />
     }*/
 
-    return null
+    return content
   }
 }
 
