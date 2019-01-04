@@ -6,6 +6,7 @@ import PrivateRoute from './Components/Common/Hoc/PrivateRoute/PrivateRoute'
 import withWeb3Provider from './Components/Common/Hoc/Web3Provider/Web3Provider'
 import Spinner from './Components/Common/UI/Spinner/Spinner'
 import { AccountSummarySubscriptionForm } from './Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummarySubscriptionForm'
+import Redirect from 'react-router-dom/es/Redirect'
 
 export class App extends Component {
   state = {
@@ -72,6 +73,7 @@ export class App extends Component {
               userData={this.state.userData}
               component={AccountSummarySubscriptionForm}
             />
+            <Redirect to="/" />
           </Switch>
         </>
       )
