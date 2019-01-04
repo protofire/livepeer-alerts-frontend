@@ -32,12 +32,11 @@ class Web3Provider extends Component {
         render: true,
         userData: {
           authenticated: false,
-          reason: failReasons.NO_WEB3
+          reason: failReasons.NO_WEB3,
+          requestingAuth: false
         }
       })
     }
-    /** Once the auth process is finished we allow the user to see the protected component **/
-    this.setState({ requestingAuth: false })
   }
 
   loadWeb3Legacy = async () => {
@@ -67,7 +66,8 @@ class Web3Provider extends Component {
           authenticated: false,
           reason: failReasons.NO_PERMISSIONS
         },
-        render: true
+        render: true,
+        requestingAuth: false
       })
       //console.log('[Web3FunctionalProvider.js] user with ethereum denied the access')
     }
@@ -90,7 +90,8 @@ class Web3Provider extends Component {
             currentNetwork: userNetwork,
             ethBalance: balance
           },
-          render: true
+          render: true,
+          requestingAuth: false
         })
 
         /** We subscribe to the event that detects if the user has changed the account **/
@@ -171,12 +172,6 @@ class Web3Provider extends Component {
         content = <h2>{texts.NO_PERMISSIONS}</h2>
       }
     }
-
-    /** TODO -- Redirect to / with error msg **/
-    /*    if (this.state.render && (!this.state.web3 || !this.state.approvePermissions)) {
-      return <Web3UnavailableScreen />
-    }*/
-
     return content
   }
 }

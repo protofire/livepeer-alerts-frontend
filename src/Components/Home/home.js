@@ -4,34 +4,16 @@ import 'react-toastify/dist/ReactToastify.css'
 import './home.css'
 import * as failReasons from '../Common/Hoc/Web3Provider/Web3FailReasons'
 import * as texts from '../Common/UI/Texts/Texts'
+import logger from '../../utils'
 
 export class HomeComponent extends Component {
   state = {
     toastId: 1
   }
 
-  /*  onGetStartedBtnHandler = () => {
-    console.log('[Home.js] getStartedBtnHandler')
-    const { web3 } = this.props
-    console.log('Props ', this.props)
-    if (!web3 || (web3 && !this.props.userData.authenticated)) {
-      this.sendToastError()
-    } else {
-      console.log('[Home.js] userAuthenticated, routing to /account: ', this.props.userData)
-      this.props.history.push('/account')
-    }
-  }*/
-
   onGetStartedBtnHandler = () => {
-    console.log('[Home.js] getStartedBtnHandler')
+    logger.log('[Home.js] getStartedBtnHandler')
     this.props.history.push('/account')
-    /** TODO REMOVE AFTER CHECKS **/
-    /*    if (!this.props.userData.authenticated) {
-      this.sendToastError()
-    } else {
-      console.log('[Home.js] userAuthenticated, routing to /account: ', this.props.userData)
-      this.props.history.push('/account')
-    }*/
   }
 
   sendToastError = toastTime => {
@@ -74,11 +56,7 @@ export class HomeComponent extends Component {
   }
 
   componentDidMount() {
-    console.log('[Home.js] componentDidMount, props: ', this.props)
-    /** TODO REMOVE AFTER CHECKS **/
-    /*    if (!this.props.web3 || !this.props.userData.authenticated) {
-      this.sendToastError(6000)
-    }*/
+    logger.log('[Home.js] componentDidMount: ')
   }
 
   render() {

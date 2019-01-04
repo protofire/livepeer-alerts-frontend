@@ -4,6 +4,7 @@ import Spinner from '../Common/UI/Spinner/Spinner'
 import * as displayTexts from './AccountSummaryTexts'
 import AccountSummaryHome from './AccountSummaryHome/AccountSummaryHome'
 import { toast, ToastContainer } from 'react-toastify'
+import logger from '../../utils'
 
 export class AccountSummaryComponent extends Component {
   state = {
@@ -33,7 +34,7 @@ export class AccountSummaryComponent extends Component {
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
-    console.log('[AccountSummary.js] componentWillReceive props ', nextProps)
+    logger.log('[AccountSummary.js] componentWillReceive props ', nextProps)
     let propsChanged =
       this.props.render !== nextProps.render ||
       this.props.userData.authenticated !== nextProps.userData.authenticated ||
@@ -47,8 +48,6 @@ export class AccountSummaryComponent extends Component {
           render: false
         },
         async () => {
-          console.log('Reloading user data')
-          console.log('state before reloading: ', this.state)
           await this.loadUserData()
         }
       )
@@ -69,7 +68,7 @@ export class AccountSummaryComponent extends Component {
           render: true,
           displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email
         },
-        () => console.log('[Loading userData finished] ', this.state)
+        () => logger.log('[Loading userData finished] ', this.state)
       )
     } catch (exception) {
       console.log('exception ', exception)
@@ -90,7 +89,7 @@ export class AccountSummaryComponent extends Component {
     )
   }
   componentDidMount = async () => {
-    console.log('[AccountSummaryComponent.js] componentDidMount')
+    logger.log('[AccountSummaryComponent.js] componentDidMount')
     let userDataPromise, summaryPromise
     this.initState(async () => {
       /** Check if the user is subscribed **/
@@ -105,10 +104,20 @@ export class AccountSummaryComponent extends Component {
             render: true,
             displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email
           },
-          () => console.log('[ComponentDidMountFinished] ')
+          () => logger.log('[ComponentDidMountFinished] ')
         )
       } catch (exception) {
-        console.log('exception ', exception)
+        this.setState(
+          {
+            ...this.state,
+            render: true,
+            error: true,
+            displayMsg: displayTexts.FAIL_NO_REASON
+          },
+          () => {
+            this.sendToast(1500, () => this.props.history.push('/'))
+          }
+        )
       }
     })
   }
@@ -117,7 +126,7 @@ export class AccountSummaryComponent extends Component {
     return new Promise(async (resolve, reject) => {
       let userData
       try {
-        console.log('Retrieving subscription for address ', this.state.userData.address)
+        logger.log('Retrieving subscription for address ', this.state.userData.address)
         userData = await axios.get('/address/' + this.state.userData.address)
         this.setState(
           {
@@ -135,7 +144,7 @@ export class AccountSummaryComponent extends Component {
       } catch (error) {
         /** Subscription not found **/
         if (error.response && error.response.status === 404) {
-          console.log('Subscription not found for ', this.state.userData.address)
+          logger.log('Subscription not found for ', this.state.userData.address)
           this.setState(
             {
               ...this.state,
@@ -177,7 +186,6 @@ export class AccountSummaryComponent extends Component {
   }
 
   sendToast = (toastTime, callback) => {
-    console.log('Sending toast')
     let time = 6000
     if (toastTime) {
       time = toastTime
@@ -206,20 +214,19 @@ export class AccountSummaryComponent extends Component {
   }
 
   onSubscribeBtnHandler = async () => {
-    console.log('[AccountSummary.js] subscribe btnHandler')
+    logger.log('[AccountSummary.js] subscribe btnHandler')
     this.props.history.push('/account/subscription')
   }
 
   onUnSubscribeBtnHandler = async () => {
-    console.log('[AccountSummary.js] unsubscribe btnHandler')
+    logger.log('[AccountSummary.js] unsubscribe btnHandler')
     this.setState({
       render: false,
       displayMsg: displayTexts.LOADING_UNSUBSCRIPTION
     })
     try {
-      console.log('unsubscribing user with id ', this.state.userData)
+      logger.log('unsubscribing user with id ', this.state.userData)
       await axios.delete('/' + this.state.userData.id)
-      console.log('User unsubscribed')
       this.setState(
         {
           render: true,
@@ -237,7 +244,7 @@ export class AccountSummaryComponent extends Component {
         () => this.sendToast()
       )
     } catch (exception) {
-      console.log('[AccountSummary.js] exception on deleteSubscription')
+      logger.log('[AccountSummary.js] exception on deleteSubscription')
       if (exception.response.status === 404) {
         /** User with that id not found **/
         this.setState(
@@ -262,7 +269,7 @@ export class AccountSummaryComponent extends Component {
   }
 
   onSubscriptionChangeHandler = () => {
-    console.log('[AccountSummary.js] onSubscriptionChangeHandler')
+    logger.log('[AccountSummary.js] onSubscriptionChangeHandler')
   }
 
   render() {
@@ -273,18 +280,23 @@ export class AccountSummaryComponent extends Component {
       </>
     )
     if (this.state.render) {
-      content = (
-        <>
-          <AccountSummaryHome
-            onUnSubscribeBtnHandler={this.onUnSubscribeBtnHandler}
-            onSubscribeBtnHandler={this.onSubscribeBtnHandler}
-            web3={this.props.web3}
-            userData={this.state.userData}
-            summary={this.state.summary}
-            lpBalance={this.state.lpBalance}
-          />
-        </>
-      )
+      if (!this.state.error) {
+        content = (
+          <>
+            <AccountSummaryHome
+              onUnSubscribeBtnHandler={this.onUnSubscribeBtnHandler}
+              onSubscribeBtnHandler={this.onSubscribeBtnHandler}
+              web3={this.props.web3}
+              userData={this.state.userData}
+              summary={this.state.summary}
+              lpBalance={this.state.lpBalance}
+            />
+          </>
+        )
+      } else {
+        /** TODO ERROR PAGE OR SOMETHING ELSE **/
+        content = <h2>{displayTexts.FAIL_NO_REASON_REDIRECT}</h2>
+      }
     }
     return (
       <div>
