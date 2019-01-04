@@ -5,11 +5,12 @@ import { HomeComponent, AccountSummaryComponent } from './Components'
 import PrivateRoute from './Components/Common/Hoc/PrivateRoute/PrivateRoute'
 import withWeb3Provider from './Components/Common/Hoc/Web3Provider/Web3Provider'
 import Spinner from './Components/Common/UI/Spinner/Spinner'
+import logger from './utils'
 
 export class App extends Component {
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    console.log('[App.js] shouldComponentUpdate')
-    let shouldUpdate =
+    logger.log('Trigger shouldComponentUpdate')
+    const shouldUpdate =
       this.props.render !== nextProps.render ||
       this.props.userData.authenticated !== nextProps.userData.authenticated ||
       this.props.userData.address !== nextProps.userData.address ||
@@ -18,29 +19,30 @@ export class App extends Component {
   }
 
   render() {
-    console.log('[App.js] render, web3 address: ', this.props.userData.address)
-    let content = <Spinner />
-    if (this.props.render) {
-      content = (
-        <>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={routeProps => <HomeComponent {...this.props} {...routeProps} />}
-            />
-            <PrivateRoute
-              authenticated={this.props.userData.authenticated}
-              exact
-              path="/account"
-              web3={this.props.web3}
-              userData={this.props.userData}
-              component={AccountSummaryComponent}
-            />
-          </Switch>
-        </>
-      )
-    }
+    logger.log('Web3 address: ', this.props.userData.address)
+    const spinner = <Spinner />
+    const routes = (
+      <>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={routeProps => <HomeComponent {...this.props} {...routeProps} />}
+          />
+          <PrivateRoute
+            authenticated={this.props.userData.authenticated}
+            exact
+            path="/account"
+            web3={this.props.web3}
+            userData={this.props.userData}
+            component={AccountSummaryComponent}
+          />
+        </Switch>
+      </>
+    )
+
+    let content = this.props.render ? routes : spinner
+
     return (
       <Router>
         <div className="App">
