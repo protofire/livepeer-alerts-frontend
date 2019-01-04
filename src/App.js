@@ -3,11 +3,11 @@ import './App.css'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import { HomeComponent, AccountSummaryComponent } from './Components'
 import PrivateRoute from './Components/Common/Hoc/PrivateRoute/PrivateRoute'
-import withWeb3Provider from './Components/Common/Hoc/Web3Provider/Web3Provider'
+import withWeb3Provider from './Components/Common/Hoc/Web3Provider/Web3FunctionalProvider'
 import Spinner from './Components/Common/UI/Spinner/Spinner'
 import { AccountSummarySubscriptionForm } from './Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummarySubscriptionForm'
 import Redirect from 'react-router-dom/es/Redirect'
-import Web3Provider from './Components/Common/Hoc/Web3Provider/Web3Provider2'
+import Web3Provider from './Components/Common/Hoc/Web3Provider/Web3Provider'
 
 export class App extends Component {
   state = {

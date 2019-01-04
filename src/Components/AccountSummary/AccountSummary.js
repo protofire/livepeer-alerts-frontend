@@ -32,19 +32,6 @@ export class AccountSummaryComponent extends Component {
     error: false
   }
 
-  initState = callback => {
-    this.setState(
-      {
-        userData: {
-          ...this.state.userData,
-          address: this.props.userData.address,
-          ethBalance: this.props.userData.ethBalance
-        }
-      },
-      callback
-    )
-  }
-
   componentWillReceiveProps(nextProps, nextContext) {
     console.log('[AccountSummary.js] componentWillReceive props ', nextProps)
     let propsChanged =
@@ -89,10 +76,21 @@ export class AccountSummaryComponent extends Component {
     }
   }
 
+  initState = callback => {
+    this.setState(
+      {
+        userData: {
+          ...this.state.userData,
+          address: this.props.userData.address,
+          ethBalance: this.props.userData.ethBalance,
+          authenticated: this.props.userData.authenticated
+        }
+      },
+      callback
+    )
+  }
   componentDidMount = async () => {
     console.log('[AccountSummaryComponent.js] componentDidMount')
-    console.log('props ', this.props)
-    console.log('state ', this.state)
     let userDataPromise, summaryPromise
     this.initState(async () => {
       /** Check if the user is subscribed **/
@@ -107,7 +105,7 @@ export class AccountSummaryComponent extends Component {
             render: true,
             displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email
           },
-          () => console.log('[ComponentDidMountFinished] ', this.state)
+          () => console.log('[ComponentDidMountFinished] ')
         )
       } catch (exception) {
         console.log('exception ', exception)
@@ -119,9 +117,8 @@ export class AccountSummaryComponent extends Component {
     return new Promise(async (resolve, reject) => {
       let userData
       try {
-        console.log('address to fetch subscription data ', this.state.userData.address)
+        console.log('Retrieving subscription for address ', this.state.userData.address)
         userData = await axios.get('/address/' + this.state.userData.address)
-        console.log('subscription detected, data: ', userData)
         this.setState(
           {
             userData: {
@@ -132,7 +129,6 @@ export class AccountSummaryComponent extends Component {
             }
           },
           () => {
-            console.log('before all', this.state)
             resolve(this.state)
           }
         )

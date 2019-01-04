@@ -24,14 +24,14 @@ export class HomeComponent extends Component {
 
   onGetStartedBtnHandler = () => {
     console.log('[Home.js] getStartedBtnHandler')
-    const { web3 } = this.props
-    console.log('Props ', this.props)
-    if (!this.props.userData.authenticated) {
+    this.props.history.push('/account')
+    /** TODO REMOVE AFTER CHECKS **/
+    /*    if (!this.props.userData.authenticated) {
       this.sendToastError()
     } else {
       console.log('[Home.js] userAuthenticated, routing to /account: ', this.props.userData)
       this.props.history.push('/account')
-    }
+    }*/
   }
 
   sendToastError = toastTime => {
@@ -74,10 +74,11 @@ export class HomeComponent extends Component {
   }
 
   componentDidMount() {
-    //console.log('[Home.js] componentDidMount, props: ', this.props)
-    if (!this.props.web3 || !this.props.userData.authenticated) {
+    console.log('[Home.js] componentDidMount, props: ', this.props)
+    /** TODO REMOVE AFTER CHECKS **/
+    /*    if (!this.props.web3 || !this.props.userData.authenticated) {
       this.sendToastError(6000)
-    }
+    }*/
   }
 
   render() {
