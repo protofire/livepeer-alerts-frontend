@@ -3,10 +3,6 @@ import { configure, mount, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import * as jest from 'jest'
 import axios from 'axios'
-import { AccountSummaryComponent } from './AccountSummary'
-import Spinner from '../Common/UI/Spinner/Spinner'
-import * as displayTexts from './AccountSummaryTexts'
-import UserSubscribed from './AccountSummary'
 
 configure({ adapter: new Adapter() })
 

@@ -91,6 +91,8 @@ export class AccountSummaryComponent extends Component {
 
   componentDidMount = async () => {
     console.log('[AccountSummaryComponent.js] componentDidMount')
+    console.log('props ', this.props)
+    console.log('state ', this.state)
     let userDataPromise, summaryPromise
     this.initState(async () => {
       /** Check if the user is subscribed **/

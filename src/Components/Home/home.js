@@ -10,9 +10,23 @@ export class HomeComponent extends Component {
     toastId: 1
   }
 
-  onGetStartedBtnHandler = () => {
+  /*  onGetStartedBtnHandler = () => {
+    console.log('[Home.js] getStartedBtnHandler')
     const { web3 } = this.props
+    console.log('Props ', this.props)
     if (!web3 || (web3 && !this.props.userData.authenticated)) {
+      this.sendToastError()
+    } else {
+      console.log('[Home.js] userAuthenticated, routing to /account: ', this.props.userData)
+      this.props.history.push('/account')
+    }
+  }*/
+
+  onGetStartedBtnHandler = () => {
+    console.log('[Home.js] getStartedBtnHandler')
+    const { web3 } = this.props
+    console.log('Props ', this.props)
+    if (!this.props.userData.authenticated) {
       this.sendToastError()
     } else {
       console.log('[Home.js] userAuthenticated, routing to /account: ', this.props.userData)

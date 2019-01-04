@@ -7,17 +7,19 @@ import withWeb3Provider from './Components/Common/Hoc/Web3Provider/Web3Provider'
 import Spinner from './Components/Common/UI/Spinner/Spinner'
 import { AccountSummarySubscriptionForm } from './Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummarySubscriptionForm'
 import Redirect from 'react-router-dom/es/Redirect'
+import Web3Provider from './Components/Common/Hoc/Web3Provider/Web3Provider2'
 
 export class App extends Component {
   state = {
     userData: {
       address: null,
-      authenticated: false,
+      authenticated: true,
       currentNetwork: ''
-    }
+    },
+    render: true
   }
 
-  shouldComponentUpdate(nextProps, nextState, nextContext) {
+  /*  shouldComponentUpdate(nextProps, nextState, nextContext) {
     console.log('[App.js] shouldComponentUpdate')
     let shouldUpdate =
       this.props.render !== nextProps.render ||
@@ -41,12 +43,12 @@ export class App extends Component {
         currentNetwork: this.props.userData.currentNetwork
       }
     })
-  }
+  }*/
 
   render() {
     //console.log('[App.js] render, web3 address: ', this.state.userData.address)
     let content = <Spinner />
-    if (this.props.render) {
+    if (this.state.render) {
       content = (
         <>
           <Switch>
@@ -57,22 +59,24 @@ export class App extends Component {
                 <HomeComponent {...this.state} {...this.props} {...routeProps} />
               )}
             />
-            <PrivateRoute
-              authenticated={this.state.userData.authenticated}
-              exact
-              path="/account"
-              web3={this.props.web3}
-              userData={this.state.userData}
-              component={AccountSummaryComponent}
-            />
-            <PrivateRoute
-              authenticated={this.state.userData.authenticated}
-              exact
-              path="/account/subscription"
-              web3={this.props.web3}
-              userData={this.state.userData}
-              component={AccountSummarySubscriptionForm}
-            />
+            <Web3Provider>
+              <PrivateRoute
+                authenticated={this.state.userData.authenticated}
+                exact
+                path="/account"
+                web3={this.props.web3}
+                userData={this.state.userData}
+                component={AccountSummaryComponent}
+              />
+              <PrivateRoute
+                authenticated={this.state.userData.authenticated}
+                exact
+                path="/account/subscription"
+                web3={this.props.web3}
+                userData={this.state.userData}
+                component={AccountSummarySubscriptionForm}
+              />
+            </Web3Provider>
             <Redirect to="/" />
           </Switch>
         </>
@@ -88,4 +92,4 @@ export class App extends Component {
   }
 }
 
-export default withWeb3Provider(App)
+export default App
