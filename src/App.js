@@ -7,7 +7,9 @@ import Spinner from './Components/Common/UI/Spinner/Spinner'
 import logger from './utils'
 import { AccountSummarySubscriptionForm } from './Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummarySubscriptionForm'
 import Redirect from 'react-router-dom/es/Redirect'
-import Web3Provider from './Components/Common/Hoc/Web3Provider/Web3Provider'
+import Web3Provider, {
+  Web3ContextConsumer
+} from './Components/Common/Hoc/Web3Provider/Web3Provider'
 
 export class App extends Component {
   state = {
@@ -35,14 +37,34 @@ export class App extends Component {
             render={routeProps => <HomeComponent {...this.state} {...this.props} {...routeProps} />}
           />
           <Web3Provider>
-            <PrivateRoute exact path="/account" component={AccountSummaryComponent} />
-            <PrivateRoute
-              exact
-              path="/account/subscription"
-              component={AccountSummarySubscriptionForm}
-            />
+            <Web3ContextConsumer>
+              {({ web3, userData, authenticated }) => {
+                return (
+                  <>
+                    <Switch>
+                      <PrivateRoute
+                        exact
+                        path="/account"
+                        web3={web3}
+                        userData={userData}
+                        authenticated={authenticated}
+                        component={AccountSummaryComponent}
+                      />
+                      <PrivateRoute
+                        exact
+                        path="/account/subscription"
+                        component={AccountSummarySubscriptionForm}
+                        web3={web3}
+                        userData={userData}
+                        authenticated={authenticated}
+                      />
+                      <Redirect to="/" />
+                    </Switch>
+                  </>
+                )
+              }}
+            </Web3ContextConsumer>
           </Web3Provider>
-          <Redirect to="/" />
         </Switch>
       </>
     )

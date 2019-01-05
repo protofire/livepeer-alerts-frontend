@@ -3,6 +3,17 @@ import Web3 from 'web3'
 import * as failReasons from './Web3FailReasons'
 import * as texts from '../../UI/Texts/Texts'
 import Spinner from '../../UI/Spinner/Spinner'
+import logger from '../../../../utils'
+
+const defaultState = {
+  userData: 1,
+  authenticated: 2,
+  web3: 3
+}
+
+const Web3Context = React.createContext(defaultState)
+
+export const Web3ContextConsumer = Web3Context.Consumer
 
 class Web3Provider extends Component {
   state = {
@@ -19,7 +30,7 @@ class Web3Provider extends Component {
   }
 
   loadWeb3 = async () => {
-    //console.log('[Web3FunctionalProvider.js] loadWeb3')
+    logger.log('[Web3FunctionalProvider.js] loadWeb3')
     /** We check if metamask is installed, either the new version or the legacy one **/
     if (window.ethereum) {
       await this.loadWeb3LastVersion()
@@ -27,7 +38,7 @@ class Web3Provider extends Component {
       await this.loadWeb3Legacy()
     } else {
       /** The user does not have web3 **/
-      //console.log('[Web3FunctionalProvider.js] user does not have web3')
+      logger.log('[Web3FunctionalProvider.js] user does not have web3')
       this.setState({
         render: true,
         userData: {
@@ -40,26 +51,26 @@ class Web3Provider extends Component {
   }
 
   loadWeb3Legacy = async () => {
-    //console.log('[Web3FunctionalProvider.js] getting web3 legacy instance')
+    logger.log('[Web3FunctionalProvider.js] getting web3 legacy instance')
     let web3Instance
     web3Instance = new Web3(window.web3.currentProvider)
     await this.loadUserDataFromWeb3(web3Instance)
   }
 
   loadWeb3LastVersion = async () => {
-    //console.log('[Web3FunctionalProvider.js] getting web3 new instance')
+    logger.log('[Web3FunctionalProvider.js] getting web3 new instance')
     let web3Instance
     web3Instance = new Web3(window.ethereum)
     try {
       /** Request access to the user **/
-      //console.log('[Web3FunctionalProvider.js] requesting user permissions')
+      logger.log('[Web3FunctionalProvider.js] requesting user permissions')
       await window.ethereum.enable()
-      //console.log('[Web3FunctionalProvider.js] user with web3 ethereum authenticated')
+      logger.log('[Web3FunctionalProvider.js] user with web3 ethereum authenticated')
       /** The user accepted the app, now it's authenticated **/
       await this.loadUserDataFromWeb3(web3Instance)
     } catch (error) {
       /** The user denied the app, it's not authenticated **/
-      //console.log('[Web3FunctionalProvider.js] user denied access')
+      logger.log('[Web3FunctionalProvider.js] user denied access')
       this.setState({
         web3: web3Instance,
         userData: {
@@ -69,11 +80,12 @@ class Web3Provider extends Component {
         render: true,
         requestingAuth: false
       })
-      //console.log('[Web3FunctionalProvider.js] user with ethereum denied the access')
+      logger.log('[Web3FunctionalProvider.js] user with ethereum denied the access')
     }
   }
 
   loadUserDataFromWeb3 = async web3Instance => {
+    console.log('Loading user data from web3')
     let userAddress
     let userNetwork
     Promise.all([web3Instance.eth.getAccounts(), web3Instance.eth.net.getId()]).then(results => {
@@ -93,11 +105,10 @@ class Web3Provider extends Component {
           render: true,
           requestingAuth: false
         })
-
         /** We subscribe to the event that detects if the user has changed the account **/
         window.ethereum.on('accountsChanged', accounts => {
-          console.log('ETHEREUM CHANGED')
-          console.log('ACCOUNTS ', accounts)
+          logger.log('ETHEREUM CHANGED')
+          logger.log('ACCOUNTS ', accounts)
           this.setState({
             userData: {
               ...this.state.userData,
@@ -105,11 +116,10 @@ class Web3Provider extends Component {
             }
           })
         })
-
         /** We subscribe to the event that detects if the user has changed the network **/
         window.ethereum.on('networkChanged', network => {
-          console.log('NETWORK CHANGED')
-          console.log('NETWORK ', network)
+          logger.log('NETWORK CHANGED')
+          logger.log('NETWORK ', network)
           this.setState({
             userData: {
               ...this.state.userData,
@@ -122,7 +132,7 @@ class Web3Provider extends Component {
   }
 
   async componentDidMount() {
-    console.log('[Web3FunctionalProvider.js] componentDidMount')
+    logger.log('[Web3FunctionalProvider.js] componentDidMount')
     this.setState({ render: true })
     await this.loadWeb3()
   }
@@ -154,20 +164,19 @@ class Web3Provider extends Component {
         <Spinner />
       </>
     )
-    /** Auth already requested **/
     if (!this.state.requestingAuth) {
-      /** User Gave us permissions **/
       if (this.state.render && this.state.web3 && this.state.userData.authenticated) {
-        /** FOR EVERY CHILDREN WE INJECT THE WEB3 **/
-        const { children } = this.props
-        const childrenWithProps = React.Children.map(children, child =>
-          React.cloneElement(child, {
-            userData: this.state.userData,
-            web3: this.state.web3,
-            authenticated: true
-          })
+        content = (
+          <Web3Context.Provider
+            value={{
+              web3: this.state.web3,
+              authenticated: this.state.userData.authenticated,
+              userData: this.state.userData
+            }}
+          >
+            {this.props.children}
+          </Web3Context.Provider>
         )
-        content = <div>{childrenWithProps}</div>
       } else {
         content = <h2>{texts.NO_PERMISSIONS}</h2>
       }
