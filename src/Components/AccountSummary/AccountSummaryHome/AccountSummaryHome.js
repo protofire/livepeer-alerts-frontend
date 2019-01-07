@@ -12,12 +12,14 @@ const AccountSummaryHome = props => {
   if (props.userData.isSubscribed) {
     subscriptionBtn = (
       <>
-        <Button clicked={props.onUnSubscribeBtnHandler}>Unsubscribe</Button>
+        <Button clicked={props.onUnSubscribeBtnHandler} className="unsubscribeBtn">
+          Unsubscribe
+        </Button>
       </>
     )
   } else {
     subscriptionBtn = (
-      <Button clicked={props.onSubscribeBtnHandler} disabled={disabledBtn}>
+      <Button clicked={props.onSubscribeBtnHandler} disabled={disabledBtn} className="subscribeBtn">
         Subscribe
       </Button>
     )
