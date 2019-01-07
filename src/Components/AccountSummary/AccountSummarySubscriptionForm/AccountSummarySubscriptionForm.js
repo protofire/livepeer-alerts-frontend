@@ -208,7 +208,11 @@ export class AccountSummarySubscriptionForm extends Component {
               touched={this.state.form.email.touched}
               changed={event => this.inputChangedHandler(event, 'email')}
             />
-            <Button btnType="Success" disabled={!this.state.form.formIsValid}>
+            <Button
+              btnType="Success"
+              disabled={!this.state.form.formIsValid}
+              class="subscriptionBtn"
+            >
               Subscribe
             </Button>
           </form>
