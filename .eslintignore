@@ -1,3 +1,5 @@
-/node_modules
-/coverage
-/public
+node_modules/
+coverage/
+public/
+!.eslintrc.js
+build/

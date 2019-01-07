@@ -9,9 +9,23 @@ import { AccountSummarySubscriptionForm } from './Components/AccountSummary/Acco
 import Redirect from 'react-router-dom/es/Redirect'
 import Web3Provider from './Components/Common/Hoc/Web3Provider/Web3Provider'
 
+// @material-ui/core components
+import withStyles from '@material-ui/core/styles/withStyles'
+import PropTypes from 'prop-types'
+
+// core components
+import PagesHeader from './Components/Common/Header/PagesHeader.js'
+import Footer from './Components/Common/Footer/Footer.js'
+import pagesStyle from './assets/jss/dashboard/layouts/pagesStyle.js'
+import bgImage from './assets/img/register.jpeg'
+
 export class App extends Component {
   state = {
     render: true
+  }
+
+  componentDidMount() {
+    document.body.style.overflow = 'unset'
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -26,36 +40,48 @@ export class App extends Component {
 
   render() {
     const spinner = <Spinner />
+    const { classes, ...rest } = this.props
+
     const routes = (
-      <>
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={routeProps => <HomeComponent {...this.state} {...this.props} {...routeProps} />}
-          />
-          <Web3Provider>
-            <PrivateRoute exact path="/account" component={AccountSummaryComponent} />
-            <PrivateRoute
+      <div className={classes.wrapper} ref="wrapper">
+        <div className={classes.fullPage} style={{ backgroundImage: 'url(' + bgImage + ')' }}>
+          <Switch>
+            <Route
               exact
-              path="/account/subscription"
-              component={AccountSummarySubscriptionForm}
+              path="/"
+              render={routeProps => (
+                <HomeComponent {...this.state} {...this.props} {...routeProps} />
+              )}
             />
-          </Web3Provider>
-          <Redirect to="/" />
-        </Switch>
-      </>
+            <Web3Provider>
+              <PrivateRoute exact path="/account" component={AccountSummaryComponent} />
+              <PrivateRoute
+                exact
+                path="/account/subscription"
+                component={AccountSummarySubscriptionForm}
+              />
+            </Web3Provider>
+            <Redirect to="/" />
+          </Switch>
+          <Footer white />
+        </div>
+      </div>
     )
     let content = this.state.render ? routes : spinner
 
     return (
       <Router>
-        <div className="App">
-          <header className="App-header">{content}</header>
+        <div>
+          <PagesHeader {...rest} />
+          {content}
         </div>
       </Router>
     )
   }
 }
 
-export default App
+App.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
+export default withStyles(pagesStyle)(App)
