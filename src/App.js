@@ -47,46 +47,48 @@ export class App extends Component {
     const routes = (
       <div className={classes.wrapper} ref="wrapper">
         <div className={classes.fullPage} style={{ backgroundImage: 'url(' + bgImage + ')' }}>
-            <Switch>
-                <Route
-                  exact
-                  path="/"
-                  render={routeProps => <HomeComponent {...this.state} {...this.props} {...routeProps} />}
-                />
-                <Web3Provider>
-                    <Web3ContextConsumer>
-                        {({ web3, userData, authenticated, error, displayMsg }) => {
-                            return (
-                                <>
-                                    <Switch>
-                                        <PrivateRoute
-                                            exact
-                                            path="/account"
-                                            web3={web3}
-                                            userData={userData}
-                                            authenticated={authenticated}
-                                            error={error}
-                                            displayMsg={displayMsg}
-                                            component={AccountSummaryComponent}
-                                        />
-                                        <PrivateRoute
-                                            exact
-                                            path="/account/subscription"
-                                            component={AccountSummarySubscriptionForm}
-                                            web3={web3}
-                                            userData={userData}
-                                            error={error}
-                                            displayMsg={displayMsg}
-                                            authenticated={authenticated}
-                                        />
-                                        <Redirect to="/" />
-                                    </Switch>
-                                </>
-                            )
-                        }}
-                    </Web3ContextConsumer>
-                </Web3Provider>
-            </Switch>
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={routeProps => (
+                <HomeComponent {...this.state} {...this.props} {...routeProps} />
+              )}
+            />
+            <Web3Provider>
+              <Web3ContextConsumer>
+                {({ web3, userData, authenticated, error, displayMsg }) => {
+                  return (
+                    <>
+                      <Switch>
+                        <PrivateRoute
+                          exact
+                          path="/account"
+                          web3={web3}
+                          userData={userData}
+                          authenticated={authenticated}
+                          error={error}
+                          displayMsg={displayMsg}
+                          component={AccountSummaryComponent}
+                        />
+                        <PrivateRoute
+                          exact
+                          path="/account/subscription"
+                          component={AccountSummarySubscriptionForm}
+                          web3={web3}
+                          userData={userData}
+                          error={error}
+                          displayMsg={displayMsg}
+                          authenticated={authenticated}
+                        />
+                        <Redirect to="/" />
+                      </Switch>
+                    </>
+                  )
+                }}
+              </Web3ContextConsumer>
+            </Web3Provider>
+          </Switch>
           <Footer white />
         </div>
       </div>
