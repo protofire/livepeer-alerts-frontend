@@ -1,8 +1,11 @@
 import React from 'react'
-import { configure } from 'enzyme'
+import { configure, shallow, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import * as jest from 'jest'
 import axios from 'axios'
+import AccountSummaryHome from './AccountSummaryHome'
+import * as displayTexts from '../AccountSummaryTexts'
+import AccountSummaryData from '../AccountSummaryData/AccountSummaryData'
 
 configure({ adapter: new Adapter() })
 
@@ -20,7 +23,8 @@ const props = {
     email: 'test@altoros.com',
     frequency: 'weekly',
     ethBalance: 'ethBalance',
-    activated: 1
+    activated: 1,
+    isSubscribed: true
   },
   render: true,
   onSubscriptionChangeHandler: () => {},
@@ -47,36 +51,15 @@ describe('test', () => {
 })
 /** TODO -- Enable again when the enzyme bug of conditional rendering is solved **/
 describe('Renders userSubscribed data', () => {
-  /*  it('Shows Welcome Message', () => {
+  it('Shows Welcome Message', () => {
     const message = displayTexts.WELCOME_AGAIN
     axios.get.mockResolvedValue(response)
     let wrapper = shallow(<AccountSummaryHome {...props} />)
     wrapper = wrapper.update()
-    console.log("testing debug wrapper" , wrapper.debug())
     expect(wrapper.contains(message)).toEqual(true)
   })
   it('Shows address', () => {
     const message = 'Address'
-    let wrapper = shallow(<AccountSummaryHome {...props} />)
-    expect(wrapper.contains(message)).toEqual(true)
-  })
-  it('Shows Email', () => {
-    const message = 'Email'
-    let wrapper = shallow(<AccountSummaryHome {...props} />)
-    expect(wrapper.contains(message)).toEqual(true)
-  })
-  it('Shows Activated status', () => {
-    const message = 'Activated'
-    let wrapper = shallow(<AccountSummaryHome {...props} />)
-    expect(wrapper.contains(message)).toEqual(true)
-  })
-  it('Shows created at', () => {
-    const message = 'Created at'
-    let wrapper = shallow(<AccountSummaryHome {...props} />)
-    expect(wrapper.contains(message)).toEqual(true)
-  })
-  it('Shows Subscription frequency', () => {
-    const message = 'Subscription frequency'
     let wrapper = shallow(<AccountSummaryHome {...props} />)
     expect(wrapper.contains(message)).toEqual(true)
   })
@@ -85,22 +68,35 @@ describe('Renders userSubscribed data', () => {
     let wrapper = shallow(<AccountSummaryHome {...props} />)
     expect(wrapper.contains(message)).toEqual(true)
   })
+  it('Shows Livepeer Balance', () => {
+    const message = 'LivePeer Balance'
+    let wrapper = shallow(<AccountSummaryHome {...props} />)
+    expect(wrapper.contains(message)).toEqual(true)
+  })
   it('Renders account summary data child component', () => {
     let wrapper = shallow(<AccountSummaryHome {...props} />)
     expect(wrapper.contains(<AccountSummaryData summary={props.summary} />)).toBe(true)
   })
-  it('Renders change subscription button', () => {
-    let wrapper = shallow(<AccountSummaryHome {...props} />)
-    expect(
-      wrapper.contains(
-        <Button clicked={props.onSubscriptionChangeHandler}>Change Subscription</Button>
-      )
-    ).toBe(true)
+  it('Renders subscription button if user not auth', () => {
+    const propsNotAuth = {
+      ...props,
+      userData: {
+        ...props.userData,
+        isSubscribed: false
+      }
+    }
+    let wrapper = mount(<AccountSummaryHome {...propsNotAuth} />)
+    expect(wrapper.find('.subscribeBtn').length).toEqual(1)
   })
-  it('Renders delete subscription button', () => {
-    let wrapper = shallow(<AccountSummaryHome {...props} />)
-    expect(
-      wrapper.contains(<Button clicked={props.onUnSubscribeBtnHandler}>Unsubscribe</Button>)
-    ).toBe(true)
-  })*/
+  it('Renders Unsubscription button if user is auth', () => {
+    const propsNotAuth = {
+      ...props,
+      userData: {
+        ...props.userData,
+        isSubscribed: true
+      }
+    }
+    let wrapper = mount(<AccountSummaryHome {...propsNotAuth} />)
+    expect(wrapper.find('.unsubscribeBtn').length).toEqual(1)
+  })
 })

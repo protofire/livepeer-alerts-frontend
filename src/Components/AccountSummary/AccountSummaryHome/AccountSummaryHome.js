@@ -5,19 +5,23 @@ import Button from '../../Common/UI/Button/Button'
 import AccountSummaryData from '../AccountSummaryData/AccountSummaryData'
 
 const AccountSummaryHome = props => {
-  /** TODO ENABLE AGAIN ONCE FINISHED **/
-  let disabledBtn
-  //let disabledBtn = props.summary.status !== 'Bonded'
+  let disabledBtn = props.summary.status !== 'Bonded'
   let subscriptionBtn
   if (props.userData.isSubscribed) {
     subscriptionBtn = (
       <>
-        <Button clicked={props.onUnSubscribeBtnHandler}>Unsubscribe</Button>
+        <Button
+          clicked={props.onUnSubscribeBtnHandler}
+          className="unsubscribeBtn"
+          disabled={disabledBtn}
+        >
+          Unsubscribe
+        </Button>
       </>
     )
   } else {
     subscriptionBtn = (
-      <Button clicked={props.onSubscribeBtnHandler} disabled={disabledBtn}>
+      <Button clicked={props.onSubscribeBtnHandler} disabled={disabledBtn} className="subscribeBtn">
         Subscribe
       </Button>
     )
