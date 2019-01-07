@@ -3,12 +3,14 @@ import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import { HomeComponent } from './home'
 import * as texts from '../Common/UI/Texts/Texts'
+import render from 'react-test-renderer'
 
 configure({ adapter: new Adapter() })
 
 describe('Renders home message', () => {
   it('Renders home message if user auth', () => {
-    const message = 'Hello LivePeer Alerts!'
+    // Given
+    const message = 'Get started'
     let props = {
       web3: [],
       userData: {
@@ -19,9 +21,15 @@ describe('Renders home message', () => {
       },
       render: false
     }
-    let wrapper = shallow(<HomeComponent {...props} />)
-    expect(wrapper.contains(message)).toEqual(true)
+    let wrapper = render.create(<HomeComponent {...props} />)
+
+    // When
+    const tree = wrapper.toJSON()
+
+    // Then
+    expect(tree).toMatchSnapshot()
   })
+
   it('Renders error message if user not auth', () => {
     const toastFn = jest.fn()
     let props = {
