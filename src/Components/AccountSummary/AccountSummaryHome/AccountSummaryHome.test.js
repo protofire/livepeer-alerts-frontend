@@ -1,8 +1,6 @@
 import React from 'react'
-import { configure, shallow } from 'enzyme'
+import { configure } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import AccountSummaryHome from './AccountSummaryHome'
-import Spinner from '../../Common/UI/Spinner/Spinner'
 import * as jest from 'jest'
 import axios from 'axios'
 

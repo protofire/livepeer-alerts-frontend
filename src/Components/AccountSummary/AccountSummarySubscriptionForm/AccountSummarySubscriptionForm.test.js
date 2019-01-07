@@ -2,8 +2,6 @@ import React from 'react'
 import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import { AccountSummarySubscriptionForm } from './AccountSummarySubscriptionForm'
-import Input from '../../Common/UI/Input/Input'
-import Button from '../../Common/UI/Button/Button'
 
 configure({ adapter: new Adapter() })
 
