@@ -6,11 +6,6 @@ import Adapter from 'enzyme-adapter-react-16'
 import { AccountSummaryComponent, HomeComponent } from './Components'
 
 configure({ adapter: new Adapter() })
-/*describe('test', () => {
-  it('test', () => {
-    expect(true)
-  })
-})*/
 describe('Check public and protected routes', () => {
   it('Expect route / to be homeComponent', () => {
     const wrapper = mount(

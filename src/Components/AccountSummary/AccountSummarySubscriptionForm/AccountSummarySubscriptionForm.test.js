@@ -1,6 +1,9 @@
 import React from 'react'
-import { configure, mount, shallow } from 'enzyme'
+import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
+import { AccountSummarySubscriptionForm } from './AccountSummarySubscriptionForm'
+import Input from '../../Common/UI/Input/Input'
+import Button from '../../Common/UI/Button/Button'
 
 configure({ adapter: new Adapter() })
 
@@ -9,19 +12,14 @@ const props = {
     address: '0x4d3F9184Fc32A43BAD2641b1536B52a076FBBDcE'
   }
 }
-/*
+
 describe('Render AccountSummarySubscriptionForm', () => {
-  it('Renders subscription form', () =>{
+  it('Should render subscription form without throwing an error', () => {
+    // Given
     let wrapper = shallow(<AccountSummarySubscriptionForm {...props} />)
-    expect(wrapper.contains(
-
-    )).toBe(true)
-  })
-})
-*/
-
-describe('test', () => {
-  it('test', () => {
-    expect(true)
+    // When
+    const tree = wrapper.html()
+    // Then
+    expect(tree).toMatchSnapshot()
   })
 })
