@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import './App.css'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
 import { HomeComponent, AccountSummaryComponent } from './Components'
 import PrivateRoute from './Components/Common/Hoc/PrivateRoute/PrivateRoute'
 import Spinner from './Components/Common/UI/Spinner/Spinner'
 import logger from './utils'
 import { AccountSummarySubscriptionForm } from './Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummarySubscriptionForm'
-import Redirect from 'react-router-dom/es/Redirect'
+import { Redirect } from 'react-router'
 import Web3Provider, {
   Web3ContextConsumer
 } from './Components/Common/Hoc/Web3Provider/Web3Provider'
@@ -38,7 +38,7 @@ export class App extends Component {
           />
           <Web3Provider>
             <Web3ContextConsumer>
-              {({ web3, userData, authenticated }) => {
+              {({ web3, userData, authenticated, error, displayMsg }) => {
                 return (
                   <>
                     <Switch>
@@ -48,6 +48,8 @@ export class App extends Component {
                         web3={web3}
                         userData={userData}
                         authenticated={authenticated}
+                        error={error}
+                        displayMsg={displayMsg}
                         component={AccountSummaryComponent}
                       />
                       <PrivateRoute
@@ -56,6 +58,8 @@ export class App extends Component {
                         component={AccountSummarySubscriptionForm}
                         web3={web3}
                         userData={userData}
+                        error={error}
+                        displayMsg={displayMsg}
                         authenticated={authenticated}
                       />
                       <Redirect to="/" />
@@ -80,4 +84,4 @@ export class App extends Component {
   }
 }
 
-export default App
+export default withRouter(App)

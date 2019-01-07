@@ -8,7 +8,9 @@ import logger from '../../../../utils'
 const defaultState = {
   userData: 1,
   authenticated: 2,
-  web3: 3
+  web3: 3,
+  displayMsg: '',
+  error: false
 }
 
 const Web3Context = React.createContext(defaultState)
@@ -26,7 +28,8 @@ class Web3Provider extends Component {
     },
     render: false,
     requestingAuth: true,
-    displayMsg: texts.WAITING_AUTHORIZATION
+    displayMsg: texts.WAITING_AUTHORIZATION,
+    error: false
   }
 
   loadWeb3 = async () => {
@@ -43,9 +46,11 @@ class Web3Provider extends Component {
         render: true,
         userData: {
           authenticated: false,
-          reason: failReasons.NO_WEB3,
-          requestingAuth: false
-        }
+          reason: failReasons.NO_WEB3
+        },
+        requestingAuth: false,
+        displayMsg: texts.NO_WEB3,
+        error: true
       })
     }
   }
@@ -78,7 +83,9 @@ class Web3Provider extends Component {
           reason: failReasons.NO_PERMISSIONS
         },
         render: true,
-        requestingAuth: false
+        requestingAuth: false,
+        displayMsg: texts.NO_PERMISSIONS,
+        error: true
       })
       logger.log('[Web3FunctionalProvider.js] user with ethereum denied the access')
     }
@@ -178,7 +185,19 @@ class Web3Provider extends Component {
           </Web3Context.Provider>
         )
       } else {
-        content = <h2>{texts.NO_PERMISSIONS}</h2>
+        content = (
+          <Web3Context.Provider
+            value={{
+              web3: this.state.web3,
+              authenticated: this.state.userData.authenticated,
+              userData: this.state.userData,
+              displayMsg: this.state.displayMsg,
+              error: this.state.error
+            }}
+          >
+            {this.props.children}
+          </Web3Context.Provider>
+        )
       }
     }
     return content
