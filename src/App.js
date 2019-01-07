@@ -18,11 +18,14 @@ export class App extends Component {
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
     logger.log('Trigger shouldComponentUpdate')
-    let shouldUpdate =
-      this.props.render !== nextProps.render ||
-      this.props.userData.authenticated !== nextProps.userData.authenticated ||
-      this.props.userData.address !== nextProps.userData.address ||
-      this.props.userData.currentNetwork !== nextProps.userData.currentNetwork
+    let shouldUpdate = true
+    if (this.props.userData && nextProps.userData) {
+      shouldUpdate =
+        this.props.render !== nextProps.render ||
+        this.props.userData.authenticated !== nextProps.userData.authenticated ||
+        this.props.userData.address !== nextProps.userData.address ||
+        this.props.userData.currentNetwork !== nextProps.userData.currentNetwork
+    }
     return shouldUpdate
   }
 

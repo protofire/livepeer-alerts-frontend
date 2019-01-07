@@ -5,9 +5,7 @@ import Button from '../../Common/UI/Button/Button'
 import AccountSummaryData from '../AccountSummaryData/AccountSummaryData'
 
 const AccountSummaryHome = props => {
-  /** TODO ENABLE AGAIN ONCE FINISHED **/
-  let disabledBtn
-  //let disabledBtn = props.summary.status !== 'Bonded'
+  let disabledBtn = props.summary.status !== 'Bonded'
   let subscriptionBtn
   if (props.userData.isSubscribed) {
     subscriptionBtn = (
