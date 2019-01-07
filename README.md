@@ -18,10 +18,9 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 In order to develop livepeer-alerts-frontend, you'll need:
-```
+
 - [Git](https://git-scm.com/)
 - [Node.js](https://nodejs.org/)
-```
 
 ### Installing
 
