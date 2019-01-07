@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import './App.css'
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
 import { HomeComponent, AccountSummaryComponent } from './Components'
 import PrivateRoute from './Components/Common/Hoc/PrivateRoute/PrivateRoute'
 import Spinner from './Components/Common/UI/Spinner/Spinner'
 import logger from './utils'
 import { AccountSummarySubscriptionForm } from './Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummarySubscriptionForm'
-import Redirect from 'react-router-dom/es/Redirect'
-import Web3Provider from './Components/Common/Hoc/Web3Provider/Web3Provider'
+import { Redirect } from 'react-router'
+import Web3Provider, {
+  Web3ContextConsumer
+} from './Components/Common/Hoc/Web3Provider/Web3Provider'
 
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles'
@@ -45,24 +47,46 @@ export class App extends Component {
     const routes = (
       <div className={classes.wrapper} ref="wrapper">
         <div className={classes.fullPage} style={{ backgroundImage: 'url(' + bgImage + ')' }}>
-          <Switch>
-            <Route
-              exact
-              path="/"
-              render={routeProps => (
-                <HomeComponent {...this.state} {...this.props} {...routeProps} />
-              )}
-            />
-            <Web3Provider>
-              <PrivateRoute exact path="/account" component={AccountSummaryComponent} />
-              <PrivateRoute
-                exact
-                path="/account/subscription"
-                component={AccountSummarySubscriptionForm}
-              />
-            </Web3Provider>
-            <Redirect to="/" />
-          </Switch>
+            <Switch>
+                <Route
+                  exact
+                  path="/"
+                  render={routeProps => <HomeComponent {...this.state} {...this.props} {...routeProps} />}
+                />
+                <Web3Provider>
+                    <Web3ContextConsumer>
+                        {({ web3, userData, authenticated, error, displayMsg }) => {
+                            return (
+                                <>
+                                    <Switch>
+                                        <PrivateRoute
+                                            exact
+                                            path="/account"
+                                            web3={web3}
+                                            userData={userData}
+                                            authenticated={authenticated}
+                                            error={error}
+                                            displayMsg={displayMsg}
+                                            component={AccountSummaryComponent}
+                                        />
+                                        <PrivateRoute
+                                            exact
+                                            path="/account/subscription"
+                                            component={AccountSummarySubscriptionForm}
+                                            web3={web3}
+                                            userData={userData}
+                                            error={error}
+                                            displayMsg={displayMsg}
+                                            authenticated={authenticated}
+                                        />
+                                        <Redirect to="/" />
+                                    </Switch>
+                                </>
+                            )
+                        }}
+                    </Web3ContextConsumer>
+                </Web3Provider>
+            </Switch>
           <Footer white />
         </div>
       </div>
@@ -84,4 +108,4 @@ App.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(pagesStyle)(App)
+export default withStyles(pagesStyle)(withRouter(App))

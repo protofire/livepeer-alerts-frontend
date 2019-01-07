@@ -2,7 +2,6 @@ import React from 'react'
 import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import { HomeComponent } from './home'
-import * as failReasons from '../Common/Hoc/Web3Provider/Web3FailReasons'
 import * as texts from '../Common/UI/Texts/Texts'
 
 configure({ adapter: new Adapter() })
@@ -28,10 +27,15 @@ describe('Renders home message', () => {
     let props = {
       web3: [],
       userData: {
-        authenticated: false,
-        reason: failReasons.NO_PERMISSIONS
+        authenticated: false
       },
       render: true,
+      location: {
+        state: {
+          displayMsg: texts.NO_PERMISSIONS,
+          error: true
+        }
+      },
       toastOpenedHandlerTest: toastFn
     }
     let wrapper = shallow(<HomeComponent {...props} />)
@@ -44,8 +48,13 @@ describe('Renders home message', () => {
       render: true,
       toastOpenedHandlerTest: toastFn,
       userData: {
-        authenticated: false,
-        reason: failReasons.NO_WEB3
+        authenticated: false
+      },
+      location: {
+        state: {
+          displayMsg: texts.NO_WEB3,
+          error: true
+        }
       }
     }
     let wrapper = shallow(<HomeComponent {...props} />)
