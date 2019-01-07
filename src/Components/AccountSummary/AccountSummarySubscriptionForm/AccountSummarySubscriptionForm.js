@@ -27,7 +27,7 @@ export class AccountSummarySubscriptionForm extends Component {
       formIsValid: false
     },
     address: null,
-    frequency: 'weekly',
+    frequency: 'daily',
     render: false,
     toastId: '1',
     displayMsg: displayTexts.LOADING_SUBSCRIPTION_DATA
