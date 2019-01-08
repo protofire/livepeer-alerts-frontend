@@ -16,14 +16,11 @@ class PagesHeader extends React.Component {
     const appBarClasses = cx({
       [' ' + classes[color]]: color
     })
-    return (
-      <AppBar position="static" className={classes.appBar + appBarClasses}>
-        <Toolbar className={classes.container}>
-          <Hidden smDown>
-            <div className={classes.flex}>
-              <span
-                dangerouslySetInnerHTML={{
-                  __html: `<a href="/" style="background-image: none; height: 32px;">
+
+    const logo = (
+      <span
+        dangerouslySetInnerHTML={{
+          __html: `<a href="/" style="background-image: none; height: 32px;">
                     <svg version="1.1" xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" viewBox="0 0 250.1 70"
                          className="logo" height="32" fill="#fff">
                         <g>
@@ -49,8 +46,21 @@ class PagesHeader extends React.Component {
                         </g>
                     </svg>
                 </a>`
-                }}
-              />
+        }}
+      />
+    )
+
+    return (
+      <AppBar position="static" className={classes.appBar + appBarClasses}>
+        <Toolbar className={classes.container}>
+          <Hidden smDown>
+            <div className={classes.flex}>{logo}</div>
+          </Hidden>
+          <Hidden mdUp>
+            <div className={classes.flex}>
+              <span className={classes.title} color="transparent">
+                {logo}
+              </span>
             </div>
           </Hidden>
         </Toolbar>
