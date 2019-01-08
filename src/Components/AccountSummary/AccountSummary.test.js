@@ -3,6 +3,9 @@ import { configure, mount, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import * as jest from 'jest'
 import axios from 'axios'
+import { AccountSummaryComponent } from './AccountSummary'
+import Spinner from '../Common/UI/Spinner/Spinner'
+import AccountSummaryHome from './AccountSummaryHome/AccountSummaryHome'
 
 configure({ adapter: new Adapter() })
 
@@ -46,14 +49,14 @@ describe('test', () => {
     expect(true)
   })
 })
-/*
 describe('Renders AccountSummary data', () => {
-    it('Renders Loading spinner when fetching data', () => {
+  it('Renders Loading spinner when fetching data', () => {
     let wrapper = shallow(<AccountSummaryComponent {...props} />)
     wrapper.update()
     expect(wrapper.contains(<Spinner />)).toBe(true)
   })
-  it('Requests user to be on bounded status if the user does not have this status', () => {
+
+  /*  it('Requests user to be on bounded status if the user does not have this status', () => {
     const message = displayTexts.WELCOME_AGAIN
     axios.get.mockResolvedValue(response)
     let wrapper = mount(<AccountSummaryComponent {...props} />)
@@ -71,6 +74,5 @@ describe('Renders AccountSummary data', () => {
         />
       )
     ).toBe(true)
-  })
+  })*/
 })
-*/
