@@ -11,9 +11,23 @@ import Web3Provider, {
   Web3ContextConsumer
 } from './Components/Common/Hoc/Web3Provider/Web3Provider'
 
+// @material-ui/core components
+import withStyles from '@material-ui/core/styles/withStyles'
+import PropTypes from 'prop-types'
+
+// core components
+import PagesHeader from './Components/Common/Header/PagesHeader.js'
+import Footer from './Components/Common/Footer/Footer.js'
+import pagesStyle from './assets/jss/dashboard/layouts/pagesStyle.js'
+import bgImage from './assets/img/register.jpeg'
+
 export class App extends Component {
   state = {
     render: true
+  }
+
+  componentDidMount() {
+    document.body.style.overflow = 'unset'
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -31,60 +45,72 @@ export class App extends Component {
 
   render() {
     const spinner = <Spinner />
+    const { classes, ...rest } = this.props
+
     const routes = (
-      <>
-        <Switch>
-          <Route
-            exact
-            path="/"
-            render={routeProps => <HomeComponent {...this.state} {...this.props} {...routeProps} />}
-          />
-          <Web3Provider>
-            <Web3ContextConsumer>
-              {({ web3, userData, authenticated, error, displayMsg }) => {
-                return (
-                  <>
-                    <Switch>
-                      <PrivateRoute
-                        exact
-                        path="/account"
-                        web3={web3}
-                        userData={userData}
-                        authenticated={authenticated}
-                        error={error}
-                        displayMsg={displayMsg}
-                        component={AccountSummaryComponent}
-                      />
-                      <PrivateRoute
-                        exact
-                        path="/account/subscription"
-                        component={AccountSummarySubscriptionForm}
-                        web3={web3}
-                        userData={userData}
-                        error={error}
-                        displayMsg={displayMsg}
-                        authenticated={authenticated}
-                      />
-                      <Redirect to="/" />
-                    </Switch>
-                  </>
-                )
-              }}
-            </Web3ContextConsumer>
-          </Web3Provider>
-        </Switch>
-      </>
+      <div className={classes.wrapper} ref="wrapper">
+        <div className={classes.fullPage} style={{ backgroundImage: 'url(' + bgImage + ')' }}>
+          <Switch>
+            <Route
+              exact
+              path="/"
+              render={routeProps => (
+                <HomeComponent {...this.state} {...this.props} {...routeProps} />
+              )}
+            />
+            <Web3Provider>
+              <Web3ContextConsumer>
+                {({ web3, userData, authenticated, error, displayMsg }) => {
+                  return (
+                    <>
+                      <Switch>
+                        <PrivateRoute
+                          exact
+                          path="/account"
+                          web3={web3}
+                          userData={userData}
+                          authenticated={authenticated}
+                          error={error}
+                          displayMsg={displayMsg}
+                          component={AccountSummaryComponent}
+                        />
+                        <PrivateRoute
+                          exact
+                          path="/account/subscription"
+                          component={AccountSummarySubscriptionForm}
+                          web3={web3}
+                          userData={userData}
+                          error={error}
+                          displayMsg={displayMsg}
+                          authenticated={authenticated}
+                        />
+                        <Redirect to="/" />
+                      </Switch>
+                    </>
+                  )
+                }}
+              </Web3ContextConsumer>
+            </Web3Provider>
+          </Switch>
+          <Footer white />
+        </div>
+      </div>
     )
     let content = this.state.render ? routes : spinner
 
     return (
       <Router>
-        <div className="App">
-          <header className="App-header">{content}</header>
+        <div>
+          <PagesHeader {...rest} />
+          {content}
         </div>
       </Router>
     )
   }
 }
 
-export default withRouter(App)
+App.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
+export default withStyles(pagesStyle)(withRouter(App))

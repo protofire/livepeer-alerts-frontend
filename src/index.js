@@ -1,6 +1,6 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
-import './index.css'
+import './assets/scss/livepeer.css?v=1.4.0'
 import App from './App'
 import * as serviceWorker from './serviceWorker'
 import axios from 'axios'

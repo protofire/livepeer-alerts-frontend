@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { ToastContainer, toast } from 'react-toastify'
+import { toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import './home.css'
 import logger from '../../utils'
 import { withRouter } from 'react-router-dom'
+import HomeCard from './HomeCard'
 
 export class HomeComponent extends Component {
   state = {
@@ -105,18 +106,9 @@ export class HomeComponent extends Component {
   }
 
   render() {
-    let content
+    // TODO PUT GET STARTED BUTTON; REVERT OLD CODE AND CHECK IT
 
-    content = (
-      <>
-        <h3>Hello LivePeer Alerts!</h3>
-        <p>Descriptions and details</p>
-        <button onClick={this.onGetStartedBtnHandler}>Get Started</button>
-        <ToastContainer autoClose={3000} />
-      </>
-    )
-
-    return <div>{content}</div>
+    return <HomeCard onClick={this.onGetStartedBtnHandler} />
   }
 }
 export default withRouter(HomeComponent)
