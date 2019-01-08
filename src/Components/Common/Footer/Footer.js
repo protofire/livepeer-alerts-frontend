@@ -8,6 +8,7 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 
 import footerStyle from '../../../assets/jss/dashboard/components/footerStyle'
+import Link from 'react-router-dom/es/Link'
 
 function Footer({ ...props }) {
   const { classes, fluid, white } = props
@@ -31,9 +32,9 @@ function Footer({ ...props }) {
         <div className={classes.left}>
           <List className={classes.list}>
             <ListItem className={classes.inlineBlock}>
-              <a href="#tyc" className={block}>
+              <Link to="/terms" className={block}>
                 Terms and conditions
-              </a>
+              </Link>
             </ListItem>
           </List>
         </div>

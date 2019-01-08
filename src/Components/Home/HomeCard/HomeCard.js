@@ -12,10 +12,10 @@ import Group from '@material-ui/icons/Group'
 // core components
 import GridContainer from '../../Common/Grid/GridContainer.js'
 import GridItem from '../../Common/Grid/GridItem.js'
-import Button from '../../Common/CustomButtons/Button.js'
-import InfoArea from '../../Common/InfoArea/InfoArea.js'
-import Card from '../../Common/Card/Card.js'
-import CardBody from '../../Common/Card/CardBody.js'
+import Button from '../../Common/UI/CustomButtons/Button.js'
+import InfoArea from '../../Common/UI/InfoArea/InfoArea.js'
+import Card from '../../Common/UI/Card/Card.js'
+import CardBody from '../../Common/UI/Card/CardBody.js'
 
 import homeCardStyle from '../../../assets/jss/dashboard/views/homeCardStyle'
 

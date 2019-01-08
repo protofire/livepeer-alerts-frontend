@@ -20,6 +20,7 @@ import PagesHeader from './Components/Common/Header/PagesHeader.js'
 import Footer from './Components/Common/Footer/Footer.js'
 import pagesStyle from './assets/jss/dashboard/layouts/pagesStyle.js'
 import bgImage from './assets/img/register.jpeg'
+import TermsAndConditionsComponent from './Components/TermsAndConditions/TermsAndConditions'
 
 export class App extends Component {
   state = {
@@ -57,6 +58,11 @@ export class App extends Component {
               render={routeProps => (
                 <HomeComponent {...this.state} {...this.props} {...routeProps} />
               )}
+            />
+            <Route
+              exact
+              path="/terms"
+              render={routeProps => <TermsAndConditionsComponent {...routeProps} />}
             />
             <Web3Provider>
               <Web3ContextConsumer>
