@@ -8,7 +8,7 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 
 import footerStyle from '../../../assets/jss/dashboard/components/footerStyle'
-import Link from 'react-router-dom/es/Link'
+import { Link } from 'react-router-dom'
 
 function Footer({ ...props }) {
   const { classes, fluid, white } = props
