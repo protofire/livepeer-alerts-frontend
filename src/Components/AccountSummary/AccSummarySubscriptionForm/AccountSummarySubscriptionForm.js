@@ -189,12 +189,7 @@ export class AccountSummarySubscriptionForm extends Component {
   }
 
   render() {
-    let content = (
-      <>
-        <h3>{this.state.displayMsg}</h3>
-        <Spinner />
-      </>
-    )
+    let content = <Spinner displayMsg={this.state.displayMsg} />
     if (this.state.render) {
       content = (
         <>
