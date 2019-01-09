@@ -1,10 +1,10 @@
-import withStyles from '@material-ui/core/es/styles/withStyles'
+import { withStyles } from '@material-ui/core/styles'
 import React from 'react'
-import AccountSummarySubscriptionFormDisplayStyle from './AccountSummarySubscriptionFormDisplayStyle'
+import AccSummarySubscriptionFormDisplayStyle from './AccSummarySubscriptionFormDisplayStyle'
 
 import Button from '../../../Common/UI/Button/Button'
 import Input from '../../../Common/UI/Input/Input'
-const AccountSummarySubscriptionFormDisplay = props => {
+const accountSummarySubscriptionFormDisplay = props => {
   const { classes } = props
   return (
     <div className={classes.container}>
@@ -26,6 +26,6 @@ const AccountSummarySubscriptionFormDisplay = props => {
     </div>
   )
 }
-export default withStyles(AccountSummarySubscriptionFormDisplayStyle)(
-  AccountSummarySubscriptionFormDisplay
+export default withStyles(AccSummarySubscriptionFormDisplayStyle)(
+  accountSummarySubscriptionFormDisplay
 )

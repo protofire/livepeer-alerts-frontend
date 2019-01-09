@@ -2,15 +2,13 @@ import React from 'react'
 import * as displayTexts from '../AccountSummaryTexts'
 import './AccountSummaryHome.css'
 import Button from '../../Common/UI/Button/Button'
-//import Button from '../../Common/UI/CustomButtons/Button'
 import AccountSummaryData from '../AccountSummaryData/AccountSummaryData'
-import withStyles from '@material-ui/core/es/styles/withStyles'
+import { withStyles } from '@material-ui/core/styles'
 import AccountSummaryStyle from './AccountSummaryStyle'
 
 const AccountSummaryHome = props => {
   let disabledBtn = props.summary.status !== 'Bonded'
   const { classes } = props
-  disabledBtn = false
   let subscriptionBtn
 
   if (props.userData.isSubscribed) {

@@ -4,7 +4,7 @@
 
 import { container } from '../../../../assets/jss/dashboard'
 
-const AccountSummarySubscriptionFormDisplayStyle = {
+const AccSummarySubscriptionFormDisplayStyle = {
   container: {
     ...container,
     position: 'relative',
@@ -12,4 +12,4 @@ const AccountSummarySubscriptionFormDisplayStyle = {
   }
 }
 
-export default AccountSummarySubscriptionFormDisplayStyle
+export default AccSummarySubscriptionFormDisplayStyle
