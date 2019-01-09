@@ -1,71 +1,97 @@
 import React from 'react'
-import PropTypes from 'prop-types'
+import { configure, shallow, mount } from 'enzyme'
+import Adapter from 'enzyme-adapter-react-16'
+import * as jest from 'jest'
+import axios from 'axios'
+import * as displayTexts from '../../AccountSummary/AccountSummaryTexts'
+import AccountSummaryHome from '../../AccountSummary/AccountSummaryHome/AccountSummaryHome'
+import AccountSummaryData from '../../AccountSummary/AccountSummaryData/AccountSummaryData'
 
-// @material-ui/core components
-import withStyles from '@material-ui/core/styles/withStyles'
+configure({ adapter: new Adapter() })
 
-// @material-ui/icons
-import Code from '@material-ui/icons/Code'
-import Group from '@material-ui/icons/Group'
-import Notifications from '@material-ui/icons/NotificationsActive'
-// core components
-import GridContainer from '../../Common/Grid/GridContainer.js'
-import GridItem from '../../Common/Grid/GridItem.js'
-import Button from '../../Common/UI/CustomButtons/Button.js'
-import InfoArea from '../../Common/UI/InfoArea/InfoArea.js'
-import Card from '../../Common/UI/Card/Card.js'
-import CardBody from '../../Common/UI/Card/CardBody.js'
+const props = {
+  summary: {
+    bondedAmount: 0,
+    fees: 0,
+    status: 'Bounded',
+    lastClaimRound: 0,
+    startRound: 0,
+    withdrawRound: 0
+  },
+  userData: {
+    address: '0x4d3F9184Fc32A43BAD2641b1536B52a076FBBDcE',
+    email: 'test@altoros.com',
+    frequency: 'weekly',
+    ethBalance: 'ethBalance',
+    activated: 1,
+    isSubscribed: true
+  },
+  render: true,
+  onSubscriptionChangeHandler: () => {},
+  onUnSubscribeBtnHandler: () => {}
+}
 
-import homeCardStyle from '../../../assets/jss/dashboard/views/homeCardStyle'
-
-class HomeCard extends React.Component {
-  render() {
-    const { classes, onClick } = this.props
-    return (
-      <div className={classes.container}>
-        <GridContainer justify="center">
-          <GridItem xs={12} sm={12} md={10}>
-            <Card className={classes.cardSignup}>
-              <h2 className={classes.cardTitle}>Livepeer Notifications</h2>
-              <CardBody>
-                <GridContainer justify="center">
-                  <GridItem xs={12} sm={12} md={5}>
-                    <InfoArea
-                      title="Pro-active alert notifications"
-                      description="We provide pro-active alert notifications that will help LPT token holders to be updated about how the transcoders are performing in near real time"
-                      icon={Notifications}
-                      iconColor="rose"
-                    />
-                    <InfoArea
-                      title="Account information summary"
-                      description="You can see also a summary of your account information and your livepeer balance"
-                      icon={Group}
-                      iconColor="info"
-                    />
-                    <InfoArea title="Open source" description="" icon={Code} iconColor="primary" />
-                  </GridItem>
-                  <GridItem xs={12} sm={8} md={5}>
-                    <div
-                      className={classes.center}
-                      style={{ paddingTop: '50%', paddingBottom: '40%' }}
-                    >
-                      <Button onClick={onClick} round color="primary" size="lg">
-                        Get started
-                      </Button>
-                    </div>
-                  </GridItem>
-                </GridContainer>
-              </CardBody>
-            </Card>
-          </GridItem>
-        </GridContainer>
-      </div>
-    )
+const response = {
+  data: {
+    bondedAmount: 0,
+    fees: 0,
+    lastClaimRound: 0,
+    startRound: 0,
+    status: 0,
+    withdrawRound: 0,
+    totalStake: 0
   }
 }
 
-HomeCard.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-export default withStyles(homeCardStyle)(HomeCard)
+jest.mock('axios')
+/** TODO -- Enable again when the enzyme bug of conditional rendering is solved **/
+describe('Renders userSubscribed data', () => {
+  it('Shows Welcome Message', () => {
+    const message = displayTexts.WELCOME_AGAIN
+    axios.get.mockResolvedValue(response)
+    let wrapper = shallow(<AccountSummaryHome {...props} />)
+    wrapper = wrapper.update()
+    expect(wrapper.contains(message)).toEqual(true)
+  })
+  it('Shows address', () => {
+    const message = 'Address'
+    let wrapper = shallow(<AccountSummaryHome {...props} />)
+    expect(wrapper.contains(message)).toEqual(true)
+  })
+  it('Shows ETH Balance', () => {
+    const message = 'ETH Balance'
+    let wrapper = shallow(<AccountSummaryHome {...props} />)
+    expect(wrapper.contains(message)).toEqual(true)
+  })
+  it('Shows Livepeer Balance', () => {
+    const message = 'LivePeer Balance'
+    let wrapper = shallow(<AccountSummaryHome {...props} />)
+    expect(wrapper.contains(message)).toEqual(true)
+  })
+  it('Renders account summary data child component', () => {
+    let wrapper = shallow(<AccountSummaryHome {...props} />)
+    expect(wrapper.contains(<AccountSummaryData summary={props.summary} />)).toBe(true)
+  })
+  it('Renders subscription button if user not auth', () => {
+    const propsNotAuth = {
+      ...props,
+      userData: {
+        ...props.userData,
+        isSubscribed: false
+      }
+    }
+    let wrapper = mount(<AccountSummaryHome {...propsNotAuth} />)
+    expect(wrapper.find('.subscribeBtn').length).toEqual(1)
+  })
+  it('Renders Unsubscription button if user is auth', () => {
+    const propsNotAuth = {
+      ...props,
+      userData: {
+        ...props.userData,
+        isSubscribed: true
+      }
+    }
+    let wrapper = mount(<AccountSummaryHome {...propsNotAuth} />)
+    expect(wrapper.find('.unsubscribeBtn').length).toEqual(1)
+  })
+})
