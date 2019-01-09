@@ -44,8 +44,8 @@ export class App extends Component {
   }
 
   render() {
-    const spinner = <Spinner />
     const { classes, ...rest } = this.props
+    const spinner = <Spinner />
 
     const routes = (
       <div className={classes.wrapper} ref="wrapper">
