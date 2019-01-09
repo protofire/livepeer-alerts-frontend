@@ -1,6 +1,4 @@
-import * as displayTexts from '../../AccountSummaryTexts'
 import withStyles from '@material-ui/core/es/styles/withStyles'
-import AccountSummaryStyle from '../../AccountSummaryHome/AccountSummaryStyle'
 import React from 'react'
 import AccountSummarySubscriptionFormDisplayStyle from './AccountSummarySubscriptionFormDisplayStyle'
 

@@ -4,8 +4,6 @@ import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
 import validator from 'validator'
 import Spinner from '../../Common/UI/Spinner/Spinner'
-import withStyles from '@material-ui/core/es/styles/withStyles'
-import AccountSummarySubscriptionFormDisplayStyle from './AccSummaryFormDisplay/AccountSummarySubscriptionFormDisplayStyle'
 import AccountSummarySubscriptionFormDisplay from './AccSummaryFormDisplay/AccSummarySubscriptionFormDisplay'
 
 export class AccountSummarySubscriptionForm extends Component {
@@ -204,7 +202,7 @@ export class AccountSummarySubscriptionForm extends Component {
     return (
       <div>
         {content}
-        <ToastContainer autoClose={3000} />
+        <ToastContainer autoClose={2000} />
       </div>
     )
   }

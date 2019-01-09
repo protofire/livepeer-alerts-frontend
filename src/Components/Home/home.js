@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { toast } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import './home.css'
 import logger from '../../utils'
@@ -67,7 +67,12 @@ export class HomeComponent extends Component {
   render() {
     // TODO PUT GET STARTED BUTTON; REVERT OLD CODE AND CHECK IT
 
-    return <HomeCard onClick={this.onGetStartedBtnHandler} />
+    return (
+      <>
+        <HomeCard onClick={this.onGetStartedBtnHandler} />
+        <ToastContainer autoClose={2000} />
+      </>
+    )
   }
 }
 export default withRouter(HomeComponent)
