@@ -5,10 +5,9 @@ import PropTypes from 'prop-types'
 import withStyles from '@material-ui/core/styles/withStyles'
 
 // @material-ui/icons
-import Timeline from '@material-ui/icons/Timeline'
 import Code from '@material-ui/icons/Code'
 import Group from '@material-ui/icons/Group'
-
+import Notifications from '@material-ui/icons/NotificationsActive'
 // core components
 import GridContainer from '../../Common/Grid/GridContainer.js'
 import GridItem from '../../Common/Grid/GridItem.js'
@@ -34,7 +33,7 @@ class HomeCard extends React.Component {
                     <InfoArea
                       title="Pro-active alert notifications"
                       description="We provide pro-active alert notifications that will help LPT token holders to be updated about how the transcoders are performing in near real time"
-                      icon={Timeline}
+                      icon={Notifications}
                       iconColor="rose"
                     />
                     <InfoArea
