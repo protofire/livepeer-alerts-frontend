@@ -23,36 +23,35 @@ class HomeCard extends React.Component {
     const { classes, onClick } = this.props
     return (
       <div className={classes.container}>
-        <GridContainer justify="center">
-          <GridItem xs={12} sm={12} md={10}>
+        <GridContainer justify="center" alignItems="center">
+          <GridItem xs={12} sm={7} md={5}>
             <Card className={classes.cardSignup}>
               <h2 className={classes.cardTitle}>Livepeer Notifications</h2>
               <CardBody>
                 <GridContainer justify="center">
-                  <GridItem xs={12} sm={12} md={5}>
+                  <GridItem container="true" direction="column" md={10} sm={12} xs={12}>
                     <InfoArea
-                      title="Pro-active alert notifications"
                       description="We provide pro-active alert notifications that will help LPT token holders to be updated about how the transcoders are performing in near real time"
                       icon={Notifications}
                       iconColor="rose"
+                      title="Pro-active alert notifications"
                     />
                     <InfoArea
-                      title="Account information summary"
                       description="You can see also a summary of your account information and your livepeer balance"
                       icon={Group}
                       iconColor="info"
+                      title="Account information summary"
                     />
-                    <InfoArea title="Open source" description="" icon={Code} iconColor="primary" />
-                  </GridItem>
-                  <GridItem xs={12} sm={8} md={5}>
-                    <div
-                      className={classes.center}
-                      style={{ paddingTop: '50%', paddingBottom: '40%' }}
-                    >
-                      <Button onClick={onClick} round color="primary" size="lg">
-                        Get started
-                      </Button>
-                    </div>
+                    <InfoArea
+                      description=""
+                      icon={Code}
+                      iconColor="primary"
+                      noCentered={true}
+                      title="Open source"
+                    />
+                    <Button onClick={onClick} round color="primary" size="lg">
+                      Get started
+                    </Button>
                   </GridItem>
                 </GridContainer>
               </CardBody>

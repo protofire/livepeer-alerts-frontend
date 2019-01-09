@@ -18,6 +18,10 @@ const infoStyle = {
     margin: '0 auto',
     padding: '0px'
   },
+  noCentered: {
+    marginLeft: '0',
+    marginRight: '0'
+  },
   iconWrapper: {
     float: 'left',
     marginTop: '24px',
