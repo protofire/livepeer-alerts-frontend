@@ -69,7 +69,11 @@ class Web3Provider extends Component {
     try {
       /** Request access to the user **/
       logger.log('[Web3FunctionalProvider.js] requesting user permissions')
-      await window.ethereum.enable()
+      let enabledAddress = await window.ethereum.enable()
+      /** Could be deleted, this is done for make easier the test **/
+      if (!enabledAddress) {
+        throw new Error(failReasons.NO_PERMISSIONS)
+      }
       logger.log('[Web3FunctionalProvider.js] user with web3 ethereum authenticated')
       /** The user accepted the app, now it's authenticated **/
       await this.loadUserDataFromWeb3(web3Instance)
