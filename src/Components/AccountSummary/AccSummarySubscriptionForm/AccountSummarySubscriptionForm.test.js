@@ -11,7 +11,7 @@ const props = {
   }
 }
 
-describe('Render AccountSummarySubscriptionForm', () => {
+describe('Render AccSummarySubscriptionForm', () => {
   it('test', () => {
     expect(true)
   })

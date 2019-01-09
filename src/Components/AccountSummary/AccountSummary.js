@@ -12,8 +12,8 @@ export class AccountSummaryComponent extends Component {
       isSubscribed: false,
       activated: null,
       id: null,
-      email: 'test@altoros.com',
-      frequency: 'weekly',
+      email: '',
+      frequency: 'daily',
       activatedCode: null,
       createdAt: null
     },
@@ -293,7 +293,6 @@ export class AccountSummaryComponent extends Component {
           </>
         )
       } else {
-        /** TODO ERROR PAGE OR SOMETHING ELSE **/
         content = <h2>{displayTexts.FAIL_NO_REASON_REDIRECT}</h2>
       }
     }

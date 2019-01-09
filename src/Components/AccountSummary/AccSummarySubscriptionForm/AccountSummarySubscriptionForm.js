@@ -2,10 +2,11 @@ import React, { Component } from 'react'
 import * as displayTexts from '../AccountSummaryTexts'
 import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
-import Input from '../../Common/UI/Input/Input'
-import Button from '../../Common/UI/Button/Button'
 import validator from 'validator'
 import Spinner from '../../Common/UI/Spinner/Spinner'
+import withStyles from '@material-ui/core/es/styles/withStyles'
+import AccountSummarySubscriptionFormDisplayStyle from './AccSummaryFormDisplay/AccountSummarySubscriptionFormDisplayStyle'
+import AccountSummarySubscriptionFormDisplay from './AccSummaryFormDisplay/AccSummarySubscriptionFormDisplay'
 
 export class AccountSummarySubscriptionForm extends Component {
   state = {
@@ -197,25 +198,11 @@ export class AccountSummarySubscriptionForm extends Component {
     if (this.state.render) {
       content = (
         <>
-          <h1>Welcome to subscription form</h1>
-          <form onSubmit={this.onSubmitBtnHandler}>
-            <Input
-              elementType={this.state.form.email.elementType}
-              elementConfig={this.state.form.email.elementConfig}
-              value={this.state.form.email.value}
-              invalid={!this.state.form.email.valid}
-              shouldValidate={this.state.form.email.validation}
-              touched={this.state.form.email.touched}
-              changed={event => this.inputChangedHandler(event, 'email')}
-            />
-            <Button
-              btnType="Success"
-              disabled={!this.state.form.formIsValid}
-              class="subscriptionBtn"
-            >
-              Subscribe
-            </Button>
-          </form>
+          <AccountSummarySubscriptionFormDisplay
+            form={this.state.form}
+            onSubmitBtnHandler={this.onSubmitBtnHandler}
+            inputChangedHandler={this.inputChangedHandler}
+          />
         </>
       )
     }

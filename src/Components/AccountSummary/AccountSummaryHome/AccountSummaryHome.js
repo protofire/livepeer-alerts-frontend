@@ -10,6 +10,7 @@ import AccountSummaryStyle from './AccountSummaryStyle'
 const AccountSummaryHome = props => {
   let disabledBtn = props.summary.status !== 'Bonded'
   const { classes } = props
+  disabledBtn = false
   let subscriptionBtn
 
   if (props.userData.isSubscribed) {
