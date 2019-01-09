@@ -14,7 +14,7 @@ import MoreVert from '@material-ui/icons/MoreVert'
 import ViewList from '@material-ui/icons/ViewList'
 
 // core components
-import Button from '../CustomButtons/Button.js'
+import Button from '../UI/CustomButtons/Button.js'
 
 import headerStyle from '../../../assets/jss/dashboard/components/headerStyle.js'
 

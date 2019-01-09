@@ -2,11 +2,16 @@ import React from 'react'
 import * as displayTexts from '../AccountSummaryTexts'
 import './AccountSummaryHome.css'
 import Button from '../../Common/UI/Button/Button'
+//import Button from '../../Common/UI/CustomButtons/Button'
 import AccountSummaryData from '../AccountSummaryData/AccountSummaryData'
+import withStyles from '@material-ui/core/es/styles/withStyles'
+import AccountSummaryStyle from './AccountSummaryStyle'
 
 const AccountSummaryHome = props => {
   let disabledBtn = props.summary.status !== 'Bonded'
+  const { classes } = props
   let subscriptionBtn
+
   if (props.userData.isSubscribed) {
     subscriptionBtn = (
       <>
@@ -27,8 +32,9 @@ const AccountSummaryHome = props => {
     )
   }
   let isSubscribed = props.userData.isSubscribed ? 'yes' : 'no'
+
   return (
-    <>
+    <div className={classes.container}>
       <h1>{displayTexts.WELCOME_AGAIN}</h1>
       <table>
         <thead>
@@ -66,9 +72,8 @@ const AccountSummaryHome = props => {
           </tr>
         </tbody>
       </table>
-
       <div className="subscriptionBtn">{subscriptionBtn}</div>
-    </>
+    </div>
   )
 }
-export default AccountSummaryHome
+export default withStyles(AccountSummaryStyle)(AccountSummaryHome)

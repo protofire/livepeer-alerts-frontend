@@ -5,7 +5,6 @@ import * as displayTexts from './AccountSummaryTexts'
 import AccountSummaryHome from './AccountSummaryHome/AccountSummaryHome'
 import { toast, ToastContainer } from 'react-toastify'
 import logger from '../../utils'
-
 export class AccountSummaryComponent extends Component {
   state = {
     userData: {
