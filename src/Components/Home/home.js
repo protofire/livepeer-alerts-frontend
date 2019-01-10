@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { toast } from 'react-toastify'
+import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import './home.css'
 import logger from '../../utils'
 import { withRouter } from 'react-router-dom'
-import HomeCard from './HomeCard/HomeCard'
+import HomeCard from './HomeCard'
 
 export class HomeComponent extends Component {
   state = {
@@ -17,7 +17,6 @@ export class HomeComponent extends Component {
     logger.log('[Home.js] getStartedBtnHandler')
     this.props.history.push('/account')
   }
-
   sendToast = (toastTime, callback) => {
     let time = 2000
     if (toastTime) {
@@ -68,7 +67,12 @@ export class HomeComponent extends Component {
   render() {
     // TODO PUT GET STARTED BUTTON; REVERT OLD CODE AND CHECK IT
 
-    return <HomeCard onClick={this.onGetStartedBtnHandler} />
+    return (
+      <>
+        <HomeCard onClick={this.onGetStartedBtnHandler} />
+        <ToastContainer autoClose={2000} />
+      </>
+    )
   }
 }
 export default withRouter(HomeComponent)

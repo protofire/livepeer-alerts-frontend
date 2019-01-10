@@ -169,12 +169,7 @@ class Web3Provider extends Component {
   }
 
   render() {
-    let content = (
-      <>
-        <h3>{this.state.displayMsg}</h3>
-        <Spinner />
-      </>
-    )
+    let content = <Spinner displayMsg={this.state.displayMsg} />
     if (!this.state.requestingAuth) {
       if (this.state.render && this.state.web3 && this.state.userData.authenticated) {
         content = (

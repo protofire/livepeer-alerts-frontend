@@ -9,7 +9,8 @@ import FormControl from '@material-ui/core/FormControl'
 import InputLabel from '@material-ui/core/InputLabel'
 import FormHelperText from '@material-ui/core/FormHelperText'
 import Input from '@material-ui/core/Input'
-import customInputStyle from '../../../../assets/jss/dashboard/components/customInputStyle'
+
+import customInputStyle from '../../../../assets/jss/dashboard/components/customInputStyle.js'
 
 function CustomInput({ ...props }) {
   const {
