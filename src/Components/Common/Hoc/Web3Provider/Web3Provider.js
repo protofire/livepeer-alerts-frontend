@@ -114,6 +114,19 @@ class Web3Provider extends Component {
           error: true
         })
       }
+      default: {
+        this.setState({
+          render: true,
+          userData: {
+            authenticated: false,
+            reason: failReasons.NO_REASON
+          },
+          requestingAuth: false,
+          displayMsg: texts.DEFAULT_ERROR,
+          error: true
+        })
+        break
+      }
     }
   }
 
