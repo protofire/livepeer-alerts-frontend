@@ -1,5 +1,5 @@
 import React from 'react'
-import Spinner from './Spinner'
+import Spinner from '../../../../Components/Common/UI/Spinner/Spinner'
 import Adapter from 'enzyme-adapter-react-16'
 import { configure, shallow } from 'enzyme'
 

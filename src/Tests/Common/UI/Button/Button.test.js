@@ -1,7 +1,7 @@
 import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
 import { configure, shallow } from 'enzyme'
-import Button from './Button'
+import Button from '../../../../Components/Common/UI/Button/Button'
 
 configure({ adapter: new Adapter() })
 

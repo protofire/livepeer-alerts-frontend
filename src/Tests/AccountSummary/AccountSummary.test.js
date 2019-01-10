@@ -1,13 +1,10 @@
 import React from 'react'
-import { configure, mount, shallow } from 'enzyme'
+import { configure, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import * as jest from 'jest'
 import axios from 'axios'
-import { AccountSummaryComponent } from './AccountSummary'
-import Spinner from '../Common/UI/Spinner/Spinner'
-import AccountSummaryHome from './AccountSummaryHome/AccountSummaryHome'
-import * as displayTexts from './AccountSummaryTexts'
-
+import { AccountSummaryComponent } from '../../Components/AccountSummary/AccountSummary'
+import Spinner from '../../Components/Common/UI/Spinner/Spinner'
 configure({ adapter: new Adapter() })
 
 const props = {
@@ -30,27 +27,6 @@ const props = {
   onSubscriptionChangeHandler: () => {},
   onUnSubscribeBtnHandler: () => {},
   web3: []
-}
-
-const response = {
-  data: {
-    activated: 0,
-    _id: 0,
-    email: 'test@altoros.com',
-    address: '0x9D45EECe52F0b8Ae0238dCb0a42da9928f4b9c4f',
-    frequency: 'weekly',
-    activatedCode: '741208730162732000000',
-    createdAt: '2019-01-02T14:51:17.800Z',
-    summary: {
-      bondedAmount: 0,
-      fees: 0,
-      status: 'Bounded',
-      lastClaimRound: 0,
-      startRound: 0,
-      withdrawRound: 0
-    },
-    balance: 0
-  }
 }
 
 jest.mock('axios')
