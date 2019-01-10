@@ -2,6 +2,9 @@ import React from 'react'
 import { configure, mount, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import { AccountSummarySubscriptionForm } from './AccountSummarySubscriptionForm'
+import * as displayTexts from '../AccountSummaryTexts'
+import * as jest from 'jest'
+import axios from 'axios'
 
 configure({ adapter: new Adapter() })
 
@@ -11,6 +14,14 @@ const props = {
   }
 }
 
+const response = {
+  data: {
+    activated: true,
+    _id: 1,
+    createdAt: ''
+  }
+}
+jest.mock('axios')
 describe('Render AccountSummarySubscriptionForm', () => {
   it('Shows Welcome Message', () => {
     const message = 'Welcome to subscription form'
@@ -42,5 +53,15 @@ describe('Render AccountSummarySubscriptionForm', () => {
       emailCheck: true
     }
     expect(wrapper.instance().checkValidity(value, rules)).toBe(true)
+  })
+  it('Displays welcome subscriber if the user subscribed', async () => {
+    let wrapper = mount(<AccountSummarySubscriptionForm {...props} />)
+    const emailTest = 'test@test.com'
+    axios.post.mockResolvedValue(response)
+    let emailInput = wrapper.find('input').at(1)
+    emailInput.simulate('change', { target: { value: emailTest } })
+    await wrapper.instance().generateSubscription(null, null)
+    let welcomeMsg = displayTexts.WELCOME_NEW_SUBSCRIBER + emailTest
+    expect(wrapper.state().displayMsg).toBe(welcomeMsg)
   })
 })
