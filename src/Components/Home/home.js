@@ -4,7 +4,7 @@ import 'react-toastify/dist/ReactToastify.css'
 import './home.css'
 import logger from '../../utils'
 import { withRouter } from 'react-router-dom'
-import HomeCard from './HomeCard'
+import HomeCard from './HomeCard/HomeCard.js'
 
 export class HomeComponent extends Component {
   state = {
