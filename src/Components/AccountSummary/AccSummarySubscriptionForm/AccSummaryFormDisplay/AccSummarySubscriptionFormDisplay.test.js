@@ -47,7 +47,7 @@ describe('Render AccSummarySubscriptionForm', () => {
   it('Renders Subscribe btn', () => {
     const message = 'Subscribe'
     let wrapper = mount(<AccountSummarySubscriptionFormDisplay {...props} />)
-    expect(wrapper.find('.Button').length).toEqual(1)
+    expect(wrapper.find('RegularButton').length).toEqual(1)
     expect(wrapper.contains(message)).toEqual(true)
   })
 })
