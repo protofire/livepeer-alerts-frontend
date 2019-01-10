@@ -42,16 +42,7 @@ class Web3Provider extends Component {
     } else {
       /** The user does not have web3 **/
       logger.log('[Web3FunctionalProvider.js] user does not have web3')
-      this.setState({
-        render: true,
-        userData: {
-          authenticated: false,
-          reason: failReasons.NO_WEB3
-        },
-        requestingAuth: false,
-        displayMsg: texts.NO_WEB3,
-        error: true
-      })
+      this.setErrorState(failReasons.NO_WEB3)
     }
   }
 
@@ -75,19 +66,54 @@ class Web3Provider extends Component {
       await this.loadUserDataFromWeb3(web3Instance)
     } catch (error) {
       /** The user denied the app, it's not authenticated **/
-      logger.log('[Web3FunctionalProvider.js] user denied access')
-      this.setState({
-        web3: web3Instance,
-        userData: {
-          authenticated: false,
-          reason: failReasons.NO_PERMISSIONS
-        },
-        render: true,
-        requestingAuth: false,
-        displayMsg: texts.NO_PERMISSIONS,
-        error: true
-      })
       logger.log('[Web3FunctionalProvider.js] user with ethereum denied the access')
+      this.setErrorState(failReasons.NO_PERMISSIONS)
+    }
+  }
+
+  setErrorState(errorReason, web3Instance = null) {
+    switch (errorReason) {
+      case failReasons.NO_ADDRESS: {
+        logger.log('[Web3FunctionalProvider.js] user address not found')
+        this.setState({
+          web3: web3Instance,
+          userData: {
+            authenticated: false,
+            reason: failReasons.NO_ADDRESS
+          },
+          render: true,
+          requestingAuth: false,
+          displayMsg: texts.NO_ADDRESS,
+          error: true
+        })
+        break
+      }
+      case failReasons.NO_PERMISSIONS: {
+        this.setState({
+          web3: web3Instance,
+          userData: {
+            authenticated: false,
+            reason: failReasons.NO_PERMISSIONS
+          },
+          render: true,
+          requestingAuth: false,
+          displayMsg: texts.NO_PERMISSIONS,
+          error: true
+        })
+        break
+      }
+      case failReasons.NO_WEB3: {
+        this.setState({
+          render: true,
+          userData: {
+            authenticated: false,
+            reason: failReasons.NO_WEB3
+          },
+          requestingAuth: false,
+          displayMsg: texts.NO_WEB3,
+          error: true
+        })
+      }
     }
   }
 
@@ -98,43 +124,50 @@ class Web3Provider extends Component {
     Promise.all([web3Instance.eth.getAccounts(), web3Instance.eth.net.getId()]).then(results => {
       userAddress = results[0]
       userNetwork = results[1]
-      web3Instance.eth.getBalance(userAddress[0]).then(balance => {
-        /** Convert balance to eth **/
-        balance = web3Instance.utils.fromWei(balance, 'ether')
-        this.setState({
-          web3: web3Instance,
-          userData: {
-            authenticated: true,
-            address: this.toChecksumAddress(web3Instance, userAddress[0]),
-            currentNetwork: userNetwork,
-            ethBalance: balance
-          },
-          render: true,
-          requestingAuth: false
-        })
-        /** We subscribe to the event that detects if the user has changed the account **/
-        window.ethereum.on('accountsChanged', accounts => {
-          logger.log('ETHEREUM CHANGED')
-          logger.log('ACCOUNTS ', accounts)
+      console.log('User address', userAddress)
+      console.log('User network ', userNetwork)
+      /** Once we got the user data, we check if he has an address, otherwise we should throw an error **/
+      if (userAddress.length === 0) {
+        this.setErrorState(failReasons.NO_ADDRESS, web3Instance)
+      } else {
+        web3Instance.eth.getBalance(userAddress[0]).then(balance => {
+          /** Convert balance to eth **/
+          balance = web3Instance.utils.fromWei(balance, 'ether')
           this.setState({
+            web3: web3Instance,
             userData: {
-              ...this.state.userData,
-              address: this.toChecksumAddress(web3Instance, accounts[0])
-            }
+              authenticated: true,
+              address: this.toChecksumAddress(web3Instance, userAddress[0]),
+              currentNetwork: userNetwork,
+              ethBalance: balance
+            },
+            render: true,
+            requestingAuth: false
+          })
+          /** We subscribe to the event that detects if the user has changed the account **/
+          window.ethereum.on('accountsChanged', accounts => {
+            logger.log('ETHEREUM CHANGED')
+            logger.log('ACCOUNTS ', accounts)
+            this.setState({
+              userData: {
+                ...this.state.userData,
+                address: this.toChecksumAddress(web3Instance, accounts[0])
+              }
+            })
+          })
+          /** We subscribe to the event that detects if the user has changed the network **/
+          window.ethereum.on('networkChanged', network => {
+            logger.log('NETWORK CHANGED')
+            logger.log('NETWORK ', network)
+            this.setState({
+              userData: {
+                ...this.state.userData,
+                currentNetwork: network
+              }
+            })
           })
         })
-        /** We subscribe to the event that detects if the user has changed the network **/
-        window.ethereum.on('networkChanged', network => {
-          logger.log('NETWORK CHANGED')
-          logger.log('NETWORK ', network)
-          this.setState({
-            userData: {
-              ...this.state.userData,
-              currentNetwork: network
-            }
-          })
-        })
-      })
+      }
     })
   }
 
