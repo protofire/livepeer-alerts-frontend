@@ -117,6 +117,7 @@ class Web3Provider extends Component {
           displayMsg: texts.NO_WEB3,
           error: true
         })
+        break
       }
       default: {
         this.setState({
