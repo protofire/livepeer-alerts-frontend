@@ -12,9 +12,6 @@ const props = {
 }
 
 describe('Render AccountSummarySubscriptionForm', () => {
-  it('test', () => {
-    expect(true)
-  })
   it('Shows Welcome Message', () => {
     const message = 'Welcome to subscription form'
     let wrapper = shallow(<AccountSummarySubscriptionForm {...props} />)
@@ -27,5 +24,23 @@ describe('Render AccountSummarySubscriptionForm', () => {
   it('Renders Subscribe btn', () => {
     let wrapper = shallow(<AccountSummarySubscriptionForm {...props} />)
     expect(wrapper.find('button').length).toEqual(1)
+  })
+  it('Validity false is input no email', () => {
+    let wrapper = shallow(<AccountSummarySubscriptionForm {...props} />)
+    const value = 'testnoemail'
+    const rules = {
+      required: true,
+      emailCheck: true
+    }
+    expect(wrapper.instance().checkValidity(value, rules)).toBe(false)
+  })
+  it('Validity true is input email', () => {
+    let wrapper = shallow(<AccountSummarySubscriptionForm {...props} />)
+    const value = 'testemailok@test.com'
+    const rules = {
+      required: true,
+      emailCheck: true
+    }
+    expect(wrapper.instance().checkValidity(value, rules)).toBe(true)
   })
 })

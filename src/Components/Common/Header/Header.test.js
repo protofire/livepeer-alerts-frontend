@@ -30,9 +30,4 @@ describe('Header test ', () => {
     const input = wrapper.find('Toolbar')
     expect(input).toHaveLength(1)
   })
-  it(`Header has menu`, () => {
-    const wrapper = mount(<Header {...props} />)
-    const input = wrapper.find('Menu')
-    expect(input).toHaveLength(1)
-  })
 })
