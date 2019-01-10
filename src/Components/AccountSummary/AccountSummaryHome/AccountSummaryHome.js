@@ -1,10 +1,11 @@
 import React from 'react'
 import * as displayTexts from '../AccountSummaryTexts'
 import './AccountSummaryHome.css'
-import Button from '../../Common/UI/Button/Button'
+//import Button from '../../Common/UI/Button/Button'
 import AccountSummaryData from '../AccountSummaryData/AccountSummaryData'
 import { withStyles } from '@material-ui/core/styles'
 import AccountSummaryStyle from './AccountSummaryStyle'
+import Button from '../../Common/UI/CustomButtons/Button'
 
 const AccountSummaryHome = props => {
   let disabledBtn = props.summary.status !== 'Bonded'
@@ -15,7 +16,7 @@ const AccountSummaryHome = props => {
     subscriptionBtn = (
       <>
         <Button
-          clicked={props.onUnSubscribeBtnHandler}
+          onClick={props.onUnSubscribeBtnHandler}
           className="unsubscribeBtn"
           disabled={disabledBtn}
         >
@@ -25,7 +26,7 @@ const AccountSummaryHome = props => {
     )
   } else {
     subscriptionBtn = (
-      <Button clicked={props.onSubscribeBtnHandler} disabled={disabledBtn} className="subscribeBtn">
+      <Button onClick={props.onSubscribeBtnHandler} disabled={disabledBtn} className="subscribeBtn">
         Subscribe
       </Button>
     )

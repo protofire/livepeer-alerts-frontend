@@ -2,8 +2,8 @@ import { withStyles } from '@material-ui/core/styles'
 import React from 'react'
 import AccSummarySubscriptionFormDisplayStyle from './AccSummarySubscriptionFormDisplayStyle'
 
-import Button from '../../../Common/UI/Button/Button'
 import Input from '../../../Common/UI/Input/Input'
+import Button from '../../../Common/UI/CustomButtons/Button'
 const accountSummarySubscriptionFormDisplay = props => {
   const { classes } = props
   return (
@@ -19,7 +19,7 @@ const accountSummarySubscriptionFormDisplay = props => {
           touched={props.form.email.touched}
           changed={event => props.inputChangedHandler(event, 'email')}
         />
-        <Button btnType="Success" disabled={!props.form.formIsValid} class="subscriptionBtn">
+        <Button disabled={!props.form.formIsValid} className="subscriptionBtn">
           Subscribe
         </Button>
       </form>
