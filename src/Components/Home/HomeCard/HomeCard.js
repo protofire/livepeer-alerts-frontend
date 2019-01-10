@@ -25,7 +25,6 @@ class HomeCard extends React.Component {
         <GridItem className={classes.cardContainer}>
           <Card className={classes.cardSignup}>
             <h2 className={classes.cardTitle}>Livepeer Notifications</h2>
-
             <InfoArea
               description="We provide pro-active alert notifications that will help LPT token holders to be updated about how the transcoders are performing in near real time"
               icon={Notifications}

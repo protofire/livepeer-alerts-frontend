@@ -60,8 +60,10 @@ const footerStyle = {
     justifyContent: 'center'
   },
   responsiveFooterElementsLeft: {
+    marginBottom: '10px',
     '@media (min-width: 768px)': {
-      justifyContent: 'flex-start'
+      justifyContent: 'flex-start',
+      marginBottom: '0'
     }
   },
   responsiveFooterElementsRight: {
