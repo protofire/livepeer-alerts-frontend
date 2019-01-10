@@ -1,5 +1,5 @@
 import React from 'react'
-import { configure, shallow, mount } from 'enzyme'
+import { configure, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import * as jest from 'jest'
 import axios from 'axios'
@@ -54,27 +54,27 @@ describe('Renders userSubscribed data', () => {
   it('Shows Welcome Message', () => {
     const message = displayTexts.WELCOME_AGAIN
     axios.get.mockResolvedValue(response)
-    let wrapper = shallow(<AccountSummaryHome {...props} />)
+    let wrapper = mount(<AccountSummaryHome {...props} />)
     wrapper = wrapper.update()
     expect(wrapper.contains(message)).toEqual(true)
   })
   it('Shows address', () => {
     const message = 'Address'
-    let wrapper = shallow(<AccountSummaryHome {...props} />)
+    let wrapper = mount(<AccountSummaryHome {...props} />)
     expect(wrapper.contains(message)).toEqual(true)
   })
   it('Shows ETH Balance', () => {
     const message = 'ETH Balance'
-    let wrapper = shallow(<AccountSummaryHome {...props} />)
+    let wrapper = mount(<AccountSummaryHome {...props} />)
     expect(wrapper.contains(message)).toEqual(true)
   })
   it('Shows Livepeer Balance', () => {
     const message = 'LivePeer Balance'
-    let wrapper = shallow(<AccountSummaryHome {...props} />)
+    let wrapper = mount(<AccountSummaryHome {...props} />)
     expect(wrapper.contains(message)).toEqual(true)
   })
   it('Renders account summary data child component', () => {
-    let wrapper = shallow(<AccountSummaryHome {...props} />)
+    let wrapper = mount(<AccountSummaryHome {...props} />)
     expect(wrapper.contains(<AccountSummaryData summary={props.summary} />)).toBe(true)
   })
   it('Renders subscription button if user not auth', () => {
@@ -86,7 +86,7 @@ describe('Renders userSubscribed data', () => {
       }
     }
     let wrapper = mount(<AccountSummaryHome {...propsNotAuth} />)
-    expect(wrapper.find('.subscribeBtn').length).toEqual(1)
+    expect(wrapper.find('RegularButton').hasClass('subscribeBtn')).toEqual(true)
   })
   it('Renders Unsubscription button if user is auth', () => {
     const propsNotAuth = {
@@ -97,6 +97,6 @@ describe('Renders userSubscribed data', () => {
       }
     }
     let wrapper = mount(<AccountSummaryHome {...propsNotAuth} />)
-    expect(wrapper.find('.unsubscribeBtn').length).toEqual(1)
+    expect(wrapper.find('RegularButton').hasClass('unsubscribeBtn')).toEqual(true)
   })
 })

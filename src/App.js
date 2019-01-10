@@ -5,7 +5,7 @@ import { HomeComponent, AccountSummaryComponent } from './Components'
 import PrivateRoute from './Components/Common/Hoc/PrivateRoute/PrivateRoute'
 import Spinner from './Components/Common/UI/Spinner/Spinner'
 import logger from './utils'
-import { AccountSummarySubscriptionForm } from './Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummarySubscriptionForm'
+import { AccountSummarySubscriptionForm } from './Components/AccountSummary/AccSummarySubscriptionForm/AccountSummarySubscriptionForm'
 import { Redirect } from 'react-router'
 import Web3Provider, {
   Web3ContextConsumer
@@ -44,8 +44,8 @@ export class App extends Component {
   }
 
   render() {
-    const spinner = <Spinner />
     const { classes, ...rest } = this.props
+    const spinner = <Spinner />
 
     const routes = (
       <div className={classes.wrapper} ref="wrapper">
