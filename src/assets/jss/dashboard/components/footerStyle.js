@@ -34,9 +34,12 @@ const footerStyle = {
     position: 'relative'
   },
   a: {
+    backgroundColor: 'transparent',
     color: primaryColor,
     textDecoration: 'none',
-    backgroundColor: 'transparent'
+    '&:hover': {
+      textDecoration: 'underline'
+    }
   },
   list: {
     marginBottom: '0',
@@ -51,6 +54,19 @@ const footerStyle = {
   whiteColor: {
     '&,&:hover,&:focus': {
       color: '#FFFFFF'
+    }
+  },
+  responsiveFooterElements: {
+    justifyContent: 'center'
+  },
+  responsiveFooterElementsLeft: {
+    '@media (min-width: 768px)': {
+      justifyContent: 'flex-start'
+    }
+  },
+  responsiveFooterElementsRight: {
+    '@media (min-width: 768px)': {
+      justifyContent: 'flex-end'
     }
   }
 }
