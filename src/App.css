@@ -1,0 +1,24 @@
+.AccountSummaryGridContainer {
+    margin: 0!important;
+    position: relative;
+    width: 100%!important;
+    z-index: 12;
+}
+
+.AccountSummaryCard {
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: center;
+    margin: 0!important;
+    max-height: 200px;
+    max-width: 200px!important;
+    min-height: 200px;
+    min-width: 200px!important;
+    padding: 10px;
+}
+
+.AccountSummaryCard h3 {
+    font-size: 20px;
+    line-height: 1.2;
+    margin: 0 0 15px;
+}

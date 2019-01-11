@@ -1,8 +1,11 @@
-import React, { Component } from 'react'
-import Web3 from 'web3'
 import * as failReasons from './Web3FailReasons'
 import * as texts from '../../UI/Texts/Texts'
+import Card from '../../../Common/UI/Card/Card.js'
+import GridContainer from '../../../Common/UI/Grid/GridContainer.js'
+import GridItem from '../../../Common/UI/Grid/GridItem.js'
+import React, { Component } from 'react'
 import Spinner from '../../UI/Spinner/Spinner'
+import Web3 from 'web3'
 import logger from '../../../../utils'
 
 const defaultState = {
@@ -216,7 +219,15 @@ class Web3Provider extends Component {
   }
 
   render() {
-    let content = <Spinner displayMsg={this.state.displayMsg} />
+    let content = (
+      <GridContainer className="AccountSummaryGridContainer" justify="center" align="center">
+        <GridItem>
+          <Card className="AccountSummaryCard">
+            <Spinner displayMsg={this.state.displayMsg} />
+          </Card>
+        </GridItem>
+      </GridContainer>
+    )
     if (!this.state.requestingAuth) {
       if (this.state.render && this.state.web3 && this.state.userData.authenticated) {
         content = (
