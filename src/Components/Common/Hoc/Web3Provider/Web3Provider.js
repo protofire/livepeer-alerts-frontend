@@ -136,14 +136,14 @@ class Web3Provider extends Component {
   }
 
   loadUserDataFromWeb3 = async web3Instance => {
-    console.log('Loading user data from web3')
+    logger.log('Loading user data from web3')
     let userAddress
     let userNetwork
     Promise.all([web3Instance.eth.getAccounts(), web3Instance.eth.net.getId()]).then(results => {
       userAddress = results[0]
       userNetwork = results[1]
-      console.log('User address', userAddress)
-      console.log('User network ', userNetwork)
+      logger.log('User address', userAddress)
+      logger.log('User network ', userNetwork)
       /** Once we got the user data, we check if he has an address, otherwise we should throw an error **/
       if (userAddress.length === 0) {
         this.setErrorState(failReasons.NO_ADDRESS, web3Instance)

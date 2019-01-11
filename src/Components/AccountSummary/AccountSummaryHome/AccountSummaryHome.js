@@ -1,18 +1,17 @@
 import React from 'react'
 import * as displayTexts from '../AccountSummaryTexts'
 import './AccountSummaryHome.css'
-//import Button from '../../Common/UI/Button/Button'
 import AccountSummaryData from '../AccountSummaryData/AccountSummaryData'
 import { withStyles } from '@material-ui/core/styles'
 import AccountSummaryStyle from './AccountSummaryStyle'
 import Button from '../../Common/UI/CustomButtons/Button'
 
 const AccountSummaryHome = props => {
-  let disabledBtn = props.summary.status !== 'Bonded'
+  let disabledBtn = props.summary && props.summary.status !== 'Bonded'
   const { classes } = props
   let subscriptionBtn
 
-  if (props.userData.isSubscribed) {
+  if (props.userData && props.userData.isSubscribed) {
     subscriptionBtn = (
       <>
         <Button
@@ -31,7 +30,7 @@ const AccountSummaryHome = props => {
       </Button>
     )
   }
-  let isSubscribed = props.userData.isSubscribed ? 'yes' : 'no'
+  let isSubscribed = props.userData && props.userData.isSubscribed ? 'yes' : 'no'
 
   return (
     <div className={classes.container}>
