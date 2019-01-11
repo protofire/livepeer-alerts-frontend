@@ -1,8 +1,8 @@
 import React from 'react'
 import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import { HomeComponent } from './home'
-import * as texts from '../Common/UI/Texts/Texts'
+import { HomeComponent } from '../../Components/Home/home'
+import * as texts from '../../Components/Common/UI/Texts/Texts'
 import render from 'react-test-renderer'
 
 configure({ adapter: new Adapter() })
@@ -10,7 +10,6 @@ configure({ adapter: new Adapter() })
 describe('Renders home message', () => {
   it('Renders home message if user auth', () => {
     // Given
-    const message = 'Get started'
     let props = {
       web3: [],
       userData: {

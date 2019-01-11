@@ -1,11 +1,9 @@
 import React from 'react'
-import { configure, mount, shallow } from 'enzyme'
+import { configure, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import * as jest from 'jest'
 import axios from 'axios'
-import { AccountSummaryComponent } from './AccountSummary'
-import Spinner from '../Common/UI/Spinner/Spinner'
-
+import { AccountSummaryComponent } from '../../Components/AccountSummary/AccountSummary'
 configure({ adapter: new Adapter() })
 
 const props = {
@@ -31,8 +29,10 @@ const props = {
 }
 
 jest.mock('axios')
-describe('test', () => {
-  it('test', () => {
-    expect(true)
+describe('Renders AccountSummary data', () => {
+  it('Renders Loading spinner when fetching data', () => {
+    let wrapper = mount(<AccountSummaryComponent {...props} />)
+    let spinner = wrapper.find('spinner')
+    expect(spinner).toHaveLength(1)
   })
 })

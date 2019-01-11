@@ -3,9 +3,9 @@ import { configure, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import * as jest from 'jest'
 import axios from 'axios'
-import AccountSummaryHome from './AccountSummaryHome'
-import * as displayTexts from '../AccountSummaryTexts'
-import AccountSummaryData from '../AccountSummaryData/AccountSummaryData'
+import AccountSummaryHome from '../../Components/AccountSummary/AccountSummaryHome/AccountSummaryHome'
+import * as displayTexts from '../../Components/AccountSummary/AccountSummaryTexts'
+import AccountSummaryData from '../../Components/AccountSummary/AccountSummaryData/AccountSummaryData'
 
 configure({ adapter: new Adapter() })
 
@@ -44,11 +44,6 @@ const response = {
 }
 
 jest.mock('axios')
-describe('test', () => {
-  it('test', () => {
-    expect(true)
-  })
-})
 /** TODO -- Enable again when the enzyme bug of conditional rendering is solved **/
 describe('Renders userSubscribed data', () => {
   it('Shows Welcome Message', () => {
