@@ -1,8 +1,7 @@
 import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
 import { configure, mount } from 'enzyme'
-import Spinner from './Spinner'
-
+import Spinner from '../../../../Components/Common/UI/Spinner/Spinner'
 configure({ adapter: new Adapter() })
 
 describe('Spinner test ', () => {
