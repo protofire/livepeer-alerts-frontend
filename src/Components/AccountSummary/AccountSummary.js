@@ -292,10 +292,10 @@ export class AccountSummaryComponent extends Component {
       }
     }
     return (
-      <div>
+      <>
         {content}
         <ToastContainer autoClose={2000} />
-      </div>
+      </>
     )
   }
 }

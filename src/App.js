@@ -1,26 +1,21 @@
-import React, { Component } from 'react'
-import './App.css'
-import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
-import { HomeComponent, AccountSummaryComponent } from './Components'
 import PrivateRoute from './Components/Common/Hoc/PrivateRoute/PrivateRoute'
+import React, { Component } from 'react'
 import Spinner from './Components/Common/UI/Spinner/Spinner'
 import logger from './utils'
 import { AccountSummarySubscriptionForm } from './Components/AccountSummary/AccSummarySubscriptionForm/AccountSummarySubscriptionForm'
+import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
+import { HomeComponent, AccountSummaryComponent } from './Components'
 import { Redirect } from 'react-router'
 import Web3Provider, {
   Web3ContextConsumer
 } from './Components/Common/Hoc/Web3Provider/Web3Provider'
-
-// @material-ui/core components
-import withStyles from '@material-ui/core/styles/withStyles'
-import PropTypes from 'prop-types'
-
-// core components
-import PagesHeader from './Components/Common/Header/PagesHeader.js'
 import Footer from './Components/Common/Footer/Footer.js'
-import pagesStyle from './assets/jss/dashboard/layouts/pagesStyle.js'
-import bgImage from './assets/img/register.jpeg'
+import PagesHeader from './Components/Common/Header/PagesHeader.js'
+import PropTypes from 'prop-types'
 import TermsAndConditionsComponent from './Components/TermsAndConditions/TermsAndConditions'
+import bgImage from './assets/img/register.jpeg'
+import pagesStyle from './assets/jss/dashboard/layouts/pagesStyle.js'
+import withStyles from '@material-ui/core/styles/withStyles'
 
 export class App extends Component {
   state = {
