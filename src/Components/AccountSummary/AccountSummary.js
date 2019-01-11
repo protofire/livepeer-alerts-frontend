@@ -5,7 +5,6 @@ import * as displayTexts from './AccountSummaryTexts'
 import AccountSummaryHome from './AccountSummaryHome/AccountSummaryHome'
 import { toast, ToastContainer } from 'react-toastify'
 import logger from '../../utils'
-
 export class AccountSummaryComponent extends Component {
   state = {
     userData: {
@@ -13,8 +12,8 @@ export class AccountSummaryComponent extends Component {
       isSubscribed: false,
       activated: null,
       id: null,
-      email: 'test@altoros.com',
-      frequency: 'weekly',
+      email: '',
+      frequency: 'daily',
       activatedCode: null,
       createdAt: null
     },
@@ -273,12 +272,7 @@ export class AccountSummaryComponent extends Component {
   }
 
   render() {
-    let content = (
-      <>
-        <h3>{this.state.displayMsg}</h3>
-        <Spinner />
-      </>
-    )
+    let content = <Spinner displayMsg={this.state.displayMsg} />
     if (this.state.render) {
       if (!this.state.error) {
         content = (
@@ -294,14 +288,13 @@ export class AccountSummaryComponent extends Component {
           </>
         )
       } else {
-        /** TODO ERROR PAGE OR SOMETHING ELSE **/
         content = <h2>{displayTexts.FAIL_NO_REASON_REDIRECT}</h2>
       }
     }
     return (
       <div>
         {content}
-        <ToastContainer autoClose={3000} />
+        <ToastContainer autoClose={2000} />
       </div>
     )
   }

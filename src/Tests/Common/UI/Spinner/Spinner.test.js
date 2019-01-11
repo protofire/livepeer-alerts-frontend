@@ -1,14 +1,13 @@
 import React from 'react'
-import Spinner from '../../../../Components/Common/UI/Spinner/Spinner'
 import Adapter from 'enzyme-adapter-react-16'
-import { configure, shallow } from 'enzyme'
-
+import { configure, mount } from 'enzyme'
+import Spinner from '../../../../Components/Common/UI/Spinner/Spinner'
 configure({ adapter: new Adapter() })
 
 describe('Spinner test ', () => {
-  it(`should render Spinner component with class name 'Loader'`, () => {
-    const wrapper = shallow(<Spinner />)
-    const visitorShortcutsWrapper = wrapper.find('.Loader')
-    expect(visitorShortcutsWrapper).toHaveLength(1)
+  it(`Should render spinner`, () => {
+    const wrapper = mount(<Spinner />)
+    const findSpinner = wrapper.find('CircularProgress')
+    expect(findSpinner).toHaveLength(1)
   })
 })
