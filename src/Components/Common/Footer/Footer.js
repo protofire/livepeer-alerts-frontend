@@ -4,18 +4,14 @@ import cx from 'classnames'
 
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles'
-import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/ListItem'
+import GridContainer from '../../Common/UI/Grid/GridContainer.js'
+import GridItem from '../../Common/UI/Grid/GridItem.js'
 
 import footerStyle from '../../../assets/jss/dashboard/components/footerStyle'
+import { Link } from 'react-router-dom'
 
 function Footer({ ...props }) {
-  const { classes, fluid, white } = props
-  var container = cx({
-    [classes.container]: !fluid,
-    [classes.containerFluid]: fluid,
-    [classes.whiteColor]: white
-  })
+  const { classes, white } = props
   var anchor =
     classes.a +
     cx({
@@ -25,26 +21,39 @@ function Footer({ ...props }) {
     [classes.block]: true,
     [classes.whiteColor]: white
   })
+
   return (
-    <footer className={classes.footer}>
-      <div className={container}>
-        <div className={classes.left}>
-          <List className={classes.list}>
-            <ListItem className={classes.inlineBlock}>
-              <a href="#tyc" className={block}>
-                Terms and conditions
-              </a>
-            </ListItem>
-          </List>
-        </div>
-        <p className={classes.right}>
-          &copy; {1900 + new Date().getYear()}{' '}
-          <a href="https://www.protofire.io" className={anchor}>
-            Protofire
-          </a>{' '}
-          made with love for a better web
-        </p>
-      </div>
+    <footer className={`${classes.footer} ${classes.container}`}>
+      <GridContainer container={true} justify="space-between">
+        <GridItem
+          alignItems="center"
+          className={`${classes.responsiveFooterElements} ${classes.responsiveFooterElementsLeft}`}
+          container={true}
+          md={6}
+          sm={6}
+          xs={12}
+        >
+          <Link to="/terms" className={`${block} ${classes.a}`}>
+            Terms and conditions
+          </Link>
+        </GridItem>
+        <GridItem
+          alignItems="center"
+          className={`${classes.responsiveFooterElements} ${classes.responsiveFooterElementsRight}`}
+          container={true}
+          md={6}
+          sm={6}
+          xs={12}
+        >
+          <p>
+            &copy; {1900 + new Date().getYear()}{' '}
+            <a href="https://www.protofire.io" className={`${anchor} ${classes.a}`}>
+              Protofire
+            </a>{' '}
+            made with love for a better web
+          </p>
+        </GridItem>
+      </GridContainer>
     </footer>
   )
 }

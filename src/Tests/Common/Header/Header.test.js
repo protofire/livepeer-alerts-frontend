@@ -1,6 +1,6 @@
 import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
-import { configure, shallow, mount } from 'enzyme'
+import { configure, mount } from 'enzyme'
 import Header from '../../../Components/Common/Header/Header'
 
 configure({ adapter: new Adapter() })

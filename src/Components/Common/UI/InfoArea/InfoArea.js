@@ -3,13 +3,12 @@ import PropTypes from 'prop-types'
 
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles'
-
-import infoStyle from '../../../assets/jss/dashboard/components/infoStyle'
+import infoStyle from '../../../../assets/jss/dashboard/components/infoStyle'
 
 function InfoArea({ ...props }) {
-  const { classes, title, description, iconColor } = props
+  const { classes, title, description, iconColor, noCentered = false } = props
   return (
-    <div className={classes.infoArea}>
+    <div className={`${classes.infoArea} ${noCentered ? classes.noCentered : ''}`}>
       <div className={classes.iconWrapper + ' ' + classes[iconColor]}>
         <props.icon className={classes.icon} />
       </div>
