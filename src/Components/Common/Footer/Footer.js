@@ -24,11 +24,11 @@ function Footer({ ...props }) {
 
   return (
     <footer className={`${classes.footer} ${classes.container}`}>
-      <GridContainer container="true" justify="space-between">
+      <GridContainer container={true} justify="space-between">
         <GridItem
           alignItems="center"
           className={`${classes.responsiveFooterElements} ${classes.responsiveFooterElementsLeft}`}
-          container="true"
+          container={true}
           md={6}
           sm={6}
           xs={12}
@@ -40,7 +40,7 @@ function Footer({ ...props }) {
         <GridItem
           alignItems="center"
           className={`${classes.responsiveFooterElements} ${classes.responsiveFooterElementsRight}`}
-          container="true"
+          container={true}
           md={6}
           sm={6}
           xs={12}
