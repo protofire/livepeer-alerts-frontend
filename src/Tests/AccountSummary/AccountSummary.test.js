@@ -33,7 +33,7 @@ jest.mock('axios')
 describe('Renders AccountSummary data', () => {
   it('Renders Loading spinner when fetching data', () => {
     let wrapper = mount(<AccountSummaryComponent {...props} />)
-    wrapper.update()
-    expect(wrapper.contains(<Spinner />)).toBe(true)
+    let spinner = wrapper.find('spinner')
+    expect(spinner).toHaveLength(1)
   })
 })

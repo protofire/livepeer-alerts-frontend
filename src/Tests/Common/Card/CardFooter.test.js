@@ -1,7 +1,7 @@
 import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
 import { configure, mount } from 'enzyme'
-import CardFooter from '../../../Components/Common/Card/CardFooter'
+import CardFooter from '../../../Components/Common/UI/Card/CardFooter'
 
 configure({ adapter: new Adapter() })
 

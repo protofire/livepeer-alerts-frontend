@@ -1,7 +1,7 @@
 import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
 import { configure, mount } from 'enzyme'
-import CardAvatar from '../../../Components/Common/Card/CardAvatar'
+import CardAvatar from '../../../Components/Common/UI/Card/CardAvatar'
 
 configure({ adapter: new Adapter() })
 

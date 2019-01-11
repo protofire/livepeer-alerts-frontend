@@ -1,7 +1,7 @@
 import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
 import { configure, mount } from 'enzyme'
-import CustomInput from '../../../Components/Common/CustomInput/CustomInput'
+import CustomInput from '../../../Components/Common/UI/CustomInput/CustomInput'
 
 configure({ adapter: new Adapter() })
 

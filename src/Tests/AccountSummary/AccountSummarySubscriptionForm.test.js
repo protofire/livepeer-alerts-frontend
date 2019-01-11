@@ -1,10 +1,10 @@
 import React from 'react'
 import { configure, mount, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import { AccountSummarySubscriptionForm } from '../../Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummarySubscriptionForm'
 import * as displayTexts from '../../Components/AccountSummary/AccountSummaryTexts'
 import * as jest from 'jest'
 import axios from 'axios'
+import { AccountSummarySubscriptionForm } from '../../Components/AccountSummary/AccSummarySubscriptionForm/AccountSummarySubscriptionForm'
 
 configure({ adapter: new Adapter() })
 
@@ -25,7 +25,7 @@ jest.mock('axios')
 describe('Render AccountSummarySubscriptionForm', () => {
   it('Shows Welcome Message', () => {
     const message = 'Welcome to subscription form'
-    let wrapper = shallow(<AccountSummarySubscriptionForm {...props} />)
+    let wrapper = mount(<AccountSummarySubscriptionForm {...props} />)
     expect(wrapper.contains(message)).toEqual(true)
   })
   it('Renders Input email text', () => {
@@ -33,7 +33,7 @@ describe('Render AccountSummarySubscriptionForm', () => {
     expect(wrapper.find('.InputElement').length).toEqual(1)
   })
   it('Renders Subscribe btn', () => {
-    let wrapper = shallow(<AccountSummarySubscriptionForm {...props} />)
+    let wrapper = mount(<AccountSummarySubscriptionForm {...props} />)
     expect(wrapper.find('button').length).toEqual(1)
   })
   it('Validity false is input no email', () => {
