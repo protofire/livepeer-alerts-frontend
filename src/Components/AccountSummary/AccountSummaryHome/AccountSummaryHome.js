@@ -110,13 +110,7 @@ const AccountSummaryHome = props => {
                 <AccountSummaryData summary={props.summary} />
               </GridItem>
             </GridContainer>
-            <GridContainer
-              className={classes.buttonContainer}
-              justify="flex-end"
-              lg={12}
-              md={12}
-              xs={12}
-            >
+            <GridContainer className={classes.buttonContainer} justify="flex-end">
               <GridItem
                 className={`${classes.buttonContainerItem}`}
                 container={true}
