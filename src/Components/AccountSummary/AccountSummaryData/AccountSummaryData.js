@@ -1,6 +1,7 @@
 import React from 'react'
 import './AccountSummaryData.css'
 const AccountSummaryData = props => {
+  let statusMsg = getStatusMsg(props.summary.status)
   return (
     <>
       <table className="accountSummaryDataTable">
@@ -38,9 +39,56 @@ const AccountSummaryData = props => {
             <td>Status</td>
             <td>{props.summary.status}</td>
           </tr>
+          <tr>{statusMsg}</tr>
         </tbody>
       </table>
     </>
   )
 }
+
+const getStatusMsg = status => {
+  let msg
+  /** TODO -- Delete once backed implemented **/
+  let transcoder = {
+    address: '',
+    round: '',
+    at: ''
+  }
+  switch (status) {
+    case 'Pending': {
+      msg = (
+        <td>
+          your LPT is getting deluded by the protocol's token inflation. Add value to the network,
+          bond to a transcoder here.
+        </td>
+      )
+      break
+    }
+    case 'Bonded': {
+      msg = (
+        <td>
+          bonded to transcoder {transcoder.address} at round {transcoder.round} on {transcoder.at}
+        </td>
+      )
+      break
+    }
+    case 'Unbonding': {
+      msg = <td>your still have to wait a few moments to get finally unbonded.</td>
+      break
+    }
+    case 'Unbonded': {
+      msg = (
+        <td>
+          your LPT is getting deluded by the protocol's token inflation. Add value to the network,
+          bond to a transcoder here.
+        </td>
+      )
+      break
+    }
+    default:
+      msg = null
+  }
+  return msg
+}
+
 export default AccountSummaryData
