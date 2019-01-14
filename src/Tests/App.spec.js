@@ -1,9 +1,9 @@
 import React from 'react'
 import { MemoryRouter } from 'react-router'
 import { configure, mount } from 'enzyme'
-import App from '../src/App'
+import App from '../App'
 import Adapter from 'enzyme-adapter-react-16'
-import { AccountSummaryComponent, HomeComponent } from './Components'
+import { AccountSummaryComponent, HomeComponent } from '../Components'
 
 configure({ adapter: new Adapter() })
 describe('Check public and protected routes', () => {

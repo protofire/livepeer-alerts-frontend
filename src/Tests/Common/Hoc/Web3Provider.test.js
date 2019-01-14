@@ -1,23 +1,10 @@
 import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
 import { configure, shallow, mount } from 'enzyme'
-import Web3Provider from './Web3Provider'
-import * as texts from '../../UI/Texts/Texts'
+import Web3Provider from '../../../Components/Common/Hoc/Web3Provider/Web3Provider'
+import * as texts from '../../../Components/Common/UI/Texts/Texts'
 
 configure({ adapter: new Adapter() })
-
-const props = {
-  classes: {},
-  className: '',
-  children: [],
-  plain: false,
-  profile: false,
-  pricing: false,
-  testimonial: false,
-  stats: false,
-  chart: false,
-  product: false
-}
 
 describe('Web3 provider  ', () => {
   it(`Renders web3 provider without errors'`, () => {
@@ -27,7 +14,6 @@ describe('Web3 provider  ', () => {
   it(`Renders web3 provider with content provider'`, () => {
     const wrapper = shallow(<Web3Provider />)
     expect(wrapper.find('ContextProvider'))
-    //   expect(wrapper.find('Footer')).toHaveLength(1)
   })
   it(`Error if user do not have web3'`, () => {
     const wrapper = shallow(<Web3Provider />)

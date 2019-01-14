@@ -1,7 +1,7 @@
 import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
 import { configure, shallow } from 'enzyme'
-import Footer from './Footer'
+import Footer from '../../../Components/Common/Footer/Footer'
 
 configure({ adapter: new Adapter() })
 
