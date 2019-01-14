@@ -65,23 +65,12 @@ const getStatusMsg = props => {
   let msg
   switch (props.summary && props.summary.status) {
     case 'Pending': {
-      msg = (
-        <td>
-          your LPT is getting deluded by the protocol's token inflation. Add value to the network,
-          bond to a transcoder here.
-        </td>
-      )
       msg =
         "  your LPT is getting deluded by the protocol's token inflation. Add value to the network,\n" +
         '          bond to a transcoder here.'
       break
     }
     case 'Bonded': {
-      msg = (
-        <td>
-          bonded to transcoder {props.summary.delegateAddress} at round {props.summary.startRound}
-        </td>
-      )
       msg =
         'bonded to transcoder ' +
         props.summary.delegateAddress +
@@ -89,17 +78,10 @@ const getStatusMsg = props => {
       break
     }
     case 'Unbonding': {
-      msg = <td>your still have to wait a few moments to get finally unbonded.</td>
       msg = 'your still have to wait a few moments to get finally unbonded.'
       break
     }
     case 'Unbonded': {
-      msg = (
-        <td>
-          your LPT is getting deluded by the protocol's token inflation. Add value to the network,
-          bond to a transcoder here.
-        </td>
-      )
       msg =
         "your LPT is getting deluded by the protocol's token inflation. Add value to the network,\n" +
         '          bond to a transcoder here.'
