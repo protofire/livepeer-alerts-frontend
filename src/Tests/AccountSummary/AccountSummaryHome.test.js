@@ -81,7 +81,8 @@ describe('Renders userSubscribed data', () => {
       }
     }
     let wrapper = mount(<AccountSummaryHome {...propsNotAuth} />)
-    expect(wrapper.find('RegularButton').hasClass('subscribeBtn')).toEqual(true)
+    let textBtn = wrapper.find('Button').text()
+    expect(textBtn === 'Subscribe').toEqual(true)
   })
   it('Renders Unsubscription button if user is auth', () => {
     const propsNotAuth = {
@@ -92,6 +93,7 @@ describe('Renders userSubscribed data', () => {
       }
     }
     let wrapper = mount(<AccountSummaryHome {...propsNotAuth} />)
-    expect(wrapper.find('RegularButton').hasClass('unsubscribeBtn')).toEqual(true)
+    let textBtn = wrapper.find('Button').text()
+    expect(textBtn === 'Unsubscribe').toEqual(true)
   })
 })

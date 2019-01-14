@@ -1,23 +1,9 @@
 import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
 import { configure, shallow, mount } from 'enzyme'
-import CustomInput from './CustomInput'
+import CustomInput from '../../../../Components/Common/UI/CustomInput/CustomInput'
 
 configure({ adapter: new Adapter() })
-
-const props = {
-  classes: {},
-  className: '',
-  children: [],
-  plain: false,
-  profile: false,
-  pricing: false,
-  testimonial: false,
-  stats: false,
-  chart: false,
-  product: false
-}
-
 describe('Custom input  ', () => {
   it(`Renders custom input'`, () => {
     const wrapper = shallow(<CustomInput />)

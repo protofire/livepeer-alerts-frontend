@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
 import * as displayTexts from '../AccountSummaryTexts'
-import axios from 'axios'
-import { toast, ToastContainer } from 'react-toastify'
-import validator from 'validator'
-import Spinner from '../../Common/UI/Spinner/Spinner'
 import AccountSummarySubscriptionFormDisplay from './AccSummaryFormDisplay/AccSummarySubscriptionFormDisplay'
+import React, { Component } from 'react'
+import Spinner from '../../Common/UI/Spinner/Spinner'
+import axios from 'axios'
+import validator from 'validator'
+import { toast, ToastContainer } from 'react-toastify'
 
 export class AccountSummarySubscriptionForm extends Component {
   state = {

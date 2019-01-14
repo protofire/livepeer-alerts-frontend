@@ -1,32 +1,24 @@
-.App {
-  text-align: center;
+.AccountSummaryGridContainer {
+    margin: 0!important;
+    position: relative;
+    width: 100%!important;
+    z-index: 12;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.AccountSummaryCard {
+    align-items: center;
+    box-sizing: border-box;
+    justify-content: center;
+    margin: 0!important;
+    max-height: 200px;
+    max-width: 200px!important;
+    min-height: 200px;
+    min-width: 200px!important;
+    padding: 10px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-}
-
-.App-link {
-  color: #61dafb;
-}
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.AccountSummaryCard h3 {
+    font-size: 20px;
+    line-height: 1.2;
+    margin: 0 0 15px;
 }
