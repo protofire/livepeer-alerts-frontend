@@ -48,12 +48,6 @@ const AccountSummaryData = props => {
 
 const getStatusMsg = props => {
   let msg
-  /** TODO -- Delete once backed implemented **/
-  let transcoder = {
-    address: '',
-    round: '',
-    at: ''
-  }
   switch (props.summary && props.summary.status) {
     case 'Pending': {
       msg = (
