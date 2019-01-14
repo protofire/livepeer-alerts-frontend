@@ -43,9 +43,26 @@ const AccountSummaryStyle = {
   },
   buttonContainer: {
     margin: '20px 0 0 0',
-    width: '100%',
+    width: '100%'
+  },
+  buttonContainerItem: {
     '@media (min-width: 768px)': {
-      margin: '0'
+      flexWrap: 'nowrap'
+    }
+  },
+  subscriptionBtn: {
+    marginBottom: '10px',
+    width: '100%',
+    '&:last-child': {
+      marginBottom: '0'
+    },
+    '@media (min-width: 768px)': {
+      marginBottom: '0',
+      marginRight: '20px',
+      width: '50%',
+      '&:last-child': {
+        marginRight: '0'
+      }
     }
   },
   noWrap: {
@@ -66,12 +83,6 @@ const AccountSummaryStyle = {
   tableTitle: {
     fontSize: '16px',
     fontWeight: '500'
-  },
-  subscriptionBtn: {
-    width: '100%',
-    '@media (min-width: 768px)': {
-      width: 'auto'
-    }
   }
 }
 

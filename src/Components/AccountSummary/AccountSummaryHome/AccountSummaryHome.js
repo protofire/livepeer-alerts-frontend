@@ -62,7 +62,7 @@ const AccountSummaryHome = props => {
         round
         size="lg"
       >
-        Subscribe
+        Subscribe via Email
       </Button>
     )
   }
@@ -115,11 +115,14 @@ const AccountSummaryHome = props => {
             <GridItem
               className={`${classes.buttonContainerItem} ${classes.gridItem}`}
               container={true}
-              justify="flex-end"
+              justify="space-between"
               lg={6}
               md={12}
               xs={12}
             >
+              <Button className={classes.subscriptionBtn} color="info" round size="lg">
+                Subscribe via Telegram
+              </Button>
               {subscriptionBtn}
             </GridItem>
           </GridContainer>
