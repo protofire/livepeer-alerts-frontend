@@ -82,7 +82,7 @@ const getStatusMsg = props => {
       if (props.summary.delegateCalledReward) {
         tokenRewardsText = (
           <p className={classes.textLeft}>
-            Unfortunately the transcoder has not claimed the last NN inflationary token rewards.
+            Unfortunately the transcoder has not claimed the last inflationary token rewards.
           </p>
         )
       } else {
