@@ -1,7 +1,7 @@
 import React from 'react'
 import './AccountSummaryData.css'
 const AccountSummaryData = props => {
-  let statusMsg = getStatusMsg(props.summary.status)
+  let statusMsg = getStatusMsg(props)
   return (
     <>
       <table className="accountSummaryDataTable">
@@ -46,7 +46,7 @@ const AccountSummaryData = props => {
   )
 }
 
-const getStatusMsg = status => {
+const getStatusMsg = props => {
   let msg
   /** TODO -- Delete once backed implemented **/
   let transcoder = {
@@ -54,7 +54,7 @@ const getStatusMsg = status => {
     round: '',
     at: ''
   }
-  switch (status) {
+  switch (props.summary && props.summary.status) {
     case 'Pending': {
       msg = (
         <td>
@@ -67,7 +67,7 @@ const getStatusMsg = status => {
     case 'Bonded': {
       msg = (
         <td>
-          bonded to transcoder {transcoder.address} at round {transcoder.round} on {transcoder.at}
+          bonded to transcoder {props.summary.delegateAddress} at round {props.summary.startRound}
         </td>
       )
       break

@@ -19,6 +19,8 @@ export class AccountSummaryComponent extends Component {
     },
     summary: {
       bondedAmount: '',
+      delegateAddress: '',
+      delegatedAmount: '',
       fees: '',
       lastClaimRound: '',
       startRound: '',
@@ -167,12 +169,14 @@ export class AccountSummaryComponent extends Component {
           {
             summary: {
               bondedAmount: summaryData.data.summary.bondedAmount,
+              delegateAddress: summaryData.data.summary.delegateAddress,
+              delegatedAmount: summaryData.data.summary.delegatedAmount,
               fees: summaryData.data.summary.fees,
               lastClaimRound: summaryData.data.summary.lastClaimRound,
               startRound: summaryData.data.summary.startRound,
               status: summaryData.data.summary.status,
-              withdrawRound: summaryData.data.summary.withdrawRound,
-              stake: summaryData.data.summary.totalStake
+              stake: summaryData.data.summary.totalStake,
+              withdrawRound: summaryData.data.summary.withdrawRound
             },
             lpBalance: summaryData.data.balance
           },
