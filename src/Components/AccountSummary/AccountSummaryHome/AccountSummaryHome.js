@@ -31,7 +31,6 @@ const AccountSummaryHome = props => {
     )
   }
   let isSubscribed = props.userData && props.userData.isSubscribed ? 'yes' : 'no'
-
   return (
     <div className={classes.container}>
       <h1>{displayTexts.WELCOME_AGAIN}</h1>
@@ -52,11 +51,11 @@ const AccountSummaryHome = props => {
                   </tr>
                   <tr>
                     <td>ETH Balance</td>
-                    <td>{props.userData.ethBalance}</td>
+                    <td>{props.userData.ethBalance} ETH</td>
                   </tr>
                   <tr>
                     <td>LivePeer Balance</td>
-                    <td>{props.lpBalance}</td>
+                    <td>{props.lpBalance} LPT</td>
                   </tr>
                   <tr>
                     <td>Subscribed</td>

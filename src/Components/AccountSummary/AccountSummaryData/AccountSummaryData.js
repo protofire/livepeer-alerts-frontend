@@ -15,12 +15,8 @@ const AccountSummaryData = props => {
             <td>{props.summary.bondedAmount} </td>
           </tr>
           <tr>
-            <td>Fees</td>
-            <td>{props.summary.fees}</td>
-          </tr>
-          <tr>
-            <td>Status</td>
-            <td>{props.summary.status}</td>
+            <td>Earned from delegated fees:</td>
+            <td>{props.summary.fees} ETH</td>
           </tr>
           <tr>
             <td>LastClaimRound</td>
@@ -36,7 +32,11 @@ const AccountSummaryData = props => {
           </tr>
           <tr>
             <td>Stake</td>
-            <td>{props.summary.totalStake}</td>
+            <td>{props.summary.stake} LPT</td>
+          </tr>
+          <tr>
+            <td>Status</td>
+            <td>{props.summary.status}</td>
           </tr>
         </tbody>
       </table>
