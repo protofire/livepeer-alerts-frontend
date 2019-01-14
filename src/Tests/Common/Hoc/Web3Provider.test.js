@@ -14,7 +14,6 @@ describe('Web3 provider  ', () => {
   it(`Renders web3 provider with content provider'`, () => {
     const wrapper = shallow(<Web3Provider />)
     expect(wrapper.find('ContextProvider'))
-    //   expect(wrapper.find('Footer')).toHaveLength(1)
   })
   it(`Error if user do not have web3'`, () => {
     const wrapper = shallow(<Web3Provider />)
