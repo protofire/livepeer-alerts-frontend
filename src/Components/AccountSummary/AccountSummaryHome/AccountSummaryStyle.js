@@ -2,7 +2,7 @@
 // // // AccountSummary view styles
 // #############################
 
-import { container, cardTitle } from '../../../assets/jss/dashboard'
+import { cardTitle } from '../../../assets/jss/dashboard'
 
 const AccountSummaryStyle = {
   container: {
@@ -35,7 +35,7 @@ const AccountSummaryStyle = {
     margin: '0'
   },
   buttonContainerItem: {
-    padding: '0!important'
+    //padding: '0!important'
   },
   noWrap: {
     whiteSpace: 'nowrap'

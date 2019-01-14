@@ -1,7 +1,5 @@
 import * as displayTexts from '../AccountSummaryTexts'
 import AccountSummarySubscriptionFormDisplay from './AccSummaryFormDisplay/AccSummarySubscriptionFormDisplay'
-import GridContainer from '../../Common/UI/Grid/GridContainer.js'
-import GridItem from '../../Common/UI/Grid/GridItem.js'
 import React, { Component } from 'react'
 import Spinner from '../../Common/UI/Spinner/Spinner'
 import axios from 'axios'
