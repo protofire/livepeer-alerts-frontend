@@ -5,11 +5,6 @@
 import { cardTitle } from '../../../assets/jss/dashboard'
 
 const AccountSummaryStyle = {
-  container: {
-    width: '100%',
-    position: 'relative',
-    zIndex: '3'
-  },
   cardTitle: {
     ...cardTitle
   },
@@ -29,13 +24,29 @@ const AccountSummaryStyle = {
     fontSize: '18px'
   },
   gridContainer: {
+    margin: '0',
+    position: 'relative',
+    width: '100%',
     zIndex: '12'
   },
-  buttonContainer: {
-    margin: '0'
+  gridItem: {
+    padding: '0!important',
+    '@media (min-width: 1024px)': {
+      padding: '0 15px !important',
+      '&:first-child': {
+        paddingLeft: '0!important'
+      },
+      '&:last-child': {
+        paddingRight: '0!important'
+      }
+    }
   },
-  buttonContainerItem: {
-    //padding: '0!important'
+  buttonContainer: {
+    margin: '20px 0 0 0',
+    width: '100%',
+    '@media (min-width: 768px)': {
+      margin: '0'
+    }
   },
   noWrap: {
     whiteSpace: 'nowrap'
@@ -55,6 +66,12 @@ const AccountSummaryStyle = {
   tableTitle: {
     fontSize: '16px',
     fontWeight: '500'
+  },
+  subscriptionBtn: {
+    width: '100%',
+    '@media (min-width: 768px)': {
+      width: 'auto'
+    }
   }
 }
 

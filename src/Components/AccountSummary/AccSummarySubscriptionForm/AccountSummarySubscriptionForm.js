@@ -188,22 +188,22 @@ export class AccountSummarySubscriptionForm extends Component {
 
   render() {
     let content = <Spinner displayMsg={this.state.displayMsg} />
+
     if (this.state.render) {
       content = (
-        <>
-          <AccountSummarySubscriptionFormDisplay
-            form={this.state.form}
-            onSubmitBtnHandler={this.onSubmitBtnHandler}
-            inputChangedHandler={this.inputChangedHandler}
-          />
-        </>
+        <AccountSummarySubscriptionFormDisplay
+          form={this.state.form}
+          onSubmitBtnHandler={this.onSubmitBtnHandler}
+          inputChangedHandler={this.inputChangedHandler}
+        />
       )
     }
+
     return (
-      <div>
+      <>
         {content}
         <ToastContainer autoClose={2000} />
-      </div>
+      </>
     )
   }
 }

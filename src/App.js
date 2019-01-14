@@ -101,10 +101,10 @@ export class App extends Component {
 
     return (
       <Router>
-        <div>
+        <>
           <PagesHeader {...rest} />
           {content}
-        </div>
+        </>
       </Router>
     )
   }

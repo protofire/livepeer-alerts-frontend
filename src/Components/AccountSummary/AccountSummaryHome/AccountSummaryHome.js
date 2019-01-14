@@ -42,6 +42,7 @@ const AccountSummaryHome = props => {
   if (props.userData && props.userData.isSubscribed) {
     subscriptionBtn = (
       <Button
+        className={classes.subscriptionBtn}
         color="warning"
         disabled={disabledBtn}
         onClick={props.onUnSubscribeBtnHandler}
@@ -54,6 +55,7 @@ const AccountSummaryHome = props => {
   } else {
     subscriptionBtn = (
       <Button
+        className={classes.subscriptionBtn}
         color="primary"
         disabled={disabledBtn}
         onClick={props.onSubscribeBtnHandler}
@@ -66,66 +68,64 @@ const AccountSummaryHome = props => {
   }
 
   return (
-    <div className={classes.container}>
-      <GridContainer className={classes.gridContainer} justify="center">
-        <GridItem className={classes.cardContainer}>
-          <Card className={classes.cardAccountSummary}>
-            <h2 className={classes.cardTitle}>{displayTexts.WELCOME_AGAIN}</h2>
-            <GridContainer className={classes.gridContainer}>
-              <GridItem lg={6} md={12} xs={12}>
-                <Table className={` ${classes.table}`}>
-                  <TableHead>
-                    <TableRow>
-                      <TableCell
-                        colSpan="2"
-                        className={`${classes.tableHeadCel} ${classes.noWrap} ${classes.pL0} ${
-                          classes.pR0
-                        } ${classes.tableTitle}`}
-                      >
-                        Account Summary
-                      </TableCell>
-                    </TableRow>
-                  </TableHead>
-                  <TableBody>
-                    {tableData.map((item, index) => {
-                      return (
-                        <TableRow key={index}>
-                          <TableCell className={`${classes.tableCell} ${classes.noWrap}`}>
-                            {item.title}
-                          </TableCell>
-                          <TableCell
-                            className={`${classes.tableCell} ${classes.textRight} ${
-                              classes.wordBreak
-                            }`}
-                          >
-                            {item.data}
-                          </TableCell>
-                        </TableRow>
-                      )
-                    })}
-                  </TableBody>
-                </Table>
-              </GridItem>
-              <GridItem lg={6} md={12} xs={12}>
-                <AccountSummaryData summary={props.summary} />
-              </GridItem>
-            </GridContainer>
-            <GridContainer className={classes.buttonContainer} justify="flex-end">
-              <GridItem
-                className={`${classes.buttonContainerItem}`}
-                container={true}
-                justify="flex-end"
-                lg={6}
-                md={12}
-                xs={12}
-              >
-                {subscriptionBtn}
-              </GridItem>
-            </GridContainer>
-          </Card>
-        </GridItem>
-      </GridContainer>
-    </div>
+    <GridContainer className={classes.gridContainer} justify="center">
+      <GridItem className={classes.cardContainer}>
+        <Card className={classes.cardAccountSummary}>
+          <h2 className={classes.cardTitle}>{displayTexts.WELCOME_AGAIN}</h2>
+          <GridContainer className={classes.gridContainer}>
+            <GridItem lg={6} md={12} xs={12} className={classes.gridItem}>
+              <Table className={` ${classes.table}`}>
+                <TableHead>
+                  <TableRow>
+                    <TableCell
+                      colSpan="2"
+                      className={`${classes.tableHeadCel} ${classes.noWrap} ${classes.pL0} ${
+                        classes.pR0
+                      } ${classes.tableTitle}`}
+                    >
+                      Account Summary
+                    </TableCell>
+                  </TableRow>
+                </TableHead>
+                <TableBody>
+                  {tableData.map((item, index) => {
+                    return (
+                      <TableRow key={index}>
+                        <TableCell className={`${classes.tableCell} ${classes.noWrap}`}>
+                          {item.title}
+                        </TableCell>
+                        <TableCell
+                          className={`${classes.tableCell} ${classes.textRight} ${
+                            classes.wordBreak
+                          }`}
+                        >
+                          {item.data}
+                        </TableCell>
+                      </TableRow>
+                    )
+                  })}
+                </TableBody>
+              </Table>
+            </GridItem>
+            <GridItem lg={6} md={12} xs={12} className={classes.gridItem}>
+              <AccountSummaryData summary={props.summary} />
+            </GridItem>
+          </GridContainer>
+          <GridContainer className={classes.buttonContainer} justify="flex-end">
+            <GridItem
+              className={`${classes.buttonContainerItem} ${classes.gridItem}`}
+              container={true}
+              justify="flex-end"
+              lg={6}
+              md={12}
+              xs={12}
+            >
+              {subscriptionBtn}
+            </GridItem>
+          </GridContainer>
+        </Card>
+      </GridItem>
+    </GridContainer>
   )
 }
 export default withStyles(theme => ({
