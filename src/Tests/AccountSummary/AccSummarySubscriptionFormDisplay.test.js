@@ -1,8 +1,8 @@
 import React from 'react'
 import { configure, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import AccountSummarySubscriptionFormDisplay from './AccSummarySubscriptionFormDisplay'
-import * as displayTexts from '../../AccountSummaryTexts'
+import AccountSummarySubscriptionFormDisplay from '../../Components/AccountSummary/AccSummarySubscriptionForm/AccSummaryFormDisplay/AccSummarySubscriptionFormDisplay'
+import * as displayTexts from '../../Components/AccountSummary/AccountSummaryTexts'
 
 configure({ adapter: new Adapter() })
 

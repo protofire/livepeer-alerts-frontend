@@ -1,11 +1,11 @@
 import React from 'react'
-import { configure, shallow, mount } from 'enzyme'
+import { configure, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import * as jest from 'jest'
 import axios from 'axios'
-import * as displayTexts from '../../AccountSummary/AccountSummaryTexts'
-import AccountSummaryHome from '../../AccountSummary/AccountSummaryHome/AccountSummaryHome'
-import AccountSummaryData from '../../AccountSummary/AccountSummaryData/AccountSummaryData'
+import * as displayTexts from '../../../Components/AccountSummary/AccountSummaryTexts'
+import AccountSummaryHome from '../../../Components/AccountSummary/AccountSummaryHome/AccountSummaryHome'
+import AccountSummaryData from '../../../Components/AccountSummary/AccountSummaryData/AccountSummaryData'
 
 configure({ adapter: new Adapter() })
 

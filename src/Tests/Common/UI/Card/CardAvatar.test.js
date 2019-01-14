@@ -1,18 +1,18 @@
 import React from 'react'
 import Adapter from 'enzyme-adapter-react-16'
 import { configure, mount } from 'enzyme'
-import CardIcon from '../../../Components/Common/UI/Card/CardIcon'
+import CardAvatar from '../../../../Components/Common/UI/Card/CardAvatar'
 
 configure({ adapter: new Adapter() })
 
-describe('cardIcon test ', () => {
-  it(`Should render cardIcon`, () => {
+describe('CardAvatar test ', () => {
+  it(`Should render cardAvatar`, () => {
     const wrapper = mount(
-      <CardIcon>
+      <CardAvatar>
         <div />
-      </CardIcon>
+      </CardAvatar>
     )
-    const cardAvatar = wrapper.find('CardIcon')
+    const cardAvatar = wrapper.find('CardAvatar')
     expect(cardAvatar).toHaveLength(1)
   })
 })
