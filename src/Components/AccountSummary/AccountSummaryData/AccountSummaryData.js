@@ -18,7 +18,7 @@ const AccountSummaryData = props => {
     },
     {
       title: 'Status',
-      data: props.summary.status + ', ' + statusMsg
+      data: statusMsg
     },
     {
       title: 'Stake',
@@ -63,28 +63,67 @@ const AccountSummaryData = props => {
 
 const getStatusMsg = props => {
   let msg
+  const { classes } = props
   switch (props.summary && props.summary.status) {
     case 'Pending': {
-      msg =
-        "  your LPT is getting deluded by the protocol's token inflation. Add value to the network,\n" +
-        '          bond to a transcoder here.'
+      msg = (
+        <>
+          <p>{props.summary.status}</p>
+          <p className={classes.textLeft}>
+            your LPT is getting deluded by the protocol's token inflation. Add value to the network,
+            bond to a transcoder here.
+          </p>
+        </>
+      )
       break
     }
     case 'Bonded': {
-      msg =
-        'bonded to transcoder ' +
-        props.summary.delegateAddress +
-        'at round {props.summary.startRound}'
+      let tokenRewardsText
+      if (props.summary.delegateCalledReward) {
+        tokenRewardsText = (
+          <p className={classes.textLeft}>
+            Unfortunately the transcoder has not claimed the last NN inflationary token rewards.
+          </p>
+        )
+      } else {
+        tokenRewardsText = (
+          <p className={classes.textLeft}>
+            The transcoder has successfully claimed the last inflationary token rewards.
+          </p>
+        )
+      }
+      msg = (
+        <>
+          <p className={classes.textLeft}>{props.summary.status}</p>
+          <p className={classes.textLeft}>
+            bonded to transcoder {props.summary.delegateAddress} at round {props.summary.startRound}
+          </p>
+          {tokenRewardsText}
+        </>
+      )
       break
     }
     case 'Unbonding': {
-      msg = 'your still have to wait a few moments to get finally unbonded.'
+      msg = (
+        <>
+          <p className={classes.textLeft}>{props.summary.status}</p>
+          <p className={classes.textLeft}>
+            your still have to wait a few moments to get finally unbonded.
+          </p>
+        </>
+      )
       break
     }
     case 'Unbonded': {
-      msg =
-        "your LPT is getting deluded by the protocol's token inflation. Add value to the network,\n" +
-        '          bond to a transcoder here.'
+      msg = (
+        <>
+          <p className={classes.textLeft}>{props.summary.status}</p>
+          <p className={classes.textLeft}>
+            your LPT is getting deluded by the protocol's token inflation. Add value to the network,
+            bond to a transcoder here.
+          </p>
+        </>
+      )
       break
     }
     default:

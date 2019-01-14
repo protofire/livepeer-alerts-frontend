@@ -30,7 +30,8 @@ export class AccountSummaryComponent extends Component {
       startRound: '',
       status: 'Bonded',
       withdrawRound: '',
-      stake: ''
+      stake: '',
+      delegateCalledReward: false
     },
     render: false,
     displayMsg: displayTexts.LOADING_USER_DATA,
@@ -181,7 +182,8 @@ export class AccountSummaryComponent extends Component {
               startRound: summaryData.data.summary.startRound,
               status: summaryData.data.summary.status,
               stake: summaryData.data.summary.totalStake,
-              withdrawRound: summaryData.data.summary.withdrawRound
+              withdrawRound: summaryData.data.summary.withdrawRound,
+              delegateCalledReward: summaryData.data.summary.delegatedCalledReward
             },
             lpBalance: summaryData.data.balance
           },
