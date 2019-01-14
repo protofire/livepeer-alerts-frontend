@@ -1,10 +1,9 @@
-import React, { Component } from 'react'
-import { toast, ToastContainer } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
-import './home.css'
-import logger from '../../utils'
-import { withRouter } from 'react-router-dom'
 import HomeCard from './HomeCard/HomeCard.js'
+import React, { Component } from 'react'
+import logger from '../../utils'
+import { toast, ToastContainer } from 'react-toastify'
+import { withRouter } from 'react-router-dom'
 
 export class HomeComponent extends Component {
   state = {

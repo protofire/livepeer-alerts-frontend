@@ -1,21 +1,15 @@
-import React from 'react'
-import PropTypes from 'prop-types'
-
-// @material-ui/core components
-import withStyles from '@material-ui/core/styles/withStyles'
-
-// @material-ui/icons
+import Button from '../../Common/UI/CustomButtons/Button.js'
+import Card from '../../Common/UI/Card/Card.js'
 import Code from '@material-ui/icons/Code'
-import Group from '@material-ui/icons/Group'
-import Notifications from '@material-ui/icons/NotificationsActive'
-// core components
 import GridContainer from '../../Common/UI/Grid/GridContainer.js'
 import GridItem from '../../Common/UI/Grid/GridItem.js'
-import Button from '../../Common/UI/CustomButtons/Button.js'
+import Group from '@material-ui/icons/Group'
 import InfoArea from '../../Common/UI/InfoArea/InfoArea.js'
-import Card from '../../Common/UI/Card/Card.js'
-
+import Notifications from '@material-ui/icons/NotificationsActive'
+import PropTypes from 'prop-types'
+import React from 'react'
 import homeCardStyle from '../../../assets/jss/dashboard/views/homeCardStyle'
+import withStyles from '@material-ui/core/styles/withStyles'
 
 class HomeCard extends React.Component {
   render() {

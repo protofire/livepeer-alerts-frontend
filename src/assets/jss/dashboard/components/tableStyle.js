@@ -85,7 +85,7 @@ const tableStyle = theme => ({
     textAlign: 'right'
   },
   tableResponsive: {
-    // width: "100%",
+    width: '100%',
     minHeight: '0.1%',
     overflowX: 'auto'
   },

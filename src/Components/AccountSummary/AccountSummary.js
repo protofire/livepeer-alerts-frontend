@@ -1,10 +1,14 @@
-import React, { Component } from 'react'
-import axios from 'axios'
-import Spinner from '../Common/UI/Spinner/Spinner'
 import * as displayTexts from './AccountSummaryTexts'
 import AccountSummaryHome from './AccountSummaryHome/AccountSummaryHome'
-import { toast, ToastContainer } from 'react-toastify'
+import Card from '../Common/UI/Card/Card.js'
+import GridContainer from '../Common/UI/Grid/GridContainer.js'
+import GridItem from '../Common/UI/Grid/GridItem.js'
+import React, { Component } from 'react'
+import Spinner from '../Common/UI/Spinner/Spinner'
+import axios from 'axios'
 import logger from '../../utils'
+import { toast, ToastContainer } from 'react-toastify'
+
 export class AccountSummaryComponent extends Component {
   state = {
     userData: {
@@ -89,6 +93,7 @@ export class AccountSummaryComponent extends Component {
       callback
     )
   }
+
   componentDidMount = async () => {
     logger.log('[AccountSummaryComponent.js] componentDidMount')
     let userDataPromise, summaryPromise
@@ -276,7 +281,15 @@ export class AccountSummaryComponent extends Component {
   }
 
   render() {
-    let content = <Spinner displayMsg={this.state.displayMsg} />
+    let content = (
+      <GridContainer className="AccountSummaryGridContainer" justify="center" align="center">
+        <GridItem>
+          <Card className="AccountSummaryCard">
+            <Spinner displayMsg={this.state.displayMsg} />
+          </Card>
+        </GridItem>
+      </GridContainer>
+    )
     if (this.state.render) {
       if (!this.state.error) {
         content = (
@@ -296,10 +309,10 @@ export class AccountSummaryComponent extends Component {
       }
     }
     return (
-      <div>
+      <>
         {content}
         <ToastContainer autoClose={2000} />
-      </div>
+      </>
     )
   }
 }

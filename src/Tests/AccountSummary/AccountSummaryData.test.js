@@ -1,5 +1,5 @@
 import React from 'react'
-import { configure, shallow } from 'enzyme'
+import { configure, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import AccountSummaryData from '../../Components/AccountSummary/AccountSummaryData/AccountSummaryData'
 
@@ -19,32 +19,38 @@ const props = {
 describe('Renders account summary data', () => {
   it('Shows bondedAmount', () => {
     const message = 'BondedAmount'
-    let wrapper = shallow(<AccountSummaryData {...props} />)
-    expect(wrapper.contains(message)).toEqual(true)
+    let wrapper = mount(<AccountSummaryData {...props} />)
+    let tr = wrapper.find('TableCell').map(tr => tr.text())
+    expect(tr[1] === message).toEqual(true)
   })
   it('Shows Fees', () => {
     const message = 'Fees'
-    let wrapper = shallow(<AccountSummaryData {...props} />)
-    expect(wrapper.contains(message)).toEqual(true)
+    let wrapper = mount(<AccountSummaryData {...props} />)
+    let tr = wrapper.find('TableCell').map(tr => tr.text())
+    expect(tr[3] === message).toEqual(true)
   })
   it('Shows Status', () => {
     const message = 'Status'
-    let wrapper = shallow(<AccountSummaryData {...props} />)
-    expect(wrapper.contains(message)).toEqual(true)
+    let wrapper = mount(<AccountSummaryData {...props} />)
+    let tr = wrapper.find('TableCell').map(tr => tr.text())
+    expect(tr[5] === message).toEqual(true)
   })
   it('Shows LastClaimRound', () => {
     const message = 'LastClaimRound'
-    let wrapper = shallow(<AccountSummaryData {...props} />)
-    expect(wrapper.contains(message)).toEqual(true)
+    let wrapper = mount(<AccountSummaryData {...props} />)
+    let tr = wrapper.find('TableCell').map(tr => tr.text())
+    expect(tr[7] === message).toEqual(true)
   })
   it('Shows StartRound', () => {
     const message = 'StartRound'
-    let wrapper = shallow(<AccountSummaryData {...props} />)
-    expect(wrapper.contains(message)).toEqual(true)
+    let wrapper = mount(<AccountSummaryData {...props} />)
+    let tr = wrapper.find('TableCell').map(tr => tr.text())
+    expect(tr[9] === message).toEqual(true)
   })
   it('Shows WithdrawRound', () => {
     const message = 'WithdrawRound'
-    let wrapper = shallow(<AccountSummaryData {...props} />)
-    expect(wrapper.contains(message)).toEqual(true)
+    let wrapper = mount(<AccountSummaryData {...props} />)
+    let tr = wrapper.find('TableCell').map(tr => tr.text())
+    expect(tr[11] === message).toEqual(true)
   })
 })
