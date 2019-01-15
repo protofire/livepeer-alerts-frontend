@@ -68,10 +68,13 @@ const getStatusMsg = props => {
     case 'Pending': {
       msg = (
         <>
-          <p>{props.summary.status}</p>
+          <p className={classes.textLeft}>{props.summary.status}</p>
           <p className={classes.textLeft}>
-            your LPT is getting deluded by the protocol's token inflation. Add value to the network,
-            bond to a transcoder here.
+            your LPT is getting deluded by the protocol's token inflation.
+          </p>
+          <p className={classes.textLeft}>
+            Add value to the network, bond to a transcoder
+            <a href="https://explorer.livepeer.org/transcoders"> here</a>
           </p>
         </>
       )
@@ -79,7 +82,10 @@ const getStatusMsg = props => {
     }
     case 'Bonded': {
       let tokenRewardsText
-      if (props.summary.delegateCalledReward) {
+      const delegateAddress = props.summary.delegateAddress
+      const delegateAddressUrl = 'https://explorer.livepeer.org/accounts/' + delegateAddress
+
+      if (!props.summary.delegateCalledReward) {
         tokenRewardsText = (
           <p className={classes.textLeft}>
             Unfortunately the transcoder has not claimed the last inflationary token rewards.
@@ -94,9 +100,10 @@ const getStatusMsg = props => {
       }
       msg = (
         <>
-          <p className={classes.textLeft}>{props.summary.status}</p>
+          <p className={classes.textLeft}>{props.summary.status} </p>
           <p className={classes.textLeft}>
-            bonded to transcoder {props.summary.delegateAddress} at round {props.summary.startRound}
+            bonded to transcoder <a href={delegateAddressUrl}>{delegateAddress}</a> at round{' '}
+            {props.summary.startRound}{' '}
           </p>
           {tokenRewardsText}
         </>
@@ -119,8 +126,11 @@ const getStatusMsg = props => {
         <>
           <p className={classes.textLeft}>{props.summary.status}</p>
           <p className={classes.textLeft}>
-            your LPT is getting deluded by the protocol's token inflation. Add value to the network,
-            bond to a transcoder here.
+            your LPT is getting deluded by the protocol's token inflation.
+          </p>
+          <p className={classes.textLeft}>
+            Add value to the network, bond to a transcoder
+            <a href="https://explorer.livepeer.org/transcoders"> here</a>
           </p>
         </>
       )
