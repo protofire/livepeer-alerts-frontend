@@ -77,6 +77,9 @@ const AccountSummaryStyle = {
   textRight: {
     textAlign: 'right'
   },
+  textLeft: {
+    textAlign: 'left'
+  },
   wordBreak: {
     wordBreak: 'break-all'
   },

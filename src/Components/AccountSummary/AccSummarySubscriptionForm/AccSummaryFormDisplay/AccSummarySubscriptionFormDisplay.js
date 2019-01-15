@@ -9,13 +9,12 @@ import { withStyles } from '@material-ui/core/styles'
 
 const accountSummarySubscriptionFormDisplay = props => {
   const { classes } = props
-
   return (
     <GridContainer className={classes.gridContainer} justify="center" alignItems="center">
       <GridItem className={classes.cardContainer}>
         <Card className={classes.cardSignup}>
           <h2 className={classes.cardTitle}>Subscribe:</h2>
-          <form onSubmit={props.onSubmitBtnHandler}>
+          <form>
             <Input
               changed={event => props.inputChangedHandler(event, 'email')}
               elementConfig={props.form.email.elementConfig}
@@ -31,6 +30,7 @@ const accountSummarySubscriptionFormDisplay = props => {
               disabled={!props.form.formIsValid}
               round
               size="lg"
+              onClick={props.onSubmitBtnHandler}
             >
               Subscribe
             </Button>

@@ -11,18 +11,17 @@ import { withStyles } from '@material-ui/core/styles'
 const AccountSummaryData = props => {
   let statusMsg = getStatusMsg(props)
   const tableData = [
-    { title: 'Bonded amount', data: props.summary.bondedAmount },
     {
-      title: 'Earned from delegate fees',
-      data: props.summary.fees
-    },
-    {
-      title: 'Status',
-      data: props.summary.status + ', ' + statusMsg
+      title: 'Bonding Status',
+      data: statusMsg
     },
     {
       title: 'Stake',
       data: props.summary.stake + ' LPT'
+    },
+    {
+      title: 'Earned from delegate fees',
+      data: props.summary.fees
     }
   ]
   const { classes } = props
@@ -61,46 +60,77 @@ const AccountSummaryData = props => {
 
 const getStatusMsg = props => {
   let msg
+  const { classes } = props
   switch (props.summary && props.summary.status) {
     case 'Pending': {
       msg = (
-        <td>
-          your LPT is getting deluded by the protocol's token inflation. Add value to the network,
-          bond to a transcoder here.
-        </td>
+        <>
+          <p className={classes.textLeft}>{props.summary.status}</p>
+          <p className={classes.textLeft}>
+            Your LPT is getting deluded by the protocol's token inflation.
+          </p>
+          <p className={classes.textLeft}>
+            Add value to the network, bond to a transcoder
+            <a href="https://explorer.livepeer.org/transcoders"> here</a>
+          </p>
+        </>
       )
-      msg =
-        "  your LPT is getting deluded by the protocol's token inflation. Add value to the network,\n" +
-        '          bond to a transcoder here.'
       break
     }
     case 'Bonded': {
+      let tokenRewardsText
+      const delegateAddress = props.summary.delegateAddress
+      const delegateAddressUrl = 'https://explorer.livepeer.org/accounts/' + delegateAddress
+
+      if (!props.summary.delegateCalledReward) {
+        tokenRewardsText = (
+          <p className={classes.textLeft}>
+            Unfortunately the transcoder has not claimed the last inflationary token rewards.
+          </p>
+        )
+      } else {
+        tokenRewardsText = (
+          <p className={classes.textLeft}>
+            The transcoder has successfully claimed the last inflationary token rewards.
+          </p>
+        )
+      }
       msg = (
-        <td>
-          bonded to transcoder {props.summary.delegateAddress} at round {props.summary.startRound}
-        </td>
+        <>
+          <p className={classes.textLeft}>{props.summary.status} </p>
+          <p className={classes.textLeft}>
+            Bonded to transcoder <a href={delegateAddressUrl}>{delegateAddress}</a> at round{' '}
+            {props.summary.startRound}{' '}
+          </p>
+          {tokenRewardsText}
+        </>
       )
-      msg =
-        'bonded to transcoder ' +
-        props.summary.delegateAddress +
-        'at round {props.summary.startRound}'
       break
     }
     case 'Unbonding': {
-      msg = <td>your still have to wait a few moments to get finally unbonded.</td>
-      msg = 'your still have to wait a few moments to get finally unbonded.'
+      msg = (
+        <>
+          <p className={classes.textLeft}>{props.summary.status}</p>
+          <p className={classes.textLeft}>
+            You still have to wait a few moments to get finally unbonded.
+          </p>
+        </>
+      )
       break
     }
     case 'Unbonded': {
       msg = (
-        <td>
-          your LPT is getting deluded by the protocol's token inflation. Add value to the network,
-          bond to a transcoder here.
-        </td>
+        <>
+          <p className={classes.textLeft}>{props.summary.status}</p>
+          <p className={classes.textLeft}>
+            Your LPT is getting deluded by the protocol's token inflation.
+          </p>
+          <p className={classes.textLeft}>
+            Add value to the network, bond to a transcoder
+            <a href="https://explorer.livepeer.org/transcoders"> here</a>
+          </p>
+        </>
       )
-      msg =
-        "your LPT is getting deluded by the protocol's token inflation. Add value to the network,\n" +
-        '          bond to a transcoder here.'
       break
     }
     default:

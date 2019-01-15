@@ -18,25 +18,20 @@ import { truncateStringInTheMiddle } from '../../../utils'
 const AccountSummaryHome = props => {
   let disabledBtn = props.summary && props.summary.status !== 'Bonded'
   let subscriptionBtn
-  let isSubscribed = props.userData && props.userData.isSubscribed ? 'Yes' : 'No'
 
   const { classes } = props
   const tableData = [
     {
-      title: 'Address',
-      data: props.userData.address
+      title: 'Wallet address',
+      data: truncateStringInTheMiddle(props.userData.address)
     },
     {
-      title: 'ETH Balance',
+      title: 'Wallet balance in ETH',
       data: props.userData.ethBalance
     },
     {
-      title: 'LivePeer Balance',
+      title: 'Wallet balance in LPT',
       data: props.lpBalance
-    },
-    {
-      title: 'Subscribed',
-      data: isSubscribed
     }
   ]
 
@@ -69,13 +64,12 @@ const AccountSummaryHome = props => {
   }
 
   const address = props.userData && props.userData.address
-  const telegramLink = `${process.env.LIVEPEER_TELEGRAM_BOT_URL}?start=${address}`
+  const telegramLink = `${process.env.REACT_APP_LIVEPEER_TELEGRAM_BOT_URL}?start=${address}`
   const openTelegramLink = () => {
     window.open(telegramLink, '_blank')
   }
 
   const summaryTitle = `Welcome ${truncateStringInTheMiddle(address)}`
-
   return (
     <GridContainer className={classes.gridContainer} justify="center">
       <GridItem className={classes.cardContainer}>
