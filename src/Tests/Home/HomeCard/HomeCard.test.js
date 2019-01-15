@@ -46,7 +46,7 @@ const response = {
 jest.mock('axios')
 describe('Renders userSubscribed data', () => {
   it('Shows Welcome Message', () => {
-    const message = displayTexts.WELCOME_AGAIN
+    const message = 'Welcome 0x4d3F91...76FBBDcE'
     axios.get.mockResolvedValue(response)
     let wrapper = mount(<AccountSummaryHome {...props} />)
     wrapper = wrapper.update()
@@ -79,10 +79,11 @@ describe('Renders userSubscribed data', () => {
         isSubscribed: false
       }
     }
-    const message = 'Subscribe'
     let wrapper = mount(<AccountSummaryHome {...propsNotAuth} />)
-    expect(wrapper.find('Button').length).toEqual(1)
-    expect(wrapper.contains(message)).toEqual(true)
+    let buttons = wrapper.find('Button')
+    expect(buttons.length).toEqual(2)
+    expect(buttons.at(0).contains('Subscribe via Telegram')).toEqual(true)
+    expect(buttons.at(1).contains('Subscribe via Email')).toEqual(true)
   })
   it('Renders Unsubscription button if user is auth', () => {
     const propsNotAuth = {
@@ -92,9 +93,10 @@ describe('Renders userSubscribed data', () => {
         isSubscribed: true
       }
     }
-    const message = 'Unsubscribe'
     let wrapper = mount(<AccountSummaryHome {...propsNotAuth} />)
-    expect(wrapper.find('Button').length).toEqual(1)
-    expect(wrapper.contains(message)).toEqual(true)
+    let buttons = wrapper.find('Button')
+    expect(buttons.length).toEqual(2)
+    expect(buttons.at(0).contains('Subscribe via Telegram')).toEqual(true)
+    expect(buttons.at(1).contains('Unsubscribe')).toEqual(true)
   })
 })

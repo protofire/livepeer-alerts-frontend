@@ -1,6 +1,16 @@
-import logdown from 'logdown'
+const truncateStringInTheMiddle = (
+  str,
+  strLength = 41,
+  strPositionStart = 8,
+  strPositionEnd = 8
+) => {
+  if (typeof str === 'string' && str.length > strLength) {
+    return `${str.substr(0, strPositionStart)}...${str.substr(
+      str.length - strPositionEnd,
+      str.length
+    )}`
+  }
+  return str
+}
 
-const logger = logdown('Livepeer:App')
-logger.state.isEnabled = process.env.NODE_ENV !== 'production'
-
-export default logger
+export { truncateStringInTheMiddle }

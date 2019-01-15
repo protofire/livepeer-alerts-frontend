@@ -12,10 +12,10 @@ const spinner = props => {
   const { classes } = props
   let displayMsg = props.displayMsg ? <h3>{props.displayMsg}</h3> : null
   return (
-    <div>
+    <>
       {displayMsg}
       <CircularProgress className={classes.progress} />
-    </div>
+    </>
   )
 }
 

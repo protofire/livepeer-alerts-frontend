@@ -1,7 +1,6 @@
 import PrivateRoute from './Components/Common/Hoc/PrivateRoute/PrivateRoute'
 import React, { Component } from 'react'
 import Spinner from './Components/Common/UI/Spinner/Spinner'
-import logger from './utils'
 import { AccountSummarySubscriptionForm } from './Components/AccountSummary/AccSummarySubscriptionForm/AccountSummarySubscriptionForm'
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
 import { HomeComponent, AccountSummaryComponent } from './Components'
@@ -13,9 +12,13 @@ import Footer from './Components/Common/Footer/Footer.js'
 import PagesHeader from './Components/Common/Header/PagesHeader.js'
 import PropTypes from 'prop-types'
 import TermsAndConditionsComponent from './Components/TermsAndConditions/TermsAndConditions'
-import bgImage from './assets/img/register.jpeg'
+import bgImage from './assets/img/bg/5.jpg'
 import pagesStyle from './assets/jss/dashboard/layouts/pagesStyle.js'
 import withStyles from '@material-ui/core/styles/withStyles'
+import logdown from 'logdown'
+
+const logger = logdown('Livepeer:App')
+logger.state.isEnabled = process.env.NODE_ENV !== 'production'
 
 export class App extends Component {
   state = {
@@ -101,10 +104,10 @@ export class App extends Component {
 
     return (
       <Router>
-        <div>
+        <>
           <PagesHeader {...rest} />
           {content}
-        </div>
+        </>
       </Router>
     )
   }

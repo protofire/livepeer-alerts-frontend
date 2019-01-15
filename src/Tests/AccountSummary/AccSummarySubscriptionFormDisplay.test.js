@@ -36,7 +36,7 @@ const props = {
 
 describe('Render AccSummarySubscriptionForm', () => {
   it('Shows Welcome Message', () => {
-    const message = 'Welcome to subscription form'
+    const message = 'Subscribe:'
     let wrapper = mount(<AccountSummarySubscriptionFormDisplay {...props} />)
     expect(wrapper.contains(message)).toEqual(true)
   })

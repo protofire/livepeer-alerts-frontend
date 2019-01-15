@@ -5,6 +5,10 @@ import Spinner from '../../Common/UI/Spinner/Spinner'
 import axios from 'axios'
 import validator from 'validator'
 import { toast, ToastContainer } from 'react-toastify'
+import logdown from 'logdown'
+
+const logger = logdown('Livepeer:AccountSummarySubscriptionForm')
+logger.state.isEnabled = process.env.NODE_ENV !== 'production'
 
 export class AccountSummarySubscriptionForm extends Component {
   state = {
@@ -33,7 +37,7 @@ export class AccountSummarySubscriptionForm extends Component {
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
-    console.log('[SummarySubscriptionForm] componentWillReceive props ')
+    logger.log('componentWillReceive props ')
     this.setState({
       ...this.state,
       address: nextProps.userData.address
@@ -41,7 +45,7 @@ export class AccountSummarySubscriptionForm extends Component {
   }
 
   componentDidMount() {
-    console.log('[SummarySubscriptionForm] componentDidMount')
+    logger.log('componentDidMount')
     this.setState({
       address: this.props.userData.address,
       render: true
@@ -50,7 +54,7 @@ export class AccountSummarySubscriptionForm extends Component {
 
   onSubmitBtnHandler = async event => {
     event.preventDefault()
-    console.log('[SummarySubscriptionForm] submit btnHandler')
+    logger.log('submit btnHandler')
     let data = {
       address: this.state.address,
       frequency: this.state.frequency,
@@ -72,7 +76,7 @@ export class AccountSummarySubscriptionForm extends Component {
   generateSubscription = async (data, callback) => {
     let response
     try {
-      console.log('Creating new subscriber with data: ', data)
+      logger.log('Creating new subscriber with data: ', data)
       response = await axios.post('', data)
       let userEmail = this.state.form.email.value
       this.setState(
@@ -94,7 +98,7 @@ export class AccountSummarySubscriptionForm extends Component {
         }
       )
     } catch (exception) {
-      console.log('[AccountSummary.js] exception on postSubscription')
+      logger.log('exception on postSubscription')
       let responseMsg = exception.response.data.message
       let displayMsg
       /** Email already exists **/
@@ -188,22 +192,22 @@ export class AccountSummarySubscriptionForm extends Component {
 
   render() {
     let content = <Spinner displayMsg={this.state.displayMsg} />
+
     if (this.state.render) {
       content = (
-        <>
-          <AccountSummarySubscriptionFormDisplay
-            form={this.state.form}
-            onSubmitBtnHandler={this.onSubmitBtnHandler}
-            inputChangedHandler={this.inputChangedHandler}
-          />
-        </>
+        <AccountSummarySubscriptionFormDisplay
+          form={this.state.form}
+          onSubmitBtnHandler={this.onSubmitBtnHandler}
+          inputChangedHandler={this.inputChangedHandler}
+        />
       )
     }
+
     return (
-      <div>
+      <>
         {content}
         <ToastContainer autoClose={2000} />
-      </div>
+      </>
     )
   }
 }
