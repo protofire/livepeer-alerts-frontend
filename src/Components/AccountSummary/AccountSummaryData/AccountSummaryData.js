@@ -20,7 +20,9 @@ const AccountSummaryData = props => {
   return (
     <>
       <div className={classes.topInfo}>
-        <h3 className={`${classes.walletTitle} ${classes.lessMarginBottom}`}>Bonding Status</h3>
+        <h3 className={`${classes.walletTitle} ${classes.lessMarginBottom}`}>
+          {props.summary.status}
+        </h3>
         {getStatusMsg(props)}
       </div>
       <div className={`${classes.blockData}`}>
@@ -45,7 +47,6 @@ const getStatusMsg = props => {
     case 'Pending': {
       msg = (
         <>
-          <p className={classes.walletInfo}>{props.summary.status}</p>
           <p className={classes.walletInfo}>
             Your LPT is getting deluded by the protocol's token inflation.
           </p>
@@ -77,7 +78,6 @@ const getStatusMsg = props => {
       }
       msg = (
         <>
-          <p className={classes.walletInfo}>{props.summary.status} </p>
           <p className={classes.walletInfo}>
             Bonded to transcoder <a href={delegateAddressUrl}>{delegateAddress}</a> at round{' '}
             {props.summary.startRound}{' '}
@@ -90,7 +90,6 @@ const getStatusMsg = props => {
     case 'Unbonding': {
       msg = (
         <>
-          <p className={classes.walletInfo}>{props.summary.status}</p>
           <p className={classes.walletInfo}>
             You still have to wait a few moments to get finally unbonded.
           </p>
@@ -101,7 +100,6 @@ const getStatusMsg = props => {
     case 'Unbonded': {
       msg = (
         <>
-          <p className={classes.walletInfo}>{props.summary.status}</p>
           <p className={classes.walletInfo}>
             Your LPT is getting deluded by the protocol's token inflation.
           </p>
