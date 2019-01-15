@@ -18,7 +18,7 @@ const props = {
 
 describe('Renders account summary data', () => {
   it('Shows bondedAmount', () => {
-    const message = 'BondedAmount'
+    const message = 'Bonded amount'
     let wrapper = mount(<AccountSummaryData {...props} />)
     let tr = wrapper.find('TableCell').map(tr => tr.text())
     expect(tr[1] === message).toEqual(true)

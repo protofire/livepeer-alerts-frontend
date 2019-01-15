@@ -134,7 +134,6 @@ const AccountSummaryHome = props => {
                   className={classes.subscriptionBtn}
                   onClick={openTelegramLink}
                   disabled={disabledBtn}
-                  title="You can only subscribe when your status is bonded"
                   color="info"
                   round
                   size="lg"
