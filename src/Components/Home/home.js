@@ -1,9 +1,12 @@
 import 'react-toastify/dist/ReactToastify.css'
 import HomeCard from './HomeCard/HomeCard.js'
 import React, { Component } from 'react'
-import logger from '../../utils'
 import { toast, ToastContainer } from 'react-toastify'
 import { withRouter } from 'react-router-dom'
+import logdown from 'logdown'
+
+const logger = logdown('Livepeer:App')
+logger.state.isEnabled = process.env.NODE_ENV !== 'production'
 
 export class HomeComponent extends Component {
   state = {
@@ -13,7 +16,7 @@ export class HomeComponent extends Component {
   }
 
   onGetStartedBtnHandler = () => {
-    logger.log('[Home.js] getStartedBtnHandler')
+    logger.log('getStartedBtnHandler')
     this.props.history.push('/account')
   }
   sendToast = (toastTime, callback) => {
@@ -64,8 +67,6 @@ export class HomeComponent extends Component {
   }
 
   render() {
-    // TODO PUT GET STARTED BUTTON; REVERT OLD CODE AND CHECK IT
-
     return (
       <>
         <HomeCard onClick={this.onGetStartedBtnHandler} />

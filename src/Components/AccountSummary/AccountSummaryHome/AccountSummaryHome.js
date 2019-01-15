@@ -1,4 +1,3 @@
-import * as displayTexts from '../AccountSummaryTexts'
 import AccountSummaryData from '../AccountSummaryData/AccountSummaryData'
 import AccountSummaryStyle from './AccountSummaryStyle'
 import Button from '../../Common/UI/CustomButtons/Button'
@@ -13,6 +12,8 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import tableStyle from '../../../assets/jss/dashboard/components/tableStyle'
 import { withStyles } from '@material-ui/core/styles'
+import { CopyToClipboard } from 'react-copy-to-clipboard'
+import { truncateStringInTheMiddle } from '../../../utils'
 
 const AccountSummaryHome = props => {
   let disabledBtn = props.summary && props.summary.status !== 'Bonded'
@@ -67,11 +68,19 @@ const AccountSummaryHome = props => {
     )
   }
 
+  const address = props.userData && props.userData.address
+  const telegramLink = `${process.env.LIVEPEER_TELEGRAM_BOT_URL}?start=${address}`
+  const openTelegramLink = () => {
+    window.open(telegramLink, '_blank')
+  }
+
+  const summaryTitle = `Welcome ${truncateStringInTheMiddle(address)}`
+
   return (
     <GridContainer className={classes.gridContainer} justify="center">
       <GridItem className={classes.cardContainer}>
         <Card className={classes.cardAccountSummary}>
-          <h2 className={classes.cardTitle}>{displayTexts.WELCOME_AGAIN}</h2>
+          <h2 className={classes.cardTitle}>{summaryTitle}</h2>
           <GridContainer className={classes.gridContainer}>
             <GridItem lg={6} md={12} xs={12} className={classes.gridItem}>
               <Table className={` ${classes.table}`}>
@@ -83,7 +92,7 @@ const AccountSummaryHome = props => {
                         classes.pR0
                       } ${classes.tableTitle}`}
                     >
-                      Account Summary
+                      Overview
                     </TableCell>
                   </TableRow>
                 </TableHead>
@@ -120,9 +129,19 @@ const AccountSummaryHome = props => {
               md={12}
               xs={12}
             >
-              <Button className={classes.subscriptionBtn} color="info" round size="lg">
-                Subscribe via Telegram
-              </Button>
+              <CopyToClipboard text={telegramLink}>
+                <Button
+                  className={classes.subscriptionBtn}
+                  onClick={openTelegramLink}
+                  disabled={disabledBtn}
+                  title="You can only subscribe when your status is bonded"
+                  color="info"
+                  round
+                  size="lg"
+                >
+                  Subscribe via Telegram
+                </Button>
+              </CopyToClipboard>
               {subscriptionBtn}
             </GridItem>
           </GridContainer>
