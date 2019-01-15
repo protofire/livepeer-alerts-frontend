@@ -5,15 +5,10 @@ import Card from '../../Common/UI/Card/Card.js'
 import GridContainer from '../../Common/UI/Grid/GridContainer.js'
 import GridItem from '../../Common/UI/Grid/GridItem.js'
 import React from 'react'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import tableStyle from '../../../assets/jss/dashboard/components/tableStyle'
-import { withStyles } from '@material-ui/core/styles'
+import metamaskImage from '../../../assets/img/logos/metamask.svg'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import { truncateStringInTheMiddle } from '../../../utils'
+import { withStyles } from '@material-ui/core/styles'
 
 const AccountSummaryHome = props => {
   let disabledBtn = props.summary && props.summary.status !== 'Bonded'
@@ -22,16 +17,12 @@ const AccountSummaryHome = props => {
   const { classes } = props
   const tableData = [
     {
-      title: 'Wallet address',
-      data: truncateStringInTheMiddle(props.userData.address)
-    },
-    {
-      title: 'Wallet balance in ETH',
-      data: props.userData.ethBalance
-    },
-    {
-      title: 'Wallet balance in LPT',
+      currency: 'LPT',
       data: props.lpBalance
+    },
+    {
+      currency: 'ETH',
+      data: props.userData.ethBalance
     }
   ]
 
@@ -58,7 +49,7 @@ const AccountSummaryHome = props => {
         round
         size="lg"
       >
-        Subscribe via Email
+        Email
       </Button>
     )
   }
@@ -69,81 +60,70 @@ const AccountSummaryHome = props => {
     window.open(telegramLink, '_blank')
   }
 
-  const summaryTitle = `Welcome ${truncateStringInTheMiddle(address)}`
   return (
     <GridContainer className={classes.gridContainer} justify="center">
-      <GridItem className={classes.cardContainer}>
-        <Card className={classes.cardAccountSummary}>
-          <h2 className={classes.cardTitle}>{summaryTitle}</h2>
-          <GridContainer className={classes.gridContainer}>
-            <GridItem lg={6} md={12} xs={12} className={classes.gridItem}>
-              <Table className={` ${classes.table}`}>
-                <TableHead>
-                  <TableRow>
-                    <TableCell
-                      colSpan="2"
-                      className={`${classes.tableHeadCel} ${classes.noWrap} ${classes.pL0} ${
-                        classes.pR0
-                      } ${classes.tableTitle}`}
-                    >
-                      Overview
-                    </TableCell>
-                  </TableRow>
-                </TableHead>
-                <TableBody>
-                  {tableData.map((item, index) => {
-                    return (
-                      <TableRow key={index}>
-                        <TableCell className={`${classes.tableCell} ${classes.noWrap}`}>
-                          {item.title}
-                        </TableCell>
-                        <TableCell
-                          className={`${classes.tableCell} ${classes.textRight} ${
-                            classes.wordBreak
-                          }`}
-                        >
-                          {item.data}
-                        </TableCell>
-                      </TableRow>
-                    )
-                  })}
-                </TableBody>
-              </Table>
-            </GridItem>
-            <GridItem lg={6} md={12} xs={12} className={classes.gridItem}>
-              <AccountSummaryData summary={props.summary} />
-            </GridItem>
-          </GridContainer>
-          <GridContainer className={classes.buttonContainer} justify="flex-end">
-            <GridItem
-              className={`${classes.buttonContainerItem} ${classes.gridItem}`}
-              container={true}
-              justify="space-between"
-              lg={6}
-              md={12}
-              xs={12}
-            >
-              <CopyToClipboard text={telegramLink}>
-                <Button
-                  className={classes.subscriptionBtn}
-                  onClick={openTelegramLink}
-                  disabled={disabledBtn}
-                  color="info"
-                  round
-                  size="lg"
-                >
-                  Subscribe via Telegram
-                </Button>
-              </CopyToClipboard>
-              {subscriptionBtn}
-            </GridItem>
-          </GridContainer>
+      <GridItem className={classes.itemsContainer} lg={12} md={12} xs={12}>
+        <Card className={classes.cardItem}>
+          <div className={classes.logoMetamask}>
+            <img src={metamaskImage} className={classes.logoMetamaskImg} alt="" />
+          </div>
+          <h3 title={address} className={classes.walletTitle}>
+            {truncateStringInTheMiddle(address)}
+          </h3>
+          <div className={`${classes.blockData}`}>
+            {tableData.map((item, index) => {
+              return (
+                <div className={`${classes.blockDataItem}`} key={index}>
+                  <p className={`${classes.blockDataItemValue}`}>{item.data}</p>
+                  <h4 className={`${classes.blockDataItemTitle}`}>{item.currency}</h4>
+                </div>
+              )
+            })}
+          </div>
         </Card>
+        <Card className={classes.cardItem}>
+          <AccountSummaryData summary={props.summary} />
+        </Card>
+      </GridItem>
+      {/* Reward calls */}
+      <GridItem className={classes.itemsContainerFull} lg={12} md={12} xs={12}>
+        <Card className={classes.cardItem}>
+          <h3 className={classes.rewardTitle}>Reward Calls</h3>
+          <p className={classes.rewardText}>Reward Calls text, put something here...</p>
+        </Card>
+      </GridItem>
+      {/* Subscribe */}
+      <GridItem className={classes.itemsContainerFull} lg={12} md={12} xs={12}>
+        <p className={classes.subscribeText}>Don't miss your LFT reward. Subscribe now!</p>
+      </GridItem>
+      {/* Buttons */}
+      <GridItem container={true} lg={12} md={12} xs={12} justify="center">
+        <GridItem
+          className={`${classes.buttonContainerItem} ${classes.gridItem}`}
+          container={true}
+          justify="space-between"
+          lg={6}
+          md={12}
+          xs={12}
+        >
+          <CopyToClipboard text={telegramLink}>
+            <Button
+              className={classes.subscriptionBtn}
+              onClick={openTelegramLink}
+              disabled={disabledBtn}
+              color="info"
+              round
+              size="lg"
+            >
+              Telegram
+            </Button>
+          </CopyToClipboard>
+          {subscriptionBtn}
+        </GridItem>
       </GridItem>
     </GridContainer>
   )
 }
 export default withStyles(theme => ({
-  ...AccountSummaryStyle,
-  ...tableStyle(theme)
+  ...AccountSummaryStyle
 }))(AccountSummaryHome)

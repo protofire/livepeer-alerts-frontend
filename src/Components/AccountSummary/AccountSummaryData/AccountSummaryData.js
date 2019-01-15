@@ -1,60 +1,40 @@
 import AccountSummaryStyle from '../AccountSummaryHome/AccountSummaryStyle'
 import React from 'react'
-import Table from '@material-ui/core/Table'
-import TableBody from '@material-ui/core/TableBody'
-import TableCell from '@material-ui/core/TableCell'
-import TableHead from '@material-ui/core/TableHead'
-import TableRow from '@material-ui/core/TableRow'
-import tableStyle from '../../../assets/jss/dashboard/components/tableStyle'
 import { withStyles } from '@material-ui/core/styles'
 
 const AccountSummaryData = props => {
-  let statusMsg = getStatusMsg(props)
   const tableData = [
     {
-      title: 'Bonding Status',
-      data: statusMsg
-    },
-    {
       title: 'Stake',
-      data: props.summary.stake + ' LPT'
+      currency: 'LPT',
+      data: props.summary.stake
     },
     {
-      title: 'Earned from delegate fees',
+      title: 'Earning fees',
+      currency: 'ETH',
       data: props.summary.fees
     }
   ]
   const { classes } = props
 
   return (
-    <Table className={classes.table}>
-      <TableHead>
-        <TableRow>
-          <TableCell
-            colSpan="2"
-            className={`${classes.tableHeadCel} ${classes.noWrap} ${classes.pL0} ${classes.pR0} ${
-              classes.tableTitle
-            }`}
-          />
-        </TableRow>
-      </TableHead>
-      <TableBody>
+    <>
+      <div className={classes.topInfo}>
+        <h3 className={`${classes.walletTitle} ${classes.lessMarginBottom}`}>Bonding Status</h3>
+        {getStatusMsg(props)}
+      </div>
+      <div className={`${classes.blockData}`}>
         {tableData.map((item, index) => {
           return (
-            <TableRow key={index}>
-              <TableCell className={`${classes.tableCell} ${classes.noWrap}`}>
-                {item.title}
-              </TableCell>
-              <TableCell
-                className={`${classes.tableCell} ${classes.textRight} ${classes.wordBreak}`}
-              >
-                {item.data}
-              </TableCell>
-            </TableRow>
+            <div className={`${classes.blockDataItem}`} key={index}>
+              <h3 className={`${classes.blockDataItemMainTitle}`}>{item.title}</h3>
+              <p className={`${classes.blockDataItemValue}`}>{item.data}</p>
+              <h4 className={`${classes.blockDataItemTitle}`}>{item.currency}</h4>
+            </div>
           )
         })}
-      </TableBody>
-    </Table>
+      </div>
+    </>
   )
 }
 
@@ -65,11 +45,11 @@ const getStatusMsg = props => {
     case 'Pending': {
       msg = (
         <>
-          <p className={classes.textLeft}>{props.summary.status}</p>
-          <p className={classes.textLeft}>
+          <p className={classes.walletInfo}>{props.summary.status}</p>
+          <p className={classes.walletInfo}>
             Your LPT is getting deluded by the protocol's token inflation.
           </p>
-          <p className={classes.textLeft}>
+          <p className={classes.walletInfo}>
             Add value to the network, bond to a transcoder
             <a href="https://explorer.livepeer.org/transcoders"> here</a>
           </p>
@@ -84,21 +64,21 @@ const getStatusMsg = props => {
 
       if (!props.summary.delegateCalledReward) {
         tokenRewardsText = (
-          <p className={classes.textLeft}>
+          <p className={classes.walletInfo}>
             Unfortunately the transcoder has not claimed the last inflationary token rewards.
           </p>
         )
       } else {
         tokenRewardsText = (
-          <p className={classes.textLeft}>
+          <p className={classes.walletInfo}>
             The transcoder has successfully claimed the last inflationary token rewards.
           </p>
         )
       }
       msg = (
         <>
-          <p className={classes.textLeft}>{props.summary.status} </p>
-          <p className={classes.textLeft}>
+          <p className={classes.walletInfo}>{props.summary.status} </p>
+          <p className={classes.walletInfo}>
             Bonded to transcoder <a href={delegateAddressUrl}>{delegateAddress}</a> at round{' '}
             {props.summary.startRound}{' '}
           </p>
@@ -110,8 +90,8 @@ const getStatusMsg = props => {
     case 'Unbonding': {
       msg = (
         <>
-          <p className={classes.textLeft}>{props.summary.status}</p>
-          <p className={classes.textLeft}>
+          <p className={classes.walletInfo}>{props.summary.status}</p>
+          <p className={classes.walletInfo}>
             You still have to wait a few moments to get finally unbonded.
           </p>
         </>
@@ -121,11 +101,11 @@ const getStatusMsg = props => {
     case 'Unbonded': {
       msg = (
         <>
-          <p className={classes.textLeft}>{props.summary.status}</p>
-          <p className={classes.textLeft}>
+          <p className={classes.walletInfo}>{props.summary.status}</p>
+          <p className={classes.walletInfo}>
             Your LPT is getting deluded by the protocol's token inflation.
           </p>
-          <p className={classes.textLeft}>
+          <p className={classes.walletInfo}>
             Add value to the network, bond to a transcoder
             <a href="https://explorer.livepeer.org/transcoders"> here</a>
           </p>
@@ -140,6 +120,5 @@ const getStatusMsg = props => {
 }
 
 export default withStyles(theme => ({
-  ...AccountSummaryStyle,
-  ...tableStyle(theme)
+  ...AccountSummaryStyle
 }))(AccountSummaryData)

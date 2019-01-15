@@ -2,27 +2,10 @@
 // // // AccountSummary view styles
 // #############################
 
-import { cardTitle } from '../../../assets/jss/dashboard'
+const maxWidthContainer = '700px'
+const commonSeparation = '30px'
 
 const AccountSummaryStyle = {
-  cardTitle: {
-    ...cardTitle
-  },
-  cardContainer: {
-    width: '1000px',
-    maxWidth: '100%'
-  },
-  cardAccountSummary: {
-    borderRadius: '6px',
-    boxShadow:
-      '0 16px 24px 2px rgba(0, 0, 0, 0.14), 0 6px 30px 5px rgba(0, 0, 0, 0.12), 0 8px 10px -5px rgba(0, 0, 0, 0.2)',
-    marginBottom: '0',
-    padding: '20px 25px',
-    marginTop: '0vh'
-  },
-  socialTitle: {
-    fontSize: '18px'
-  },
   gridContainer: {
     margin: '0',
     position: 'relative',
@@ -30,16 +13,119 @@ const AccountSummaryStyle = {
     zIndex: '12'
   },
   gridItem: {
-    padding: '0!important',
+    padding: '0!important'
+  },
+  itemsContainer: {
+    maxWidth: maxWidthContainer,
+    display: 'grid',
+    gridRowGap: commonSeparation,
+    gridTemplateColumns: '1fr',
+    marginBottom: commonSeparation,
     '@media (min-width: 1024px)': {
-      padding: '0 15px !important',
-      '&:first-child': {
-        paddingLeft: '0!important'
-      },
-      '&:last-child': {
-        paddingRight: '0!important'
-      }
+      gridColumnGap: commonSeparation,
+      gridTemplateColumns: '1fr 1fr'
     }
+  },
+  itemsContainerFull: {
+    maxWidth: maxWidthContainer,
+    marginBottom: commonSeparation
+  },
+  cardItem: {
+    margin: '0',
+    padding: '20px'
+  },
+  logoMetamask: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#eee',
+    borderRadius: '50%',
+    height: '100px',
+    margin: '0 auto 10px',
+    width: '100px'
+  },
+  logoMetamaskImg: {
+    height: '75px',
+    width: '75px'
+  },
+  walletTitle: {
+    fontSize: '18px',
+    textAlign: 'center',
+    fontWeight: '700',
+    margin: '0 0 25px'
+  },
+  rewardTitle: {
+    fontSize: '20px',
+    textAlign: 'center',
+    fontWeight: '700',
+    margin: '0 0 15px'
+  },
+  rewardText: {
+    color: '#333',
+    fontSize: '18px',
+    textAlign: 'center',
+    fontWeight: '400',
+    margin: '0'
+  },
+  subscribeText: {
+    color: '#fff',
+    fontSize: '17px',
+    textAlign: 'center',
+    fontWeight: '500',
+    textShadow: '0 5px 5px rgba(0, 0, 0, 0.5)',
+    margin: '0 0 -15px'
+  },
+  lessMarginBottom: {
+    marginBottom: '10px'
+  },
+  topInfo: {
+    margin: '0 0 25px'
+  },
+  walletInfo: {
+    fontSize: '16px',
+    fontWeight: '300',
+    color: '#3C4858',
+    lineHeight: '1.2',
+    margin: '0 0 5px',
+    textAlign: 'center'
+  },
+  blockData: {
+    minHeight: '60px',
+    display: 'flex',
+    justifyContent: 'space-between'
+  },
+  blockDataItem: {
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRight: '1px solid #ddd',
+    borderTop: '1px solid #ddd',
+    flexDirection: 'column',
+    flexGrow: '1',
+    '&:last-child': {
+      borderRight: 'none'
+    }
+  },
+  blockDataItemValue: {
+    fontSize: '16px',
+    fontWeight: '300',
+    color: '#3C4858',
+    lineHeight: '1.2',
+    margin: '0 0 5px'
+  },
+  blockDataItemTitle: {
+    fontSize: '16px',
+    fontWeight: '700',
+    color: '#333',
+    lineHeight: '1.2',
+    margin: '0'
+  },
+  blockDataItemMainTitle: {
+    fontSize: '15px',
+    fontWeight: '500',
+    color: '#333',
+    lineHeight: '1.2',
+    margin: '10px 0'
   },
   buttonContainer: {
     margin: '20px 0 0 0',
