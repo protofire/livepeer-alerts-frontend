@@ -227,7 +227,6 @@ export class AccountSummaryComponent extends Component {
   }
 
   onSubscribeBtnHandler = async () => {
-    logger.log('Subscribe btnHandler')
     this.props.history.push('/account/subscription')
   }
 

@@ -69,13 +69,12 @@ const AccountSummaryHome = props => {
   }
 
   const address = props.userData && props.userData.address
-  const telegramLink = `${process.env.LIVEPEER_TELEGRAM_BOT_URL}?start=${address}`
+  const telegramLink = `${process.env.REACT_APP_LIVEPEER_TELEGRAM_BOT_URL}?start=${address}`
   const openTelegramLink = () => {
     window.open(telegramLink, '_blank')
   }
 
   const summaryTitle = `Welcome ${truncateStringInTheMiddle(address)}`
-
   return (
     <GridContainer className={classes.gridContainer} justify="center">
       <GridItem className={classes.cardContainer}>
