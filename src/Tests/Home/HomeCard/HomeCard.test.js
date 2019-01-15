@@ -53,17 +53,17 @@ describe('Renders userSubscribed data', () => {
     expect(wrapper.contains(message)).toEqual(true)
   })
   it('Shows address', () => {
-    const message = 'Address'
+    const message = 'Wallet address'
     let wrapper = mount(<AccountSummaryHome {...props} />)
     expect(wrapper.contains(message)).toEqual(true)
   })
   it('Shows ETH Balance', () => {
-    const message = 'ETH Balance'
+    const message = 'Wallet balance in ETH'
     let wrapper = mount(<AccountSummaryHome {...props} />)
     expect(wrapper.contains(message)).toEqual(true)
   })
   it('Shows Livepeer Balance', () => {
-    const message = 'LivePeer Balance'
+    const message = 'Wallet balance in LPT'
     let wrapper = mount(<AccountSummaryHome {...props} />)
     expect(wrapper.contains(message)).toEqual(true)
   })

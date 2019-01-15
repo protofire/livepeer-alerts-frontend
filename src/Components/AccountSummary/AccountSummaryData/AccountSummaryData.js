@@ -11,18 +11,17 @@ import { withStyles } from '@material-ui/core/styles'
 const AccountSummaryData = props => {
   let statusMsg = getStatusMsg(props)
   const tableData = [
-    { title: 'Bonded amount', data: props.summary.bondedAmount },
     {
-      title: 'Earned from delegate fees',
-      data: props.summary.fees
-    },
-    {
-      title: 'Status',
+      title: 'Bonding Status',
       data: statusMsg
     },
     {
       title: 'Stake',
       data: props.summary.stake + ' LPT'
+    },
+    {
+      title: 'Earned from delegate fees',
+      data: props.summary.fees
     }
   ]
   const { classes } = props
@@ -68,7 +67,7 @@ const getStatusMsg = props => {
         <>
           <p className={classes.textLeft}>{props.summary.status}</p>
           <p className={classes.textLeft}>
-            your LPT is getting deluded by the protocol's token inflation.
+            Your LPT is getting deluded by the protocol's token inflation.
           </p>
           <p className={classes.textLeft}>
             Add value to the network, bond to a transcoder
@@ -100,7 +99,7 @@ const getStatusMsg = props => {
         <>
           <p className={classes.textLeft}>{props.summary.status} </p>
           <p className={classes.textLeft}>
-            bonded to transcoder <a href={delegateAddressUrl}>{delegateAddress}</a> at round{' '}
+            Bonded to transcoder <a href={delegateAddressUrl}>{delegateAddress}</a> at round{' '}
             {props.summary.startRound}{' '}
           </p>
           {tokenRewardsText}
@@ -113,7 +112,7 @@ const getStatusMsg = props => {
         <>
           <p className={classes.textLeft}>{props.summary.status}</p>
           <p className={classes.textLeft}>
-            your still have to wait a few moments to get finally unbonded.
+            You still have to wait a few moments to get finally unbonded.
           </p>
         </>
       )
@@ -124,7 +123,7 @@ const getStatusMsg = props => {
         <>
           <p className={classes.textLeft}>{props.summary.status}</p>
           <p className={classes.textLeft}>
-            your LPT is getting deluded by the protocol's token inflation.
+            Your LPT is getting deluded by the protocol's token inflation.
           </p>
           <p className={classes.textLeft}>
             Add value to the network, bond to a transcoder

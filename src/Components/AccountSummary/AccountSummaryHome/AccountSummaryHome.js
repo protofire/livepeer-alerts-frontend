@@ -18,25 +18,20 @@ import { truncateStringInTheMiddle } from '../../../utils'
 const AccountSummaryHome = props => {
   let disabledBtn = props.summary && props.summary.status !== 'Bonded'
   let subscriptionBtn
-  let isSubscribed = props.userData && props.userData.isSubscribed ? 'Yes' : 'No'
 
   const { classes } = props
   const tableData = [
     {
-      title: 'Address',
-      data: props.userData.address
+      title: 'Wallet address',
+      data: truncateStringInTheMiddle(props.userData.address)
     },
     {
-      title: 'ETH Balance',
+      title: 'Wallet balance in ETH',
       data: props.userData.ethBalance
     },
     {
-      title: 'LivePeer Balance',
+      title: 'Wallet balance in LPT',
       data: props.lpBalance
-    },
-    {
-      title: 'Subscribed',
-      data: isSubscribed
     }
   ]
 
