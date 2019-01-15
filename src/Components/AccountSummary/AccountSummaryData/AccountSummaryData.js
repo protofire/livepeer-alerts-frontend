@@ -11,7 +11,7 @@ import { withStyles } from '@material-ui/core/styles'
 const AccountSummaryData = props => {
   let statusMsg = getStatusMsg(props)
   const tableData = [
-    { title: 'BondedAmount', data: props.summary.bondedAmount },
+    { title: 'Bonded amount', data: props.summary.bondedAmount },
     {
       title: 'Earned from delegate fees',
       data: props.summary.fees
@@ -36,9 +36,7 @@ const AccountSummaryData = props => {
             className={`${classes.tableHeadCel} ${classes.noWrap} ${classes.pL0} ${classes.pR0} ${
               classes.tableTitle
             }`}
-          >
-            Summary Information
-          </TableCell>
+          />
         </TableRow>
       </TableHead>
       <TableBody>

@@ -24,7 +24,7 @@ const response = {
 jest.mock('axios')
 describe('Render AccountSummarySubscriptionForm', () => {
   it('Shows Welcome Message', () => {
-    const message = 'Welcome to subscription form'
+    const message = 'Subscribe:'
     let wrapper = mount(<AccountSummarySubscriptionForm {...props} />)
     expect(wrapper.contains(message)).toEqual(true)
   })

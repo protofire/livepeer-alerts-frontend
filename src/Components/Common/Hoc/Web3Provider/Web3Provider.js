@@ -6,7 +6,10 @@ import GridItem from '../../../Common/UI/Grid/GridItem.js'
 import React, { Component } from 'react'
 import Spinner from '../../UI/Spinner/Spinner'
 import Web3 from 'web3'
-import logger from '../../../../utils'
+import logdown from 'logdown'
+
+const logger = logdown('Livepeer:Web3Provider')
+logger.state.isEnabled = process.env.NODE_ENV !== 'production'
 
 const defaultState = {
   userData: 1,

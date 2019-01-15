@@ -6,8 +6,11 @@ import GridItem from '../Common/UI/Grid/GridItem.js'
 import React, { Component } from 'react'
 import Spinner from '../Common/UI/Spinner/Spinner'
 import axios from 'axios'
-import logger from '../../utils'
 import { toast, ToastContainer } from 'react-toastify'
+import logdown from 'logdown'
+
+const logger = logdown('Livepeer:AccountSummary')
+logger.state.isEnabled = process.env.NODE_ENV !== 'production'
 
 export class AccountSummaryComponent extends Component {
   state = {
@@ -40,7 +43,7 @@ export class AccountSummaryComponent extends Component {
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
-    logger.log('[AccountSummary.js] componentWillReceive props ', nextProps)
+    logger.log('componentWillReceive props ', nextProps)
     let propsChanged =
       this.props.render !== nextProps.render ||
       this.props.userData.authenticated !== nextProps.userData.authenticated ||
@@ -77,7 +80,7 @@ export class AccountSummaryComponent extends Component {
         () => logger.log('[Loading userData finished] ', this.state)
       )
     } catch (exception) {
-      console.log('exception ', exception)
+      logger.log('exception ', exception)
     }
   }
 
@@ -96,7 +99,7 @@ export class AccountSummaryComponent extends Component {
   }
 
   componentDidMount = async () => {
-    logger.log('[AccountSummaryComponent.js] componentDidMount')
+    logger.log('componentDidMount')
     let userDataPromise, summaryPromise
     this.initState(async () => {
       /** Check if the user is subscribed **/
@@ -224,12 +227,12 @@ export class AccountSummaryComponent extends Component {
   }
 
   onSubscribeBtnHandler = async () => {
-    logger.log('[AccountSummary.js] subscribe btnHandler')
+    logger.log('Subscribe btnHandler')
     this.props.history.push('/account/subscription')
   }
 
   onUnSubscribeBtnHandler = async () => {
-    logger.log('[AccountSummary.js] unsubscribe btnHandler')
+    logger.log('Unsubscribe btnHandler')
     this.setState({
       render: false,
       displayMsg: displayTexts.LOADING_UNSUBSCRIPTION
@@ -254,7 +257,7 @@ export class AccountSummaryComponent extends Component {
         () => this.sendToast()
       )
     } catch (exception) {
-      logger.log('[AccountSummary.js] exception on deleteSubscription')
+      logger.log('Exception on deleteSubscription')
       if (exception.response.status === 404) {
         /** User with that id not found **/
         this.setState(
@@ -279,7 +282,7 @@ export class AccountSummaryComponent extends Component {
   }
 
   onSubscriptionChangeHandler = () => {
-    logger.log('[AccountSummary.js] onSubscriptionChangeHandler')
+    logger.log('onSubscriptionChangeHandler')
   }
 
   render() {

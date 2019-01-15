@@ -47,7 +47,7 @@ jest.mock('axios')
 /** TODO -- Enable again when the enzyme bug of conditional rendering is solved **/
 describe('Renders userSubscribed data', () => {
   it('Shows Welcome Message', () => {
-    const message = displayTexts.WELCOME_AGAIN
+    const message = 'Welcome 0x4d3F91...76FBBDcE'
     axios.get.mockResolvedValue(response)
     let wrapper = mount(<AccountSummaryHome {...props} />)
     wrapper = wrapper.update()
@@ -81,8 +81,16 @@ describe('Renders userSubscribed data', () => {
       }
     }
     let wrapper = mount(<AccountSummaryHome {...propsNotAuth} />)
-    let textBtn = wrapper.find('Button').text()
-    expect(textBtn === 'Subscribe').toEqual(true)
+    let textBtnSubscribeTelegram = wrapper
+      .find('Button')
+      .at(0)
+      .text()
+    let textBtnSubscribeEmail = wrapper
+      .find('Button')
+      .at(1)
+      .text()
+    expect(textBtnSubscribeEmail === 'Subscribe via Email').toEqual(true)
+    expect(textBtnSubscribeTelegram === 'Subscribe via Telegram').toEqual(true)
   })
   it('Renders Unsubscription button if user is auth', () => {
     const propsNotAuth = {
@@ -93,7 +101,11 @@ describe('Renders userSubscribed data', () => {
       }
     }
     let wrapper = mount(<AccountSummaryHome {...propsNotAuth} />)
-    let textBtn = wrapper.find('Button').text()
+    wrapper = wrapper.update()
+    let textBtn = wrapper
+      .find('Button')
+      .at(1)
+      .text()
     expect(textBtn === 'Unsubscribe').toEqual(true)
   })
 })
