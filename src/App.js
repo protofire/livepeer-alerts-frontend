@@ -30,7 +30,7 @@ export class App extends Component {
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
-    logger.log('Trigger shouldComponentUpdate')
+    logger.log('Fire event shouldComponentUpdate')
     let shouldUpdate = true
     if (this.props.userData && nextProps.userData) {
       shouldUpdate =

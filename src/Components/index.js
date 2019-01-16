@@ -1,2 +1,2 @@
 export { AccountSummaryComponent } from './AccountSummary/AccountSummary.js'
-export { HomeComponent } from './Home/home'
+export { HomeComponent } from './Home/Home'

@@ -1,7 +1,7 @@
 import React from 'react'
 import { configure, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import { HomeComponent } from '../../Components/Home/home'
+import { HomeComponent } from '../../Components/Home/Home'
 import * as texts from '../../Components/Common/UI/Texts/Texts'
 import render from 'react-test-renderer'
 

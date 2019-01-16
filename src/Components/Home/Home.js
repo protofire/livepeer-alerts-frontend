@@ -5,7 +5,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import { withRouter } from 'react-router-dom'
 import logdown from 'logdown'
 
-const logger = logdown('Livepeer:App')
+const logger = logdown('Livepeer:Home')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
 
 export class HomeComponent extends Component {
@@ -16,7 +16,7 @@ export class HomeComponent extends Component {
   }
 
   onGetStartedBtnHandler = () => {
-    logger.log('getStartedBtnHandler')
+    logger.log('Fire event getStartedBtnHandler')
     this.props.history.push('/account')
   }
   sendToast = (toastTime, callback) => {
@@ -51,7 +51,7 @@ export class HomeComponent extends Component {
   }
 
   componentDidMount() {
-    logger.log('[Home.js] componentDidMount: ')
+    logger.log('Fire event componentDidMount')
     /** If we get redirected with an error msg, we should display it **/
     if (this.props.location && this.props.location.state && this.props.location.state.error) {
       this.setState(

@@ -43,7 +43,7 @@ export class AccountSummaryComponent extends Component {
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
-    logger.log('componentWillReceive props ', nextProps)
+    logger.log('Fire event componentWillReceiveProps', nextProps)
     let propsChanged =
       this.props.render !== nextProps.render ||
       this.props.userData.authenticated !== nextProps.userData.authenticated ||
@@ -77,7 +77,7 @@ export class AccountSummaryComponent extends Component {
           render: true,
           displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email
         },
-        () => logger.log('[Loading userData finished] ', this.state)
+        () => logger.log('Loading userData finished', this.state)
       )
     } catch (exception) {
       logger.log('exception ', exception)
@@ -99,7 +99,7 @@ export class AccountSummaryComponent extends Component {
   }
 
   componentDidMount = async () => {
-    logger.log('componentDidMount')
+    logger.log('Fire event componentDidMount')
     let userDataPromise, summaryPromise
     this.initState(async () => {
       /** Check if the user is subscribed **/
@@ -114,7 +114,7 @@ export class AccountSummaryComponent extends Component {
             render: true,
             displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email
           },
-          () => logger.log('[ComponentDidMountFinished] ')
+          () => logger.log('ComponentDidMountFinished ')
         )
       } catch (exception) {
         this.setState(
@@ -237,7 +237,7 @@ export class AccountSummaryComponent extends Component {
       displayMsg: displayTexts.LOADING_UNSUBSCRIPTION
     })
     try {
-      logger.log('unsubscribing user with id ', this.state.userData)
+      logger.log('Unsubscribing user with id ', this.state.userData)
       await axios.delete('/' + this.state.userData.id)
       this.setState(
         {
@@ -281,7 +281,7 @@ export class AccountSummaryComponent extends Component {
   }
 
   onSubscriptionChangeHandler = () => {
-    logger.log('onSubscriptionChangeHandler')
+    logger.log('Fire event onSubscriptionChangeHandler')
   }
 
   render() {

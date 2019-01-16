@@ -6,6 +6,9 @@ import axios from 'axios'
 import validator from 'validator'
 import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
+import GridItem from '../../Common/UI/Grid/GridItem'
+import GridContainer from '../../Common/UI/Grid/GridContainer'
+import Card from '../../Common/UI/Card/Card'
 
 const logger = logdown('Livepeer:AccountSummarySubscriptionForm')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
@@ -37,7 +40,7 @@ export class AccountSummarySubscriptionForm extends Component {
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
-    logger.log('componentWillReceive props ')
+    logger.log('Fire event componentWillReceiveProps')
     this.setState({
       ...this.state,
       address: nextProps.userData.address
@@ -45,7 +48,7 @@ export class AccountSummarySubscriptionForm extends Component {
   }
 
   componentDidMount() {
-    logger.log('componentDidMount')
+    logger.log('Fire event componentDidMount')
     this.setState({
       address: this.props.userData.address,
       render: true
@@ -54,7 +57,7 @@ export class AccountSummarySubscriptionForm extends Component {
 
   onSubmitBtnHandler = async event => {
     event.preventDefault()
-    logger.log('submit btnHandler')
+    logger.log('Submit btnHandler')
     let data = {
       address: this.state.address,
       frequency: this.state.frequency,
@@ -73,12 +76,17 @@ export class AccountSummarySubscriptionForm extends Component {
     )
   }
 
+  onCancelBtnHandler = event => {
+    logger.log('Cancel btnHandler')
+
+    this.props.history.push('/account')
+  }
+
   generateSubscription = async (data, callback) => {
     let response
     try {
       logger.log('Creating new subscriber with data: ', data)
       response = await axios.post('', data)
-      let userEmail = this.state.form.email.value
       this.setState(
         {
           userData: {
@@ -91,14 +99,14 @@ export class AccountSummarySubscriptionForm extends Component {
           },
           render: false,
           error: false,
-          displayMsg: displayTexts.WELCOME_NEW_SUBSCRIBER + userEmail
+          displayMsg: displayTexts.WELCOME_NEW_SUBSCRIBER
         },
         () => {
-          this.sendToast(null, callback)
+          setTimeout(callback, 1000)
         }
       )
     } catch (exception) {
-      logger.log('exception on postSubscription')
+      logger.log('Exception on postSubscription')
       let responseMsg = exception.response.data.message
       let displayMsg
       /** Email already exists **/
@@ -191,13 +199,22 @@ export class AccountSummarySubscriptionForm extends Component {
   }
 
   render() {
-    let content = <Spinner displayMsg={this.state.displayMsg} />
+    let content = (
+      <GridContainer className="AccountSummaryGridContainer" justify="center" align="center">
+        <GridItem>
+          <Card className="AccountSummaryCard">
+            <Spinner displayMsg={this.state.displayMsg} />
+          </Card>
+        </GridItem>
+      </GridContainer>
+    )
 
     if (this.state.render) {
       content = (
         <AccountSummarySubscriptionFormDisplay
           form={this.state.form}
           onSubmitBtnHandler={this.onSubmitBtnHandler}
+          onCancelBtnHandler={this.onCancelBtnHandler}
           inputChangedHandler={this.inputChangedHandler}
         />
       )

@@ -34,7 +34,7 @@ const AccountSummarySubscriptionFormDisplayStyle = {
   },
   subscribeButton: {
     marginTop: '20px',
-    width: '100%'
+    width: '49%'
   }
 }
 

@@ -39,7 +39,7 @@ class Web3Provider extends Component {
   }
 
   loadWeb3 = async () => {
-    logger.log('[Web3FunctionalProvider.js] loadWeb3')
+    logger.log('LoadWeb3')
     /** We check if metamask is installed, either the new version or the legacy one **/
     if (window.ethereum) {
       await this.loadWeb3LastVersion()
@@ -47,36 +47,36 @@ class Web3Provider extends Component {
       await this.loadWeb3Legacy()
     } else {
       /** The user does not have web3 **/
-      logger.log('[Web3FunctionalProvider.js] user does not have web3')
+      logger.log('User does not have web3')
       this.setErrorState(failReasons.NO_WEB3)
     }
   }
 
   loadWeb3Legacy = async () => {
-    logger.log('[Web3FunctionalProvider.js] getting web3 legacy instance')
+    logger.log('Getting web3 legacy instance')
     let web3Instance
     web3Instance = new Web3(window.web3.currentProvider)
     await this.loadUserDataFromWeb3(web3Instance)
   }
 
   loadWeb3LastVersion = async () => {
-    logger.log('[Web3FunctionalProvider.js] getting web3 new instance')
+    logger.log('Getting web3 new instance')
     let web3Instance
     web3Instance = new Web3(window.ethereum)
     try {
       /** Request access to the user **/
-      logger.log('[Web3FunctionalProvider.js] requesting user permissions')
+      logger.log('Requesting user permissions')
       let enabledAddress = await window.ethereum.enable()
       /** Could be deleted, this is done for make easier the test **/
       if (!enabledAddress) {
         throw new Error(failReasons.NO_PERMISSIONS)
       }
-      logger.log('[Web3FunctionalProvider.js] user with web3 ethereum authenticated')
+      logger.log('User with web3 ethereum authenticated')
       /** The user accepted the app, now it's authenticated **/
       await this.loadUserDataFromWeb3(web3Instance)
     } catch (error) {
       /** The user denied the app, it's not authenticated **/
-      logger.log('[Web3FunctionalProvider.js] user with ethereum denied the access')
+      logger.log('User with ethereum denied the access')
       this.setErrorState(failReasons.NO_PERMISSIONS)
     }
   }
@@ -84,7 +84,7 @@ class Web3Provider extends Component {
   setErrorState(errorReason, web3Instance = null) {
     switch (errorReason) {
       case failReasons.NO_ADDRESS: {
-        logger.log('[Web3FunctionalProvider.js] user address not found')
+        logger.log('User address not found')
         this.setState({
           web3: web3Instance,
           userData: {
@@ -196,7 +196,7 @@ class Web3Provider extends Component {
   }
 
   async componentDidMount() {
-    logger.log('[Web3FunctionalProvider.js] componentDidMount')
+    logger.log('Fire event componentDidMount')
     this.setState({ render: true })
     await this.loadWeb3()
   }
