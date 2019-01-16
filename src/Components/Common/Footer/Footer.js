@@ -33,7 +33,7 @@ function Footer({ ...props }) {
           sm={6}
           xs={12}
         >
-          <Link to="/terms" className={`${block} ${classes.a}`}>
+          <Link to="/" className={`${block} ${classes.a}`}>
             Terms and conditions
           </Link>
         </GridItem>
