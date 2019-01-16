@@ -177,16 +177,16 @@ export class AccountSummaryComponent extends Component {
         this.setState(
           {
             summary: {
-              bondedAmount: summaryData.data.summary.bondedAmount,
+              bondedAmount: summaryData.data.summary.bondedAmountInLPT,
               delegateAddress: summaryData.data.summary.delegateAddress,
               delegatedAmount: summaryData.data.summary.delegatedAmount,
               fees: summaryData.data.summary.fees,
               lastClaimRound: summaryData.data.summary.lastClaimRound,
               startRound: summaryData.data.summary.startRound,
               status: summaryData.data.summary.status,
-              stake: summaryData.data.summary.totalStake,
+              stake: summaryData.data.summary.totalStakeInLPT,
               withdrawRound: summaryData.data.summary.withdrawRound,
-              delegateCalledReward: summaryData.data.summary.delegatedCalledReward
+              delegateCalledReward: summaryData.data.summary.delegateCalledReward
             },
             lpBalance: summaryData.data.balance
           },
