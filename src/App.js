@@ -1,7 +1,7 @@
 import PrivateRoute from './Components/Common/Hoc/PrivateRoute/PrivateRoute'
 import React, { Component } from 'react'
 import Spinner from './Components/Common/UI/Spinner/Spinner'
-import { AccountSummarySubscriptionForm } from './Components/AccountSummary/AccSummarySubscriptionForm/AccountSummarySubscriptionForm'
+import { AccountSummarySubscriptionForm } from './Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummarySubscriptionForm'
 import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
 import { HomeComponent, AccountSummaryComponent } from './Components'
 import { Redirect } from 'react-router'

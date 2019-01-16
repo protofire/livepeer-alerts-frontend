@@ -1,10 +1,10 @@
 // ##############################
-// // // AccSummarySubscriptionForm view styles
+// // // AccountSummarySubscriptionForm view styles
 // #############################
 
-import { container, cardTitle } from '../../../../assets/jss/dashboard'
+import { container, cardTitle } from '../../dashboard'
 
-const AccSummarySubscriptionFormDisplayStyle = {
+const AccountSummarySubscriptionFormDisplayStyle = {
   container: {
     ...container,
     position: 'relative',
@@ -38,4 +38,4 @@ const AccSummarySubscriptionFormDisplayStyle = {
   }
 }
 
-export default AccSummarySubscriptionFormDisplayStyle
+export default AccountSummarySubscriptionFormDisplayStyle

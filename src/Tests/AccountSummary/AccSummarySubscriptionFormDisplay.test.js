@@ -1,7 +1,7 @@
 import React from 'react'
 import { configure, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import AccountSummarySubscriptionFormDisplay from '../../Components/AccountSummary/AccSummarySubscriptionForm/AccSummaryFormDisplay/AccSummarySubscriptionFormDisplay'
+import AccountSummarySubscriptionFormDisplay from '../../Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummaryFormDisplay/AccountSummarySubscriptionFormDisplay'
 import * as displayTexts from '../../Components/AccountSummary/AccountSummaryTexts'
 
 configure({ adapter: new Adapter() })
@@ -34,7 +34,7 @@ const props = {
   displayMsg: displayTexts.LOADING_SUBSCRIPTION_DATA
 }
 
-describe('Render AccSummarySubscriptionForm', () => {
+describe('Render AccountSummarySubscriptionForm', () => {
   it('Shows Welcome Message', () => {
     const message = 'Subscribe:'
     let wrapper = mount(<AccountSummarySubscriptionFormDisplay {...props} />)

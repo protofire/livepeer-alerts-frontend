@@ -4,7 +4,7 @@ import Adapter from 'enzyme-adapter-react-16'
 import * as displayTexts from '../../Components/AccountSummary/AccountSummaryTexts'
 import * as jest from 'jest'
 import axios from 'axios'
-import { AccountSummarySubscriptionForm } from '../../Components/AccountSummary/AccSummarySubscriptionForm/AccountSummarySubscriptionForm'
+import { AccountSummarySubscriptionForm } from '../../Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummarySubscriptionForm'
 
 configure({ adapter: new Adapter() })
 

@@ -1,4 +1,4 @@
-import AccSummarySubscriptionFormDisplayStyle from './AccSummarySubscriptionFormDisplayStyle'
+import AccountSummarySubscriptionFormDisplayStyle from '../../../../assets/jss/dashboard/views/AccountSummarySubscriptionFormDisplayStyle'
 import Button from '../../../Common/UI/CustomButtons/Button'
 import Card from '../../../Common/UI/Card/Card.js'
 import GridContainer from '../../../Common/UI/Grid/GridContainer.js'
@@ -8,7 +8,7 @@ import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 
 const accountSummarySubscriptionFormDisplay = props => {
-  const { classes } = props
+  const { classes, form } = props
   return (
     <GridContainer className={classes.gridContainer} justify="center" alignItems="center">
       <GridItem className={classes.cardContainer}>
@@ -17,17 +17,17 @@ const accountSummarySubscriptionFormDisplay = props => {
           <form>
             <Input
               changed={event => props.inputChangedHandler(event, 'email')}
-              elementConfig={props.form.email.elementConfig}
-              elementType={props.form.email.elementType}
-              invalid={!props.form.email.valid}
-              shouldValidate={props.form.email.validation}
-              touched={props.form.email.touched}
-              value={props.form.email.value}
+              elementConfig={form.email.elementConfig}
+              elementType={form.email.elementType}
+              invalid={!form.email.valid}
+              shouldValidate={form.email.validation}
+              touched={form.email.touched}
+              value={form.email.value}
             />
             <Button
               className={classes.subscribeButton}
               color="primary"
-              disabled={!props.form.formIsValid}
+              disabled={!form.formIsValid}
               round
               size="lg"
               onClick={props.onSubmitBtnHandler}
@@ -40,6 +40,6 @@ const accountSummarySubscriptionFormDisplay = props => {
     </GridContainer>
   )
 }
-export default withStyles(AccSummarySubscriptionFormDisplayStyle)(
+export default withStyles(AccountSummarySubscriptionFormDisplayStyle)(
   accountSummarySubscriptionFormDisplay
 )

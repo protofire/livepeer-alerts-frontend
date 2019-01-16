@@ -1,5 +1,5 @@
 import * as displayTexts from '../AccountSummaryTexts'
-import AccountSummarySubscriptionFormDisplay from './AccSummaryFormDisplay/AccSummarySubscriptionFormDisplay'
+import AccountSummarySubscriptionFormDisplay from './AccountSummaryFormDisplay/AccountSummarySubscriptionFormDisplay'
 import React, { Component } from 'react'
 import Spinner from '../../Common/UI/Spinner/Spinner'
 import axios from 'axios'
