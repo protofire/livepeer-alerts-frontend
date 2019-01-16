@@ -1,6 +1,7 @@
 import AccountSummaryStyle from '../AccountSummaryHome/AccountSummaryStyle'
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
+import { truncateStringInTheMiddle } from '../../../utils'
 
 const AccountSummaryData = props => {
   const tableData = [
@@ -43,7 +44,8 @@ const AccountSummaryData = props => {
 const getStatusMsg = props => {
   let msg
   const { classes } = props
-  switch (props.summary && props.summary.status) {
+  const status = props.summary && props.summary.status
+  switch (status) {
     case 'Pending': {
       msg = (
         <>
@@ -52,7 +54,14 @@ const getStatusMsg = props => {
           </p>
           <p className={classes.walletInfo}>
             Add value to the network, bond to a transcoder
-            <a href="https://explorer.livepeer.org/transcoders"> here</a>
+            <a
+              href="https://explorer.livepeer.org/transcoders"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {' '}
+              here
+            </a>
           </p>
         </>
       )
@@ -61,26 +70,29 @@ const getStatusMsg = props => {
     case 'Bonded': {
       let tokenRewardsText
       const delegateAddress = props.summary.delegateAddress
-      const delegateAddressUrl = 'https://explorer.livepeer.org/accounts/' + delegateAddress
+      const delegateAddressUrl = `https://explorer.livepeer.org/accounts/${delegateAddress}`
 
-      if (!props.summary.delegateCalledReward) {
+      if (props.summary.delegateCalledReward) {
         tokenRewardsText = (
           <p className={classes.walletInfo}>
-            Unfortunately the transcoder has not claimed the last inflationary token rewards.
+            The transcoder has successfully claimed the last inflationary token rewards.
           </p>
         )
       } else {
         tokenRewardsText = (
           <p className={classes.walletInfo}>
-            The transcoder has successfully claimed the last inflationary token rewards.
+            Unfortunately the transcoder has not claimed the last inflationary token rewards.
           </p>
         )
       }
       msg = (
         <>
           <p className={classes.walletInfo}>
-            Bonded to transcoder <a href={delegateAddressUrl}>{delegateAddress}</a> at round{' '}
-            {props.summary.startRound}{' '}
+            Bonded to transcoder{' '}
+            <a href={delegateAddressUrl} target="_blank" rel="noopener noreferrer">
+              {truncateStringInTheMiddle(delegateAddress)}
+            </a>{' '}
+            at round {props.summary.startRound}{' '}
           </p>
           {tokenRewardsText}
         </>
@@ -105,7 +117,14 @@ const getStatusMsg = props => {
           </p>
           <p className={classes.walletInfo}>
             Add value to the network, bond to a transcoder
-            <a href="https://explorer.livepeer.org/transcoders"> here</a>
+            <a
+              href="https://explorer.livepeer.org/transcoders"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {' '}
+              here
+            </a>
           </p>
         </>
       )
