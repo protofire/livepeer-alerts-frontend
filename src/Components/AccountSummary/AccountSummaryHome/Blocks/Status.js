@@ -3,7 +3,8 @@ import { truncateStringInTheMiddle } from '../../../../utils'
 import Card from '../../../Common/UI/Card/Card.js'
 
 const Status = props => {
-  const { stake, fees, status, delegateAddress, startRound } = props.summary
+  const { summary } = props
+  const { stake, fees, status, delegateAddress, startRound } = summary
   const tableData = [
     {
       title: 'Stake',
@@ -19,6 +20,10 @@ const Status = props => {
   const { classes } = props
 
   const messageForBonded = () => {
+    if (status !== 'Bonded') {
+      return
+    }
+
     const delegateAddressUrl = `https://explorer.livepeer.org/accounts/${delegateAddress}`
 
     return (

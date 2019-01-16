@@ -16,6 +16,9 @@ const AccountSummaryStyle = {
   gridItem: {
     padding: '0!important'
   },
+  gridItemHidden: {
+    display: 'none!important'
+  },
   itemsContainer: {
     maxWidth: maxWidthContainer,
     display: 'grid',
