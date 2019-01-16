@@ -1,10 +1,7 @@
 import * as displayTexts from './AccountSummaryTexts'
 import AccountSummaryHome from './AccountSummaryHome/AccountSummaryHome'
-import Card from '../Common/UI/Card/Card.js'
-import GridContainer from '../Common/UI/Grid/GridContainer.js'
-import GridItem from '../Common/UI/Grid/GridItem.js'
 import React, { Component } from 'react'
-import Spinner from '../Common/UI/Spinner/Spinner'
+import SpinnerExtended from '../Common/UI/SpinnerExtended/SpinnerExtended'
 import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
@@ -285,15 +282,7 @@ export class AccountSummaryComponent extends Component {
   }
 
   render() {
-    let content = (
-      <GridContainer className="AccountSummaryGridContainer" justify="center" align="center">
-        <GridItem>
-          <Card className="AccountSummaryCard">
-            <Spinner displayMsg={this.state.displayMsg} />
-          </Card>
-        </GridItem>
-      </GridContainer>
-    )
+    let content = <SpinnerExtended displayMsg={this.state.displayMsg} />
     if (this.state.render) {
       if (!this.state.error) {
         content = (

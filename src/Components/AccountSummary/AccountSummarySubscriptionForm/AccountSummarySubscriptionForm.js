@@ -1,14 +1,11 @@
 import * as displayTexts from '../AccountSummaryTexts'
 import AccountSummarySubscriptionFormDisplay from './AccountSummaryFormDisplay/AccountSummarySubscriptionFormDisplay'
 import React, { Component } from 'react'
-import Spinner from '../../Common/UI/Spinner/Spinner'
+import SpinnerExtended from '../../Common/UI/SpinnerExtended/SpinnerExtended'
 import axios from 'axios'
 import validator from 'validator'
 import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
-import GridItem from '../../Common/UI/Grid/GridItem'
-import GridContainer from '../../Common/UI/Grid/GridContainer'
-import Card from '../../Common/UI/Card/Card'
 
 const logger = logdown('Livepeer:AccountSummarySubscriptionForm')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
@@ -199,15 +196,7 @@ export class AccountSummarySubscriptionForm extends Component {
   }
 
   render() {
-    let content = (
-      <GridContainer className="AccountSummaryGridContainer" justify="center" align="center">
-        <GridItem>
-          <Card className="AccountSummaryCard">
-            <Spinner displayMsg={this.state.displayMsg} />
-          </Card>
-        </GridItem>
-      </GridContainer>
-    )
+    let content = <SpinnerExtended displayMsg={this.state.displayMsg} />
 
     if (this.state.render) {
       content = (
