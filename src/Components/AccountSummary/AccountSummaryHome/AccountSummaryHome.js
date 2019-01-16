@@ -139,7 +139,7 @@ const AccountSummaryHome = props => {
         </Card>
       </GridItem>
       {/* Buttons */}
-      <GridItem className={classes.buttonsContainer} lg={12} md={12} xs={12} justify="center">
+      <GridItem className={classes.buttonsContainer} lg={12} md={12} xs={12}>
         <CopyToClipboard text={telegramLink}>
           <Button
             className={classes.subscriptionBtn}
