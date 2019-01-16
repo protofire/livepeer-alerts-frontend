@@ -53,7 +53,7 @@ const getStatusMsg = props => {
             Your LPT is getting deluded by the protocol's token inflation.
           </p>
           <p className={classes.walletInfo}>
-            Add value to the network, bond to a transcoder
+            Add value to the network, bond to a delegate
             <a
               href="https://explorer.livepeer.org/transcoders"
               target="_blank"
@@ -75,20 +75,20 @@ const getStatusMsg = props => {
       if (props.summary.delegateCalledReward) {
         tokenRewardsText = (
           <p className={classes.walletInfo}>
-            The transcoder has successfully claimed the last inflationary token rewards.
+            The delegate has successfully claimed the last inflationary token rewards.
           </p>
         )
       } else {
         tokenRewardsText = (
           <p className={classes.walletInfo}>
-            Unfortunately the transcoder has not claimed the last inflationary token rewards.
+            Unfortunately the delegate has not claimed the last inflationary token rewards.
           </p>
         )
       }
       msg = (
         <>
           <p className={classes.walletInfo}>
-            Bonded to transcoder{' '}
+            Bonded to delegate{' '}
             <a href={delegateAddressUrl} target="_blank" rel="noopener noreferrer">
               {truncateStringInTheMiddle(delegateAddress)}
             </a>{' '}
@@ -116,7 +116,7 @@ const getStatusMsg = props => {
             Your LPT is getting deluded by the protocol's token inflation.
           </p>
           <p className={classes.walletInfo}>
-            Add value to the network, bond to a transcoder
+            Add value to the network, bond to a delegate
             <a
               href="https://explorer.livepeer.org/transcoders"
               target="_blank"

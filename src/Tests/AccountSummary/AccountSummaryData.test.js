@@ -35,9 +35,9 @@ describe('Renders account summary data', () => {
   })
 
   it('Shows Bonded status msg if status is bonded and delegatedHasNotCalledReward', () => {
-    const messageStatus = 'Bonded to transcoder 1234 at round 1'
+    const messageStatus = 'Bonded to delegate 1234 at round 1'
     const messageReward =
-      'Unfortunately the transcoder has not claimed the last inflationary token rewards.'
+      'Unfortunately the delegate has not claimed the last inflationary token rewards.'
     const propsStatus = {
       summary: {
         delegateAddress: '1234',
@@ -52,9 +52,9 @@ describe('Renders account summary data', () => {
     expect(tr[2].includes(messageReward)).toEqual(true)
   })
   it('Shows Bonded status msg if status is bonded and delegatedHasCalledReward', () => {
-    const messageStatus = 'Bonded to transcoder 1234 at round 1'
+    const messageStatus = 'Bonded to delegate 1234 at round 1'
     const messageReward =
-      'The transcoder has successfully claimed the last inflationary token rewards.'
+      'The delegate has successfully claimed the last inflationary token rewards.'
     const propsStatus = {
       summary: {
         delegateAddress: '1234',
@@ -71,7 +71,7 @@ describe('Renders account summary data', () => {
   it('Shows pending msg if status is pending', () => {
     const messageStatus = 'Pending'
     const messageExtra = "Your LPT is getting deluded by the protocol's token inflation."
-    const msgAddValue = 'Add value to the network, bond to a transcoder here'
+    const msgAddValue = 'Add value to the network, bond to a delegate here'
     const propsStatus = {
       summary: {
         status: 'Pending'
@@ -86,7 +86,7 @@ describe('Renders account summary data', () => {
   it('Shows Unbonded msg if status is Unbonded', () => {
     const messageStatus = 'Unbonded'
     const messageExtra = "Your LPT is getting deluded by the protocol's token inflation."
-    const msgAddValue = 'Add value to the network, bond to a transcoder here'
+    const msgAddValue = 'Add value to the network, bond to a delegate here'
     const propsStatus = {
       summary: {
         status: 'Unbonded'
