@@ -7,9 +7,10 @@ const commonSeparation = '30px'
 
 const AccountSummaryStyle = {
   gridContainer: {
-    margin: '0',
+    margin: '0 auto',
+    maxWidth: '100%',
     position: 'relative',
-    width: '100%',
+    width: maxWidthContainer,
     zIndex: '12'
   },
   gridItem: {
@@ -21,7 +22,7 @@ const AccountSummaryStyle = {
     gridRowGap: commonSeparation,
     gridTemplateColumns: '1fr',
     marginBottom: commonSeparation,
-    '@media (min-width: 1024px)': {
+    '@media (min-width: 768px)': {
       gridColumnGap: commonSeparation,
       gridTemplateColumns: '1fr 1fr'
     }
@@ -73,7 +74,8 @@ const AccountSummaryStyle = {
     textAlign: 'center',
     fontWeight: '500',
     textShadow: '0 5px 5px rgba(0, 0, 0, 0.5)',
-    margin: '0 0 -15px'
+    margin: '0',
+    padding: '0'
   },
   lessMarginBottom: {
     marginBottom: '10px'
@@ -127,9 +129,16 @@ const AccountSummaryStyle = {
     lineHeight: '1.2',
     margin: '10px 0'
   },
-  buttonContainer: {
-    margin: '20px 0 0 0',
-    width: '100%'
+  buttonsContainer: {
+    maxWidth: maxWidthContainer,
+    display: 'grid',
+    gridRowGap: '15px',
+    gridTemplateColumns: '1fr',
+    marginBottom: commonSeparation,
+    '@media (min-width: 768px)': {
+      gridColumnGap: commonSeparation,
+      gridTemplateColumns: '1fr 1fr'
+    }
   },
   buttonContainerItem: {
     '@media (min-width: 768px)': {
@@ -137,19 +146,7 @@ const AccountSummaryStyle = {
     }
   },
   subscriptionBtn: {
-    marginBottom: '10px',
-    width: '100%',
-    '&:last-child': {
-      marginBottom: '0'
-    },
-    '@media (min-width: 768px)': {
-      marginBottom: '0',
-      marginRight: '20px',
-      width: '50%',
-      '&:last-child': {
-        marginRight: '0'
-      }
-    }
+    width: '100%'
   },
   noWrap: {
     whiteSpace: 'nowrap'

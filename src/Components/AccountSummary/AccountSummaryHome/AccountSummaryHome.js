@@ -92,34 +92,25 @@ const AccountSummaryHome = props => {
           <p className={classes.rewardText}>Reward Calls text, put something here...</p>
         </Card>
       </GridItem>
+      {/* Buttons */}
+      <GridItem className={classes.buttonsContainer} lg={12} md={12} xs={12} justify="center">
+        <CopyToClipboard text={telegramLink}>
+          <Button
+            className={classes.subscriptionBtn}
+            onClick={openTelegramLink}
+            disabled={disabledBtn}
+            color="info"
+            round
+            size="lg"
+          >
+            Telegram
+          </Button>
+        </CopyToClipboard>
+        {subscriptionBtn}
+      </GridItem>
       {/* Subscribe */}
       <GridItem className={classes.itemsContainerFull} lg={12} md={12} xs={12}>
         <p className={classes.subscribeText}>Don't miss your LFT reward. Subscribe now!</p>
-      </GridItem>
-      {/* Buttons */}
-      <GridItem container={true} lg={12} md={12} xs={12} justify="center">
-        <GridItem
-          className={`${classes.buttonContainerItem} ${classes.gridItem}`}
-          container={true}
-          justify="space-between"
-          lg={6}
-          md={12}
-          xs={12}
-        >
-          <CopyToClipboard text={telegramLink}>
-            <Button
-              className={classes.subscriptionBtn}
-              onClick={openTelegramLink}
-              disabled={disabledBtn}
-              color="info"
-              round
-              size="lg"
-            >
-              Telegram
-            </Button>
-          </CopyToClipboard>
-          {subscriptionBtn}
-        </GridItem>
       </GridItem>
     </GridContainer>
   )
