@@ -1,5 +1,5 @@
 import AccountSummaryData from '../AccountSummaryData/AccountSummaryData'
-import AccountSummaryStyle from './AccountSummaryStyle'
+import AccountSummaryStyle from '../../../assets/jss/dashboard/views/accountSummaryStyle'
 import Button from '../../Common/UI/CustomButtons/Button'
 import Card from '../../Common/UI/Card/Card.js'
 import GridContainer from '../../Common/UI/Grid/GridContainer.js'
@@ -105,6 +105,7 @@ const AccountSummaryHome = props => {
   return (
     <GridContainer className={classes.gridContainer} justify="center">
       <GridItem className={classes.itemsContainer} lg={12} md={12} xs={12}>
+        {/* Wallet block */}
         <Card className={classes.cardItem}>
           <div className={classes.logoMetamask}>
             <img src={metamaskImage} className={classes.logoMetamaskImg} alt="" />
@@ -123,6 +124,7 @@ const AccountSummaryHome = props => {
             })}
           </div>
         </Card>
+        {/* Status block */}
         <Card className={classes.cardItem}>
           <AccountSummaryData summary={props.summary} />
         </Card>

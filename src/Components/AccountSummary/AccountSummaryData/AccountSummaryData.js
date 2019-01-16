@@ -1,4 +1,4 @@
-import AccountSummaryStyle from '../AccountSummaryHome/AccountSummaryStyle'
+import AccountSummaryStyle from '../../../assets/jss/dashboard/views/accountSummaryStyle'
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import { truncateStringInTheMiddle } from '../../../utils'
