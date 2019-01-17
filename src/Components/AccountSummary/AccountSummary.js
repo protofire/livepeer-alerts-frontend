@@ -81,12 +81,24 @@ export class AccountSummaryComponent extends Component {
     }
   }
 
+  getRandomAddress = () => {
+    /** Returns a random address for demo version **/
+    let stringAddresses = process.env.REACT_APP_DEMO_ADDRESS
+    let addresses = stringAddresses && stringAddresses.split(',')
+    return addresses && addresses[Math.floor(Math.random() * addresses.length)]
+  }
+
   initState = callback => {
+    let address = this.props.userData.address
+    /** If we are on demo version we choose a random address **/
+    if (this.props.location.pathname === '/account/demo') {
+      address = this.getRandomAddress()
+    }
     this.setState(
       {
         userData: {
           ...this.state.userData,
-          address: this.props.userData.address,
+          address: address,
           ethBalance: this.props.userData.ethBalance,
           authenticated: this.props.userData.authenticated
         }

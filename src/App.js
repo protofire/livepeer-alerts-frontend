@@ -70,7 +70,7 @@ export class App extends Component {
                       <Switch>
                         <PrivateRoute
                           exact
-                          path="/account"
+                          path="/(account|account/demo)/"
                           web3={web3}
                           userData={userData}
                           authenticated={authenticated}
