@@ -82,10 +82,10 @@ export class AccountSummaryComponent extends Component {
   }
 
   initState = callback => {
-    let address = this.props.userData.address
+    let address = this.props.userData ? this.props.userData.address : ''
     const stringAddresses = process.env.REACT_APP_DEMO_ADDRESS
     /** If we are on demo version we choose a random address **/
-    if (this.props.location.pathname === '/account/demo') {
+    if (this.props.location && this.props.location.pathname === '/account/demo') {
       if (typeof stringAddresses !== 'undefined' && stringAddresses.length > 0) {
         /** We have addresses on the env var **/
         const addresses = stringAddresses && stringAddresses.split(',')
