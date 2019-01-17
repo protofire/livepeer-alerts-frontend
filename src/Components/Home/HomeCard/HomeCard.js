@@ -13,7 +13,7 @@ import withStyles from '@material-ui/core/styles/withStyles'
 
 class HomeCard extends React.Component {
   render() {
-    const { classes, onClick, onDemoClick } = this.props
+    const { classes, onClick } = this.props
     const demoAddress = process.env.REACT_APP_DEMO_ADDRESS
     let demoBtnDisabled = typeof demoAddress === 'undefined' || demoAddress.length === 0
     if (!demoBtnDisabled && demoAddress) {
