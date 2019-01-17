@@ -12,7 +12,7 @@ exports[`Footer test  Should render footer and check snapshot 1`] = `
     >
       <a
         className="Footer-block-1 Footer-a-7"
-        href="/terms"
+        href="/"
         onClick={[Function]}
       >
         Terms and conditions
