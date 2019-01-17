@@ -81,18 +81,22 @@ export class AccountSummaryComponent extends Component {
     }
   }
 
-  getRandomAddress = () => {
-    /** Returns a random address for demo version **/
-    const stringAddresses = process.env.REACT_APP_DEMO_ADDRESS
-    const addresses = stringAddresses && stringAddresses.split(',')
-    return addresses && addresses[Math.floor(Math.random() * addresses.length)]
-  }
-
   initState = callback => {
     let address = this.props.userData.address
+    const stringAddresses = process.env.REACT_APP_DEMO_ADDRESS
     /** If we are on demo version we choose a random address **/
     if (this.props.location.pathname === '/account/demo') {
-      address = this.getRandomAddress()
+      if (typeof stringAddresses !== 'undefined' && stringAddresses.length > 0) {
+        /** We have addresses on the env var **/
+        const addresses = stringAddresses && stringAddresses.split(',')
+        address = addresses && addresses[Math.floor(Math.random() * addresses.length)]
+      } else {
+        /** The user does not have addresses on the env var, we redirect to the home page **/
+        //this.props.history.push('/')
+
+        const addresses = stringAddresses && stringAddresses.split(',')
+        address = addresses && addresses[Math.floor(Math.random() * addresses.length)]
+      }
     }
     this.setState(
       {
@@ -131,7 +135,7 @@ export class AccountSummaryComponent extends Component {
             ...this.state,
             render: true,
             error: true,
-            displayMsg: displayTexts.FAIL_NO_REASON
+            displayMsg: displayTexts.FAIL_NO_REASON_REDIRECT
           },
           () => {
             this.sendToast(1500, () => this.props.history.push('/'))
@@ -310,7 +314,7 @@ export class AccountSummaryComponent extends Component {
           </>
         )
       } else {
-        content = <h2>{displayTexts.FAIL_NO_REASON_REDIRECT}</h2>
+        content = <SpinnerExtended displayMsg={this.state.displayMsg} />
       }
     }
     return (
