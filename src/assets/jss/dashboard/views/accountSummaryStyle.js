@@ -31,22 +31,26 @@ const AccountSummaryStyle = {
     }
   },
   itemsContainerFull: {
-    maxWidth: maxWidthContainer,
+    // maxWidth: maxWidthContainer,
     marginBottom: commonSeparation
   },
   cardItem: {
     margin: '0',
     padding: '20px'
   },
+  alignFlexEnd: {
+    justifyContent: 'flex-end'
+  },
   logoMetamask: {
+    border: '2px solid #fff',
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#eee',
     borderRadius: '50%',
-    height: '100px',
-    margin: '0 auto 10px',
-    width: '100px'
+    height: '85px',
+    margin: '-55px auto 15px',
+    width: '85px'
   },
   logoMetamaskImg: {
     height: '75px',
@@ -63,6 +67,9 @@ const AccountSummaryStyle = {
     textAlign: 'center',
     fontWeight: '700',
     margin: '0 0 15px'
+  },
+  rewardTitleBig: {
+    fontSize: '24px'
   },
   rewardText: {
     color: '#333',
@@ -109,7 +116,9 @@ const AccountSummaryStyle = {
     flexGrow: '1',
     '&:last-child': {
       borderRight: 'none'
-    }
+    },
+    maxWidth: '50%',
+    width: '50%'
   },
   blockDataItemValue: {
     fontSize: '16px',

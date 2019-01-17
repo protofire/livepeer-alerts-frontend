@@ -17,11 +17,11 @@ const Wallet = props => {
     }
   ]
   return (
-    <Card className={classes.cardItem}>
+    <Card className={`${classes.cardItem} ${classes.alignFlexEnd}`}>
       <div className={classes.logoMetamask}>
         <img src={metamaskImage} className={classes.logoMetamaskImg} alt="" />
       </div>
-      <h3 title={address} className={classes.walletTitle}>
+      <h3 title={address} className={`${classes.walletTitle}`}>
         {truncateStringInTheMiddle(address)}
       </h3>
       <div className={`${classes.blockData}`}>
