@@ -6,8 +6,13 @@ configure({ adapter: new Adapter() })
 
 describe('Spinner test ', () => {
   it(`Should render spinner`, () => {
+    // Given
     const wrapper = mount(<Spinner />)
+
+    // When
     const findSpinner = wrapper.find('CircularProgress')
+
+    // Then
     expect(findSpinner).toHaveLength(1)
   })
 })

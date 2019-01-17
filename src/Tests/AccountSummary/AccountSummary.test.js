@@ -4,6 +4,8 @@ import Adapter from 'enzyme-adapter-react-16'
 import * as jest from 'jest'
 import axios from 'axios'
 import { AccountSummaryComponent } from '../../Components/AccountSummary/AccountSummary'
+import render from 'react-test-renderer'
+
 configure({ adapter: new Adapter() })
 
 const props = {
@@ -29,10 +31,15 @@ const props = {
 }
 
 jest.mock('axios')
-describe('Renders AccountSummary data', () => {
-  it('Renders Loading spinner when fetching data', () => {
-    let wrapper = mount(<AccountSummaryComponent {...props} />)
-    let spinner = wrapper.find('spinner')
-    expect(spinner).toHaveLength(1)
+describe('AccountSummary Test', () => {
+  it('Renders AccountSummary and match snapshot', () => {
+    // Given
+    let wrapper = render.create(<AccountSummaryComponent {...props} />)
+
+    //When
+    const tree = wrapper.toJSON()
+
+    //Then
+    expect(tree).toMatchSnapshot()
   })
 })

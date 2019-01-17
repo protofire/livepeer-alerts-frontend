@@ -12,12 +12,12 @@ import { Link } from 'react-router-dom'
 
 function Footer({ ...props }) {
   const { classes, white } = props
-  var anchor =
+  let anchor =
     classes.a +
     cx({
       [' ' + classes.whiteColor]: white
     })
-  var block = cx({
+  let block = cx({
     [classes.block]: true,
     [classes.whiteColor]: white
   })

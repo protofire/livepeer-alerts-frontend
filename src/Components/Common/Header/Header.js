@@ -20,7 +20,7 @@ import headerStyle from '../../../assets/jss/dashboard/components/headerStyle.js
 
 function Header({ ...props }) {
   function makeBrand() {
-    var name
+    let name
     props.routes.map((prop, key) => {
       if (prop.collapse) {
         prop.views.map((prop, key) => {

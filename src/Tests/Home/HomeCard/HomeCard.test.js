@@ -3,9 +3,8 @@ import { configure, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import * as jest from 'jest'
 import axios from 'axios'
-import * as displayTexts from '../../../Components/AccountSummary/AccountSummaryTexts'
-import AccountSummaryHome from '../../../Components/AccountSummary/AccountSummaryHome/AccountSummaryHome'
-import AccountSummaryData from '../../../Components/AccountSummary/AccountSummaryData/AccountSummaryData'
+import HomeCard from '../../../Components/Home/HomeCard/HomeCard'
+import render from 'react-test-renderer'
 
 configure({ adapter: new Adapter() })
 
@@ -13,7 +12,7 @@ const props = {
   summary: {
     bondedAmount: 0,
     fees: 0,
-    status: 'Bounded',
+    status: 'Bonded',
     lastClaimRound: 0,
     startRound: 0,
     withdrawRound: 0
@@ -44,59 +43,16 @@ const response = {
 }
 
 jest.mock('axios')
-describe('Renders userSubscribed data', () => {
-  it('Shows Welcome Message', () => {
-    const message = 'Welcome 0x4d3F91...76FBBDcE'
-    axios.get.mockResolvedValue(response)
-    let wrapper = mount(<AccountSummaryHome {...props} />)
-    wrapper = wrapper.update()
-    expect(wrapper.contains(message)).toEqual(true)
-  })
-  it('Shows address', () => {
-    const message = 'Wallet address'
-    let wrapper = mount(<AccountSummaryHome {...props} />)
-    expect(wrapper.contains(message)).toEqual(true)
-  })
-  it('Shows ETH Balance', () => {
-    const message = 'Wallet balance in ETH'
-    let wrapper = mount(<AccountSummaryHome {...props} />)
-    expect(wrapper.contains(message)).toEqual(true)
-  })
-  it('Shows Livepeer Balance', () => {
-    const message = 'Wallet balance in LPT'
-    let wrapper = mount(<AccountSummaryHome {...props} />)
-    expect(wrapper.contains(message)).toEqual(true)
-  })
-  it('Renders account summary data child component', () => {
-    let wrapper = mount(<AccountSummaryHome {...props} />)
-    expect(wrapper.contains(<AccountSummaryData summary={props.summary} />)).toBe(true)
-  })
-  it('Renders subscription button if user not auth', () => {
-    const propsNotAuth = {
-      ...props,
-      userData: {
-        ...props.userData,
-        isSubscribed: false
-      }
-    }
-    let wrapper = mount(<AccountSummaryHome {...propsNotAuth} />)
-    let buttons = wrapper.find('Button')
-    expect(buttons.length).toEqual(2)
-    expect(buttons.at(0).contains('Subscribe via Telegram')).toEqual(true)
-    expect(buttons.at(1).contains('Subscribe via Email')).toEqual(true)
-  })
-  it('Renders Unsubscription button if user is auth', () => {
-    const propsNotAuth = {
-      ...props,
-      userData: {
-        ...props.userData,
-        isSubscribed: true
-      }
-    }
-    let wrapper = mount(<AccountSummaryHome {...propsNotAuth} />)
-    let buttons = wrapper.find('Button')
-    expect(buttons.length).toEqual(2)
-    expect(buttons.at(0).contains('Subscribe via Telegram')).toEqual(true)
-    expect(buttons.at(1).contains('Unsubscribe')).toEqual(true)
+
+describe('HomeCard test', () => {
+  it('HomeCard test', () => {
+    // Given
+    let wrapper = render.create(<HomeCard {...props} />)
+
+    // When
+    const tree = wrapper.toJSON()
+
+    // Then
+    expect(tree).toMatchSnapshot()
   })
 })

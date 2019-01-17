@@ -20,7 +20,7 @@ class HomeCard extends React.Component {
           <Card className={classes.cardSignup}>
             <h2 className={classes.cardTitle}>Livepeer Notifications</h2>
             <InfoArea
-              description="We provide pro-active alert notifications that will help LPT token holders to be updated about how the transcoders are performing in near real time"
+              description="We provide pro-active alert notifications that will help LPT token holders to be updated about how the delegates are performing in near real time"
               icon={Notifications}
               iconColor="rose"
               title="Pro-active alert notifications"
@@ -40,6 +40,9 @@ class HomeCard extends React.Component {
             />
             <Button onClick={onClick} round color="primary" size="lg">
               Get started
+            </Button>
+            <Button disabled={true} round color="info" size="lg">
+              Demo
             </Button>
           </Card>
         </GridItem>
