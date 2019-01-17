@@ -14,6 +14,14 @@ import withStyles from '@material-ui/core/styles/withStyles'
 class HomeCard extends React.Component {
   render() {
     const { classes, onClick, onDemoClick } = this.props
+    const demoAddress = process.env.REACT_APP_DEMO_ADDRESS
+    let demoBtnDisabled = demoAddress === 'undefined'
+    if (!demoBtnDisabled) {
+      demoAddress.split(',').forEach(element => {
+        /** Checks if the address length is ok **/
+        demoBtnDisabled = !(element.length % 42 === 0)
+      })
+    }
     return (
       <GridContainer className={classes.gridContainer} justify="center" alignItems="center">
         <GridItem className={classes.cardContainer}>
@@ -41,7 +49,7 @@ class HomeCard extends React.Component {
             <Button onClick={onClick} round color="primary" size="lg">
               Get started
             </Button>
-            <Button round color="info" size="lg" onClick={onDemoClick}>
+            <Button round color="info" size="lg" onClick={onDemoClick} disabled={demoBtnDisabled}>
               Demo
             </Button>
           </Card>
