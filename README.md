@@ -10,7 +10,10 @@ Provide pro-active alert notifications that will help LPT token holders to be up
 
 
 ### Demo
-[Live version is worth thousand word](https://livepeer-alerts-frontend.herokuapp.com/)
+[Live version is worth thousand word](https://livepeer.tools/)
+
+[![Deploy to Netlify](https://www.netlify.com/img/deploy/button.svg)](https://app.netlify.com/start/deploy?repository=https://github.com/protofire/livepeer-alerts-frontend)
+
 
 ## Getting Started
 
