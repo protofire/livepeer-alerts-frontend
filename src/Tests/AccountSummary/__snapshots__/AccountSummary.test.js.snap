@@ -1,0 +1,50 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccountSummary Test Renders AccountSummary and match snapshot 1`] = `
+Array [
+  <div
+    align="center"
+    className="MuiGrid-container-2 MuiGrid-justify-xs-center-19 GridContainer-grid-1 AccountSummaryGridContainer"
+  >
+    <div
+      className="MuiGrid-item-3 GridItem-grid-99 undefined"
+    >
+      <div
+        className="Card-card-100 AccountSummaryCard"
+      >
+        <h3>
+          Loading user data
+        </h3>
+        <div
+          className="MuiCircularProgress-root-118 MuiCircularProgress-colorPrimary-121 MuiCircularProgress-indeterminate-120 spinner-progress-117"
+          role="progressbar"
+          style={
+            Object {
+              "height": 40,
+              "width": 40,
+            }
+          }
+        >
+          <svg
+            className="MuiCircularProgress-svg-123"
+            viewBox="22 22 44 44"
+          >
+            <circle
+              className="MuiCircularProgress-circle-124 MuiCircularProgress-circleIndeterminate-126"
+              cx={44}
+              cy={44}
+              fill="none"
+              r={20.2}
+              strokeWidth={3.6}
+              style={Object {}}
+            />
+          </svg>
+        </div>
+      </div>
+    </div>
+  </div>,
+  <div
+    className="Toastify"
+  />,
+]
+`;
