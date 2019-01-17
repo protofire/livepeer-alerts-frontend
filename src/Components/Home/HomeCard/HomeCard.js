@@ -17,10 +17,11 @@ class HomeCard extends React.Component {
     const demoAddress = process.env.REACT_APP_DEMO_ADDRESS
     let demoBtnDisabled = demoAddress === 'undefined'
     if (!demoBtnDisabled) {
-      demoAddress.split(',').forEach(element => {
-        /** Checks if the address length is ok **/
-        demoBtnDisabled = !(element.length % 42 === 0)
-      })
+      demoAddress &&
+        demoAddress.split(',').forEach(element => {
+          /** Checks if the address length is ok **/
+          demoBtnDisabled = !(element.length % 42 === 0)
+        })
     }
     return (
       <GridContainer className={classes.gridContainer} justify="center" alignItems="center">
