@@ -49,9 +49,9 @@ class HomeCard extends React.Component {
             <Button onClick={onClick} round color="primary" size="lg">
               Get started
             </Button>
-            <Button round color="info" size="lg" onClick={onDemoClick} disabled={demoBtnDisabled}>
+            {/*            <Button round color="info" size="lg" onClick={onDemoClick} disabled={demoBtnDisabled}>
               Demo
-            </Button>
+            </Button>*/}
           </Card>
         </GridItem>
       </GridContainer>
