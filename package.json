@@ -85,5 +85,10 @@
       "!<rootDir>/node_modules/",
       "!<rootDir>/src/assets/**"
     ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-push": "npm run test && npm run lint"
+    }
   }
 }
