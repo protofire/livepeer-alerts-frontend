@@ -92,10 +92,7 @@ export class AccountSummaryComponent extends Component {
         address = addresses && addresses[Math.floor(Math.random() * addresses.length)]
       } else {
         /** The user does not have addresses on the env var, we redirect to the home page **/
-        //this.props.history.push('/')
-
-        const addresses = stringAddresses && stringAddresses.split(',')
-        address = addresses && addresses[Math.floor(Math.random() * addresses.length)]
+        this.props.history.push('/')
       }
     }
     this.setState(
