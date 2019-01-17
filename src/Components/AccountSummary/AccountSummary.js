@@ -83,8 +83,8 @@ export class AccountSummaryComponent extends Component {
 
   getRandomAddress = () => {
     /** Returns a random address for demo version **/
-    let stringAddresses = process.env.REACT_APP_DEMO_ADDRESS
-    let addresses = stringAddresses && stringAddresses.split(',')
+    const stringAddresses = process.env.REACT_APP_DEMO_ADDRESS
+    const addresses = stringAddresses && stringAddresses.split(',')
     return addresses && addresses[Math.floor(Math.random() * addresses.length)]
   }
 
