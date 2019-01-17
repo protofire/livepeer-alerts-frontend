@@ -152,7 +152,7 @@ exports[`HomeCard test HomeCard test 1`] = `
         />
       </button>
       <button
-        className="MuiButtonBase-root-235 MuiButton-root-209 MuiButton-text-211 MuiButton-flat-214 RegularButton-button-180 RegularButton-lg-203 RegularButton-info-183 RegularButton-round-205 RegularButton-disabled-202"
+        className="MuiButtonBase-root-235 MuiButton-root-209 MuiButton-text-211 MuiButton-flat-214 RegularButton-button-180 RegularButton-lg-203 RegularButton-info-183 RegularButton-round-205"
         disabled={false}
         onBlur={[Function]}
         onFocus={[Function]}
