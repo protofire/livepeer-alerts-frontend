@@ -85,9 +85,6 @@ const Reward = props => {
     return messages[status][type]
   }
 
-  // Add class to hide some blocks, buttons and description
-  const classHidden = disableOrHide ? ` ${classes.gridItemHidden}` : ''
-
   return (
     <>
       <GridItem className={classes.itemsContainerFull} lg={12} md={12} xs={12}>
@@ -100,24 +97,28 @@ const Reward = props => {
           </p>
         </Card>
       </GridItem>
-      <GridItem className={classes.buttonsContainer + classHidden} lg={12} md={12} xs={12}>
-        <CopyToClipboard text={telegramLink}>
-          <Button
-            className={classes.subscriptionBtn}
-            onClick={openTelegramLink}
-            disabled={disableOrHide}
-            color="info"
-            round
-            size="lg"
-          >
-            Telegram
-          </Button>
-        </CopyToClipboard>
-        {subscriptionBtn}
-      </GridItem>
-      <GridItem className={classes.itemsContainerFull + classHidden} lg={12} md={12} xs={12}>
-        <p className={classes.subscribeText}>Don't miss your LFT reward. Subscribe now!</p>
-      </GridItem>
+      {disableOrHide ? null : (
+        <>
+          <GridItem className={classes.buttonsContainer} lg={12} md={12} xs={12}>
+            <CopyToClipboard text={telegramLink}>
+              <Button
+                className={classes.subscriptionBtn}
+                onClick={openTelegramLink}
+                disabled={disableOrHide}
+                color="info"
+                round
+                size="lg"
+              >
+                Telegram
+              </Button>
+            </CopyToClipboard>
+            {subscriptionBtn}
+          </GridItem>
+          <GridItem className={classes.itemsContainerFull} lg={12} md={12} xs={12}>
+            <p className={classes.subscribeText}>Don't miss your LFT reward. Subscribe now!</p>
+          </GridItem>
+        </>
+      )}
     </>
   )
 }
