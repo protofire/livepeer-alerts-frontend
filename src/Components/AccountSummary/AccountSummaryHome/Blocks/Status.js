@@ -41,18 +41,25 @@ const Status = props => {
 
   return (
     <>
-      <Card className={classes.cardItem}>
+      <Card className={`${classes.cardItem} ${classes.alignFlexEnd}`}>
         <div className={classes.topInfo}>
-          <h3 className={`${classes.walletTitle} ${classes.lessMarginBottom}`}>{status}</h3>
+          <h3
+            className={`${classes.walletTitle} ${classes.rewardTitleBig} ${
+              classes.lessMarginBottom
+            }`}
+          >
+            {status}
+          </h3>
           {messageForBonded()}
         </div>
         <div className={`${classes.blockData}`}>
           {tableData.map((item, index) => {
             return (
               <div className={`${classes.blockDataItem}`} key={index}>
-                <h3 className={`${classes.blockDataItemMainTitle}`}>{item.title}</h3>
                 <p className={`${classes.blockDataItemValue}`}>{item.data}</p>
-                <h4 className={`${classes.blockDataItemTitle}`}>{item.currency}</h4>
+                <h4 className={`${classes.blockDataItemTitle}`}>
+                  {item.title} {item.currency}
+                </h4>
               </div>
             )
           })}
