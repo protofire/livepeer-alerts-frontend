@@ -1,8 +1,9 @@
 import React from 'react'
 import { configure, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import AccountSummarySubscriptionFormDisplay from '../../Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummaryFormDisplay/AccountSummarySubscriptionFormDisplay'
-import * as displayTexts from '../../Components/AccountSummary/AccountSummaryTexts'
+import AccountSummarySubscriptionFormDisplay from '../../../../Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummaryFormDisplay/AccountSummarySubscriptionFormDisplay'
+import * as displayTexts from '../../../../Components/AccountSummary/AccountSummaryTexts'
+import render from 'react-test-renderer'
 
 configure({ adapter: new Adapter() })
 
@@ -34,20 +35,52 @@ const props = {
   displayMsg: displayTexts.LOADING_SUBSCRIPTION_DATA
 }
 
-describe('Render AccountSummarySubscriptionForm', () => {
+describe('AccountSummarySubscriptionFormDisplay Tests', () => {
+  it('Renders AccountSummarySubscriptionFormDisplay and match snapshot', () => {
+    // Given
+
+    let wrapper = render.create(<AccountSummarySubscriptionFormDisplay {...props} />)
+
+    // When
+    const tree = wrapper.toJSON()
+
+    // Then
+    expect(tree).toMatchSnapshot()
+  })
+
   it('Shows Welcome Message', () => {
+    //Given
     const message = 'Subscribe:'
+
+    // When
     let wrapper = mount(<AccountSummarySubscriptionFormDisplay {...props} />)
+
+    //Then
     expect(wrapper.contains(message)).toEqual(true)
   })
+
   it('Renders Input email text', () => {
+    // Given
     let wrapper = mount(<AccountSummarySubscriptionFormDisplay {...props} />)
-    expect(wrapper.find('.InputElement').length).toEqual(1)
+
+    //When
+    const input = wrapper.find('.InputElement')
+
+    //Then
+    expect(input.length).toEqual(1)
   })
+
   it('Renders Subscribe btn', () => {
+    //Given
     const message = 'Subscribe'
     let wrapper = mount(<AccountSummarySubscriptionFormDisplay {...props} />)
-    expect(wrapper.find('RegularButton').length).toEqual(1)
-    expect(wrapper.contains(message)).toEqual(true)
+
+    //When
+    const buttons = wrapper.find('RegularButton')
+    const messages = wrapper.contains(message)
+
+    //Then
+    expect(buttons.length).toEqual(2)
+    expect(messages).toEqual(true)
   })
 })

@@ -8,7 +8,7 @@ import render from 'react-test-renderer'
 configure({ adapter: new Adapter() })
 
 describe('Renders home message', () => {
-  it('Renders home message if user auth', () => {
+  it('Renders home message if user auth and match snapshot', () => {
     // Given
     let props = {
       web3: [],
@@ -30,6 +30,7 @@ describe('Renders home message', () => {
   })
 
   it('Renders error message if user not auth', () => {
+    // Given
     const toastFn = jest.fn()
     let props = {
       web3: [],
@@ -45,10 +46,16 @@ describe('Renders home message', () => {
       },
       toastOpenedHandlerTest: toastFn
     }
+
+    // When
     let wrapper = shallow(<HomeComponent {...props} />)
+
+    // Then
     expect(toastFn).toBeCalledWith(texts.NO_PERMISSIONS)
   })
+
   it('Renders error message if user does not have Metamask installed', () => {
+    // Given
     const toastFn = jest.fn()
     let props = {
       web3: null,
@@ -64,7 +71,11 @@ describe('Renders home message', () => {
         }
       }
     }
+
+    // When
     let wrapper = shallow(<HomeComponent {...props} />)
+
+    // Then
     expect(toastFn).toBeCalledWith(texts.NO_WEB3)
   })
 })

@@ -3,7 +3,7 @@ import { configure, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import * as jest from 'jest'
 import axios from 'axios'
-import HomeCard from '../../../Components/Home/HomeCard/HomeCard'
+import AccountSummaryHome from '../../../Components/AccountSummary/AccountSummaryHome/AccountSummaryHome'
 import render from 'react-test-renderer'
 
 configure({ adapter: new Adapter() })
@@ -43,16 +43,34 @@ const response = {
 }
 
 jest.mock('axios')
-
-describe('HomeCard test', () => {
-  it('HomeCard test', () => {
+/** TODO -- Enable again when the enzyme bug of conditional rendering is solved **/
+describe('AccountSummaryHome tests', () => {
+  it('Renders AccountSummaryHome and match snapshot', () => {
     // Given
-    let wrapper = render.create(<HomeCard {...props} />)
+
+    let wrapper = render.create(<AccountSummaryHome {...props} />)
 
     // When
     const tree = wrapper.toJSON()
 
     // Then
     expect(tree).toMatchSnapshot()
+  })
+
+  it('Renders Unsubscription button if user is auth', () => {
+    const propsNotAuth = {
+      ...props,
+      userData: {
+        ...props.userData,
+        isSubscribed: true
+      }
+    }
+    let wrapper = mount(<AccountSummaryHome {...propsNotAuth} />)
+    wrapper = wrapper.update()
+    let textBtn = wrapper
+      .find('Button')
+      .at(1)
+      .text()
+    expect(textBtn === 'Unsubscribe').toEqual(true)
   })
 })

@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Renders home message Renders home message if user auth 1`] = `
+exports[`Renders home message Renders home message if user auth and match snapshot 1`] = `
 Array [
   <div
     className="MuiGrid-container-42 MuiGrid-align-items-xs-center-50 MuiGrid-justify-xs-center-59 GridContainer-grid-41 HomeCard-gridContainer-40"
@@ -49,7 +49,7 @@ Array [
             <p
               className="InfoArea-description-170"
             >
-              We provide pro-active alert notifications that will help LPT token holders to be updated about how the transcoders are performing in near real time
+              We provide pro-active alert notifications that will help LPT token holders to be updated about how the delegates are performing in near real time
             </p>
           </div>
         </div>
@@ -148,6 +148,31 @@ Array [
             className="MuiButton-label-210"
           >
             Get started
+          </span>
+          <span
+            className="MuiTouchRipple-root-238"
+          />
+        </button>
+        <button
+          className="MuiButtonBase-root-235 MuiButton-root-209 MuiButton-text-211 MuiButton-flat-214 RegularButton-button-180 RegularButton-lg-203 RegularButton-info-183 RegularButton-round-205 RegularButton-disabled-202"
+          disabled={false}
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex="0"
+          type="button"
+        >
+          <span
+            className="MuiButton-label-210"
+          >
+            Demo
           </span>
           <span
             className="MuiTouchRipple-root-238"
