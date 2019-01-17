@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Button test Should render a Button and check snapshot 1`] = `
+<button
+  className="MuiButtonBase-root-56 MuiButton-root-30 MuiButton-text-32 MuiButton-flat-35 RegularButton-button-1"
+  disabled={false}
+  onBlur={[Function]}
+  onFocus={[Function]}
+  onKeyDown={[Function]}
+  onKeyUp={[Function]}
+  onMouseDown={[Function]}
+  onMouseLeave={[Function]}
+  onMouseUp={[Function]}
+  onTouchEnd={[Function]}
+  onTouchMove={[Function]}
+  onTouchStart={[Function]}
+  tabIndex="0"
+  type="button"
+>
+  <span
+    className="MuiButton-label-31"
+  >
+    Test
+  </span>
+  <span
+    className="MuiTouchRipple-root-59"
+  />
+</button>
+`;
