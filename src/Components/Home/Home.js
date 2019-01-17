@@ -19,6 +19,12 @@ export class HomeComponent extends Component {
     logger.log('Fire event getStartedBtnHandler')
     this.props.history.push('/account')
   }
+
+  onDemoBtnHandler = () => {
+    logger.log('Fire event demoBtnHandler')
+    this.props.history.push('/account/demo')
+  }
+
   sendToast = (toastTime, callback) => {
     let time = 2000
     if (toastTime) {
@@ -69,7 +75,7 @@ export class HomeComponent extends Component {
   render() {
     return (
       <>
-        <HomeCard onClick={this.onGetStartedBtnHandler} />
+        <HomeCard onClick={this.onGetStartedBtnHandler} onDemoClick={this.onDemoBtnHandler} />
         <ToastContainer autoClose={2000} />
       </>
     )

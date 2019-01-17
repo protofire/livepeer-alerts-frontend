@@ -157,6 +157,7 @@ Array [
           className="MuiButtonBase-root-235 MuiButton-root-209 MuiButton-text-211 MuiButton-flat-214 RegularButton-button-180 RegularButton-lg-203 RegularButton-info-183 RegularButton-round-205 RegularButton-disabled-202"
           disabled={false}
           onBlur={[Function]}
+          onClick={[Function]}
           onFocus={[Function]}
           onKeyDown={[Function]}
           onKeyUp={[Function]}
