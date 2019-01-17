@@ -2,54 +2,54 @@
 
 exports[`AccountSummaryHome tests Renders AccountSummaryHome and match snapshot 1`] = `
 <div
-  className="MuiGrid-container-32 MuiGrid-justify-xs-center-49 GridContainer-grid-31 AccountSummaryHome-gridContainer-1"
+  className="MuiGrid-container-34 MuiGrid-justify-xs-center-51 GridContainer-grid-33 AccountSummaryHome-gridContainer-1"
 >
   <div
-    className="MuiGrid-item-33 MuiGrid-grid-xs-12-72 MuiGrid-grid-md-12-100 MuiGrid-grid-lg-12-114 GridItem-grid-129 AccountSummaryHome-itemsContainer-4"
+    className="MuiGrid-item-35 MuiGrid-grid-xs-12-74 MuiGrid-grid-md-12-102 MuiGrid-grid-lg-12-116 GridItem-grid-131 AccountSummaryHome-itemsContainer-4"
   >
     <div
-      className="Card-card-130 AccountSummaryHome-cardItem-6"
+      className="Card-card-132 AccountSummaryHome-cardItem-6 AccountSummaryHome-alignFlexEnd-7"
     >
       <div
-        className="AccountSummaryHome-logoMetamask-7"
+        className="AccountSummaryHome-logoMetamask-8"
       >
         <img
           alt=""
-          className="AccountSummaryHome-logoMetamaskImg-8"
+          className="AccountSummaryHome-logoMetamaskImg-9"
           src="metamask.svg"
         />
       </div>
       <h3
-        className="AccountSummaryHome-walletTitle-9"
+        className="AccountSummaryHome-walletTitle-10"
         title="0x4d3F9184Fc32A43BAD2641b1536B52a076FBBDcE"
       >
         0x4d3F91...76FBBDcE
       </h3>
       <div
-        className="AccountSummaryHome-blockData-16"
+        className="AccountSummaryHome-blockData-18"
       >
         <div
-          className="AccountSummaryHome-blockDataItem-17"
+          className="AccountSummaryHome-blockDataItem-19"
         >
           <p
-            className="AccountSummaryHome-blockDataItemValue-18"
+            className="AccountSummaryHome-blockDataItemValue-20"
           />
           <h4
-            className="AccountSummaryHome-blockDataItemTitle-19"
+            className="AccountSummaryHome-blockDataItemTitle-21"
           >
             LPT
           </h4>
         </div>
         <div
-          className="AccountSummaryHome-blockDataItem-17"
+          className="AccountSummaryHome-blockDataItem-19"
         >
           <p
-            className="AccountSummaryHome-blockDataItemValue-18"
+            className="AccountSummaryHome-blockDataItemValue-20"
           >
             ethBalance
           </p>
           <h4
-            className="AccountSummaryHome-blockDataItemTitle-19"
+            className="AccountSummaryHome-blockDataItemTitle-21"
           >
             ETH
           </h4>
@@ -57,18 +57,18 @@ exports[`AccountSummaryHome tests Renders AccountSummaryHome and match snapshot 
       </div>
     </div>
     <div
-      className="Card-card-130 AccountSummaryHome-cardItem-6"
+      className="Card-card-132 AccountSummaryHome-cardItem-6 AccountSummaryHome-alignFlexEnd-7"
     >
       <div
-        className="AccountSummaryHome-topInfo-14"
+        className="AccountSummaryHome-topInfo-16"
       >
         <h3
-          className="AccountSummaryHome-walletTitle-9 AccountSummaryHome-lessMarginBottom-13"
+          className="AccountSummaryHome-walletTitle-10 AccountSummaryHome-rewardTitleBig-12 AccountSummaryHome-lessMarginBottom-15"
         >
           Bonded
         </h3>
         <p
-          className="AccountSummaryHome-walletInfo-15"
+          className="AccountSummaryHome-walletInfo-17"
         >
           Bonded to delegate
            
@@ -84,41 +84,35 @@ exports[`AccountSummaryHome tests Renders AccountSummaryHome and match snapshot 
         </p>
       </div>
       <div
-        className="AccountSummaryHome-blockData-16"
+        className="AccountSummaryHome-blockData-18"
       >
         <div
-          className="AccountSummaryHome-blockDataItem-17"
+          className="AccountSummaryHome-blockDataItem-19"
         >
-          <h3
-            className="AccountSummaryHome-blockDataItemMainTitle-20"
-          >
-            Stake
-          </h3>
           <p
-            className="AccountSummaryHome-blockDataItemValue-18"
+            className="AccountSummaryHome-blockDataItemValue-20"
           />
           <h4
-            className="AccountSummaryHome-blockDataItemTitle-19"
+            className="AccountSummaryHome-blockDataItemTitle-21"
           >
+            Stake
+             
             LPT
           </h4>
         </div>
         <div
-          className="AccountSummaryHome-blockDataItem-17"
+          className="AccountSummaryHome-blockDataItem-19"
         >
-          <h3
-            className="AccountSummaryHome-blockDataItemMainTitle-20"
-          >
-            Earning fees
-          </h3>
           <p
-            className="AccountSummaryHome-blockDataItemValue-18"
+            className="AccountSummaryHome-blockDataItemValue-20"
           >
             0
           </p>
           <h4
-            className="AccountSummaryHome-blockDataItemTitle-19"
+            className="AccountSummaryHome-blockDataItemTitle-21"
           >
+            Earning fees
+             
             ETH
           </h4>
         </div>
@@ -126,28 +120,28 @@ exports[`AccountSummaryHome tests Renders AccountSummaryHome and match snapshot 
     </div>
   </div>
   <div
-    className="MuiGrid-item-33 MuiGrid-grid-xs-12-72 MuiGrid-grid-md-12-100 MuiGrid-grid-lg-12-114 GridItem-grid-129 AccountSummaryHome-itemsContainerFull-5"
+    className="MuiGrid-item-35 MuiGrid-grid-xs-12-74 MuiGrid-grid-md-12-102 MuiGrid-grid-lg-12-116 GridItem-grid-131 AccountSummaryHome-itemsContainerFull-5"
   >
     <div
-      className="Card-card-130 AccountSummaryHome-cardItem-6"
+      className="Card-card-132 AccountSummaryHome-cardItem-6"
     >
       <h3
-        className="AccountSummaryHome-rewardTitle-10"
+        className="AccountSummaryHome-rewardTitle-11"
       >
         Reward Calls
       </h3>
       <p
-        className="AccountSummaryHome-rewardText-11"
+        className="AccountSummaryHome-rewardText-13"
       >
         Unfortunately the delegate has not claimed the last inflationary token rewards.
       </p>
     </div>
   </div>
   <div
-    className="MuiGrid-item-33 MuiGrid-grid-xs-12-72 MuiGrid-grid-md-12-100 MuiGrid-grid-lg-12-114 GridItem-grid-129 AccountSummaryHome-buttonsContainer-21"
+    className="MuiGrid-item-35 MuiGrid-grid-xs-12-74 MuiGrid-grid-md-12-102 MuiGrid-grid-lg-12-116 GridItem-grid-131 AccountSummaryHome-buttonsContainer-23"
   >
     <button
-      className="MuiButtonBase-root-202 MuiButton-root-176 MuiButton-text-178 MuiButton-flat-181 RegularButton-button-147 RegularButton-lg-170 RegularButton-info-150 RegularButton-round-172 AccountSummaryHome-subscriptionBtn-23"
+      className="MuiButtonBase-root-204 MuiButton-root-178 MuiButton-text-180 MuiButton-flat-183 RegularButton-button-149 RegularButton-lg-172 RegularButton-info-152 RegularButton-round-174 AccountSummaryHome-subscriptionBtn-25"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
@@ -164,16 +158,16 @@ exports[`AccountSummaryHome tests Renders AccountSummaryHome and match snapshot 
       type="button"
     >
       <span
-        className="MuiButton-label-177"
+        className="MuiButton-label-179"
       >
         Telegram
       </span>
       <span
-        className="MuiTouchRipple-root-205"
+        className="MuiTouchRipple-root-207"
       />
     </button>
     <button
-      className="MuiButtonBase-root-202 MuiButton-root-176 MuiButton-text-178 MuiButton-flat-181 RegularButton-button-147 RegularButton-lg-170 RegularButton-warning-152 RegularButton-round-172 AccountSummaryHome-subscriptionBtn-23"
+      className="MuiButtonBase-root-204 MuiButton-root-178 MuiButton-text-180 MuiButton-flat-183 RegularButton-button-149 RegularButton-lg-172 RegularButton-warning-154 RegularButton-round-174 AccountSummaryHome-subscriptionBtn-25"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
@@ -190,20 +184,20 @@ exports[`AccountSummaryHome tests Renders AccountSummaryHome and match snapshot 
       type="button"
     >
       <span
-        className="MuiButton-label-177"
+        className="MuiButton-label-179"
       >
         Unsubscribe
       </span>
       <span
-        className="MuiTouchRipple-root-205"
+        className="MuiTouchRipple-root-207"
       />
     </button>
   </div>
   <div
-    className="MuiGrid-item-33 MuiGrid-grid-xs-12-72 MuiGrid-grid-md-12-100 MuiGrid-grid-lg-12-114 GridItem-grid-129 AccountSummaryHome-itemsContainerFull-5"
+    className="MuiGrid-item-35 MuiGrid-grid-xs-12-74 MuiGrid-grid-md-12-102 MuiGrid-grid-lg-12-116 GridItem-grid-131 AccountSummaryHome-itemsContainerFull-5"
   >
     <p
-      className="AccountSummaryHome-subscribeText-12"
+      className="AccountSummaryHome-subscribeText-14"
     >
       Don't miss your LFT reward. Subscribe now!
     </p>

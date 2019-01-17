@@ -80,7 +80,7 @@ exports[`HomeCard test HomeCard test 1`] = `
           <h4
             className="InfoArea-title-169"
           >
-            Account information summary
+            You and Livepeer
           </h4>
           <p
             className="InfoArea-description-170"
@@ -146,31 +146,6 @@ exports[`HomeCard test HomeCard test 1`] = `
           className="MuiButton-label-210"
         >
           Get started
-        </span>
-        <span
-          className="MuiTouchRipple-root-238"
-        />
-      </button>
-      <button
-        className="MuiButtonBase-root-235 MuiButton-root-209 MuiButton-text-211 MuiButton-flat-214 RegularButton-button-180 RegularButton-lg-203 RegularButton-info-183 RegularButton-round-205"
-        disabled={false}
-        onBlur={[Function]}
-        onFocus={[Function]}
-        onKeyDown={[Function]}
-        onKeyUp={[Function]}
-        onMouseDown={[Function]}
-        onMouseLeave={[Function]}
-        onMouseUp={[Function]}
-        onTouchEnd={[Function]}
-        onTouchMove={[Function]}
-        onTouchStart={[Function]}
-        tabIndex="0"
-        type="button"
-      >
-        <span
-          className="MuiButton-label-210"
-        >
-          Demo
         </span>
         <span
           className="MuiTouchRipple-root-238"

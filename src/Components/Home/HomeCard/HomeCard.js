@@ -13,7 +13,7 @@ import withStyles from '@material-ui/core/styles/withStyles'
 
 class HomeCard extends React.Component {
   render() {
-    const { classes, onClick, onDemoClick } = this.props
+    const { classes, onClick } = this.props
     const demoAddress = process.env.REACT_APP_DEMO_ADDRESS
     let demoBtnDisabled = typeof demoAddress === 'undefined' || demoAddress.length === 0
     if (!demoBtnDisabled && demoAddress) {
@@ -37,7 +37,7 @@ class HomeCard extends React.Component {
               description="You can see also a summary of your account information and your livepeer balance"
               icon={Group}
               iconColor="info"
-              title="Account information summary"
+              title="You and Livepeer"
             />
             <InfoArea
               description=""
@@ -49,9 +49,9 @@ class HomeCard extends React.Component {
             <Button onClick={onClick} round color="primary" size="lg">
               Get started
             </Button>
-            <Button round color="info" size="lg" onClick={onDemoClick} disabled={demoBtnDisabled}>
+            {/*            <Button round color="info" size="lg" onClick={onDemoClick} disabled={demoBtnDisabled}>
               Demo
-            </Button>
+            </Button>*/}
           </Card>
         </GridItem>
       </GridContainer>

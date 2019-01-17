@@ -6,7 +6,6 @@ import Card from '../../../Common/UI/Card/Card.js'
 const Wallet = props => {
   const { classes, userData, lpBalance } = props
   const { address, ethBalance } = userData
-
   const tableData = [
     {
       currency: 'LPT',
@@ -17,7 +16,6 @@ const Wallet = props => {
       data: ethBalance
     }
   ]
-
   return (
     <Card className={`${classes.cardItem} ${classes.alignFlexEnd}`}>
       <div className={classes.logoMetamask}>

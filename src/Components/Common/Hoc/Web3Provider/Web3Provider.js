@@ -167,29 +167,41 @@ class Web3Provider extends Component {
           })
           /** We subscribe to the event that detects if the user has changed the account **/
           window.ethereum.on('accountsChanged', accounts => {
-            logger.log('ETHEREUM CHANGED')
-            logger.log('ACCOUNTS ', accounts)
-            this.setState({
-              userData: {
-                ...this.state.userData,
-                address: this.toChecksumAddress(web3Instance, accounts[0])
-              }
+            logger.log('Account Changed ', accounts)
+            this.getUserBalance(web3Instance, accounts[0]).then(balance => {
+              balance = web3Instance.utils.fromWei(balance, 'ether')
+              this.setState({
+                userData: {
+                  ...this.state.userData,
+                  address: this.toChecksumAddress(web3Instance, accounts[0]),
+                  ethBalance: balance
+                }
+              })
             })
           })
           /** We subscribe to the event that detects if the user has changed the network **/
           window.ethereum.on('networkChanged', network => {
-            logger.log('NETWORK CHANGED')
-            logger.log('NETWORK ', network)
+            logger.log('Network changed ', network)
+            balance = web3Instance.utils.fromWei(balance, 'ether')
             this.setState({
               userData: {
                 ...this.state.userData,
-                currentNetwork: network
+                currentNetwork: network,
+                ethBalance: balance
               }
             })
           })
         })
       }
     })
+  }
+
+  getUserBalance = async (web3Instance, address) => {
+    let balance = 0
+    if (web3Instance && address) {
+      balance = await web3Instance.eth.getBalance(address)
+    }
+    return balance
   }
 
   async componentDidMount() {
