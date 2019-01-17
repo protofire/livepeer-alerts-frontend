@@ -3,6 +3,7 @@ import Card from '../../../Common/UI/Card/Card.js'
 import GridItem from '../../../Common/UI/Grid/GridItem.js'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import Button from '../../../Common/UI/CustomButtons/Button'
+import Parser from 'html-react-parser'
 
 const Reward = props => {
   const { classes, userData, summary } = props
@@ -82,7 +83,7 @@ const Reward = props => {
       }
     }
 
-    return messages[status][type]
+    return Parser(messages[status][type])
   }
 
   // Add class to hide some blocks, buttons and description

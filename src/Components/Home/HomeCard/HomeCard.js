@@ -37,7 +37,7 @@ class HomeCard extends React.Component {
               description="You can see also a summary of your account information and your livepeer balance"
               icon={Group}
               iconColor="info"
-              title="Account information summary"
+              title="You and Livepeer"
             />
             <InfoArea
               description=""
