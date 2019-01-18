@@ -181,6 +181,12 @@ const AccountSummaryStyle = {
   tableTitle: {
     fontSize: '16px',
     fontWeight: '500'
+  },
+  iconSuccess: {
+    color: 'green'
+  },
+  iconError: {
+    color: 'red'
   }
 }
 

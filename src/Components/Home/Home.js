@@ -26,7 +26,7 @@ export class HomeComponent extends Component {
   }
 
   sendToast = (toastTime, callback) => {
-    let time = 2000
+    let time = 3500
     if (toastTime) {
       time = toastTime
     }
