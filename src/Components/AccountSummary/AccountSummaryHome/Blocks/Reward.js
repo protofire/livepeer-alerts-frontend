@@ -55,9 +55,9 @@ const Reward = props => {
 
     const delegateAddressUrl = `https://explorer.livepeer.org/accounts/${delegateAddress}/transcoding`
 
-    return `Bonded to delegate <a href=${delegateAddressUrl} target="_blank" rel="noopener noreferrer">${truncateStringInTheMiddle(
+    return `<br>(You are bonded to delegate <a href=${delegateAddressUrl} target="_blank" rel="noopener noreferrer">${truncateStringInTheMiddle(
       delegateAddress
-    )}</a> at round ${startRound}.`
+    )}</a> since round ${startRound}.`
   }
 
   const getRewardMessage = data => {
@@ -65,8 +65,9 @@ const Reward = props => {
     let bondedDescription
 
     if (delegateCalledReward) {
-      bondedDescription = `${messageForBonded(data)}<br><br>
-The delegate has successfully claimed the last inflationary token rewards.`
+      bondedDescription = `The delegate has successfully claimed the last inflationary token rewards. ${messageForBonded(
+        data
+      )}<br><br>`
     } else {
       bondedDescription = `${messageForBonded(data)}<br><br>
 Unfortunately the delegate has not claimed the last inflationary token rewards.`
@@ -74,7 +75,7 @@ Unfortunately the delegate has not claimed the last inflationary token rewards.`
 
     const messages = {
       Bonded: {
-        title: `Reward Calls`,
+        title: `Delegate reward calling status`,
         description: bondedDescription
       },
       Pending: {
@@ -86,14 +87,8 @@ Unfortunately the delegate has not claimed the last inflationary token rewards.`
         description: `You still have to wait a few moments to get finally Unbonded.`
       },
       Unbonded: {
-        title: `You are currently in the Unbonded state`,
-        description: `A delegator starts off in the Unbonded state by default and also enters the Unbonded state if it fully unbonds.<br><br>
-Add value to the network, bond to a delegate
-            <a
-              href="https://explorer.livepeer.org/transcoders"
-              target="_blank"
-              rel="noopener noreferrer"
-            > here </a>`
+        title: `Your current status is: Unbonded`,
+        description: `As a delegator you are in the Unbounded state if you are not bonded to any delegate yet or if you have unbonded your tokens completely.`
       }
     }
 
@@ -136,7 +131,18 @@ Add value to the network, bond to a delegate
             {subscriptionBtn}
           </GridItem>
           <GridItem className={classes.itemsContainerFull} lg={12} md={12} xs={12}>
-            <p className={classes.subscribeText}>Don't miss your LFT reward. Subscribe now!</p>
+            <p className={classes.subscribeText}>
+              Don't miss your
+              <a
+                href="https://forum.livepeer.org/t/why-you-should-bond-your-new-livepeer-tokens-lpt-detailed-version/418"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                {' '}
+                LPT reward.{' '}
+              </a>
+              Subscribe now!
+            </p>
           </GridItem>
         </>
       )}
