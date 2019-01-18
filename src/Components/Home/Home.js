@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 import { withRouter } from 'react-router-dom'
 import logdown from 'logdown'
-
 const logger = logdown('Livepeer:Home')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
 
