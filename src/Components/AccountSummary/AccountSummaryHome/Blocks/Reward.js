@@ -4,11 +4,12 @@ import GridItem from '../../../Common/UI/Grid/GridItem.js'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import Button from '../../../Common/UI/CustomButtons/Button'
 import Parser from 'html-react-parser'
+import { truncateStringInTheMiddle } from '../../../../utils'
 
 const Reward = props => {
   const { classes, userData, summary } = props
   const { isSubscribed, address } = userData
-  const { status, delegateCalledReward } = summary
+  const { status, delegateCalledReward, delegateAddress, startRound } = summary
   const disableOrHide = status !== 'Bonded'
 
   let subscriptionBtn
@@ -45,14 +46,30 @@ const Reward = props => {
     window.open(telegramLink, '_blank')
   }
 
+  const messageForBonded = data => {
+    const { status, startRound, delegateAddress } = data
+
+    if (status !== 'Bonded') {
+      return
+    }
+
+    const delegateAddressUrl = `https://explorer.livepeer.org/accounts/${delegateAddress}/transcoding`
+
+    return `Bonded to delegate <a href=${delegateAddressUrl} target="_blank" rel="noopener noreferrer">${truncateStringInTheMiddle(
+      delegateAddress
+    )}</a> at round ${startRound}.`
+  }
+
   const getRewardMessage = data => {
     const { status, type, delegateCalledReward } = data
     let bondedDescription
 
     if (delegateCalledReward) {
-      bondedDescription = `The delegate has successfully claimed the last inflationary token rewards.`
+      bondedDescription = `${messageForBonded(data)}<br><br>
+The delegate has successfully claimed the last inflationary token rewards.`
     } else {
-      bondedDescription = `Unfortunately the delegate has not claimed the last inflationary token rewards.`
+      bondedDescription = `${messageForBonded(data)}<br><br>
+Unfortunately the delegate has not claimed the last inflationary token rewards.`
     }
 
     const messages = {
@@ -61,20 +78,17 @@ const Reward = props => {
         description: bondedDescription
       },
       Pending: {
-        title: `Delegation is pending`,
-        description: `Your LPT is getting deluded by the protocol's token inflation. Add value to the network, bond to a transcoder <a
-              href="https://explorer.livepeer.org/transcoders"
-              target="_blank"
-              rel="noopener noreferrer"
-            >`
+        title: `You are currently in the Pending state`,
+        description: `A delegator enters the Pending state when it bonds from the Unbonded state.`
       },
       Unbonding: {
-        title: `You are currently unbonding from your delegate`,
-        description: `You still have to wait a few moments to get finally unbonded.`
+        title: `You are currently in the Unbonding state`,
+        description: `You still have to wait a few moments to get finally Unbonded.`
       },
       Unbonded: {
-        title: `You've been unbonded from your delegate`,
-        description: `Add value to the network, bond to a delegate
+        title: `You are currently in the Unbonded state`,
+        description: `A delegator starts off in the Unbonded state by default and also enters the Unbonded state if it fully unbonds.<br><br>
+Add value to the network, bond to a delegate
             <a
               href="https://explorer.livepeer.org/transcoders"
               target="_blank"
@@ -94,7 +108,13 @@ const Reward = props => {
             {getRewardMessage({ status, type: 'title', delegateCalledReward })}
           </h3>
           <p className={classes.rewardText}>
-            {getRewardMessage({ status, type: 'description', delegateCalledReward })}
+            {getRewardMessage({
+              status,
+              type: 'description',
+              delegateCalledReward,
+              startRound,
+              delegateAddress
+            })}
           </p>
         </Card>
       </GridItem>

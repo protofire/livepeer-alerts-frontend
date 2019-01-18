@@ -65,23 +65,8 @@ exports[`AccountSummaryHome tests Renders AccountSummaryHome and match snapshot 
         <h3
           className="AccountSummaryHome-walletTitle-10 AccountSummaryHome-rewardTitleBig-12 AccountSummaryHome-lessMarginBottom-15"
         >
-          Bonded
+          BONDED
         </h3>
-        <p
-          className="AccountSummaryHome-walletInfo-17"
-        >
-          Bonded to delegate
-           
-          <a
-            href="https://explorer.livepeer.org/accounts/undefined"
-            rel="noopener noreferrer"
-            target="_blank"
-          />
-           
-          at round 
-          0
-           
-        </p>
       </div>
       <div
         className="AccountSummaryHome-blockData-18"
@@ -133,7 +118,19 @@ exports[`AccountSummaryHome tests Renders AccountSummaryHome and match snapshot 
       <p
         className="AccountSummaryHome-rewardText-13"
       >
-        Unfortunately the delegate has not claimed the last inflationary token rewards.
+        Bonded to delegate 
+        <a
+          href="https://explorer.livepeer.org/accounts/undefined/transcoding"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
+          undefined
+        </a>
+         at round 0.
+        <br />
+        <br />
+        
+Unfortunately the delegate has not claimed the last inflationary token rewards.
       </p>
     </div>
   </div>

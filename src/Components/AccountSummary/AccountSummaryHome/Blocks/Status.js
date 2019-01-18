@@ -1,10 +1,9 @@
 import React from 'react'
-import { truncateStringInTheMiddle } from '../../../../utils'
 import Card from '../../../Common/UI/Card/Card.js'
 
 const Status = props => {
   const { summary } = props
-  const { stake, fees, status, delegateAddress, startRound } = summary
+  const { stake, fees, status } = summary
   const tableData = [
     {
       title: 'Stake',
@@ -19,25 +18,7 @@ const Status = props => {
   ]
   const { classes } = props
 
-  const messageForBonded = () => {
-    if (status !== 'Bonded') {
-      return
-    }
-
-    const delegateAddressUrl = `https://explorer.livepeer.org/accounts/${delegateAddress}`
-
-    return (
-      <>
-        <p className={classes.walletInfo}>
-          Bonded to delegate{' '}
-          <a href={delegateAddressUrl} target="_blank" rel="noopener noreferrer">
-            {truncateStringInTheMiddle(delegateAddress)}
-          </a>{' '}
-          at round {startRound}{' '}
-        </p>
-      </>
-    )
-  }
+  const statusUppercase = status.toUpperCase()
 
   return (
     <>
@@ -48,9 +29,8 @@ const Status = props => {
               classes.lessMarginBottom
             }`}
           >
-            {status}
+            {statusUppercase}
           </h3>
-          {messageForBonded()}
         </div>
         <div className={`${classes.blockData}`}>
           {tableData.map((item, index) => {
