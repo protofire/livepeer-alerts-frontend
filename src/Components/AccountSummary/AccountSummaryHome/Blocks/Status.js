@@ -6,13 +6,13 @@ const Status = props => {
   const { stake, fees, status } = summary
   const tableData = [
     {
-      title: 'Stake',
-      currency: 'LPT',
+      title: 'Staked',
+      currency: '(LPT)',
       data: stake
     },
     {
       title: 'Earning fees',
-      currency: 'ETH',
+      currency: '(ETH)',
       data: fees
     }
   ]
