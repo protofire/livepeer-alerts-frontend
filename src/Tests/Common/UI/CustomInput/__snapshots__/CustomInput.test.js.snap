@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Custom input test Should render a Custom Input and check snapshot 1`] = `
+<div
+  className="MuiFormControl-root-12 CustomInput-formControl-8"
+>
+  <div
+    className="MuiInputBase-root-29 MuiInput-root-16 MuiInput-underline-20 CustomInput-underline-2 MuiInputBase-formControl-30 MuiInput-formControl-17"
+    onClick={[Function]}
+  >
+    <input
+      aria-invalid={false}
+      className="MuiInputBase-input-39 MuiInput-input-24 CustomInput-input-10"
+      disabled={false}
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      required={false}
+      type="text"
+    />
+  </div>
+</div>
+`;
