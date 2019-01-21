@@ -209,7 +209,6 @@ export class AccountSummarySubscriptionForm extends Component {
 
     if (this.state.render) {
       if (this.state.userData && this.state.userData.isSubscribed) {
-        console.log('acc summary')
         content = <AccountSummaryModalEmail onEmailModalClosed={this.onEmailModalClosed} />
       } else {
         content = (
