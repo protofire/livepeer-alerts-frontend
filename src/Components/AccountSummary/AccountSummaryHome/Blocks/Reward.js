@@ -7,7 +7,7 @@ import Button from '../../../Common/UI/CustomButtons/Button'
 const Reward = props => {
   const { classes, userData, summary } = props
   const { isSubscribed, address } = userData
-  const { status, delegateCalledReward, delegateAddress, startRound } = summary
+  const { status } = summary
   const disableOrHide = status !== 'Bonded'
 
   let subscriptionBtn
@@ -21,6 +21,7 @@ const Reward = props => {
         round
         size="lg"
       >
+        <i className="fas fa-envelope" />
         Unsubscribe
       </Button>
     )
@@ -34,6 +35,7 @@ const Reward = props => {
         round
         size="lg"
       >
+        <i className="fas fa-envelope" />
         Email
       </Button>
     )
@@ -57,10 +59,11 @@ const Reward = props => {
                 className={classes.subscriptionBtn}
                 onClick={openTelegramLink}
                 disabled={disableOrHide}
-                color="info"
+                color="twitter"
                 round
                 size="lg"
               >
+                <i className="fab fa-telegram-plane" />
                 Telegram
               </Button>
             </CopyToClipboard>
