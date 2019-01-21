@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`GridContainer test Should render an Input and check snapshot 1`] = `
-<div
-  className="MuiGrid-container-2 GridContainer-grid-1 undefined"
-/>
-`;
