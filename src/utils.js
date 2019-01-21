@@ -1,3 +1,5 @@
+import BigNumber from 'bignumber.js'
+
 const truncateStringInTheMiddle = (
   str,
   strLength = 41,
@@ -13,4 +15,8 @@ const truncateStringInTheMiddle = (
   return str
 }
 
-export { truncateStringInTheMiddle }
+const decimalPlaces = (x = 0, decimals = 4) => {
+  return new BigNumber(x).decimalPlaces(decimals).toString()
+}
+
+export { truncateStringInTheMiddle, decimalPlaces }

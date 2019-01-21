@@ -4,7 +4,6 @@ import React, { Component } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 import { withRouter } from 'react-router-dom'
 import logdown from 'logdown'
-
 const logger = logdown('Livepeer:Home')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
 
@@ -26,7 +25,7 @@ export class HomeComponent extends Component {
   }
 
   sendToast = (toastTime, callback) => {
-    let time = 2000
+    let time = 3500
     if (toastTime) {
       time = toastTime
     }

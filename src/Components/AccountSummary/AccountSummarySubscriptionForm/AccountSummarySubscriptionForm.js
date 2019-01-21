@@ -6,6 +6,7 @@ import axios from 'axios'
 import validator from 'validator'
 import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
+import AccountSummaryModalEmail from './AccountSummaryFormDisplay/AccountSummaryModalEmail/AccountSummaryModalEmail'
 
 const logger = logdown('Livepeer:AccountSummarySubscriptionForm')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
@@ -33,7 +34,8 @@ export class AccountSummarySubscriptionForm extends Component {
     frequency: 'daily',
     render: false,
     toastId: '1',
-    displayMsg: displayTexts.LOADING_SUBSCRIPTION_DATA
+    displayMsg: displayTexts.LOADING_SUBSCRIPTION_DATA,
+    userSubscribed: false
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
@@ -67,7 +69,7 @@ export class AccountSummarySubscriptionForm extends Component {
       },
       async () => {
         await this.generateSubscription(data, () => {
-          this.props.history.push('/account')
+          //    this.props.history.push('/account')
         })
       }
     )
@@ -75,7 +77,11 @@ export class AccountSummarySubscriptionForm extends Component {
 
   onCancelBtnHandler = event => {
     logger.log('Cancel btnHandler')
+    this.props.history.push('/account')
+  }
 
+  onEmailModalClosed = event => {
+    logger.log('Email modal closed')
     this.props.history.push('/account')
   }
 
@@ -94,7 +100,7 @@ export class AccountSummarySubscriptionForm extends Component {
             createdAt: response.data.createdAt,
             isSubscribed: true
           },
-          render: false,
+          render: true,
           error: false,
           displayMsg: displayTexts.WELCOME_NEW_SUBSCRIBER
         },
@@ -107,7 +113,10 @@ export class AccountSummarySubscriptionForm extends Component {
       let responseMsg = exception.response.data.message
       let displayMsg
       /** Email already exists **/
-      if (responseMsg && responseMsg === displayTexts.FAIL_EMAIL_ALREADY_EXISTS_RESPONSE) {
+      if (
+        (responseMsg && responseMsg === displayTexts.FAIL_EMAIL_ALREADY_EXISTS_RESPONSE) ||
+        exception.response.status === 422
+      ) {
         displayMsg = displayTexts.EMAIL_ALREADY_EXISTS
       } else {
         displayMsg = displayTexts.FAIL_NO_REASON
@@ -199,14 +208,18 @@ export class AccountSummarySubscriptionForm extends Component {
     let content = <SpinnerExtended displayMsg={this.state.displayMsg} />
 
     if (this.state.render) {
-      content = (
-        <AccountSummarySubscriptionFormDisplay
-          form={this.state.form}
-          onSubmitBtnHandler={this.onSubmitBtnHandler}
-          onCancelBtnHandler={this.onCancelBtnHandler}
-          inputChangedHandler={this.inputChangedHandler}
-        />
-      )
+      if (this.state.userData && this.state.userData.isSubscribed) {
+        content = <AccountSummaryModalEmail onEmailModalClosed={this.onEmailModalClosed} />
+      } else {
+        content = (
+          <AccountSummarySubscriptionFormDisplay
+            form={this.state.form}
+            onSubmitBtnHandler={this.onSubmitBtnHandler}
+            onCancelBtnHandler={this.onCancelBtnHandler}
+            inputChangedHandler={this.inputChangedHandler}
+          />
+        )
+      }
     }
 
     return (
