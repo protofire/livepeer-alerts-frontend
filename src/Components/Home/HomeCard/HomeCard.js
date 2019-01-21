@@ -1,6 +1,5 @@
 import Button from '../../Common/UI/CustomButtons/Button.js'
 import Card from '../../Common/UI/Card/Card.js'
-import Code from '@material-ui/icons/Code'
 import GridContainer from '../../Common/UI/Grid/GridContainer.js'
 import GridItem from '../../Common/UI/Grid/GridItem.js'
 import Group from '@material-ui/icons/Group'
@@ -10,7 +9,6 @@ import PropTypes from 'prop-types'
 import React from 'react'
 import homeCardStyle from '../../../assets/jss/dashboard/views/homeCardStyle'
 import withStyles from '@material-ui/core/styles/withStyles'
-import Icon from '@material-ui/core/Icon'
 
 class HomeCard extends React.Component {
   render() {
