@@ -48,7 +48,7 @@ function Footer({ ...props }) {
           <p>
             {1900 + new Date().getYear()}{' '}
             <a href="https://www.protofire.io" className={`${anchor} ${classes.a}`}>
-              Protofire.
+              Protofire.io.
             </a>{' '}
             <a href="https://github.com/protofire" className={`${anchor} ${classes.a}`}>
               Github
