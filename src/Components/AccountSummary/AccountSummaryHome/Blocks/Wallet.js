@@ -1,5 +1,5 @@
 import React from 'react'
-import { truncateStringInTheMiddle } from '../../../../utils'
+import { truncateStringInTheMiddle, decimalPlaces } from '../../../../utils'
 import metamaskImage from '../../../../assets/img/logos/metamask.svg'
 import Card from '../../../Common/UI/Card/Card.js'
 
@@ -13,7 +13,7 @@ const Wallet = props => {
     },
     {
       currency: 'ETH',
-      data: ethBalance
+      data: decimalPlaces(ethBalance)
     }
   ]
   return (

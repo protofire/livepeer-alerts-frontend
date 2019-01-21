@@ -13,7 +13,7 @@ exports[`HomeCard test HomeCard test 1`] = `
       <h2
         className="HomeCard-cardTitle-26"
       >
-        Livepeer Notifications
+        Tools for the Livepeer Network
       </h2>
       <div
         className="InfoArea-infoArea-157 "
@@ -48,7 +48,7 @@ exports[`HomeCard test HomeCard test 1`] = `
           <p
             className="InfoArea-description-170"
           >
-            We provide pro-active alert notifications that will help LPT token holders to be updated about how the delegates are performing in near real time
+            Subscribe to receive alert notifications on how your LPTs are performing based on the token inflation and whether your delegate is calling the reward (you earn) or not (you loose)
           </p>
         </div>
       </div>
@@ -85,44 +85,7 @@ exports[`HomeCard test HomeCard test 1`] = `
           <p
             className="InfoArea-description-170"
           >
-            You can see also a summary of your account information and your livepeer balance
-          </p>
-        </div>
-      </div>
-      <div
-        className="InfoArea-infoArea-157 InfoArea-noCentered-158"
-      >
-        <div
-          className="InfoArea-iconWrapper-159 InfoArea-primary-160"
-        >
-          <svg
-            aria-hidden="true"
-            className="MuiSvgIcon-root-171 InfoArea-icon-167"
-            focusable="false"
-            role="presentation"
-            viewBox="0 0 24 24"
-          >
-            <path
-              d="M0 0h24v24H0V0z"
-              fill="none"
-            />
-            <path
-              d="M9.4 16.6L4.8 12l4.6-4.6L8 6l-6 6 6 6 1.4-1.4zm5.2 0l4.6-4.6-4.6-4.6L16 6l6 6-6 6-1.4-1.4z"
-            />
-          </svg>
-        </div>
-        <div
-          className="InfoArea-descriptionWrapper-168"
-        >
-          <h4
-            className="InfoArea-title-169"
-          >
-            Open source
-          </h4>
-          <p
-            className="InfoArea-description-170"
-          >
-            
+            A Dashboard that provides an at-a-glance view of your participation in the network and receive tips on how to improve your earnings.
           </p>
         </div>
       </div>
