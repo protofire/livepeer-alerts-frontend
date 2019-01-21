@@ -1,0 +1,44 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Footer test  Should render footer and check snapshot 1`] = `
+<footer
+  className="Footer-footer-4 Footer-container-5"
+>
+  <div
+    className="MuiGrid-container-15 MuiGrid-justify-xs-space-between-34 GridContainer-grid-14 undefined"
+  >
+    <div
+      className="MuiGrid-container-15 MuiGrid-item-16 MuiGrid-align-items-xs-center-23 MuiGrid-grid-xs-12-55 MuiGrid-grid-sm-6-63 MuiGrid-grid-md-6-77 GridItem-grid-112 Footer-responsiveFooterElements-11 Footer-responsiveFooterElementsLeft-12"
+    >
+      <a
+        className="Footer-block-1 Footer-a-7"
+        href="/"
+        onClick={[Function]}
+      >
+        Terms and conditions
+      </a>
+    </div>
+    <div
+      className="MuiGrid-container-15 MuiGrid-item-16 MuiGrid-align-items-xs-center-23 MuiGrid-grid-xs-12-55 MuiGrid-grid-sm-6-63 MuiGrid-grid-md-6-77 GridItem-grid-112 Footer-responsiveFooterElements-11 Footer-responsiveFooterElementsRight-13"
+    >
+      <p>
+        2019
+         
+        <a
+          className="Footer-a-7 Footer-a-7"
+          href="https://www.protofire.io"
+        >
+          Protofire.
+        </a>
+         
+        <a
+          className="Footer-a-7 Footer-a-7"
+          href="https://github.com/protofire"
+        >
+          Github
+        </a>
+      </p>
+    </div>
+  </div>
+</footer>
+`;
