@@ -46,11 +46,13 @@ function Footer({ ...props }) {
           xs={12}
         >
           <p>
-            &copy; {1900 + new Date().getYear()}{' '}
+            {1900 + new Date().getYear()}{' '}
             <a href="https://www.protofire.io" className={`${anchor} ${classes.a}`}>
-              Protofire
+              Protofire.
             </a>{' '}
-            made with love for a better web
+            <a href="https://github.com/protofire" className={`${anchor} ${classes.a}`}>
+              Github
+            </a>
           </p>
         </GridItem>
       </GridContainer>
