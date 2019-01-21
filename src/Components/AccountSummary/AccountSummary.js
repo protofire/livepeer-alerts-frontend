@@ -28,7 +28,7 @@ export class AccountSummaryComponent extends Component {
       fees: '',
       lastClaimRound: '',
       startRound: '',
-      status: 'Bonded',
+      status: '',
       withdrawRound: '',
       stake: '',
       delegateCalledReward: false
@@ -288,10 +288,6 @@ export class AccountSummaryComponent extends Component {
         )
       }
     }
-  }
-
-  onSubscriptionChangeHandler = () => {
-    logger.log('Fire event onSubscriptionChangeHandler')
   }
 
   render() {
