@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccountSummarySubscriptionFormDisplay Tests Renders AccountSummarySubscriptionFormDisplay and match snapshot 1`] = `
+<div
+  className="MuiGrid-container-8 MuiGrid-align-items-xs-center-16 MuiGrid-justify-xs-center-25 GridContainer-grid-7 accountSummarySubscriptionFormDisplay-gridContainer-4"
+>
+  <div
+    className="MuiGrid-item-9 GridItem-grid-105 accountSummarySubscriptionFormDisplay-cardContainer-3"
+  >
+    <div
+      className="Card-card-106 accountSummarySubscriptionFormDisplay-cardSignup-5"
+    >
+      <h2
+        className="accountSummarySubscriptionFormDisplay-cardTitle-2"
+      >
+        Subscribe:
+      </h2>
+      <form>
+        <div
+          className="Input"
+        >
+          <label
+            className="Label"
+          />
+          <input
+            className="InputElement"
+            onChange={[Function]}
+            placeholder="Your E-Mail"
+            type="email"
+            value=""
+          />
+        </div>
+        <button
+          className="MuiButtonBase-root-178 MuiButton-root-152 MuiButton-text-154 MuiButton-flat-157 RegularButton-button-123 RegularButton-lg-146 RegularButton-warning-128 RegularButton-round-148 accountSummarySubscriptionFormDisplay-subscribeButton-6"
+          disabled={false}
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex="0"
+          type="button"
+        >
+          <span
+            className="MuiButton-label-153"
+          >
+            Cancel
+          </span>
+          <span
+            className="MuiTouchRipple-root-181"
+          />
+        </button>
+        <button
+          className="MuiButtonBase-root-178 MuiButton-root-152 MuiButton-text-154 MuiButton-flat-157 RegularButton-button-123 RegularButton-lg-146 RegularButton-primary-125 RegularButton-round-148 RegularButton-disabled-145 accountSummarySubscriptionFormDisplay-subscribeButton-6"
+          disabled={false}
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onKeyDown={[Function]}
+          onKeyUp={[Function]}
+          onMouseDown={[Function]}
+          onMouseLeave={[Function]}
+          onMouseUp={[Function]}
+          onTouchEnd={[Function]}
+          onTouchMove={[Function]}
+          onTouchStart={[Function]}
+          tabIndex="0"
+          type="button"
+        >
+          <span
+            className="MuiButton-label-153"
+          >
+            Subscribe
+          </span>
+          <span
+            className="MuiTouchRipple-root-181"
+          />
+        </button>
+      </form>
+    </div>
+  </div>
+</div>
+`;
