@@ -137,25 +137,45 @@ exports[`AccountSummaryHome tests Renders AccountSummaryHome and match snapshot 
       <h3
         className="AccountSummaryHome-rewardTitle-11"
       >
+        <span
+          className="emoji-mart-emoji"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          title={null}
+        >
+          <span
+            style={
+              Object {
+                "backgroundImage": "url(https://unpkg.com/emoji-datasource-apple@4.0.4/img/apple/sheets-256/64.png)",
+                "backgroundPosition": "29.41176470588235% 5.88235294117647%",
+                "backgroundSize": "5200% 5200%",
+                "display": "inline-block",
+                "height": 18,
+                "width": 18,
+              }
+            }
+          />
+        </span>
+         
         Delegate reward calling status
       </h3>
       <p
         className="AccountSummaryHome-rewardText-13"
       >
-        <br />
-        (You are bonded to delegate 
+        Unfortunately the delegate has not claimed the last inflationary token rewards.
+         You are bonded to delegate
+         
         <a
           href="https://explorer.livepeer.org/accounts/undefined/transcoding"
           rel="noopener noreferrer"
           target="_blank"
-        >
-          undefined
-        </a>
-         since round 0.
-        <br />
-        <br />
-        
-Unfortunately the delegate has not claimed the last inflationary token rewards.
+        />
+         
+        since round 
+        0
+        .
+         
       </p>
     </div>
   </div>
