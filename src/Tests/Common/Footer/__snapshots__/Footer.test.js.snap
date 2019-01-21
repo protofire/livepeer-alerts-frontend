@@ -28,7 +28,7 @@ exports[`Footer test  Should render footer and check snapshot 1`] = `
           className="Footer-a-7 Footer-a-7"
           href="https://www.protofire.io"
         >
-          Protofire.
+          Protofire.io.
         </a>
          
         <a
