@@ -163,8 +163,7 @@ exports[`AccountSummaryHome tests Renders AccountSummaryHome and match snapshot 
       <p
         className="AccountSummaryHome-rewardText-13"
       >
-        Unfortunately the delegate has not claimed the last inflationary token rewards.
-         You are bonded to delegate
+        You are bonded to delegate
          
         <a
           href="https://explorer.livepeer.org/accounts/undefined/transcoding"
@@ -172,9 +171,11 @@ exports[`AccountSummaryHome tests Renders AccountSummaryHome and match snapshot 
           target="_blank"
         />
          
-        since round 
+        since round #
         0
         .
+        <br />
+        Unfortunately the delegate has not claimed the last inflationary token rewards.
          
       </p>
     </div>
@@ -183,7 +184,7 @@ exports[`AccountSummaryHome tests Renders AccountSummaryHome and match snapshot 
     className="MuiGrid-item-37 MuiGrid-grid-xs-12-76 MuiGrid-grid-md-12-104 MuiGrid-grid-lg-12-118 GridItem-grid-133 AccountSummaryHome-buttonsContainer-23"
   >
     <button
-      className="MuiButtonBase-root-213 MuiButton-root-187 MuiButton-text-189 MuiButton-flat-192 RegularButton-button-158 RegularButton-lg-181 RegularButton-info-161 RegularButton-round-183 AccountSummaryHome-subscriptionBtn-25"
+      className="MuiButtonBase-root-213 MuiButton-root-187 MuiButton-text-189 MuiButton-flat-192 RegularButton-button-158 RegularButton-lg-181 RegularButton-twitter-167 RegularButton-round-183 AccountSummaryHome-subscriptionBtn-25"
       disabled={false}
       onBlur={[Function]}
       onClick={[Function]}
@@ -202,6 +203,9 @@ exports[`AccountSummaryHome tests Renders AccountSummaryHome and match snapshot 
       <span
         className="MuiButton-label-188"
       >
+        <i
+          className="fab fa-telegram-plane"
+        />
         Telegram
       </span>
       <span
@@ -228,6 +232,9 @@ exports[`AccountSummaryHome tests Renders AccountSummaryHome and match snapshot 
       <span
         className="MuiButton-label-188"
       >
+        <i
+          className="fas fa-envelope"
+        />
         Unsubscribe
       </span>
       <span
