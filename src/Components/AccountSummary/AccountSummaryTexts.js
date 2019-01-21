@@ -1,4 +1,4 @@
-export const LOADING_USER_DATA = 'Loading user data'
+export const LOADING_USER_DATA = 'Loading your data'
 export const WELCOME_AGAIN = 'Welcome Again! '
 export const WELCOME_NEW_SUBSCRIBER = 'Welcome to Livepeer! '
 export const WELCOME_NOT_SUBSCRIBED = 'Welcome to Livepeer!'
