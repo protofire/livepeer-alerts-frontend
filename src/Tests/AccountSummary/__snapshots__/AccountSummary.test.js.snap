@@ -13,7 +13,7 @@ Array [
         className="Card-card-100 AccountSummaryCard"
       >
         <h3>
-          Loading user data
+          Loading your data
         </h3>
         <div
           className="MuiCircularProgress-root-118 MuiCircularProgress-colorPrimary-121 MuiCircularProgress-indeterminate-120 spinner-progress-117"
