@@ -1,7 +1,0 @@
-// Jest Snapshot v1, https://goo.gl/fbAQLP
-
-exports[`CardText test Should render a cardText and check snapshot 1`] = `
-<div
-  className="CardText-cardText-1"
-/>
-`;
