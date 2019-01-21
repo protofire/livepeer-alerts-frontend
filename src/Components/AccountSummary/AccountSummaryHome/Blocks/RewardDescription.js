@@ -30,11 +30,12 @@ const RewardDescription = props => {
           {
             Bonded: (
               <>
-                {bondedDescription} You are bonded to delegate{' '}
+                You are bonded to delegate{' '}
                 <a href={delegateAddressUrl} target="_blank" rel="noopener noreferrer">
                   {delegateAddressTruncated}
                 </a>{' '}
-                since round {startRound}.
+                since round #{startRound}.<br />
+                {bondedDescription}
               </>
             ),
             Pending: `A delegator enters the Pending state when it bonds from the Unbonded state.`,
