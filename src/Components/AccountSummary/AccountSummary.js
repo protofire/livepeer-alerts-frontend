@@ -5,6 +5,7 @@ import SpinnerExtended from '../Common/UI/SpinnerExtended/SpinnerExtended'
 import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
+import { DelegatorSummary } from '../../Model/DelegatorSummary'
 
 const logger = logdown('Livepeer:AccountSummary')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
@@ -24,26 +25,7 @@ export class AccountSummaryComponent extends Component {
     summary: {
       role: '',
       lpBalance: '',
-      delegator: {
-        address: '',
-        allowance: '0',
-        bondedAmount: '0',
-        delegateAddress: '',
-        delegatedAmount: '0',
-        fees: '0',
-        lastClaimRound: '0',
-        pendingFees: '0',
-        pendingStake: '0',
-        startRound: '0',
-        status: '',
-        withdrawRound: '0',
-        withdrawAmount: '0',
-        nextUnbondingLockId: '0',
-        totalStake: '0',
-        delegateCalledReward: false,
-        totalStakeInLPT: '0',
-        bondedAmountInLPT: '0'
-      },
+      delegator: DelegatorSummary,
       delegate: {
         active: true,
         address: '',
@@ -217,7 +199,9 @@ export class AccountSummaryComponent extends Component {
               role: summaryData.data.role,
               lpBalance: summaryData.data.balance,
               delegate: summaryData.data.transcoder ? { ...summaryData.data.transcoder } : null,
-              delegator: summaryData.data.delegator ? { ...summaryData.data.delegator } : null
+              delegator: summaryData.data.delegator
+                ? new DelegatorSummary(...summaryData.data.delegator)
+                : null
             }
           },
           () => resolve(summaryData.data)
