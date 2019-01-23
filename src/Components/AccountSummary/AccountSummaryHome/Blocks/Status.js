@@ -4,12 +4,12 @@ import Tooltip from '@material-ui/core/Tooltip'
 
 const Status = props => {
   const { summary } = props
-  const { stake, fees, status } = summary
+  const { totalStakeInLPT, fees, status } = summary
   const tableData = [
     {
       title: 'Staked',
       currency: '(LPT)',
-      data: stake,
+      data: totalStakeInLPT,
       tooltip: 'total tokens delegated toward a delegator '
     },
     {

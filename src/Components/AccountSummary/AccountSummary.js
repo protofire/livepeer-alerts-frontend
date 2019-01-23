@@ -25,19 +25,27 @@ export class AccountSummaryComponent extends Component {
       role: '',
       lpBalance: '',
       delegator: {
-        bondedAmount: '',
+        address: '',
+        allowance: '0',
+        bondedAmount: '0',
         delegateAddress: '',
-        delegatedAmount: '',
-        fees: '',
-        lastClaimRound: '',
-        startRound: '',
+        delegatedAmount: '0',
+        fees: '0',
+        lastClaimRound: '0',
+        pendingFees: '0',
+        pendingStake: '0',
+        startRound: '0',
         status: '',
-        withdrawRound: '',
-        stake: '',
-        delegateCalledReward: false
+        withdrawRound: '0',
+        withdrawAmount: '0',
+        nextUnbondingLockId: '0',
+        totalStake: '0',
+        delegateCalledReward: false,
+        totalStakeInLPT: '0',
+        bondedAmountInLPT: '0'
       },
       delegate: {
-        active: false,
+        active: true,
         address: '',
         feeShare: '',
         lastRewardRound: '',
@@ -48,7 +56,7 @@ export class AccountSummaryComponent extends Component {
         rewardCut: '',
         status: '',
         totalStake: '',
-        transcoderCalledReward: '',
+        delegateCalledReward: false,
         totalStakeInLPT: ''
       }
     },
@@ -203,18 +211,13 @@ export class AccountSummaryComponent extends Component {
     return new Promise(async (resolve, reject) => {
       try {
         let summaryData = await axios.get('/summary/' + this.state.userData.address)
-        /** TODO REMOVE summaryData.data default case and change to : null once backend done **/
         this.setState(
           {
             summary: {
               role: summaryData.data.role,
               lpBalance: summaryData.data.balance,
-              delegate: summaryData.data.transcoder
-                ? { ...summaryData.data.transcoder }
-                : { ...summaryData.data.summary },
-              delegator: summaryData.data.delegator
-                ? { ...summaryData.data.delegator }
-                : { ...summaryData.data.summary }
+              delegate: summaryData.data.transcoder ? { ...summaryData.data.transcoder } : null,
+              delegator: summaryData.data.delegator ? { ...summaryData.data.delegator } : null
             }
           },
           () => resolve(summaryData.data)
@@ -309,14 +312,16 @@ export class AccountSummaryComponent extends Component {
 
   render() {
     let content = <SpinnerExtended displayMsg={this.state.displayMsg} />
+    /** Shows only summary information according the role (delegate or delegator) **/
     let summaryForRole = this.state.summary.delegate
       ? this.state.summary.delegate
       : this.state.summary.delegator
     let summaryProps = {
       ...summaryForRole,
       role: this.state.summary.role,
-      balance: this.state.summary.balance
+      balance: this.state.summary.lpBalance
     }
+
     if (this.state.render) {
       if (!this.state.error) {
         content = (
@@ -327,7 +332,7 @@ export class AccountSummaryComponent extends Component {
               web3={this.props.web3}
               userData={this.state.userData}
               summary={summaryProps}
-              lpBalance={this.state.lpBalance}
+              lpBalance={this.state.summary.lpBalance}
             />
           </>
         )
