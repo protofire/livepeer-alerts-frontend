@@ -1,6 +1,5 @@
 import React from 'react'
 import Card from '../../../Common/UI/Card/Card.js'
-import { truncateStringInTheMiddle } from '../../../../utils'
 import { Emoji } from 'emoji-mart'
 
 const RewardDescriptionDelegate = props => {
@@ -8,10 +7,7 @@ const RewardDescriptionDelegate = props => {
 
   const description = props => {
     const { summary } = props
-    const { status, delegateCalledReward, delegateAddress, startRound } = summary
-
-    const delegateAddressUrl = `https://explorer.livepeer.org/accounts/${delegateAddress}/transcoding`
-    const delegateAddressTruncated = truncateStringInTheMiddle(delegateAddress)
+    const { delegateCalledReward } = summary
 
     let bondedDescription
     if (delegateCalledReward) {
@@ -24,7 +20,7 @@ const RewardDescriptionDelegate = props => {
         </>
       )
     } else {
-      bondedDescription = <p>You did not has been claimed the last inflationary token rewards</p>
+      bondedDescription = <p>You did not claimed the last inflationary token rewards</p>
     }
 
     return bondedDescription

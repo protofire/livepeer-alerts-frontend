@@ -48,8 +48,8 @@ const Reward = props => {
   }
 
   let rewardDescription = <RewardDescription {...props} />
-  /** Todo change to check if its transcoder **/
-  if (true) {
+  /** If the user is a delegate we show the delegate component, otherwise we show the delegator component **/
+  if (props.summary && props.summary.delegate) {
     rewardDescription = <RewardDescriptionDelegate {...props} />
   }
 

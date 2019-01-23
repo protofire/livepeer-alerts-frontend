@@ -23,7 +23,7 @@ export class AccountSummaryComponent extends Component {
     },
     summary: {
       role: '',
-      balance: '',
+      lpBalance: '',
       delegator: {
         bondedAmount: '',
         delegateAddress: '',
@@ -203,13 +203,18 @@ export class AccountSummaryComponent extends Component {
     return new Promise(async (resolve, reject) => {
       try {
         let summaryData = await axios.get('/summary/' + this.state.userData.address)
+        /** TODO REMOVE summaryData.data default case and change to : null once backend done **/
         this.setState(
           {
             summary: {
               role: summaryData.data.role,
-              balance: summaryData.data.balance,
-              delegate: summaryData.data.transcoder ? { ...summaryData.data.transcoder } : null,
-              delegator: summaryData.data.delegator ? { ...summaryData.data.delegator } : null
+              lpBalance: summaryData.data.balance,
+              delegate: summaryData.data.transcoder
+                ? { ...summaryData.data.transcoder }
+                : { ...summaryData.data.summary },
+              delegator: summaryData.data.delegator
+                ? { ...summaryData.data.delegator }
+                : { ...summaryData.data.summary }
             }
           },
           () => resolve(summaryData.data)
@@ -304,6 +309,14 @@ export class AccountSummaryComponent extends Component {
 
   render() {
     let content = <SpinnerExtended displayMsg={this.state.displayMsg} />
+    let summaryForRole = this.state.summary.delegate
+      ? this.state.summary.delegate
+      : this.state.summary.delegator
+    let summaryProps = {
+      ...summaryForRole,
+      role: this.state.summary.role,
+      balance: this.state.summary.balance
+    }
     if (this.state.render) {
       if (!this.state.error) {
         content = (
@@ -313,7 +326,7 @@ export class AccountSummaryComponent extends Component {
               onSubscribeBtnHandler={this.onSubscribeBtnHandler}
               web3={this.props.web3}
               userData={this.state.userData}
-              summary={this.state.summary}
+              summary={summaryProps}
               lpBalance={this.state.lpBalance}
             />
           </>
