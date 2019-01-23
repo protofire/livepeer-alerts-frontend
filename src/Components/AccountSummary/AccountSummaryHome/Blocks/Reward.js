@@ -3,6 +3,7 @@ import RewardDescription from './RewardDescription'
 import GridItem from '../../../Common/UI/Grid/GridItem.js'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import Button from '../../../Common/UI/CustomButtons/Button'
+import RewardDescriptionDelegate from './RewardDescriptionDelegate'
 
 const Reward = props => {
   const { classes, userData, summary } = props
@@ -46,10 +47,16 @@ const Reward = props => {
     window.open(telegramLink, '_blank')
   }
 
+  let rewardDescription = <RewardDescription {...props} />
+  /** Todo change to check if its transcoder **/
+  if (true) {
+    rewardDescription = <RewardDescriptionDelegate {...props} />
+  }
+
   return (
     <>
       <GridItem className={classes.itemsContainerFull} lg={12} md={12} xs={12}>
-        <RewardDescription {...props} />
+        {rewardDescription}
       </GridItem>
       {disableOrHide ? null : (
         <>

@@ -22,16 +22,35 @@ export class AccountSummaryComponent extends Component {
       createdAt: null
     },
     summary: {
-      bondedAmount: '',
-      delegateAddress: '',
-      delegatedAmount: '',
-      fees: '',
-      lastClaimRound: '',
-      startRound: '',
-      status: '',
-      withdrawRound: '',
-      stake: '',
-      delegateCalledReward: false
+      role: '',
+      balance: '',
+      delegator: {
+        bondedAmount: '',
+        delegateAddress: '',
+        delegatedAmount: '',
+        fees: '',
+        lastClaimRound: '',
+        startRound: '',
+        status: '',
+        withdrawRound: '',
+        stake: '',
+        delegateCalledReward: false
+      },
+      delegate: {
+        active: false,
+        address: '',
+        feeShare: '',
+        lastRewardRound: '',
+        pricePerSegment: '',
+        pendingRewardCut: '',
+        pendingFeeShare: '',
+        pendingPricePerSegment: '',
+        rewardCut: '',
+        status: '',
+        totalStake: '',
+        transcoderCalledReward: '',
+        totalStakeInLPT: ''
+      }
     },
     render: false,
     displayMsg: displayTexts.LOADING_USER_DATA,
@@ -187,18 +206,11 @@ export class AccountSummaryComponent extends Component {
         this.setState(
           {
             summary: {
-              bondedAmount: summaryData.data.summary.bondedAmountInLPT,
-              delegateAddress: summaryData.data.summary.delegateAddress,
-              delegatedAmount: summaryData.data.summary.delegatedAmount,
-              fees: summaryData.data.summary.fees,
-              lastClaimRound: summaryData.data.summary.lastClaimRound,
-              startRound: summaryData.data.summary.startRound,
-              status: summaryData.data.summary.status,
-              stake: summaryData.data.summary.totalStakeInLPT,
-              withdrawRound: summaryData.data.summary.withdrawRound,
-              delegateCalledReward: summaryData.data.summary.delegateCalledReward
-            },
-            lpBalance: summaryData.data.balance
+              role: summaryData.data.role,
+              balance: summaryData.data.balance,
+              delegate: summaryData.data.transcoder ? { ...summaryData.data.transcoder } : null,
+              delegator: summaryData.data.delegator ? { ...summaryData.data.delegator } : null
+            }
           },
           () => resolve(summaryData.data)
         )
