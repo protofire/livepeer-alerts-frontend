@@ -6,9 +6,16 @@ import AccountSummaryStyle from '../../../assets/jss/dashboard/views/accountSumm
 import Reward from './Blocks/Reward'
 import Status from './Blocks/Status'
 import Wallet from './Blocks/Wallet'
+import StatusDelegate from './Blocks/StatusDelegate'
 
 const AccountSummaryHome = props => {
   const { classes } = props
+
+  let statusBlock = <Status {...props} />
+  /** If the user is a delegate we show the delegate component, otherwise we show the delegator component **/
+  if (props.summary && props.summary.role.toLowerCase() === 'transcoder') {
+    statusBlock = <StatusDelegate {...props} />
+  }
 
   return (
     <GridContainer className={classes.gridContainer} justify="center">
@@ -16,7 +23,7 @@ const AccountSummaryHome = props => {
         {/* Wallet block */}
         <Wallet {...props} />
         {/* Status block */}
-        <Status {...props} />
+        {statusBlock}
       </GridItem>
       {/* Reward calls */}
       <Reward {...props} />

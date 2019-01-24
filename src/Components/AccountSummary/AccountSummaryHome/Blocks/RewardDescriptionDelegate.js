@@ -13,10 +13,11 @@ const RewardDescriptionDelegate = props => {
     if (delegateCalledReward) {
       bondedDescription = (
         <>
-          <p>You has been successfully claimed the last inflationary token rewards</p>
           <p>
-            Your feeshare is {summary.feeShare}% and your reward cut is {summary.rewardCut}%
+            You has been successfully claimed the last inflationary token rewards at round{' '}
+            {summary.lastRewardRound}{' '}
           </p>
+          <p>Your feeshare is {summary.feeShare}%</p>
         </>
       )
     } else {
