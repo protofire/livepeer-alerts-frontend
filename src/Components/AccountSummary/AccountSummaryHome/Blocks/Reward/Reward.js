@@ -4,12 +4,29 @@ import GridItem from '../../../../Common/UI/Grid/GridItem.js'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import Button from '../../../../Common/UI/CustomButtons/Button'
 import RewardDescriptionDelegate from './RewardDescriptionDelegate'
+import * as toolTipsTexts from '../Status/ToolTipTexts'
 
 const Reward = props => {
   const { classes, userData, summary } = props
   const { isSubscribed, address } = userData
   const { status } = summary
-  const disableOrHide = status !== 'Bonded'
+  let disableOrHide = status !== 'Bonded'
+
+  let statusCheck = status.toUpperCase()
+  switch (statusCheck) {
+    case 'REGISTERED': {
+      disableOrHide = false
+      break
+    }
+    case 'BONDED': {
+      disableOrHide = false
+      break
+    }
+    default: {
+      disableOrHide = true
+      break
+    }
+  }
 
   let subscriptionBtn
   if (isSubscribed) {
