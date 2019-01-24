@@ -1,5 +1,5 @@
 import React from 'react'
-import Card from '../../../Common/UI/Card/Card.js'
+import Card from '../../../../Common/UI/Card/Card.js'
 import Tooltip from '@material-ui/core/Tooltip'
 import * as toolTipsTexts from './ToolTipTexts'
 

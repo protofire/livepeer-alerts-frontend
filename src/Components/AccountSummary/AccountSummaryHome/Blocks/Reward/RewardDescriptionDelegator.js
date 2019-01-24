@@ -1,6 +1,6 @@
 import React from 'react'
-import Card from '../../../Common/UI/Card/Card.js'
-import { truncateStringInTheMiddle } from '../../../../utils'
+import Card from '../../../../Common/UI/Card/Card.js'
+import { truncateStringInTheMiddle } from '../../../../../utils'
 import { Emoji } from 'emoji-mart'
 
 const RewardDescriptionDelegator = props => {

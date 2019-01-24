@@ -1,8 +1,8 @@
 import React from 'react'
 import RewardDescriptionDelegator from './RewardDescriptionDelegator'
-import GridItem from '../../../Common/UI/Grid/GridItem.js'
+import GridItem from '../../../../Common/UI/Grid/GridItem.js'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import Button from '../../../Common/UI/CustomButtons/Button'
+import Button from '../../../../Common/UI/CustomButtons/Button'
 import RewardDescriptionDelegate from './RewardDescriptionDelegate'
 
 const Reward = props => {

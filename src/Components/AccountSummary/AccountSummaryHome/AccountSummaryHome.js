@@ -3,10 +3,10 @@ import GridItem from '../../Common/UI/Grid/GridItem.js'
 import React from 'react'
 import { withStyles } from '@material-ui/core/styles'
 import AccountSummaryStyle from '../../../assets/jss/dashboard/views/accountSummaryStyle'
-import Reward from './Blocks/Reward'
-import StatusDelegator from './Blocks/StatusDelegator'
+import Reward from './Blocks/Reward/Reward'
+import StatusDelegator from './Blocks/Status/StatusDelegator'
 import Wallet from './Blocks/Wallet'
-import StatusDelegate from './Blocks/StatusDelegate'
+import StatusDelegate from './Blocks/Status/StatusDelegate'
 
 const AccountSummaryHome = props => {
   const { classes } = props
