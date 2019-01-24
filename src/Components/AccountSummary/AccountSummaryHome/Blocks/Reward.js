@@ -1,5 +1,5 @@
 import React from 'react'
-import RewardDescription from './RewardDescription'
+import RewardDescriptionDelegator from './RewardDescriptionDelegator'
 import GridItem from '../../../Common/UI/Grid/GridItem.js'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import Button from '../../../Common/UI/CustomButtons/Button'
@@ -47,7 +47,7 @@ const Reward = props => {
     window.open(telegramLink, '_blank')
   }
 
-  let rewardDescription = <RewardDescription {...props} />
+  let rewardDescription = <RewardDescriptionDelegator {...props} />
   /** If the user is a delegate we show the delegate component, otherwise we show the delegator component **/
   if (props.summary && props.summary.role.toLowerCase() === 'transcoder') {
     rewardDescription = <RewardDescriptionDelegate {...props} />

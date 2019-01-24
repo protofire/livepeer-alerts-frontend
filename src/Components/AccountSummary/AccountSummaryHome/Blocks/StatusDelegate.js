@@ -1,27 +1,28 @@
 import React from 'react'
 import Card from '../../../Common/UI/Card/Card.js'
 import Tooltip from '@material-ui/core/Tooltip'
+import * as toolTipsTexts from './ToolTipTexts'
 
 const Status = props => {
   const { summary } = props
-  const { totalStakeInLPT, rewardCut, status } = summary
+  const { totalStakeInLPT, active, status } = summary
   const tableData = [
     {
-      title: 'Staked',
+      title: 'Total Stake',
       currency: '(LPT)',
       data: totalStakeInLPT,
-      tooltip: 'total tokens delegated toward a delegator '
+      tooltip: toolTipsTexts.TOTAL_STAKE_TOOLTIP
     },
     {
-      title: 'Reward Cut',
-      currency: '(%)',
-      data: rewardCut,
-      tooltip: 'of block reward cut paid to delegate by a delegator'
+      title: 'Active',
+      currency: '',
+      data: active ? 'Yes' : 'No',
+      tooltip: toolTipsTexts.ACTIVE_TRANSCODER_TOOLTIP
     }
   ]
   const toolTips = {
-    REGISTERED: 'You are registered as delegate on livepeer network.',
-    NOTREGISTERED: 'You are not registered as delegate on livepeer network.'
+    REGISTERED: toolTipsTexts.REGISTERED_TOOLTIP,
+    NOTREGISTERED: toolTipsTexts.NOT_REGISTERED_TOOLTIP
   }
   const { classes } = props
 

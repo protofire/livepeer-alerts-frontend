@@ -1,8 +1,9 @@
 import React from 'react'
 import Card from '../../../Common/UI/Card/Card.js'
 import Tooltip from '@material-ui/core/Tooltip'
+import * as toolTipsTexts from './ToolTipTexts'
 
-const Status = props => {
+const StatusDelegator = props => {
   const { summary } = props
   const { totalStakeInLPT, fees, status } = summary
   const tableData = [
@@ -10,23 +11,20 @@ const Status = props => {
       title: 'Staked',
       currency: '(LPT)',
       data: totalStakeInLPT,
-      tooltip: 'total tokens delegated toward a delegator '
+      tooltip: toolTipsTexts.TOTAL_STAKE_TOOLTIP
     },
     {
       title: 'Earning fees',
       currency: '(ETH)',
       data: fees,
-      tooltip: 'the amount of ETH the delegator has earned'
+      tooltip: toolTipsTexts.EARNING_FEES_TOOLTIP
     }
   ]
   const toolTips = {
-    BONDED:
-      'A delegator enters the Bonded state at the start of startRound which is set after it bonds.',
-    UNBONDED:
-      'A delegator starts off in the Unbonded state by default and also enters the Unbonded state if it fully unbonds.',
-    UNBONDING: 'A delegator enters the Unbonding state when it unbounds. ',
-    PENDING:
-      'A delegator enters the Pending state when it bonds from the Unbonded state. You have to wait the Unbonding Period before you can access your token.'
+    BONDED: toolTipsTexts.BONDED_STATUS_TOOLTIP,
+    UNBONDED: toolTipsTexts.UNBONDED_STATUS_TOOLTIP,
+    UNBONDING: toolTipsTexts.UNBONDING_STATUS_TOOLTIP,
+    PENDING: toolTipsTexts.PENDING_STATUS_TOOLTIP
   }
   const { classes } = props
 
@@ -67,4 +65,4 @@ const Status = props => {
   )
 }
 
-export default Status
+export default StatusDelegator

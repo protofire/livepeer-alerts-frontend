@@ -3,7 +3,7 @@ import Card from '../../../Common/UI/Card/Card.js'
 import { truncateStringInTheMiddle } from '../../../../utils'
 import { Emoji } from 'emoji-mart'
 
-const RewardDescription = props => {
+const RewardDescriptionDelegator = props => {
   const { classes } = props
 
   const description = props => {
@@ -84,4 +84,4 @@ const RewardDescription = props => {
   )
 }
 
-export default RewardDescription
+export default RewardDescriptionDelegator
