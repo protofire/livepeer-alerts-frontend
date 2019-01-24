@@ -7,7 +7,7 @@ const RewardDescriptionDelegate = props => {
 
   const title = props => {
     const { summary } = props
-    const { status, delegateCalledReward } = summary
+    const { delegateCalledReward } = summary
 
     return (
       <>
