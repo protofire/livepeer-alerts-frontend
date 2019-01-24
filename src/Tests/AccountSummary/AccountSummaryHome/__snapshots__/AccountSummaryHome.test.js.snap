@@ -1,0 +1,265 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`AccountSummaryHome tests Renders AccountSummaryHome and match snapshot 1`] = `
+<div
+  className="MuiGrid-container-36 MuiGrid-justify-xs-center-53 GridContainer-grid-35 AccountSummaryHome-gridContainer-1"
+>
+  <div
+    className="MuiGrid-item-37 MuiGrid-grid-xs-12-76 MuiGrid-grid-md-12-104 MuiGrid-grid-lg-12-118 GridItem-grid-133 AccountSummaryHome-itemsContainer-4"
+  >
+    <div
+      className="Card-card-134 AccountSummaryHome-cardItem-6 AccountSummaryHome-alignFlexEnd-7"
+    >
+      <div
+        className="AccountSummaryHome-logoMetamask-8"
+      >
+        <img
+          alt=""
+          className="AccountSummaryHome-logoMetamaskImg-9"
+          src="metamask.svg"
+        />
+      </div>
+      <h3
+        className="AccountSummaryHome-walletTitle-10"
+        title="0x4d3F9184Fc32A43BAD2641b1536B52a076FBBDcE"
+      >
+        0x4d3F91...76FBBDcE
+      </h3>
+      <div
+        className="AccountSummaryHome-blockData-18"
+      >
+        <div
+          className="AccountSummaryHome-blockDataItem-19"
+        >
+          <p
+            className="AccountSummaryHome-blockDataItemValue-20"
+          />
+          <h4
+            className="AccountSummaryHome-blockDataItemTitle-21"
+          >
+            LPT
+          </h4>
+        </div>
+        <div
+          className="AccountSummaryHome-blockDataItem-19"
+        >
+          <p
+            className="AccountSummaryHome-blockDataItemValue-20"
+          >
+            NaN
+          </p>
+          <h4
+            className="AccountSummaryHome-blockDataItemTitle-21"
+          >
+            ETH
+          </h4>
+        </div>
+      </div>
+    </div>
+    <div
+      className="Card-card-134 AccountSummaryHome-cardItem-6 AccountSummaryHome-alignFlexEnd-7"
+    >
+      <div
+        className="AccountSummaryHome-topInfo-16"
+      >
+        <h3
+          aria-describedby={null}
+          className="AccountSummaryHome-walletTitle-10 AccountSummaryHome-rewardTitleBig-12 AccountSummaryHome-lessMarginBottom-15"
+          onBlur={[Function]}
+          onFocus={[Function]}
+          onMouseLeave={[Function]}
+          onMouseOver={[Function]}
+          onTouchEnd={[Function]}
+          onTouchStart={[Function]}
+          title="A delegator enters the Bonded state at the start of startRound which is set after it bonds."
+        >
+          BONDED
+        </h3>
+      </div>
+      <div
+        className="AccountSummaryHome-blockData-18"
+      >
+        <div
+          className="AccountSummaryHome-blockDataItem-19"
+        >
+          <p
+            className="AccountSummaryHome-blockDataItemValue-20"
+          />
+          <h4
+            aria-describedby={null}
+            className="AccountSummaryHome-blockDataItemTitle-21"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOver={[Function]}
+            onTouchEnd={[Function]}
+            onTouchStart={[Function]}
+            title="Total tokens delegated toward a delegator"
+          >
+            Staked
+             
+            (LPT)
+          </h4>
+        </div>
+        <div
+          className="AccountSummaryHome-blockDataItem-19"
+        >
+          <p
+            className="AccountSummaryHome-blockDataItemValue-20"
+          >
+            0
+          </p>
+          <h4
+            aria-describedby={null}
+            className="AccountSummaryHome-blockDataItemTitle-21"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOver={[Function]}
+            onTouchEnd={[Function]}
+            onTouchStart={[Function]}
+            title="the amount of ETH the delegator has earned"
+          >
+            Earning fees
+             
+            (ETH)
+          </h4>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    className="MuiGrid-item-37 MuiGrid-grid-xs-12-76 MuiGrid-grid-md-12-104 MuiGrid-grid-lg-12-118 GridItem-grid-133 AccountSummaryHome-itemsContainerFull-5"
+  >
+    <div
+      className="Card-card-134 AccountSummaryHome-cardItem-6"
+    >
+      <h3
+        className="AccountSummaryHome-rewardTitle-11"
+      >
+        <span
+          className="emoji-mart-emoji"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          title={null}
+        >
+          <span
+            style={
+              Object {
+                "backgroundImage": "url(https://unpkg.com/emoji-datasource-apple@4.0.4/img/apple/sheets-256/64.png)",
+                "backgroundPosition": "29.41176470588235% 5.88235294117647%",
+                "backgroundSize": "5200% 5200%",
+                "display": "inline-block",
+                "height": 18,
+                "width": 18,
+              }
+            }
+          />
+        </span>
+         
+        Delegate reward calling status
+      </h3>
+      <p
+        className="AccountSummaryHome-rewardText-13"
+      >
+        You are bonded to delegate
+         
+        <a
+          href="https://explorer.livepeer.org/accounts/undefined/transcoding"
+          rel="noopener noreferrer"
+          target="_blank"
+        />
+         
+        since round #
+        0
+        .
+        <br />
+        Unfortunately the delegate has not claimed the last inflationary token rewards.
+         
+      </p>
+    </div>
+  </div>
+  <div
+    className="MuiGrid-item-37 MuiGrid-grid-xs-12-76 MuiGrid-grid-md-12-104 MuiGrid-grid-lg-12-118 GridItem-grid-133 AccountSummaryHome-buttonsContainer-23"
+  >
+    <button
+      className="MuiButtonBase-root-213 MuiButton-root-187 MuiButton-text-189 MuiButton-flat-192 RegularButton-button-158 RegularButton-lg-181 RegularButton-twitter-167 RegularButton-round-183 AccountSummaryHome-subscriptionBtn-25"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex="0"
+      type="button"
+    >
+      <span
+        className="MuiButton-label-188"
+      >
+        <i
+          className="fab fa-telegram-plane"
+        />
+        Telegram
+      </span>
+      <span
+        className="MuiTouchRipple-root-216"
+      />
+    </button>
+    <button
+      className="MuiButtonBase-root-213 MuiButton-root-187 MuiButton-text-189 MuiButton-flat-192 RegularButton-button-158 RegularButton-lg-181 RegularButton-warning-163 RegularButton-round-183 AccountSummaryHome-subscriptionBtn-25"
+      disabled={false}
+      onBlur={[Function]}
+      onClick={[Function]}
+      onFocus={[Function]}
+      onKeyDown={[Function]}
+      onKeyUp={[Function]}
+      onMouseDown={[Function]}
+      onMouseLeave={[Function]}
+      onMouseUp={[Function]}
+      onTouchEnd={[Function]}
+      onTouchMove={[Function]}
+      onTouchStart={[Function]}
+      tabIndex="0"
+      type="button"
+    >
+      <span
+        className="MuiButton-label-188"
+      >
+        <i
+          className="fas fa-envelope"
+        />
+        Unsubscribe
+      </span>
+      <span
+        className="MuiTouchRipple-root-216"
+      />
+    </button>
+  </div>
+  <div
+    className="MuiGrid-item-37 MuiGrid-grid-xs-12-76 MuiGrid-grid-md-12-104 MuiGrid-grid-lg-12-118 GridItem-grid-133 AccountSummaryHome-itemsContainerFull-5"
+  >
+    <p
+      className="AccountSummaryHome-subscribeText-14"
+    >
+      Don't miss your
+      <a
+        href="https://forum.livepeer.org/t/why-you-should-bond-your-new-livepeer-tokens-lpt-detailed-version/418"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
+         
+        LPT reward.
+         
+      </a>
+      Subscribe now!
+    </p>
+  </div>
+</div>
+`;
