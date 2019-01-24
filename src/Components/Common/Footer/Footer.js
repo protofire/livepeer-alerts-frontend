@@ -1,7 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles'
 import GridContainer from '../../Common/UI/Grid/GridContainer.js'
@@ -9,6 +9,7 @@ import GridItem from '../../Common/UI/Grid/GridItem.js'
 
 import footerStyle from '../../../assets/jss/dashboard/components/footerStyle'
 import { Link } from 'react-router-dom'
+import { Emoji } from 'emoji-mart'
 
 function Footer({ ...props }) {
   const { classes, white } = props
@@ -50,8 +51,11 @@ function Footer({ ...props }) {
             <a href="https://www.protofire.io" className={`${anchor} ${classes.a}`}>
               Protofire.io.
             </a>{' '}
-            <a href="https://github.com/protofire" className={`${anchor} ${classes.a}`}>
-              Github
+            <a
+              href="https://github.com/protofire/livepeer-alerts-frontend"
+              className={`${anchor} ${classes.a}`}
+            >
+              <i className="fab fa-github" />
             </a>
           </p>
         </GridItem>
