@@ -21,19 +21,43 @@ class HomeCard extends React.Component {
         demoBtnDisabled = !(element.length % 42 === 0)
       })
     }
+
+    const proactiveAlertDescription = (
+      <>
+        <p>
+          As a <strong>Token Holder</strong> get to know how your LPTs are performing based on the
+          token inflation and whether your delegate is calling the reward (you earn) or not (you
+          loose)
+        </p>
+        <p>
+          As a <strong>Transcoder</strong> be notified if there was something wrong with your node
+          and the reward was not called in the current round automatically.
+        </p>
+      </>
+    )
+
+    const youAndLivepeerDescription = (
+      <>
+        <p>
+          A Dashboard that provides an at-a-glance view of your participation in the network and
+          receive tips on how to improve your earnings.
+        </p>
+      </>
+    )
+
     return (
       <GridContainer className={classes.gridContainer} justify="center" alignItems="center">
         <GridItem className={classes.cardContainer}>
           <Card className={classes.cardSignup}>
             <h2 className={classes.cardTitle}>Tools for the Livepeer Network</h2>
             <InfoArea
-              description="Subscribe to receive alert notifications on how your LPTs are performing based on the token inflation and whether your delegate is calling the reward (you earn) or not (you loose)"
+              description={proactiveAlertDescription}
               icon={Notifications}
               iconColor="rose"
               title="Pro-active alert notifications"
             />
             <InfoArea
-              description="A Dashboard that provides an at-a-glance view of your participation in the network and receive tips on how to improve your earnings."
+              description={youAndLivepeerDescription}
               icon={Group}
               iconColor="info"
               title="You and Livepeer"

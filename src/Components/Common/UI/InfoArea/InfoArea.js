@@ -14,7 +14,7 @@ function InfoArea({ ...props }) {
       </div>
       <div className={classes.descriptionWrapper}>
         <h4 className={classes.title}>{title}</h4>
-        <p className={classes.description}>{description}</p>
+        <div className={classes.description}>{description}</div>
       </div>
     </div>
   )
@@ -28,7 +28,7 @@ InfoArea.propTypes = {
   classes: PropTypes.object.isRequired,
   icon: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
-  description: PropTypes.string.isRequired,
+  description: PropTypes.object.isRequired,
   iconColor: PropTypes.oneOf(['primary', 'warning', 'danger', 'success', 'info', 'rose', 'gray'])
 }
 
