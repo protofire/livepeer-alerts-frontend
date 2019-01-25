@@ -4,7 +4,6 @@ import GridItem from '../../../../Common/UI/Grid/GridItem.js'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import Button from '../../../../Common/UI/CustomButtons/Button'
 import RewardDescriptionDelegate from './RewardDescriptionDelegate'
-import * as toolTipsTexts from '../Status/ToolTipTexts'
 
 const Reward = props => {
   const { classes, userData, summary } = props
