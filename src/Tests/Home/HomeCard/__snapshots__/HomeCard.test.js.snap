@@ -45,11 +45,24 @@ exports[`HomeCard test HomeCard test 1`] = `
           >
             Pro-active alert notifications
           </h4>
-          <p
+          <div
             className="InfoArea-description-170"
           >
-            Subscribe to receive alert notifications on how your LPTs are performing based on the token inflation and whether your delegate is calling the reward (you earn) or not (you loose)
-          </p>
+            <p>
+              As a 
+              <strong>
+                Token Holder
+              </strong>
+               get to know how your LPTs are performing based on the token inflation and whether your delegate is calling the reward (you earn) or not (you loose)
+            </p>
+            <p>
+              As a 
+              <strong>
+                Transcoder
+              </strong>
+               be notified if there was something wrong with your node and the reward was not called in the current round automatically.
+            </p>
+          </div>
         </div>
       </div>
       <div
@@ -82,11 +95,13 @@ exports[`HomeCard test HomeCard test 1`] = `
           >
             You and Livepeer
           </h4>
-          <p
+          <div
             className="InfoArea-description-170"
           >
-            A Dashboard that provides an at-a-glance view of your participation in the network and receive tips on how to improve your earnings.
-          </p>
+            <p>
+              A Dashboard that provides an at-a-glance view of your participation in the network and receive tips on how to improve your earnings.
+            </p>
+          </div>
         </div>
       </div>
       <button

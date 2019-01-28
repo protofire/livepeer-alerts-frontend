@@ -31,11 +31,11 @@ exports[`InfoArea test Should render an InfoArea and check snapshot 1`] = `
     >
       Pro-active alert notifications
     </h4>
-    <p
+    <div
       className="InfoArea-description-14"
     >
       We provide pro-active alert notifications that will help LPT token holders to be updated about how the delegates are performing in near real time
-    </p>
+    </div>
   </div>
 </div>
 `;
