@@ -40,7 +40,20 @@ const RewardDescription = props => {
             ),
             Pending: `A delegator enters the Pending state when it bonds from the Unbonded state.`,
             Unbonding: `You still have to wait a few moments to get finally Unbonded.`,
-            Unbonded: `As a delegator you are in the Unbounded state if you are not bonded to any delegate yet or if you have unbonded your tokens completely.`
+            Unbonded: (
+              <>
+                You are not bonded to any delegate, therefore you are not earning LPT from the token
+                inflation. Go ahead and delegate your LPT{' '}
+                <a
+                  href="https://explorer.livepeer.org/transcoders"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  here
+                </a>
+              </>
+            )
+            //  Unbonded: `As a delegator you are in the Unbounded state if you are not bonded to any delegate yet or if you have unbonded your tokens completely.`
           }[status]
         }
       </>
