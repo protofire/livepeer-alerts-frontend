@@ -43,7 +43,7 @@
     "react-tagsinput": "3.19.0",
     "react-toastify": "^4.5.1",
     "validator": "^10.10.0",
-    "web3": "^1.0.0-beta.37"
+    "web3": "1.0.0-beta.37"
   },
   "devDependencies": {
     "@babel/core": "7.0.0",

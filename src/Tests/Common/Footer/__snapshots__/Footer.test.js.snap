@@ -33,9 +33,18 @@ exports[`Footer test  Should render footer and check snapshot 1`] = `
          
         <a
           className="Footer-a-7 Footer-a-7"
-          href="https://github.com/protofire"
+          href="https://github.com/protofire/livepeer-alerts-frontend"
         >
-          Github
+          <i
+            className="fab fa-github"
+          />
+           
+        </a>
+        <a
+          className="Footer-a-7 Footer-a-7"
+          href="https://github.com/protofire/livepeer-alerts-frontend/issues/new"
+        >
+          Report a bug
         </a>
       </p>
     </div>
