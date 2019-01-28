@@ -8,7 +8,6 @@ import GridItem from '../../Common/UI/Grid/GridItem.js'
 
 import footerStyle from '../../../assets/jss/dashboard/components/footerStyle'
 import { Link } from 'react-router-dom'
-import { Emoji } from 'emoji-mart'
 
 function Footer({ ...props }) {
   const { classes, white } = props
