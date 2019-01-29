@@ -2,7 +2,7 @@ import PrivateRoute from './Components/Common/Hoc/PrivateRoute/PrivateRoute'
 import React, { Component } from 'react'
 import Spinner from './Components/Common/UI/Spinner/Spinner'
 import { AccountSummarySubscriptionForm } from './Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummarySubscriptionForm'
-import { BrowserRouter as Router, Route, Switch, withRouter } from 'react-router-dom'
+import { Route, Switch, withRouter } from 'react-router-dom'
 import { HomeComponent, AccountSummaryComponent } from './Components'
 import { Redirect } from 'react-router'
 import Web3Provider, {
@@ -16,7 +16,8 @@ import bgImage from './assets/img/bg/5.jpg'
 import pagesStyle from './assets/jss/dashboard/layouts/pagesStyle.js'
 import withStyles from '@material-ui/core/styles/withStyles'
 import logdown from 'logdown'
-
+import ReactGA from 'react-ga'
+import { BrowserRouter as Router } from 'react-router-dom'
 const logger = logdown('Livepeer:App')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
 
@@ -25,8 +26,22 @@ export class App extends Component {
     render: true
   }
 
+  onRouteChanged = () => {
+    /** Google analytics **/
+    if (this.props.location && this.props.location.pathname) {
+      logger.log('Google analytics: ', this.props.location.pathname)
+      ReactGA.pageview(this.props.location.pathname)
+    }
+  }
+
   componentDidMount() {
     document.body.style.overflow = 'unset'
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      this.onRouteChanged()
+    }
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {

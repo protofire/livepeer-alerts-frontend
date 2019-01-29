@@ -7,6 +7,7 @@ import validator from 'validator'
 import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
 import AccountSummaryModalEmail from './AccountSummaryFormDisplay/AccountSummaryModalEmail/AccountSummaryModalEmail'
+import ReactGA from 'react-ga'
 
 const logger = logdown('Livepeer:AccountSummarySubscriptionForm')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
@@ -48,6 +49,11 @@ export class AccountSummarySubscriptionForm extends Component {
 
   componentDidMount() {
     logger.log('Fire event componentDidMount')
+    /** Google analytics **/
+    if (this.props.location && this.props.location.pathname) {
+      logger.log('Google analytics: ', this.props.location.pathname)
+      ReactGA.pageview(this.props.location.pathname)
+    }
     this.setState({
       address: this.props.userData.address,
       render: true
