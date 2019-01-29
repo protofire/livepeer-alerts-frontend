@@ -153,7 +153,7 @@ export class AccountSummaryComponent extends Component {
           () => logger.log('ComponentDidMountFinished ')
         )
       } catch (exception) {
-        console.log('Exception ', exception)
+        logger.log('Exception ', exception)
         this.setState(
           {
             ...this.state,
