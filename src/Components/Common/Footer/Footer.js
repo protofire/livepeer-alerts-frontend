@@ -1,7 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import cx from 'classnames'
-
 // @material-ui/core components
 import withStyles from '@material-ui/core/styles/withStyles'
 import GridContainer from '../../Common/UI/Grid/GridContainer.js'
@@ -50,8 +49,17 @@ function Footer({ ...props }) {
             <a href="https://www.protofire.io" className={`${anchor} ${classes.a}`}>
               Protofire.io.
             </a>{' '}
-            <a href="https://github.com/protofire" className={`${anchor} ${classes.a}`}>
-              Github
+            <a
+              href="https://github.com/protofire/livepeer-alerts-frontend"
+              className={`${anchor} ${classes.a}`}
+            >
+              <i className="fab fa-github" />{' '}
+            </a>
+            <a
+              href="https://github.com/protofire/livepeer-alerts-frontend/issues/new"
+              className={`${anchor} ${classes.a}`}
+            >
+              Report a bug
             </a>
           </p>
         </GridItem>
