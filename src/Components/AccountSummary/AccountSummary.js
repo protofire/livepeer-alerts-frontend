@@ -5,6 +5,7 @@ import SpinnerExtended from '../Common/UI/SpinnerExtended/SpinnerExtended'
 import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
+import ReactGA from 'react-ga'
 
 const logger = logdown('Livepeer:AccountSummary')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
@@ -110,6 +111,11 @@ export class AccountSummaryComponent extends Component {
 
   componentDidMount = async () => {
     logger.log('Fire event componentDidMount')
+    /** Google analytics **/
+    if (this.props.location && this.props.location.pathname) {
+      logger.log('Google analytics: ', this.props.location.pathname)
+      ReactGA.pageview(this.props.location.pathname)
+    }
     let userDataPromise, summaryPromise
     this.initState(async () => {
       /** Check if the user is subscribed **/

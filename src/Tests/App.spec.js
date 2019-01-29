@@ -31,7 +31,6 @@ describe('Check public and protected routes', () => {
         <App {...props} />
       </MemoryRouter>
     )
-
     expect(wrapper.find(AccountSummaryComponent)).toHaveLength(0)
     expect(wrapper.find(HomeComponent)).toHaveLength(1)
   })

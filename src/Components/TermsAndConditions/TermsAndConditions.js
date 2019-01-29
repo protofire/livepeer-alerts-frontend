@@ -4,12 +4,20 @@ import GridItem from '../Common/UI/Grid/GridItem.js'
 import PropTypes from 'prop-types'
 import React from 'react'
 import withStyles from '@material-ui/core/styles/withStyles'
-
+import ReactGA from 'react-ga'
 import termsStyle from '../../assets/jss/dashboard/views/termsStyle'
+import logdown from 'logdown'
+const logger = logdown('Livepeer:Terms')
+logger.state.isEnabled = process.env.NODE_ENV !== 'production'
 
 class TermsAndConditionsComponent extends React.Component {
   render() {
     const { classes } = this.props
+    /** Google analytics **/
+    if (this.props.location && this.props.location.pathname) {
+      logger.log('Google analytics: ', this.props.location.pathname)
+      ReactGA.pageview(this.props.location.pathname)
+    }
     return (
       <GridContainer className={classes.gridContainer} justify="center" alignItems="center">
         <GridItem className={`${classes.cardContainer}`}>
