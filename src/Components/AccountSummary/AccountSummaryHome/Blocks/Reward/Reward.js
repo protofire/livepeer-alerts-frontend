@@ -1,14 +1,31 @@
 import React from 'react'
-import RewardDescription from './RewardDescription'
-import GridItem from '../../../Common/UI/Grid/GridItem.js'
+import RewardDescriptionDelegator from './RewardDescriptionDelegator'
+import GridItem from '../../../../Common/UI/Grid/GridItem.js'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import Button from '../../../Common/UI/CustomButtons/Button'
+import Button from '../../../../Common/UI/CustomButtons/Button'
+import RewardDescriptionDelegate from './RewardDescriptionDelegate'
 
 const Reward = props => {
   const { classes, userData, summary } = props
   const { isSubscribed, address } = userData
   const { status } = summary
-  const disableOrHide = status !== 'Bonded'
+  let disableOrHide = status !== 'Bonded'
+
+  let statusCheck = status.toUpperCase()
+  switch (statusCheck) {
+    case 'REGISTERED': {
+      disableOrHide = false
+      break
+    }
+    case 'BONDED': {
+      disableOrHide = false
+      break
+    }
+    default: {
+      disableOrHide = true
+      break
+    }
+  }
 
   let subscriptionBtn
   if (isSubscribed) {
@@ -46,10 +63,16 @@ const Reward = props => {
     window.open(telegramLink, '_blank')
   }
 
+  let rewardDescription = <RewardDescriptionDelegator {...props} />
+  /** If the user is a delegate we show the delegate component, otherwise we show the delegator component **/
+  if (props.summary && props.summary.role && props.summary.role.toLowerCase() === 'transcoder') {
+    rewardDescription = <RewardDescriptionDelegate {...props} />
+  }
+
   return (
     <>
       <GridItem className={classes.itemsContainerFull} lg={12} md={12} xs={12}>
-        <RewardDescription {...props} />
+        {rewardDescription}
       </GridItem>
       {disableOrHide ? null : (
         <>

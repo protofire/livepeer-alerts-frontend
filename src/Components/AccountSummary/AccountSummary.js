@@ -23,16 +23,43 @@ export class AccountSummaryComponent extends Component {
       createdAt: null
     },
     summary: {
-      bondedAmount: '',
-      delegateAddress: '',
-      delegatedAmount: '',
-      fees: '',
-      lastClaimRound: '',
-      startRound: '',
-      status: '',
-      withdrawRound: '',
-      stake: '',
-      delegateCalledReward: false
+      role: '',
+      lpBalance: '',
+      delegator: {
+        address: '',
+        allowance: '0',
+        bondedAmount: '0',
+        delegateAddress: '',
+        delegatedAmount: '0',
+        fees: '0',
+        lastClaimRound: '0',
+        pendingFees: '0',
+        pendingStake: '0',
+        startRound: '0',
+        status: '',
+        withdrawRound: '0',
+        withdrawAmount: '0',
+        nextUnbondingLockId: '0',
+        totalStake: '0',
+        delegateCalledReward: false,
+        totalStakeInLPT: '0',
+        bondedAmountInLPT: '0'
+      },
+      delegate: {
+        active: true,
+        address: '',
+        feeShare: '',
+        lastRewardRound: '',
+        pricePerSegment: '',
+        pendingRewardCut: '',
+        pendingFeeShare: '',
+        pendingPricePerSegment: '',
+        rewardCut: '',
+        status: '',
+        totalStake: '',
+        delegateCalledReward: false,
+        totalStakeInLPT: ''
+      }
     },
     render: false,
     displayMsg: displayTexts.LOADING_USER_DATA,
@@ -133,6 +160,7 @@ export class AccountSummaryComponent extends Component {
           () => logger.log('ComponentDidMountFinished ')
         )
       } catch (exception) {
+        logger.log('Exception ', exception)
         this.setState(
           {
             ...this.state,
@@ -193,18 +221,11 @@ export class AccountSummaryComponent extends Component {
         this.setState(
           {
             summary: {
-              bondedAmount: summaryData.data.summary.bondedAmountInLPT,
-              delegateAddress: summaryData.data.summary.delegateAddress,
-              delegatedAmount: summaryData.data.summary.delegatedAmount,
-              fees: summaryData.data.summary.fees,
-              lastClaimRound: summaryData.data.summary.lastClaimRound,
-              startRound: summaryData.data.summary.startRound,
-              status: summaryData.data.summary.status,
-              stake: summaryData.data.summary.totalStakeInLPT,
-              withdrawRound: summaryData.data.summary.withdrawRound,
-              delegateCalledReward: summaryData.data.summary.delegateCalledReward
-            },
-            lpBalance: summaryData.data.balance
+              role: summaryData.data.role,
+              lpBalance: summaryData.data.balance,
+              delegate: summaryData.data.transcoder ? { ...summaryData.data.transcoder } : null,
+              delegator: summaryData.data.delegator ? { ...summaryData.data.delegator } : null
+            }
           },
           () => resolve(summaryData.data)
         )
@@ -298,6 +319,16 @@ export class AccountSummaryComponent extends Component {
 
   render() {
     let content = <SpinnerExtended displayMsg={this.state.displayMsg} />
+    /** Shows only summary information according the role (delegate or delegator) **/
+    let summaryForRole = this.state.summary.delegate
+      ? this.state.summary.delegate
+      : this.state.summary.delegator
+    let summaryProps = {
+      ...summaryForRole,
+      role: this.state.summary.role,
+      balance: this.state.summary.lpBalance
+    }
+
     if (this.state.render) {
       if (!this.state.error) {
         content = (
@@ -307,8 +338,8 @@ export class AccountSummaryComponent extends Component {
               onSubscribeBtnHandler={this.onSubscribeBtnHandler}
               web3={this.props.web3}
               userData={this.state.userData}
-              summary={this.state.summary}
-              lpBalance={this.state.lpBalance}
+              summary={summaryProps}
+              lpBalance={this.state.summary.lpBalance}
             />
           </>
         )

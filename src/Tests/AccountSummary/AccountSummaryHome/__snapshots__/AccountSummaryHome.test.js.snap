@@ -94,7 +94,7 @@ exports[`AccountSummaryHome tests Renders AccountSummaryHome and match snapshot 
             onMouseOver={[Function]}
             onTouchEnd={[Function]}
             onTouchStart={[Function]}
-            title="total tokens delegated toward a delegator "
+            title="Total tokens delegated toward a delegator"
           >
             Staked
              
