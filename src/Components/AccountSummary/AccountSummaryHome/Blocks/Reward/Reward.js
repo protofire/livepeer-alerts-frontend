@@ -9,27 +9,9 @@ const Reward = props => {
   const { classes, userData, summary } = props
   const { isSubscribed, address } = userData
   const { status } = summary
-  let disableOrHide
 
   let statusCheck = status.toUpperCase()
-  switch (statusCheck) {
-    case 'REGISTERED': {
-      disableOrHide = false
-      break
-    }
-    case 'BONDED': {
-      disableOrHide = false
-      break
-    }
-    case 'UNBONDING': {
-      disableOrHide = false
-      break
-    }
-    default: {
-      disableOrHide = true
-      break
-    }
-  }
+  let disableOrHide = !['REGISTERED', 'BONDED', 'UNBONDING'].includes(statusCheck)
 
   let subscriptionBtn
   if (isSubscribed) {
