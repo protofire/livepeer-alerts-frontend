@@ -9,7 +9,7 @@ const Reward = props => {
   const { classes, userData, summary } = props
   const { isSubscribed, address } = userData
   const { status } = summary
-  let disableOrHide = status !== 'Bonded'
+  let disableOrHide
 
   let statusCheck = status.toUpperCase()
   switch (statusCheck) {
@@ -18,6 +18,10 @@ const Reward = props => {
       break
     }
     case 'BONDED': {
+      disableOrHide = false
+      break
+    }
+    case 'UNBONDING': {
       disableOrHide = false
       break
     }
