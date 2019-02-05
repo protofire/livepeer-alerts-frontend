@@ -8,7 +8,7 @@ const RewardDescriptionDelegator = props => {
 
   const description = props => {
     const { summary } = props
-    let { status, delegateCalledReward, delegateAddress, startRound, roundsLeft } = summary
+    let { status, delegateCalledReward, delegateAddress, startRound, roundsUntilUnbonded } = summary
 
     const delegateAddressUrl = `https://explorer.livepeer.org/accounts/${delegateAddress}/transcoding`
     const delegateAddressTruncated = truncateStringInTheMiddle(delegateAddress)
@@ -41,7 +41,7 @@ const RewardDescriptionDelegator = props => {
             Pending: `A delegator enters the Pending state when it bonds from the Unbonded state.`,
             Unbonding:
               `You still have ` +
-              roundsLeft +
+              roundsUntilUnbonded +
               ` round(s) left in the unbonding period. Each round lasts roughly one day..`,
             Unbonded: (
               <>
