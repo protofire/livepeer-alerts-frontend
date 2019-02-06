@@ -212,12 +212,10 @@ class Web3Provider extends Component {
 
   /** Converts the address from uppercase to lowercase (checksum format) in order to avoid metamask bug of using both address **/
   toChecksumAddress = (web3, address) => {
-    let checksumAddress
-    if (!web3 || !address) {
+    if (!web3 || !address || !web3.utils) {
       return
     }
-    checksumAddress = web3.utils.toChecksumAddress(address)
-    return checksumAddress
+    return web3.utils.toChecksumAddress(address)
   }
 
   render() {
