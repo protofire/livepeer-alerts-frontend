@@ -11,7 +11,7 @@ const Reward = props => {
   const { status } = summary
 
   let statusCheck = status.toUpperCase()
-  let disableOrHide = !['REGISTERED', 'BONDED', 'UNBONDING'].includes(statusCheck)
+  let disableOrHide = !['REGISTERED', 'BONDED', 'UNBONDING', 'UNBONDED'].includes(statusCheck)
 
   let subscriptionBtn
   if (isSubscribed) {
