@@ -31,11 +31,7 @@ function Footer({ ...props }) {
           md={6}
           sm={6}
           xs={12}
-        >
-          <Link to="/" className={`${block} ${classes.a}`}>
-            Terms and conditions
-          </Link>
-        </GridItem>
+        />
         <GridItem
           alignItems="center"
           className={`${classes.responsiveFooterElements} ${classes.responsiveFooterElementsRight}`}

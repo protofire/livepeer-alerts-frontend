@@ -72,11 +72,6 @@ export class App extends Component {
                 <HomeComponent {...this.state} {...this.props} {...routeProps} />
               )}
             />
-            <Route
-              exact
-              path="/terms"
-              render={routeProps => <TermsAndConditionsComponent {...routeProps} />}
-            />
             <Web3Provider>
               <Web3ContextConsumer>
                 {({ web3, userData, authenticated, error, displayMsg }) => {
