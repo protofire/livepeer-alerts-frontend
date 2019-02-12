@@ -9,15 +9,7 @@ exports[`Footer test  Should render footer and check snapshot 1`] = `
   >
     <div
       className="MuiGrid-container-15 MuiGrid-item-16 MuiGrid-align-items-xs-center-23 MuiGrid-grid-xs-12-55 MuiGrid-grid-sm-6-63 MuiGrid-grid-md-6-77 GridItem-grid-112 Footer-responsiveFooterElements-11 Footer-responsiveFooterElementsLeft-12"
-    >
-      <a
-        className="Footer-block-1 Footer-a-7"
-        href="/"
-        onClick={[Function]}
-      >
-        Terms and conditions
-      </a>
-    </div>
+    />
     <div
       className="MuiGrid-container-15 MuiGrid-item-16 MuiGrid-align-items-xs-center-23 MuiGrid-grid-xs-12-55 MuiGrid-grid-sm-6-63 MuiGrid-grid-md-6-77 GridItem-grid-112 Footer-responsiveFooterElements-11 Footer-responsiveFooterElementsRight-13"
     >

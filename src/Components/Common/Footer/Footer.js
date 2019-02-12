@@ -7,8 +7,6 @@ import GridContainer from '../../Common/UI/Grid/GridContainer.js'
 import GridItem from '../../Common/UI/Grid/GridItem.js'
 
 import footerStyle from '../../../assets/jss/dashboard/components/footerStyle'
-import { Link } from 'react-router-dom'
-
 function Footer({ ...props }) {
   const { classes, white } = props
   let anchor =
@@ -16,10 +14,6 @@ function Footer({ ...props }) {
     cx({
       [' ' + classes.whiteColor]: white
     })
-  let block = cx({
-    [classes.block]: true,
-    [classes.whiteColor]: white
-  })
 
   return (
     <footer className={`${classes.footer} ${classes.container}`}>
@@ -31,11 +25,7 @@ function Footer({ ...props }) {
           md={6}
           sm={6}
           xs={12}
-        >
-          <Link to="/" className={`${block} ${classes.a}`}>
-            Terms and conditions
-          </Link>
-        </GridItem>
+        />
         <GridItem
           alignItems="center"
           className={`${classes.responsiveFooterElements} ${classes.responsiveFooterElementsRight}`}

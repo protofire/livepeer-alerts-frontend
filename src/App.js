@@ -11,7 +11,6 @@ import Web3Provider, {
 import Footer from './Components/Common/Footer/Footer.js'
 import PagesHeader from './Components/Common/Header/PagesHeader.js'
 import PropTypes from 'prop-types'
-import TermsAndConditionsComponent from './Components/TermsAndConditions/TermsAndConditions'
 import bgImage from './assets/img/bg/5.jpg'
 import pagesStyle from './assets/jss/dashboard/layouts/pagesStyle.js'
 import withStyles from '@material-ui/core/styles/withStyles'
@@ -71,11 +70,6 @@ export class App extends Component {
               render={routeProps => (
                 <HomeComponent {...this.state} {...this.props} {...routeProps} />
               )}
-            />
-            <Route
-              exact
-              path="/terms"
-              render={routeProps => <TermsAndConditionsComponent {...routeProps} />}
             />
             <Web3Provider>
               <Web3ContextConsumer>
