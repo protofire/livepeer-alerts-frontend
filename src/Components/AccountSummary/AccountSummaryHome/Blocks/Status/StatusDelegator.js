@@ -5,7 +5,7 @@ import * as toolTipsTexts from './ToolTipTexts'
 
 const StatusDelegator = props => {
   const { summary } = props
-  const { totalStakeInLPT, fees, status } = summary
+  const { totalStakeInLPT, fees, status, roi } = summary
   const tableData = [
     {
       title: 'Staked',
@@ -18,6 +18,12 @@ const StatusDelegator = props => {
       currency: '(ETH)',
       data: fees,
       tooltip: toolTipsTexts.EARNING_FEES_TOOLTIP
+    },
+    {
+      title: 'ROI',
+      currency: '',
+      data: roi ? roi.toFixed(2) : '',
+      tooltip: toolTipsTexts.ROI_TOOLTIP
     }
   ]
   const toolTips = {

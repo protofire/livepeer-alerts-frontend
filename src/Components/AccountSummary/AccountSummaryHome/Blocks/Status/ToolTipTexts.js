@@ -4,6 +4,7 @@ export const ACTIVE_TRANSCODER_TOOLTIP =
   'Transcoders with the most delegated stake become active and process transcode jobs for the network. Active transcoders may also claim inflationary rewards and fees each round'
 export const TOTAL_STAKE_TOOLTIP = 'Total tokens delegated toward a delegator'
 export const EARNING_FEES_TOOLTIP = 'the amount of ETH the delegator has earned'
+export const ROI_TOOLTIP = 'The return of investments (ROI) index of the delegator'
 export const BONDED_STATUS_TOOLTIP =
   'A delegator enters the Bonded state at the start of startRound which is set after it bonds.'
 export const UNBONDED_STATUS_TOOLTIP =

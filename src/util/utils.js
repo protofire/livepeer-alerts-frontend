@@ -20,8 +20,9 @@ const decimalPlaces = (x = 0, decimals = 4) => {
 }
 
 const tokenAmountInUnits = (amount, decimals = 18) => {
-  const decimalsPerToken = Math.pow(10, decimals)
-  return amount / decimalsPerToken
+  const amountAsBN = new BigNumber(amount)
+  const decimalsPerToken = new BigNumber(10).pow(decimals)
+  return amountAsBN.dividedBy(decimalsPerToken)
 }
 
 export { truncateStringInTheMiddle, decimalPlaces, tokenAmountInUnits }

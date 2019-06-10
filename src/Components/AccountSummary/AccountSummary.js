@@ -6,6 +6,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
 import ReactGA from 'react-ga'
 import axiosInstance from '../../util/axios'
+import { getTranscoderRoi } from '../../util/delegates-utils'
 
 const logger = logdown('Livepeer:AccountSummary')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
@@ -25,6 +26,7 @@ export class AccountSummaryComponent extends Component {
     summary: {
       role: '',
       lpBalance: '',
+      roi: '',
       delegator: {
         address: '',
         allowance: '0',
@@ -89,13 +91,15 @@ export class AccountSummaryComponent extends Component {
   }
 
   loadUserData = async () => {
-    let userDataPromise, summaryPromise
+    let userDataPromise, summaryPromise, roiPromise
     // Check if the user is subscribed
     userDataPromise = this.fetchSubscriptionData()
     // Get summary information about the user
     summaryPromise = this.fetchAccountSummaryData()
+    // Get ROI data about the delegate
+    roiPromise = this.fetchRoiData()
     try {
-      await Promise.all([userDataPromise, summaryPromise])
+      await Promise.all([userDataPromise, summaryPromise, roiPromise])
       this.setState(
         {
           ...this.state,
@@ -157,7 +161,11 @@ export class AccountSummaryComponent extends Component {
             render: true,
             displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email
           },
-          () => logger.log('ComponentDidMountFinished ')
+          async () => {
+            // Get ROI data about the delegate
+            await this.fetchRoiData()
+            logger.log('ComponentDidMountFinished ')
+          }
         )
       } catch (exception) {
         logger.log('Exception ', exception)
@@ -218,6 +226,7 @@ export class AccountSummaryComponent extends Component {
   fetchAccountSummaryData = async () => {
     return new Promise(async (resolve, reject) => {
       try {
+        logger.log('Retrieving account summary data for address ', this.state.userData.address)
         let summaryData = await axiosInstance.get('/summary/' + this.state.userData.address)
         this.setState(
           {
@@ -234,6 +243,24 @@ export class AccountSummaryComponent extends Component {
         reject(exception)
       }
     })
+  }
+
+  fetchRoiData = async () => {
+    const { summary } = this.state
+    logger.log('Retrieving ROI data for delegate address ')
+    const delegateAdd = summary.delegate
+      ? summary.delegate.address
+      : summary.delegator.delegateAddress
+    if (delegateAdd) {
+      const roi = await getTranscoderRoi(delegateAdd)
+      this.setState({
+        ...this.state,
+        summary: {
+          ...this.state.summary,
+          roi
+        }
+      })
+    }
   }
 
   sendToast = (toastTime, callback) => {
@@ -320,14 +347,14 @@ export class AccountSummaryComponent extends Component {
 
   render() {
     let content = <SpinnerExtended displayMsg={this.state.displayMsg} />
+    const { summary } = this.state
     // Shows only summary information according the role (delegate or delegator)
-    let summaryForRole = this.state.summary.delegate
-      ? this.state.summary.delegate
-      : this.state.summary.delegator
+    let summaryForRole = summary.delegate ? summary.delegate : summary.delegator
     let summaryProps = {
       ...summaryForRole,
-      role: this.state.summary.role,
-      balance: this.state.summary.lpBalance
+      roi: summary.roi,
+      role: summary.role,
+      balance: summary.lpBalance
     }
 
     if (this.state.render) {

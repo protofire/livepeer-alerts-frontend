@@ -1,5 +1,6 @@
 import { getTranscoderRewards, getTranscoderTotalStake } from './apollo'
 import { tokenAmountInUnits } from './utils'
+import { BigNumber } from 'bignumber.js'
 
 export const getTranscoderRoi = async transcoderAddress => {
   const rewards = await getTranscoderRewards(transcoderAddress)
@@ -7,9 +8,11 @@ export const getTranscoderRoi = async transcoderAddress => {
 
   if (rewards && totalStake) {
     const totalReward = rewards.reduce((total, reward) => {
-      const amount = tokenAmountInUnits(reward.rewardTokens)
-      return total + amount
-    }, 0)
+      // Removes the cases in which the rewardToken is null
+      const rewardTokenAmount = reward.rewardTokens ? reward.rewardTokens : 0
+      const amount = tokenAmountInUnits(rewardTokenAmount)
+      return total.plus(amount)
+    }, new BigNumber(0))
     return totalReward / tokenAmountInUnits(totalStake)
   }
   return null
