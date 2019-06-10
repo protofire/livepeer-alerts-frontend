@@ -2,10 +2,9 @@ import React from 'react'
 import { configure, mount, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import * as displayTexts from '../../../Components/AccountSummary/AccountSummaryTexts'
-import * as jest from 'jest'
-import axios from 'axios'
 import { AccountSummarySubscriptionForm } from '../../../Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummarySubscriptionForm'
 import render from 'react-test-renderer'
+import axiosInstance from '../../../util/axios'
 
 configure({ adapter: new Adapter() })
 
@@ -22,7 +21,6 @@ const response = {
     createdAt: ''
   }
 }
-jest.mock('axios')
 describe('AccountSummarySubscriptionForm Test', () => {
   it('Renders AccountSummarySubscriptionForm and match snapshot', () => {
     // Given
@@ -104,7 +102,7 @@ describe('AccountSummarySubscriptionForm Test', () => {
   it('Displays welcome subscriber if the user subscribed', async () => {
     let wrapper = mount(<AccountSummarySubscriptionForm {...props} />)
     const emailTest = 'test@test.com'
-    axios.post.mockResolvedValue(response)
+    axiosInstance.post = jest.fn().mockResolvedValue(response)
     let emailInput = wrapper.find('input').at(1)
     emailInput.simulate('change', { target: { value: emailTest } })
     await wrapper.instance().generateSubscription(null, null)

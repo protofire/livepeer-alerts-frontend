@@ -125,6 +125,30 @@ exports[`AccountSummaryHome tests Renders AccountSummaryHome and match snapshot 
             (ETH)
           </h4>
         </div>
+        <div
+          className="AccountSummaryHome-blockDataItem-19"
+        >
+          <p
+            className="AccountSummaryHome-blockDataItemValue-20"
+          >
+            
+          </p>
+          <h4
+            aria-describedby={null}
+            className="AccountSummaryHome-blockDataItemTitle-21"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            onMouseLeave={[Function]}
+            onMouseOver={[Function]}
+            onTouchEnd={[Function]}
+            onTouchStart={[Function]}
+            title="The return of investments (ROI) index of the delegator"
+          >
+            ROI
+             
+            
+          </h4>
+        </div>
       </div>
     </div>
   </div>
