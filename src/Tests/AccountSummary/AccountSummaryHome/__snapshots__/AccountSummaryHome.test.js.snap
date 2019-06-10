@@ -162,6 +162,7 @@ exports[`AccountSummaryHome tests Renders AccountSummaryHome and match snapshot 
         className="AccountSummaryHome-rewardTitle-11"
       >
         <span
+          aria-label="👎, -1, thumbsdown"
           className="emoji-mart-emoji"
           onClick={[Function]}
           onMouseEnter={[Function]}
