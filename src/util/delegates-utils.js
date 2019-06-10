@@ -1,5 +1,5 @@
-import { tokenAmountInUnits } from './tokens'
 import { getTranscoderRewards, getTranscoderTotalStake } from './apollo'
+import { tokenAmountInUnits } from './utils'
 
 export const getTranscoderRoi = async transcoderAddress => {
   const rewards = await getTranscoderRewards(transcoderAddress)

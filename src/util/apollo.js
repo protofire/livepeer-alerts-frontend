@@ -1,6 +1,6 @@
 // React apollo
 import { ApolloClient } from 'apollo-client'
-import { APOLLO_API_URL } from './constants'
+import { APOLLO_API_URL } from '../common/constants'
 import gql from 'graphql-tag'
 import { createHttpLink } from 'apollo-link-http'
 import { InMemoryCache } from 'apollo-cache-inmemory'

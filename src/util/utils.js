@@ -19,4 +19,9 @@ const decimalPlaces = (x = 0, decimals = 4) => {
   return new BigNumber(x).decimalPlaces(decimals).toString()
 }
 
-export { truncateStringInTheMiddle, decimalPlaces }
+const tokenAmountInUnits = (amount, decimals = 18) => {
+  const decimalsPerToken = Math.pow(10, decimals)
+  return amount / decimalsPerToken
+}
+
+export { truncateStringInTheMiddle, decimalPlaces, tokenAmountInUnits }

@@ -1,5 +1,5 @@
 import React from 'react'
-import { truncateStringInTheMiddle, decimalPlaces } from '../../../../utils'
+import { truncateStringInTheMiddle, decimalPlaces } from '../../../../util/utils'
 import metamaskImage from '../../../../assets/img/logos/metamask.svg'
 import Card from '../../../Common/UI/Card/Card.js'
 

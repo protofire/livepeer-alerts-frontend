@@ -2,12 +2,12 @@ import * as displayTexts from '../AccountSummaryTexts'
 import AccountSummarySubscriptionFormDisplay from './AccountSummaryFormDisplay/AccountSummarySubscriptionFormDisplay'
 import React, { Component } from 'react'
 import SpinnerExtended from '../../Common/UI/SpinnerExtended/SpinnerExtended'
-import axios from 'axios'
 import validator from 'validator'
 import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
 import AccountSummaryModalEmail from './AccountSummaryFormDisplay/AccountSummaryModalEmail/AccountSummaryModalEmail'
 import ReactGA from 'react-ga'
+import axiosInstance from '../../../util/axios'
 
 const logger = logdown('Livepeer:AccountSummarySubscriptionForm')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
@@ -95,7 +95,7 @@ export class AccountSummarySubscriptionForm extends Component {
     let response
     try {
       logger.log('Creating new subscriber with data: ', data)
-      response = await axios.post('', data)
+      response = await axiosInstance.post('', data)
       this.setState(
         {
           userData: {

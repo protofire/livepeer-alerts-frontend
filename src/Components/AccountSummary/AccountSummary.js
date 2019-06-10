@@ -2,10 +2,10 @@ import * as displayTexts from './AccountSummaryTexts'
 import AccountSummaryHome from './AccountSummaryHome/AccountSummaryHome'
 import React, { Component } from 'react'
 import SpinnerExtended from '../Common/UI/SpinnerExtended/SpinnerExtended'
-import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
 import ReactGA from 'react-ga'
+import axiosInstance from '../../util/axios'
 
 const logger = logdown('Livepeer:AccountSummary')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
@@ -181,7 +181,8 @@ export class AccountSummaryComponent extends Component {
       let userData
       try {
         logger.log('Retrieving subscription for address ', this.state.userData.address)
-        userData = await axios.get('/address/' + this.state.userData.address)
+        userData = await axiosInstance.get('/address/' + this.state.userData.address)
+
         this.setState(
           {
             userData: {
@@ -217,7 +218,7 @@ export class AccountSummaryComponent extends Component {
   fetchAccountSummaryData = async () => {
     return new Promise(async (resolve, reject) => {
       try {
-        let summaryData = await axios.get('/summary/' + this.state.userData.address)
+        let summaryData = await axiosInstance.get('/summary/' + this.state.userData.address)
         this.setState(
           {
             summary: {
@@ -275,7 +276,7 @@ export class AccountSummaryComponent extends Component {
     })
     try {
       logger.log('Unsubscribing user with id ', this.state.userData)
-      await axios.delete('/' + this.state.userData.id)
+      await axiosInstance.delete('/' + this.state.userData.id)
       this.setState(
         {
           render: true,
