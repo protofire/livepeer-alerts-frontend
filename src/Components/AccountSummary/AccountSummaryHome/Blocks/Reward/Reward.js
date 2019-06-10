@@ -4,6 +4,7 @@ import GridItem from '../../../../Common/UI/Grid/GridItem.js'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import Button from '../../../../Common/UI/CustomButtons/Button'
 import RewardDescriptionDelegate from './RewardDescriptionDelegate'
+import { TELEGRAM_URL } from '../../../../../common/constants'
 
 const Reward = props => {
   const { classes, userData, summary } = props
@@ -44,7 +45,7 @@ const Reward = props => {
     )
   }
 
-  const telegramLink = `${process.env.REACT_APP_LIVEPEER_TELEGRAM_BOT_URL}?start=${address}`
+  const telegramLink = `${TELEGRAM_URL}?start=${address}`
   const openTelegramLink = () => {
     window.open(telegramLink, '_blank')
   }

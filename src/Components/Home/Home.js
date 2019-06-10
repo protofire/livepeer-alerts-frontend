@@ -48,7 +48,7 @@ export class HomeComponent extends Component {
           onClose: callback
         })
       }
-      /** TODO -- CHECK IF THERE IS ANOTHER WAY TO USE THIS, THIS IS FOR TESTING THAT THE TOAST IS CALLED **/
+      // TODO -- CHECK IF THERE IS ANOTHER WAY TO USE THIS, THIS IS FOR TESTING THAT THE TOAST IS CALLED
       if (this.props.toastOpenedHandlerTest) {
         this.props.toastOpenedHandlerTest(displayMsg)
       }
@@ -57,7 +57,7 @@ export class HomeComponent extends Component {
 
   componentDidMount() {
     logger.log('Fire event componentDidMount')
-    /** If we get redirected with an error msg, we should display it **/
+    // If we get redirected with an error msg, we should display
     if (this.props.location && this.props.location.state && this.props.location.state.error) {
       this.setState(
         {

@@ -26,7 +26,7 @@ export class App extends Component {
   }
 
   onRouteChanged = () => {
-    /** Google analytics **/
+    // Google analytics
     if (this.props.location && this.props.location.pathname) {
       logger.log('Google analytics: ', this.props.location.pathname)
       ReactGA.pageview(this.props.location.pathname)

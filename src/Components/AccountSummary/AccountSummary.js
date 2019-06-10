@@ -90,9 +90,9 @@ export class AccountSummaryComponent extends Component {
 
   loadUserData = async () => {
     let userDataPromise, summaryPromise
-    /** Check if the user is subscribed **/
+    // Check if the user is subscribed
     userDataPromise = this.fetchSubscriptionData()
-    /** Get summary information about the user **/
+    // Get summary information about the user
     summaryPromise = this.fetchAccountSummaryData()
     try {
       await Promise.all([userDataPromise, summaryPromise])
@@ -112,14 +112,14 @@ export class AccountSummaryComponent extends Component {
   initState = callback => {
     let address = this.props.userData ? this.props.userData.address : ''
     const stringAddresses = process.env.REACT_APP_DEMO_ADDRESS
-    /** If we are on demo version we choose a random address **/
+    // If we are on demo version we choose a random address
     if (this.props.location && this.props.location.pathname === '/account/demo') {
       if (typeof stringAddresses !== 'undefined' && stringAddresses.length > 0) {
-        /** We have addresses on the env var **/
+        // We have addresses on the env var **/
         const addresses = stringAddresses && stringAddresses.split(',')
         address = addresses && addresses[Math.floor(Math.random() * addresses.length)]
       } else {
-        /** The user does not have addresses on the env var, we redirect to the home page **/
+        // The user does not have addresses on the env var, we redirect to the home page
         this.props.history.push('/')
       }
     }
@@ -138,16 +138,16 @@ export class AccountSummaryComponent extends Component {
 
   componentDidMount = async () => {
     logger.log('Fire event componentDidMount')
-    /** Google analytics **/
+    // Google analytics
     if (this.props.location && this.props.location.pathname) {
       logger.log('Google analytics: ', this.props.location.pathname)
       ReactGA.pageview(this.props.location.pathname)
     }
     let userDataPromise, summaryPromise
     this.initState(async () => {
-      /** Check if the user is subscribed **/
+      // Check if the user is subscribed
       userDataPromise = this.fetchSubscriptionData()
-      /** Get summary information about the user **/
+      // Get summary information about the user
       summaryPromise = this.fetchAccountSummaryData()
       try {
         await Promise.all([userDataPromise, summaryPromise])
@@ -196,7 +196,7 @@ export class AccountSummaryComponent extends Component {
           }
         )
       } catch (error) {
-        /** Subscription not found **/
+        // Subscription not found
         if (error.response && error.response.status === 404) {
           logger.log('Subscription not found for ', this.state.userData.address)
           this.setState(
@@ -207,7 +207,7 @@ export class AccountSummaryComponent extends Component {
             () => resolve(this.state)
           )
         } else {
-          /** Another network problem **/
+          // Another network problem
           reject(error)
         }
       }
@@ -295,7 +295,7 @@ export class AccountSummaryComponent extends Component {
     } catch (exception) {
       logger.log('Exception on deleteSubscription')
       if (exception.response.status === 404) {
-        /** User with that id not found **/
+        // User with that id not found
         this.setState(
           {
             render: true,
@@ -319,7 +319,7 @@ export class AccountSummaryComponent extends Component {
 
   render() {
     let content = <SpinnerExtended displayMsg={this.state.displayMsg} />
-    /** Shows only summary information according the role (delegate or delegator) **/
+    // Shows only summary information according the role (delegate or delegator)
     let summaryForRole = this.state.summary.delegate
       ? this.state.summary.delegate
       : this.state.summary.delegator
