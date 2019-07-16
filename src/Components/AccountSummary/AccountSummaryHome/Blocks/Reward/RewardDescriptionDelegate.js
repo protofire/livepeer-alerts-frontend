@@ -1,5 +1,4 @@
 import React from 'react'
-import Card from '../../../../Common/UI/Card/Card.js'
 import { Emoji } from 'emoji-mart'
 
 const RewardDescriptionDelegate = props => {
@@ -48,10 +47,10 @@ const RewardDescriptionDelegate = props => {
 
   return (
     <>
-      <Card className={classes.cardItem}>
+      <div>
         <h3 className={classes.rewardTitle}>{title(props)}</h3>
         <div className={classes.rewardText}>{description(props)}</div>
-      </Card>
+      </div>
     </>
   )
 }

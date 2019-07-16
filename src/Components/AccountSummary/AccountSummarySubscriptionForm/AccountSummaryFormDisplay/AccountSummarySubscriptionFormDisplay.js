@@ -1,21 +1,14 @@
-import AccountSummarySubscriptionFormDisplayStyle from '../../../../assets/jss/dashboard/views/AccountSummarySubscriptionFormDisplayStyle'
-import Button from '../../../Common/UI/CustomButtons/Button'
-import Card from '../../../Common/UI/Card/Card.js'
-import GridContainer from '../../../Common/UI/Grid/GridContainer.js'
-import GridItem from '../../../Common/UI/Grid/GridItem.js'
-import Input from '../../../Common/UI/Input/Input'
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles'
 
 const accountSummarySubscriptionFormDisplay = props => {
   const { classes, form } = props
   return (
-    <GridContainer className={classes.gridContainer} justify="center" alignItems="center">
-      <GridItem className={classes.cardContainer}>
-        <Card className={classes.cardSignup}>
+    <div>
+      <div>
+        <div>
           <h2 className={classes.cardTitle}>Subscribe:</h2>
           <form>
-            <Input
+            {/* <Input
               changed={event => props.inputChangedHandler(event, 'email')}
               elementConfig={form.email.elementConfig}
               elementType={form.email.elementType}
@@ -23,8 +16,8 @@ const accountSummarySubscriptionFormDisplay = props => {
               shouldValidate={form.email.validation}
               touched={form.email.touched}
               value={form.email.value}
-            />
-            <Button
+            /> */}
+            {/* <Button
               className={classes.subscribeButton}
               color="warning"
               round
@@ -42,13 +35,11 @@ const accountSummarySubscriptionFormDisplay = props => {
               onClick={props.onSubmitBtnHandler}
             >
               Subscribe
-            </Button>
+            </Button> */}
           </form>
-        </Card>
-      </GridItem>
-    </GridContainer>
+        </div>
+      </div>
+    </div>
   )
 }
-export default withStyles(AccountSummarySubscriptionFormDisplayStyle)(
-  accountSummarySubscriptionFormDisplay
-)
+export default accountSummarySubscriptionFormDisplay

@@ -1,8 +1,4 @@
-import GridContainer from '../../Common/UI/Grid/GridContainer.js'
-import GridItem from '../../Common/UI/Grid/GridItem.js'
 import React from 'react'
-import { withStyles } from '@material-ui/core/styles'
-import AccountSummaryStyle from '../../../assets/jss/dashboard/views/accountSummaryStyle'
 import Reward from './Blocks/Reward/Reward'
 import StatusDelegator from './Blocks/Status/StatusDelegator'
 import Wallet from './Blocks/Wallet'
@@ -18,18 +14,16 @@ const AccountSummaryHome = props => {
   }
 
   return (
-    <GridContainer className={classes.gridContainer} justify="center">
-      <GridItem className={classes.itemsContainer} lg={12} md={12} xs={12}>
+    <div>
+      <div>
         {/* Wallet block */}
         <Wallet {...props} />
         {/* Status block */}
         {statusBlock}
-      </GridItem>
+      </div>
       {/* Reward calls */}
       <Reward {...props} />
-    </GridContainer>
+    </div>
   )
 }
-export default withStyles(theme => ({
-  ...AccountSummaryStyle
-}))(AccountSummaryHome)
+export default AccountSummaryHome

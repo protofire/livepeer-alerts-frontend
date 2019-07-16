@@ -1,8 +1,6 @@
 import React from 'react'
 import RewardDescriptionDelegator from './RewardDescriptionDelegator'
-import GridItem from '../../../../Common/UI/Grid/GridItem.js'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import Button from '../../../../Common/UI/CustomButtons/Button'
 import RewardDescriptionDelegate from './RewardDescriptionDelegate'
 
 const Reward = props => {
@@ -16,7 +14,7 @@ const Reward = props => {
   let subscriptionBtn
   if (isSubscribed) {
     subscriptionBtn = (
-      <Button
+      <div
         className={classes.subscriptionBtn}
         color="warning"
         disabled={disableOrHide}
@@ -26,11 +24,11 @@ const Reward = props => {
       >
         <i className="fas fa-envelope" />
         Unsubscribe
-      </Button>
+      </div>
     )
   } else {
     subscriptionBtn = (
-      <Button
+      <div
         className={classes.subscriptionBtn}
         color="primary"
         disabled={disableOrHide}
@@ -40,7 +38,7 @@ const Reward = props => {
       >
         <i className="fas fa-envelope" />
         Email
-      </Button>
+      </div>
     )
   }
 
@@ -57,14 +55,12 @@ const Reward = props => {
 
   return (
     <>
-      <GridItem className={classes.itemsContainerFull} lg={12} md={12} xs={12}>
-        {rewardDescription}
-      </GridItem>
+      <div>{rewardDescription}</div>
       {disableOrHide ? null : (
         <>
-          <GridItem className={classes.buttonsContainer} lg={12} md={12} xs={12}>
+          <div>
             <CopyToClipboard text={telegramLink}>
-              <Button
+              {/* <Button
                 className={classes.subscriptionBtn}
                 onClick={openTelegramLink}
                 disabled={disableOrHide}
@@ -74,11 +70,11 @@ const Reward = props => {
               >
                 <i className="fab fa-telegram-plane" />
                 Telegram
-              </Button>
+              </Button> */}
             </CopyToClipboard>
             {subscriptionBtn}
-          </GridItem>
-          <GridItem className={classes.itemsContainerFull} lg={12} md={12} xs={12}>
+          </div>
+          <div>
             <p className={classes.subscribeText}>
               Don't miss your
               <a
@@ -91,7 +87,7 @@ const Reward = props => {
               </a>
               Subscribe now!
             </p>
-          </GridItem>
+          </div>
         </>
       )}
     </>

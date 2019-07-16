@@ -1,7 +1,6 @@
 import * as displayTexts from './AccountSummaryTexts'
 import AccountSummaryHome from './AccountSummaryHome/AccountSummaryHome'
 import React, { Component } from 'react'
-import SpinnerExtended from '../Common/UI/SpinnerExtended/SpinnerExtended'
 import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
@@ -318,7 +317,8 @@ export class AccountSummaryComponent extends Component {
   }
 
   render() {
-    let content = <SpinnerExtended displayMsg={this.state.displayMsg} />
+    // let content = <SpinnerExtended displayMsg={this.state.displayMsg} />
+    let content = ''
     /** Shows only summary information according the role (delegate or delegator) **/
     let summaryForRole = this.state.summary.delegate
       ? this.state.summary.delegate
@@ -333,18 +333,19 @@ export class AccountSummaryComponent extends Component {
       if (!this.state.error) {
         content = (
           <>
-            <AccountSummaryHome
+            {/* <AccountSummaryHome
               onUnSubscribeBtnHandler={this.onUnSubscribeBtnHandler}
               onSubscribeBtnHandler={this.onSubscribeBtnHandler}
               web3={this.props.web3}
               userData={this.state.userData}
               summary={summaryProps}
               lpBalance={this.state.summary.lpBalance}
-            />
+            /> */}
           </>
         )
       } else {
-        content = <SpinnerExtended displayMsg={this.state.displayMsg} />
+        // content = <SpinnerExtended displayMsg={this.state.displayMsg} />
+        content = ''
       }
     }
     return (

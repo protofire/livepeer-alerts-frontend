@@ -1,7 +1,6 @@
 import React from 'react'
 import { truncateStringInTheMiddle, decimalPlaces } from '../../../../utils'
 import metamaskImage from '../../../../assets/img/logos/metamask.svg'
-import Card from '../../../Common/UI/Card/Card.js'
 
 const Wallet = props => {
   const { classes, userData, lpBalance } = props
@@ -17,7 +16,7 @@ const Wallet = props => {
     }
   ]
   return (
-    <Card className={`${classes.cardItem} ${classes.alignFlexEnd}`}>
+    <div>
       <div className={classes.logoMetamask}>
         <img src={metamaskImage} className={classes.logoMetamaskImg} alt="" />
       </div>
@@ -34,7 +33,7 @@ const Wallet = props => {
           )
         })}
       </div>
-    </Card>
+    </div>
   )
 }
 

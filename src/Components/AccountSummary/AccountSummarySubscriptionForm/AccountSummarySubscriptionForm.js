@@ -1,7 +1,6 @@
 import * as displayTexts from '../AccountSummaryTexts'
 import AccountSummarySubscriptionFormDisplay from './AccountSummaryFormDisplay/AccountSummarySubscriptionFormDisplay'
 import React, { Component } from 'react'
-import SpinnerExtended from '../../Common/UI/SpinnerExtended/SpinnerExtended'
 import axios from 'axios'
 import validator from 'validator'
 import { toast, ToastContainer } from 'react-toastify'
@@ -211,21 +210,24 @@ export class AccountSummarySubscriptionForm extends Component {
   }
 
   render() {
-    let content = <SpinnerExtended displayMsg={this.state.displayMsg} />
+    // let content = <SpinnerExtended displayMsg={this.state.displayMsg} />
+    let content = ''
 
     if (this.state.render) {
       if (this.state.userData && this.state.userData.isSubscribed) {
-        content = <AccountSummaryModalEmail onEmailModalClosed={this.onEmailModalClosed} />
+        // content = <AccountSummaryModalEmail onEmailModalClosed={this.onEmailModalClosed} />
+        content = ''
       } else {
-        content = (
-          <AccountSummarySubscriptionFormDisplay
-            form={this.state.form}
-            onSubmitBtnHandler={this.onSubmitBtnHandler}
-            onCancelBtnHandler={this.onCancelBtnHandler}
-            inputChangedHandler={this.inputChangedHandler}
-          />
-        )
+        //   content = (
+        //     <AccountSummarySubscriptionFormDisplay
+        //       form={this.state.form}
+        //       onSubmitBtnHandler={this.onSubmitBtnHandler}
+        //       onCancelBtnHandler={this.onCancelBtnHandler}
+        //       inputChangedHandler={this.inputChangedHandler}
+        //     />
+        //   )
       }
+      content = ''
     }
 
     return (

@@ -1,5 +1,3 @@
-import './App.css'
-import './assets/scss/livepeer.css?v=1.4.0'
 import * as serviceWorker from './serviceWorker'
 import App from './App'
 import React from 'react'
@@ -8,6 +6,9 @@ import axios from 'axios'
 import { BrowserRouter as Router } from 'react-router-dom'
 import ReactGA from 'react-ga'
 import logdown from 'logdown'
+import 'sanitize.css'
+import './assets/styles/index.css'
+
 const logger = logdown('Livepeer:Index')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
 /** Axios default cfg **/

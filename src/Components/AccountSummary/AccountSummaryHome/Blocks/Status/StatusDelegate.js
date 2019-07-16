@@ -1,6 +1,4 @@
 import React from 'react'
-import Card from '../../../../Common/UI/Card/Card.js'
-import Tooltip from '@material-ui/core/Tooltip'
 import * as toolTipsTexts from './ToolTipTexts'
 
 const Status = props => {
@@ -32,9 +30,9 @@ const Status = props => {
 
   return (
     <>
-      <Card className={`${classes.cardItem} ${classes.alignFlexEnd}`}>
+      <div>
         <div className={classes.topInfo}>
-          <Tooltip title={statusToolTip}>
+          {/* <Tooltip title={statusToolTip}>
             <h3
               className={`${classes.walletTitle} ${classes.rewardTitleBig} ${
                 classes.lessMarginBottom
@@ -42,23 +40,23 @@ const Status = props => {
             >
               {statusUppercase}
             </h3>
-          </Tooltip>
+          </Tooltip> */}
         </div>
         <div className={`${classes.blockData}`}>
           {tableData.map((item, index) => {
             return (
               <div className={`${classes.blockDataItem}`} key={index}>
                 <p className={`${classes.blockDataItemValue}`}>{item.data}</p>
-                <Tooltip title={item.tooltip}>
+                {/* <Tooltip title={item.tooltip}>
                   <h4 className={`${classes.blockDataItemTitle}`}>
                     {item.title} {item.currency}
                   </h4>
-                </Tooltip>
+                </Tooltip> */}
               </div>
             )
           })}
         </div>
-      </Card>
+      </div>
     </>
   )
 }

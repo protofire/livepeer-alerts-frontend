@@ -1,14 +1,5 @@
-import Button from '../../Common/UI/CustomButtons/Button.js'
-import Card from '../../Common/UI/Card/Card.js'
-import GridContainer from '../../Common/UI/Grid/GridContainer.js'
-import GridItem from '../../Common/UI/Grid/GridItem.js'
-import Group from '@material-ui/icons/Group'
-import InfoArea from '../../Common/UI/InfoArea/InfoArea.js'
-import Notifications from '@material-ui/icons/NotificationsActive'
 import PropTypes from 'prop-types'
 import React from 'react'
-import homeCardStyle from '../../../assets/jss/dashboard/views/homeCardStyle'
-import withStyles from '@material-ui/core/styles/withStyles'
 
 class HomeCard extends React.Component {
   render() {
@@ -46,11 +37,9 @@ class HomeCard extends React.Component {
     )
 
     return (
-      <GridContainer className={classes.gridContainer} justify="center" alignItems="center">
-        <GridItem className={classes.cardContainer}>
-          <Card className={classes.cardSignup}>
-            <h2 className={classes.cardTitle}>Tools for the Livepeer Network</h2>
-            <InfoArea
+      <div>
+        <h2>Tools for the Livepeer Network</h2>
+        {/* <InfoArea
               description={proactiveAlertDescription}
               icon={Notifications}
               iconColor="rose"
@@ -61,16 +50,14 @@ class HomeCard extends React.Component {
               icon={Group}
               iconColor="info"
               title="You and Livepeer"
-            />
-            <Button onClick={onClick} round color="primary" size="lg">
+            /> */}
+        {/* <Button onClick={onClick} round color="primary" size="lg">
               Get started
-            </Button>
-            {/*            <Button round color="info" size="lg" onClick={onDemoClick} disabled={demoBtnDisabled}>
+            </Button> */}
+        {/*            <Button round color="info" size="lg" onClick={onDemoClick} disabled={demoBtnDisabled}>
               Demo
             </Button>*/}
-          </Card>
-        </GridItem>
-      </GridContainer>
+      </div>
     )
   }
 }
@@ -79,4 +66,4 @@ HomeCard.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(homeCardStyle)(HomeCard)
+export default HomeCard

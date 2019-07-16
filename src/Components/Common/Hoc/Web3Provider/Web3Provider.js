@@ -1,7 +1,6 @@
 import * as failReasons from './Web3FailReasons'
-import * as texts from '../../UI/Texts/Texts'
+import * as texts from '../../Texts/Texts'
 import React, { Component } from 'react'
-import SpinnerExtended from '../../UI/SpinnerExtended/SpinnerExtended'
 import Web3 from 'web3'
 import logdown from 'logdown'
 
@@ -219,7 +218,9 @@ class Web3Provider extends Component {
   }
 
   render() {
-    let content = <SpinnerExtended displayMsg={this.state.displayMsg} />
+    // let content = <SpinnerExtended displayMsg={this.state.displayMsg} />
+    let content = ''
+
     if (!this.state.requestingAuth) {
       if (this.state.render && this.state.web3 && this.state.userData.authenticated) {
         content = (

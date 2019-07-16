@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 import { withRouter } from 'react-router-dom'
 import logdown from 'logdown'
+
 const logger = logdown('Livepeer:Home')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
 
@@ -29,6 +30,7 @@ export class HomeComponent extends Component {
     if (toastTime) {
       time = toastTime
     }
+
     let displayMsg = this.state.displayMsg
     if (!toast.isActive(this.state.toastId)) {
       if (this.state.error) {

@@ -1,10 +1,10 @@
 import React from 'react'
 
-function Header({ ...props }) {
+function Footer({ ...props }) {
   const { classes } = props
 
   return (
-    <header>
+    <footer>
       {/* <GridContainer container={true} justify="space-between">
         <GridItem
           alignItems="center"
@@ -42,8 +42,8 @@ function Header({ ...props }) {
           </p>
         </GridItem>
       </GridContainer> */}
-    </header>
+    </footer>
   )
 }
 
-export default Header
+export default Footer
