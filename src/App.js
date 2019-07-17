@@ -3,8 +3,8 @@ import Footer from './Components/Common/Footer/Footer'
 import Header from './Components/Common/Header/Header'
 import MainWrapper from './Components/Common/Layout/MainWrapper'
 import MainScroll from './Components/Common/Layout/MainScroll'
+import FullLoading from './Components/Common/FullLoading/FullLoading'
 import PrivateRoute from './Components/Common/Hoc/PrivateRoute/PrivateRoute'
-import PropTypes from 'prop-types'
 import ReactGA from 'react-ga'
 import Web3Provider, { Web3ContextConsumer } from './Components/Common/Hoc/Web3Provider/Web3Provider'
 import logdown from 'logdown'
@@ -56,72 +56,64 @@ export class App extends Component {
   }
 
   render() {
-    const { classes, ...rest } = this.props
-    // const spinner = <Spinner />
-    const spinner = ''
-
-    const routes = (
-      <Switch>
-        <Route
-          exact
-          path="/"
-          render={routeProps => <HomeComponent {...this.state} {...this.props} {...routeProps} />}
-        />
-        <Web3Provider>
-          <Web3ContextConsumer>
-            {({ web3, userData, authenticated, error, displayMsg }) => {
-              return (
-                <>
-                  <Switch>
-                    <PrivateRoute
-                      exact
-                      path="/(account|account/demo)/"
-                      web3={web3}
-                      userData={userData}
-                      authenticated={authenticated}
-                      error={error}
-                      displayMsg={displayMsg}
-                      component={AccountSummaryComponent}
-                    />
-                    <PrivateRoute
-                      exact
-                      path="/account/subscription"
-                      component={AccountSummarySubscriptionForm}
-                      web3={web3}
-                      userData={userData}
-                      error={error}
-                      displayMsg={displayMsg}
-                      authenticated={authenticated}
-                    />
-                    <Redirect to="/" />
-                  </Switch>
-                </>
-              )
-            }}
-          </Web3ContextConsumer>
-        </Web3Provider>
-      </Switch>
-    )
-    let content = this.state.render ? routes : spinner
+    const { ...restProps } = this.props
 
     return (
       <Router>
         <ThemeProvider theme={theme}>
-          <MainWrapper>
-            <Header />
-            <MainScroll>
-              {content}
-              <Footer />
-            </MainScroll>
-          </MainWrapper>
+          <>
+            <FullLoading show={!this.state.render} />
+            <MainWrapper {...restProps}>
+              <Header />
+              <MainScroll>
+                <Switch>
+                  <Route
+                    exact
+                    path="/"
+                    render={routeProps => <HomeComponent {...this.state} {...this.props} {...routeProps} />}
+                  />
+                  <Web3Provider>
+                    <Web3ContextConsumer>
+                      {({ web3, userData, authenticated, error, displayMsg }) => {
+                        return (
+                          <>
+                            <Switch>
+                              <PrivateRoute
+                                authenticated={authenticated}
+                                component={AccountSummaryComponent}
+                                displayMsg={displayMsg}
+                                error={error}
+                                exact
+                                path="/(account|account/demo)/"
+                                userData={userData}
+                                web3={web3}
+                              />
+                              <PrivateRoute
+                                authenticated={authenticated}
+                                component={AccountSummarySubscriptionForm}
+                                displayMsg={displayMsg}
+                                error={error}
+                                exact
+                                path="/account/subscription"
+                                userData={userData}
+                                web3={web3}
+                              />
+                              <Redirect to="/" />
+                            </Switch>
+                          </>
+                        )
+                      }}
+                    </Web3ContextConsumer>
+                  </Web3Provider>
+                </Switch>
+                <Footer />
+              </MainScroll>
+            </MainWrapper>
+          </>
         </ThemeProvider>
       </Router>
     )
   }
-}
-
-App.propTypes = {
-  classes: PropTypes.object.isRequired,
 }
 
 export default App
