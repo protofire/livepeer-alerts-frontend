@@ -2,8 +2,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   background-color: #fff;
-  color: #000;
-  font-family: 'Open Sans', sans-serif;
+  font-family: 'Roboto', 'Helvetica Neue', 'Segoe UI', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', -apple-system, BlinkMacSystemFont, sans-serif;
   font-size: 15px;
 }
 

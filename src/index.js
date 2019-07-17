@@ -8,6 +8,7 @@ import ReactGA from 'react-ga'
 import logdown from 'logdown'
 import 'sanitize.css'
 import './assets/styles/index.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 const logger = logdown('Livepeer:Index')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'

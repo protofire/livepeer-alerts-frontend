@@ -1,45 +1,20 @@
-import PrivateRoute from './Components/Common/Hoc/PrivateRoute/PrivateRoute'
 import React, { Component } from 'react'
+import Footer from './Components/Common/Footer/Footer'
+import Header from './Components/Common/Header/Header'
+import MainWrapper from './Components/Common/Layout/MainWrapper'
+import MainScroll from './Components/Common/Layout/MainScroll'
+import PrivateRoute from './Components/Common/Hoc/PrivateRoute/PrivateRoute'
+import PropTypes from 'prop-types'
+import ReactGA from 'react-ga'
+import Web3Provider, { Web3ContextConsumer } from './Components/Common/Hoc/Web3Provider/Web3Provider'
+import logdown from 'logdown'
+import { ThemeProvider } from 'styled-components'
+import theme from './Theme'
 import { AccountSummarySubscriptionForm } from './Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummarySubscriptionForm'
-import { Route, Switch } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
 import { HomeComponent, AccountSummaryComponent } from './Components'
 import { Redirect } from 'react-router'
-import Web3Provider, { Web3ContextConsumer } from './Components/Common/Hoc/Web3Provider/Web3Provider'
-import Footer from './Components/Common/Footer/Footer'
-// import PagesHeader from './Components/Common/Header/Header.js/index.js'
-import PropTypes from 'prop-types'
-import bgImage from './assets/img/bg/5.jpg'
-import logdown from 'logdown'
-import ReactGA from 'react-ga'
-import { BrowserRouter as Router } from 'react-router-dom'
-import styled, { ThemeProvider } from 'styled-components'
-import theme from './Theme'
-
-const MainWrapper = styled.div`
-  background-color: #fff;
-  background-image: url(${bgImage});
-  background-repeat: no-repeat;
-  background-size: cover;
-  height: 100vh;
-  position: relative;
-  width: 100vw;
-
-  * {
-    position: relative;
-    z-index: 5;
-  }
-
-  &::before {
-    background-color: rgba(0, 0, 0, 0.4);
-    content: '';
-    height: 100%;
-    left: 0;
-    position: absolute;
-    top: 0;
-    width: 100%;
-    z-index: 1;
-  }
-`
+import { Route, Switch } from 'react-router-dom'
 
 const logger = logdown('Livepeer:App')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
@@ -133,9 +108,11 @@ export class App extends Component {
       <Router>
         <ThemeProvider theme={theme}>
           <MainWrapper>
-            {/* <PagesHeader {...rest} /> */}
-            {content}
-            <Footer />
+            <Header />
+            <MainScroll>
+              {content}
+              <Footer />
+            </MainScroll>
           </MainWrapper>
         </ThemeProvider>
       </Router>

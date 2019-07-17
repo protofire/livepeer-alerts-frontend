@@ -1,6 +1,5 @@
-import 'react-toastify/dist/ReactToastify.css'
-import HomeCard from './HomeCard/HomeCard.js'
 import React, { Component } from 'react'
+import HomeCard from '../HomeCard/HomeCard'
 import { toast, ToastContainer } from 'react-toastify'
 import { withRouter } from 'react-router-dom'
 import logdown from 'logdown'
