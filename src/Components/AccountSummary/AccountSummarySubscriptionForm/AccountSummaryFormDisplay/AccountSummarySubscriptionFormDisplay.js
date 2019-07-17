@@ -1,12 +1,12 @@
 import React from 'react'
 
 const accountSummarySubscriptionFormDisplay = props => {
-  const { classes, form } = props
+  const { form } = props
   return (
     <div>
       <div>
         <div>
-          <h2 className={classes.cardTitle}>Subscribe:</h2>
+          <h2>Subscribe:</h2>
           <form>
             {/* <Input
               changed={event => props.inputChangedHandler(event, 'email')}
@@ -18,7 +18,6 @@ const accountSummarySubscriptionFormDisplay = props => {
               value={form.email.value}
             /> */}
             {/* <Button
-              className={classes.subscribeButton}
               color="warning"
               round
               size="lg"
@@ -27,7 +26,6 @@ const accountSummarySubscriptionFormDisplay = props => {
               Cancel
             </Button>
             <Button
-              className={classes.subscribeButton}
               color="primary"
               disabled={!form.formIsValid}
               round

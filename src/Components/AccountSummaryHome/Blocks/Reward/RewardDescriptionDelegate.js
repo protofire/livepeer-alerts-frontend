@@ -2,8 +2,6 @@ import React from 'react'
 import { Emoji } from 'emoji-mart'
 
 const RewardDescriptionDelegate = props => {
-  const { classes } = props
-
   const title = props => {
     const { summary } = props
     const { delegateCalledReward } = summary
@@ -45,8 +43,8 @@ const RewardDescriptionDelegate = props => {
   return (
     <>
       <div>
-        <h3 className={classes.rewardTitle}>{title(props)}</h3>
-        <div className={classes.rewardText}>{description(props)}</div>
+        <h3>{title(props)}</h3>
+        <div>{description(props)}</div>
       </div>
     </>
   )

@@ -1,15 +1,16 @@
 import * as displayTexts from './AccountSummaryTexts'
-import AccountSummaryHome from './AccountSummaryHome/AccountSummaryHome'
+import AccountSummaryHome from '../AccountSummaryHome/AccountSummaryHome'
 import React, { Component } from 'react'
 import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
 import ReactGA from 'react-ga'
+import FullLoading from '../Common/FullLoading/FullLoading'
 
 const logger = logdown('Livepeer:AccountSummary')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
 
-export class AccountSummaryComponent extends Component {
+export class AccountSummary extends Component {
   state = {
     userData: {
       address: null,
@@ -89,9 +90,8 @@ export class AccountSummaryComponent extends Component {
 
   loadUserData = async () => {
     let userDataPromise, summaryPromise
-    /** Check if the user is subscribed **/
+
     userDataPromise = this.fetchSubscriptionData()
-    /** Get summary information about the user **/
     summaryPromise = this.fetchAccountSummaryData()
     try {
       await Promise.all([userDataPromise, summaryPromise])
@@ -137,17 +137,18 @@ export class AccountSummaryComponent extends Component {
 
   componentDidMount = async () => {
     logger.log('Fire event componentDidMount')
-    /** Google analytics **/
+
     if (this.props.location && this.props.location.pathname) {
       logger.log('Google analytics: ', this.props.location.pathname)
       ReactGA.pageview(this.props.location.pathname)
     }
+
     let userDataPromise, summaryPromise
+
     this.initState(async () => {
-      /** Check if the user is subscribed **/
       userDataPromise = this.fetchSubscriptionData()
-      /** Get summary information about the user **/
       summaryPromise = this.fetchAccountSummaryData()
+
       try {
         await Promise.all([userDataPromise, summaryPromise])
         this.setState(
@@ -317,9 +318,9 @@ export class AccountSummaryComponent extends Component {
   }
 
   render() {
-    // let content = <SpinnerExtended displayMsg={this.state.displayMsg} />
-    let content = ''
-    /** Shows only summary information according the role (delegate or delegator) **/
+    let content = <FullLoading show={true} message={this.state.displayMsg} />
+
+    // Shows only summary information according the role (delegate or delegator)
     let summaryForRole = this.state.summary.delegate ? this.state.summary.delegate : this.state.summary.delegator
     let summaryProps = {
       ...summaryForRole,
@@ -327,29 +328,23 @@ export class AccountSummaryComponent extends Component {
       balance: this.state.summary.lpBalance,
     }
 
-    if (this.state.render) {
-      if (!this.state.error) {
-        content = (
-          <>
-            {/* <AccountSummaryHome
-              onUnSubscribeBtnHandler={this.onUnSubscribeBtnHandler}
-              onSubscribeBtnHandler={this.onSubscribeBtnHandler}
-              web3={this.props.web3}
-              userData={this.state.userData}
-              summary={summaryProps}
-              lpBalance={this.state.summary.lpBalance}
-            /> */}
-          </>
-        )
-      } else {
-        // content = <SpinnerExtended displayMsg={this.state.displayMsg} />
-        content = ''
-      }
+    if (this.state.render && !this.state.error) {
+      content = (
+        <AccountSummaryHome
+          lpBalance={this.state.summary.lpBalance}
+          onSubscribeBtnHandler={this.onSubscribeBtnHandler}
+          onUnSubscribeBtnHandler={this.onUnSubscribeBtnHandler}
+          summary={summaryProps}
+          userData={this.state.userData}
+          web3={this.props.web3}
+        />
+      )
     }
+
     return (
       <>
         {content}
-        <ToastContainer autoClose={2000} />
+        <ToastContainer autoClose={5000} />
       </>
     )
   }

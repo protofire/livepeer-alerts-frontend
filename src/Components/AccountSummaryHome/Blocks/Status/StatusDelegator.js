@@ -24,32 +24,26 @@ const StatusDelegator = props => {
     UNBONDING: toolTipsTexts.UNBONDING_STATUS_TOOLTIP,
     PENDING: toolTipsTexts.PENDING_STATUS_TOOLTIP,
   }
-  const { classes } = props
 
   const statusUppercase = status.toUpperCase()
-
   const statusToolTip = toolTips[statusUppercase]
 
   return (
     <>
-      <div className={classes.topInfo}>
+      <div>
         {/* <Tooltip title={statusToolTip}>
-          <h3
-            className={`${classes.walletTitle} ${classes.rewardTitleBig} ${
-              classes.lessMarginBottom
-            }`}
-          >
+          <h3>
             {statusUppercase}
           </h3>
         </Tooltip> */}
       </div>
-      <div className={`${classes.blockData}`}>
+      <div>
         {tableData.map((item, index) => {
           return (
-            <div className={`${classes.blockDataItem}`} key={index}>
-              <p className={`${classes.blockDataItemValue}`}>{item.data}</p>
+            <div key={index}>
+              <p>{item.data}</p>
               {/* <Tooltip title={item.tooltip}>
-                <h4 className={`${classes.blockDataItemTitle}`}>
+                <h4>
                   {item.title} {item.currency}
                 </h4>
               </Tooltip> */}

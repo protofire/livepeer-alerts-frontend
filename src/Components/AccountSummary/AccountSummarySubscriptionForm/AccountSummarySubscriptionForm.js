@@ -7,6 +7,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
 import AccountSummaryModalEmail from './AccountSummaryFormDisplay/AccountSummaryModalEmail/AccountSummaryModalEmail'
 import ReactGA from 'react-ga'
+import FullLoading from '../../Common/FullLoading/FullLoading'
 
 const logger = logdown('Livepeer:AccountSummarySubscriptionForm')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
@@ -169,6 +170,7 @@ export class AccountSummarySubscriptionForm extends Component {
 
   checkValidity = (value, rules) => {
     let isValid = true
+
     if (!rules) {
       return true
     }
@@ -207,22 +209,21 @@ export class AccountSummarySubscriptionForm extends Component {
   }
 
   render() {
-    // let content = <SpinnerExtended displayMsg={this.state.displayMsg} />
-    let content = ''
+    let content = <FullLoading show={true} message={this.state.displayMsg} />
 
     if (this.state.render) {
       if (this.state.userData && this.state.userData.isSubscribed) {
-        // content = <AccountSummaryModalEmail onEmailModalClosed={this.onEmailModalClosed} />
+        content = <AccountSummaryModalEmail onEmailModalClosed={this.onEmailModalClosed} />
         content = ''
       } else {
-        //   content = (
-        //     <AccountSummarySubscriptionFormDisplay
-        //       form={this.state.form}
-        //       onSubmitBtnHandler={this.onSubmitBtnHandler}
-        //       onCancelBtnHandler={this.onCancelBtnHandler}
-        //       inputChangedHandler={this.inputChangedHandler}
-        //     />
-        //   )
+        content = (
+          <AccountSummarySubscriptionFormDisplay
+            form={this.state.form}
+            onSubmitBtnHandler={this.onSubmitBtnHandler}
+            onCancelBtnHandler={this.onCancelBtnHandler}
+            inputChangedHandler={this.inputChangedHandler}
+          />
+        )
       }
       content = ''
     }

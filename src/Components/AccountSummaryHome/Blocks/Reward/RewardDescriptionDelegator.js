@@ -1,10 +1,8 @@
 import React from 'react'
-import { truncateStringInTheMiddle } from '../../../../../utils'
+import { truncateStringInTheMiddle } from '../../../../utils'
 import { Emoji } from 'emoji-mart'
 
 const RewardDescriptionDelegator = props => {
-  const { classes } = props
-
   const description = props => {
     const { summary } = props
     let { status, delegateCalledReward, delegateAddress, startRound, roundsUntilUnbonded } = summary
@@ -84,8 +82,8 @@ const RewardDescriptionDelegator = props => {
   return (
     <>
       <div>
-        <h3 className={classes.rewardTitle}>{title(props)}</h3>
-        <p className={classes.rewardText}>{description(props)} </p>
+        <h3>{title(props)}</h3>
+        <p>{description(props)} </p>
       </div>
     </>
   )

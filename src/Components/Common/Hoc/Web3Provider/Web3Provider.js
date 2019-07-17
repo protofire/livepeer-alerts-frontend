@@ -3,6 +3,7 @@ import * as texts from '../../Texts/Texts'
 import React, { Component } from 'react'
 import Web3 from 'web3'
 import logdown from 'logdown'
+import FullLoading from '../../../Common/FullLoading/FullLoading'
 
 const logger = logdown('Livepeer:Web3Provider')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
@@ -141,6 +142,7 @@ class Web3Provider extends Component {
     logger.log('Loading user data from web3')
     let userAddress
     let userNetwork
+
     Promise.all([web3Instance.eth.getAccounts(), web3Instance.eth.net.getId()]).then(results => {
       userAddress = results[0]
       userNetwork = results[1]
@@ -218,8 +220,7 @@ class Web3Provider extends Component {
   }
 
   render() {
-    // let content = <SpinnerExtended displayMsg={this.state.displayMsg} />
-    let content = ''
+    let content = <FullLoading show={true} dismissLink={{ to: '/', text: 'Go back' }} message={this.state.displayMsg} />
 
     if (!this.state.requestingAuth) {
       if (this.state.render && this.state.web3 && this.state.userData.authenticated) {

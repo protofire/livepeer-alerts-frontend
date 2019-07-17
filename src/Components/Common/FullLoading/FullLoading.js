@@ -1,8 +1,9 @@
 import React from 'react'
-import styled from 'styled-components'
 import ReactDOM from 'react-dom'
-import { rgba } from 'polished'
+import { NavLink } from 'react-router-dom'
 import Spinner from '../Spinner/Spinner'
+import styled from 'styled-components'
+import { rgba } from 'polished'
 
 const FullLoadingStyled = styled.div`
   align-items: center;
@@ -29,13 +30,26 @@ const Message = styled.p`
   text-align: center;
 `
 
+const DismissLink = styled(NavLink)`
+  color: #fff;
+  font-size: 16px;
+  padding: 20px 0 0;
+  text-align: center;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+`
+
 const FullLoading = props => {
-  const { message = 'Loading...', show = false, ...restProps } = props
+  const { message = 'Loading...', show = false, dismissLink = null, ...restProps } = props
   return show
     ? ReactDOM.createPortal(
         <FullLoadingStyled {...restProps}>
           {message ? <Message>{message}</Message> : null}
           <Spinner />
+          {dismissLink ? <DismissLink to={dismissLink.to}>{dismissLink.text}</DismissLink> : null}
         </FullLoadingStyled>,
         document.getElementById('loadingContainer'),
       )

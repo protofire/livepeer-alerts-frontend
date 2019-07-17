@@ -4,7 +4,7 @@ import { CopyToClipboard } from 'react-copy-to-clipboard'
 import RewardDescriptionDelegate from './RewardDescriptionDelegate'
 
 const Reward = props => {
-  const { classes, userData, summary } = props
+  const { userData, summary } = props
   const { isSubscribed, address } = userData
   const { status } = summary
 
@@ -14,29 +14,13 @@ const Reward = props => {
   let subscriptionBtn
   if (isSubscribed) {
     subscriptionBtn = (
-      <div
-        className={classes.subscriptionBtn}
-        color="warning"
-        disabled={disableOrHide}
-        onClick={props.onUnSubscribeBtnHandler}
-        round
-        size="lg"
-      >
-        <i className="fas fa-envelope" />
+      <div color="warning" disabled={disableOrHide} onClick={props.onUnSubscribeBtnHandler} round size="lg">
         Unsubscribe
       </div>
     )
   } else {
     subscriptionBtn = (
-      <div
-        className={classes.subscriptionBtn}
-        color="primary"
-        disabled={disableOrHide}
-        onClick={props.onSubscribeBtnHandler}
-        round
-        size="lg"
-      >
-        <i className="fas fa-envelope" />
+      <div color="primary" disabled={disableOrHide} onClick={props.onSubscribeBtnHandler}>
         Email
       </div>
     )
@@ -60,22 +44,14 @@ const Reward = props => {
         <>
           <div>
             <CopyToClipboard text={telegramLink}>
-              {/* <Button
-                className={classes.subscriptionBtn}
-                onClick={openTelegramLink}
-                disabled={disableOrHide}
-                color="twitter"
-                round
-                size="lg"
-              >
-                <i className="fab fa-telegram-plane" />
+              <button onClick={openTelegramLink} disabled={disableOrHide}>
                 Telegram
-              </Button> */}
+              </button>
             </CopyToClipboard>
             {subscriptionBtn}
           </div>
           <div>
-            <p className={classes.subscribeText}>
+            <p>
               Don't miss your
               <a
                 href="https://forum.livepeer.org/t/why-you-should-bond-your-new-livepeer-tokens-lpt-detailed-version/418"
