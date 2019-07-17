@@ -18,31 +18,31 @@ export class AccountSummarySubscriptionForm extends Component {
         elementType: 'input',
         elementConfig: {
           type: 'email',
-          placeholder: 'Your E-Mail'
+          placeholder: 'Your E-Mail',
         },
         validation: {
           required: true,
-          emailCheck: true
+          emailCheck: true,
         },
         value: '',
         touched: false,
-        valid: false
+        valid: false,
       },
-      formIsValid: false
+      formIsValid: false,
     },
     address: null,
     frequency: 'daily',
     render: false,
     toastId: '1',
     displayMsg: displayTexts.LOADING_SUBSCRIPTION_DATA,
-    userSubscribed: false
+    userSubscribed: false,
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
     logger.log('Fire event componentWillReceiveProps')
     this.setState({
       ...this.state,
-      address: nextProps.userData.address
+      address: nextProps.userData.address,
     })
   }
 
@@ -55,7 +55,7 @@ export class AccountSummarySubscriptionForm extends Component {
     }
     this.setState({
       address: this.props.userData.address,
-      render: true
+      render: true,
     })
   }
 
@@ -65,18 +65,18 @@ export class AccountSummarySubscriptionForm extends Component {
     let data = {
       address: this.state.address,
       frequency: this.state.frequency,
-      email: this.state.form.email.value
+      email: this.state.form.email.value,
     }
     this.setState(
       {
         render: false,
-        displayMsg: displayTexts.GENERATING_SUBSCRIPTION
+        displayMsg: displayTexts.GENERATING_SUBSCRIPTION,
       },
       async () => {
         await this.generateSubscription(data, () => {
           //    this.props.history.push('/account')
         })
-      }
+      },
     )
   }
 
@@ -103,15 +103,15 @@ export class AccountSummarySubscriptionForm extends Component {
             id: response.data._id,
             activatedCode: response.data.activated,
             createdAt: response.data.createdAt,
-            isSubscribed: true
+            isSubscribed: true,
           },
           render: true,
           error: false,
-          displayMsg: displayTexts.WELCOME_NEW_SUBSCRIBER
+          displayMsg: displayTexts.WELCOME_NEW_SUBSCRIBER,
         },
         () => {
           setTimeout(callback, 1000)
-        }
+        },
       )
     } catch (exception) {
       logger.log('Exception on postSubscription')
@@ -130,11 +130,11 @@ export class AccountSummarySubscriptionForm extends Component {
         {
           render: true,
           displayMsg: displayMsg,
-          error: true
+          error: true,
         },
         () => {
           this.sendToast()
-        }
+        },
       )
     }
   }
@@ -153,7 +153,7 @@ export class AccountSummarySubscriptionForm extends Component {
           progressClassName: 'Toast-progress-bar',
           autoClose: time,
           toastId: this.state.toastId,
-          onClose: callback
+          onClose: callback,
         })
       } else {
         toast.success(displayMsg, {
@@ -161,7 +161,7 @@ export class AccountSummarySubscriptionForm extends Component {
           progressClassName: 'Toast-progress-bar',
           autoClose: time,
           toastId: this.state.toastId,
-          onClose: callback
+          onClose: callback,
         })
       }
     }
@@ -190,16 +190,13 @@ export class AccountSummarySubscriptionForm extends Component {
 
   inputChangedHandler = (event, inputIdentifier) => {
     const updatedForm = {
-      ...this.state.form
+      ...this.state.form,
     }
     const updatedFormElement = {
       ...updatedForm[inputIdentifier],
-      value: event.target.value
+      value: event.target.value,
     }
-    updatedFormElement.valid = this.checkValidity(
-      updatedFormElement.value,
-      updatedFormElement.validation
-    )
+    updatedFormElement.valid = this.checkValidity(updatedFormElement.value, updatedFormElement.validation)
     updatedFormElement.touched = true
     updatedForm[inputIdentifier] = updatedFormElement
 

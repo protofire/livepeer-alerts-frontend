@@ -8,9 +8,9 @@ const accountSummaryModalEmail = props => {
         Open dialog
       </Button> */}
       <div>
-        Email Sent You have been successfully subscribed, please check your email inbox, in a few
-        minutes you will receive an email with your livepeer account information. Please check your
-        spam folder in case you did not received it.
+        Email Sent You have been successfully subscribed, please check your email inbox, in a few minutes you will
+        receive an email with your livepeer account information. Please check your spam folder in case you did not
+        received it.
         {/* <Button onClick={onEmailModalClosed} color="primary">
             Accept
           </Button> */}

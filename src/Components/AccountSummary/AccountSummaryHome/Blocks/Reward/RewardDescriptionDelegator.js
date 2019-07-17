@@ -14,13 +14,9 @@ const RewardDescriptionDelegator = props => {
 
     let bondedDescription
     if (delegateCalledReward) {
-      bondedDescription = (
-        <>The delegate has successfully claimed the last inflationary token rewards.</>
-      )
+      bondedDescription = <>The delegate has successfully claimed the last inflationary token rewards.</>
     } else {
-      bondedDescription = (
-        <>Unfortunately the delegate has not claimed the last inflationary token rewards.</>
-      )
+      bondedDescription = <>Unfortunately the delegate has not claimed the last inflationary token rewards.</>
     }
 
     return (
@@ -44,17 +40,13 @@ const RewardDescriptionDelegator = props => {
               ` round(s) left in the unbonding period. Each round lasts roughly one day.`,
             Unbonded: (
               <>
-                You are not bonded to any delegate, therefore you are not earning LPT from the token
-                inflation. Go ahead and delegate your LPT{' '}
-                <a
-                  href="https://explorer.livepeer.org/transcoders"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
+                You are not bonded to any delegate, therefore you are not earning LPT from the token inflation. Go ahead
+                and delegate your LPT{' '}
+                <a href="https://explorer.livepeer.org/transcoders" target="_blank" rel="noopener noreferrer">
                   here
                 </a>
               </>
-            )
+            ),
             //  Unbonded: `As a delegator you are in the Unbounded state if you are not bonded to any delegate yet or if you have unbonded your tokens completely.`
           }[status]
         }
@@ -82,7 +74,7 @@ const RewardDescriptionDelegator = props => {
             ),
             Pending: `You are currently in the Pending state`,
             Unbonding: `You are currently in the Unbonding state`,
-            Unbonded: `Your current status is: Unbonded`
+            Unbonded: `Your current status is: Unbonded`,
           }[status]
         }
       </>

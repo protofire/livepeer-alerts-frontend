@@ -9,18 +9,18 @@ const Status = props => {
       title: 'Total Stake',
       currency: '(LPT)',
       data: totalStakeInLPT,
-      tooltip: toolTipsTexts.TOTAL_STAKE_TOOLTIP
+      tooltip: toolTipsTexts.TOTAL_STAKE_TOOLTIP,
     },
     {
       title: 'Active',
       currency: '',
       data: active ? 'Yes' : 'No',
-      tooltip: toolTipsTexts.ACTIVE_TRANSCODER_TOOLTIP
-    }
+      tooltip: toolTipsTexts.ACTIVE_TRANSCODER_TOOLTIP,
+    },
   ]
   const toolTips = {
     REGISTERED: toolTipsTexts.REGISTERED_TOOLTIP,
-    NOTREGISTERED: toolTipsTexts.NOT_REGISTERED_TOOLTIP
+    NOTREGISTERED: toolTipsTexts.NOT_REGISTERED_TOOLTIP,
   }
   const { classes } = props
 

@@ -8,12 +8,12 @@ const Wallet = props => {
   const tableData = [
     {
       currency: 'LPT',
-      data: lpBalance
+      data: lpBalance,
     },
     {
       currency: 'ETH',
-      data: decimalPlaces(ethBalance)
-    }
+      data: decimalPlaces(ethBalance),
+    },
   ]
   return (
     <div>

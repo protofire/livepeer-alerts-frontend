@@ -12,7 +12,7 @@ export class HomeComponent extends Component {
   state = {
     toastId: 1,
     displayMsg: null,
-    error: false
+    error: false,
   }
 
   onGetStartedBtnHandler = () => {
@@ -39,7 +39,7 @@ export class HomeComponent extends Component {
           progressClassName: 'Toast-progress-bar',
           autoClose: time,
           toastId: this.state.toastId,
-          onClose: callback
+          onClose: callback,
         })
       } else {
         toast.success(displayMsg, {
@@ -47,7 +47,7 @@ export class HomeComponent extends Component {
           progressClassName: 'Toast-progress-bar',
           autoClose: time,
           toastId: this.state.toastId,
-          onClose: callback
+          onClose: callback,
         })
       }
       /** TODO -- CHECK IF THERE IS ANOTHER WAY TO USE THIS, THIS IS FOR TESTING THAT THE TOAST IS CALLED **/
@@ -64,11 +64,11 @@ export class HomeComponent extends Component {
       this.setState(
         {
           error: this.props.location.state.error,
-          displayMsg: this.props.location.state.displayMsg
+          displayMsg: this.props.location.state.displayMsg,
         },
         () => {
           this.sendToast()
-        }
+        },
       )
     }
   }

@@ -19,7 +19,7 @@ export class AccountSummaryComponent extends Component {
       email: '',
       frequency: 'daily',
       activatedCode: null,
-      createdAt: null
+      createdAt: null,
     },
     summary: {
       role: '',
@@ -42,7 +42,7 @@ export class AccountSummaryComponent extends Component {
         totalStake: '0',
         delegateCalledReward: false,
         totalStakeInLPT: '0',
-        bondedAmountInLPT: '0'
+        bondedAmountInLPT: '0',
       },
       delegate: {
         active: true,
@@ -57,13 +57,13 @@ export class AccountSummaryComponent extends Component {
         status: '',
         totalStake: '',
         delegateCalledReward: false,
-        totalStakeInLPT: ''
-      }
+        totalStakeInLPT: '',
+      },
     },
     render: false,
     displayMsg: displayTexts.LOADING_USER_DATA,
     toastId: 1,
-    error: false
+    error: false,
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
@@ -78,11 +78,11 @@ export class AccountSummaryComponent extends Component {
         {
           ...this.state,
           ...nextProps,
-          render: false
+          render: false,
         },
         async () => {
           await this.loadUserData()
-        }
+        },
       )
     }
   }
@@ -99,9 +99,9 @@ export class AccountSummaryComponent extends Component {
         {
           ...this.state,
           render: true,
-          displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email
+          displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email,
         },
-        () => logger.log('Loading userData finished', this.state)
+        () => logger.log('Loading userData finished', this.state),
       )
     } catch (exception) {
       logger.log('exception ', exception)
@@ -128,10 +128,10 @@ export class AccountSummaryComponent extends Component {
           ...this.state.userData,
           address: address,
           ethBalance: this.props.userData.ethBalance,
-          authenticated: this.props.userData.authenticated
-        }
+          authenticated: this.props.userData.authenticated,
+        },
       },
-      callback
+      callback,
     )
   }
 
@@ -154,9 +154,9 @@ export class AccountSummaryComponent extends Component {
           {
             ...this.state,
             render: true,
-            displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email
+            displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email,
           },
-          () => logger.log('ComponentDidMountFinished ')
+          () => logger.log('ComponentDidMountFinished '),
         )
       } catch (exception) {
         logger.log('Exception ', exception)
@@ -165,11 +165,11 @@ export class AccountSummaryComponent extends Component {
             ...this.state,
             render: true,
             error: true,
-            displayMsg: displayTexts.FAIL_NO_REASON_REDIRECT
+            displayMsg: displayTexts.FAIL_NO_REASON_REDIRECT,
           },
           () => {
             this.sendToast(1500, () => this.props.history.push('/'))
-          }
+          },
         )
       }
     })
@@ -187,12 +187,12 @@ export class AccountSummaryComponent extends Component {
               ...this.state.userData,
               isSubscribed: true,
               id: userData.data._id,
-              ...userData.data
-            }
+              ...userData.data,
+            },
           },
           () => {
             resolve(this.state)
-          }
+          },
         )
       } catch (error) {
         /** Subscription not found **/
@@ -201,9 +201,9 @@ export class AccountSummaryComponent extends Component {
           this.setState(
             {
               ...this.state,
-              isSubscribed: false
+              isSubscribed: false,
             },
-            () => resolve(this.state)
+            () => resolve(this.state),
           )
         } else {
           /** Another network problem **/
@@ -223,10 +223,10 @@ export class AccountSummaryComponent extends Component {
               role: summaryData.data.role,
               lpBalance: summaryData.data.balance,
               delegate: summaryData.data.transcoder ? { ...summaryData.data.transcoder } : null,
-              delegator: summaryData.data.delegator ? { ...summaryData.data.delegator } : null
-            }
+              delegator: summaryData.data.delegator ? { ...summaryData.data.delegator } : null,
+            },
           },
-          () => resolve(summaryData.data)
+          () => resolve(summaryData.data),
         )
       } catch (exception) {
         reject(exception)
@@ -248,7 +248,7 @@ export class AccountSummaryComponent extends Component {
           progressClassName: 'Toast-progress-bar',
           autoClose: time,
           toastId: this.state.toastId,
-          onClose: callback
+          onClose: callback,
         })
       } else {
         toast.success(displayMsg, {
@@ -256,7 +256,7 @@ export class AccountSummaryComponent extends Component {
           progressClassName: 'Toast-progress-bar',
           autoClose: time,
           toastId: this.state.toastId,
-          onClose: callback
+          onClose: callback,
         })
       }
     }
@@ -270,7 +270,7 @@ export class AccountSummaryComponent extends Component {
     logger.log('Unsubscribe btnHandler')
     this.setState({
       render: false,
-      displayMsg: displayTexts.LOADING_UNSUBSCRIPTION
+      displayMsg: displayTexts.LOADING_UNSUBSCRIPTION,
     })
     try {
       logger.log('Unsubscribing user with id ', this.state.userData)
@@ -286,10 +286,10 @@ export class AccountSummaryComponent extends Component {
             id: null,
             activatedCode: null,
             createdAt: null,
-            error: false
-          }
+            error: false,
+          },
         },
-        () => this.sendToast()
+        () => this.sendToast(),
       )
     } catch (exception) {
       logger.log('Exception on deleteSubscription')
@@ -299,18 +299,18 @@ export class AccountSummaryComponent extends Component {
           {
             render: true,
             displayMsg: displayTexts.WELCOME_NOT_SUBSCRIBED,
-            error: true
+            error: true,
           },
-          () => this.sendToast()
+          () => this.sendToast(),
         )
       } else {
         this.setState(
           {
             render: true,
             displayMsg: displayTexts.FAIL_NO_REASON,
-            error: true
+            error: true,
           },
-          () => this.sendToast()
+          () => this.sendToast(),
         )
       }
     }
@@ -320,13 +320,11 @@ export class AccountSummaryComponent extends Component {
     // let content = <SpinnerExtended displayMsg={this.state.displayMsg} />
     let content = ''
     /** Shows only summary information according the role (delegate or delegator) **/
-    let summaryForRole = this.state.summary.delegate
-      ? this.state.summary.delegate
-      : this.state.summary.delegator
+    let summaryForRole = this.state.summary.delegate ? this.state.summary.delegate : this.state.summary.delegator
     let summaryProps = {
       ...summaryForRole,
       role: this.state.summary.role,
-      balance: this.state.summary.lpBalance
+      balance: this.state.summary.lpBalance,
     }
 
     if (this.state.render) {

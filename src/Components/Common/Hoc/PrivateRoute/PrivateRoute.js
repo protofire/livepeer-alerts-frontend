@@ -12,7 +12,7 @@ const PrivateRoute = ({ component: Component, authenticated, ...rest }) => {
           <Redirect
             to={{
               pathname: '/',
-              state: { error: rest.error, displayMsg: rest.displayMsg }
+              state: { error: rest.error, displayMsg: rest.displayMsg },
             }}
           />
         )

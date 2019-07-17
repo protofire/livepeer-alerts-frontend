@@ -9,20 +9,20 @@ const StatusDelegator = props => {
       title: 'Staked',
       currency: '(LPT)',
       data: totalStakeInLPT,
-      tooltip: toolTipsTexts.TOTAL_STAKE_TOOLTIP
+      tooltip: toolTipsTexts.TOTAL_STAKE_TOOLTIP,
     },
     {
       title: 'Earning fees',
       currency: '(ETH)',
       data: fees,
-      tooltip: toolTipsTexts.EARNING_FEES_TOOLTIP
-    }
+      tooltip: toolTipsTexts.EARNING_FEES_TOOLTIP,
+    },
   ]
   const toolTips = {
     BONDED: toolTipsTexts.BONDED_STATUS_TOOLTIP,
     UNBONDED: toolTipsTexts.UNBONDED_STATUS_TOOLTIP,
     UNBONDING: toolTipsTexts.UNBONDING_STATUS_TOOLTIP,
-    PENDING: toolTipsTexts.PENDING_STATUS_TOOLTIP
+    PENDING: toolTipsTexts.PENDING_STATUS_TOOLTIP,
   }
   const { classes } = props
 

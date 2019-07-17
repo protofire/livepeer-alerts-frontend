@@ -12,7 +12,7 @@ const defaultState = {
   authenticated: 2,
   web3: 3,
   displayMsg: '',
-  error: false
+  error: false,
 }
 
 const Web3Context = React.createContext(defaultState)
@@ -26,12 +26,12 @@ class Web3Provider extends Component {
       authenticated: false,
       reason: null,
       address: null,
-      currentNetwork: null
+      currentNetwork: null,
     },
     render: false,
     requestingAuth: true,
     displayMsg: texts.WAITING_AUTHORIZATION,
-    error: false
+    error: false,
   }
 
   loadWeb3 = async () => {
@@ -85,12 +85,12 @@ class Web3Provider extends Component {
           web3: web3Instance,
           userData: {
             authenticated: false,
-            reason: failReasons.NO_ADDRESS
+            reason: failReasons.NO_ADDRESS,
           },
           render: true,
           requestingAuth: false,
           displayMsg: texts.NO_ADDRESS,
-          error: true
+          error: true,
         })
         break
       }
@@ -99,12 +99,12 @@ class Web3Provider extends Component {
           web3: web3Instance,
           userData: {
             authenticated: false,
-            reason: failReasons.NO_PERMISSIONS
+            reason: failReasons.NO_PERMISSIONS,
           },
           render: true,
           requestingAuth: false,
           displayMsg: texts.NO_PERMISSIONS,
-          error: true
+          error: true,
         })
         break
       }
@@ -113,11 +113,11 @@ class Web3Provider extends Component {
           render: true,
           userData: {
             authenticated: false,
-            reason: failReasons.NO_WEB3
+            reason: failReasons.NO_WEB3,
           },
           requestingAuth: false,
           displayMsg: texts.NO_WEB3,
-          error: true
+          error: true,
         })
         break
       }
@@ -126,11 +126,11 @@ class Web3Provider extends Component {
           render: true,
           userData: {
             authenticated: false,
-            reason: failReasons.NO_REASON
+            reason: failReasons.NO_REASON,
           },
           requestingAuth: false,
           displayMsg: texts.DEFAULT_ERROR,
-          error: true
+          error: true,
         })
         break
       }
@@ -159,10 +159,10 @@ class Web3Provider extends Component {
               authenticated: true,
               address: this.toChecksumAddress(web3Instance, userAddress[0]),
               currentNetwork: userNetwork,
-              ethBalance: balance
+              ethBalance: balance,
             },
             render: true,
-            requestingAuth: false
+            requestingAuth: false,
           })
           /** We subscribe to the event that detects if the user has changed the account **/
           window.ethereum.on('accountsChanged', accounts => {
@@ -173,8 +173,8 @@ class Web3Provider extends Component {
                 userData: {
                   ...this.state.userData,
                   address: this.toChecksumAddress(web3Instance, accounts[0]),
-                  ethBalance: balance
-                }
+                  ethBalance: balance,
+                },
               })
             })
           })
@@ -186,8 +186,8 @@ class Web3Provider extends Component {
               userData: {
                 ...this.state.userData,
                 currentNetwork: network,
-                ethBalance: balance
-              }
+                ethBalance: balance,
+              },
             })
           })
         })
@@ -228,7 +228,7 @@ class Web3Provider extends Component {
             value={{
               web3: this.state.web3,
               authenticated: this.state.userData.authenticated,
-              userData: this.state.userData
+              userData: this.state.userData,
             }}
           >
             {this.props.children}
@@ -242,7 +242,7 @@ class Web3Provider extends Component {
               authenticated: this.state.userData.authenticated,
               userData: this.state.userData,
               displayMsg: this.state.displayMsg,
-              error: this.state.error
+              error: this.state.error,
             }}
           >
             {this.props.children}

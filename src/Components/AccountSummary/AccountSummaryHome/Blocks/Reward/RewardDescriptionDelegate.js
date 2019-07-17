@@ -35,10 +35,7 @@ const RewardDescriptionDelegate = props => {
       )
     } else {
       bondedDescription = (
-        <p>
-          There might be something wrong with your node given that the last round reward call was
-          not made yet.
-        </p>
+        <p>There might be something wrong with your node given that the last round reward call was not made yet.</p>
       )
     }
 

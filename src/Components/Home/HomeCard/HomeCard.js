@@ -16,13 +16,12 @@ class HomeCard extends React.Component {
     const proactiveAlertDescription = (
       <>
         <p>
-          As a <strong>Token Holder</strong> get to know how your LPTs are performing based on the
-          token inflation and whether your delegate is calling the reward (you earn) or not (you
-          loose)
+          As a <strong>Token Holder</strong> get to know how your LPTs are performing based on the token inflation and
+          whether your delegate is calling the reward (you earn) or not (you loose)
         </p>
         <p>
-          As a <strong>Transcoder</strong> be notified if there was something wrong with your node
-          and the reward was not called in the current round automatically.
+          As a <strong>Transcoder</strong> be notified if there was something wrong with your node and the reward was
+          not called in the current round automatically.
         </p>
       </>
     )
@@ -30,8 +29,8 @@ class HomeCard extends React.Component {
     const youAndLivepeerDescription = (
       <>
         <p>
-          A Dashboard that provides an at-a-glance view of your participation in the network and
-          receive tips on how to improve your earnings.
+          A Dashboard that provides an at-a-glance view of your participation in the network and receive tips on how to
+          improve your earnings.
         </p>
       </>
     )
@@ -63,7 +62,7 @@ class HomeCard extends React.Component {
 }
 
 HomeCard.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 }
 
 export default HomeCard

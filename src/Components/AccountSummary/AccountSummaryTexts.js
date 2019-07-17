@@ -7,8 +7,7 @@ export const FAIL_NO_REASON_REDIRECT = 'Something went wrong! Redirecting to hom
 export const BOUNDED_STATUS_NEEDED = 'In order to subscribe you need to be on BOUNDED status'
 export const LOADING_UNSUBSCRIPTION = 'Please wait while we process your unsubscription'
 export const LOADING_SUBSCRIPTION = 'Please wait while we process your subscription'
-export const LOADING_SUBSCRIPTION_DATA =
-  'Please wait while we get the information of your subscription'
+export const LOADING_SUBSCRIPTION_DATA = 'Please wait while we get the information of your subscription'
 export const GENERATING_SUBSCRIPTION = 'Please wait while we generate your subscription'
 export const UNSUBSCRIPTION_SUCCESSFUL = 'You were successfully unsubscribed!'
 export const EMAIL_ALREADY_EXISTS = 'Email related to that address already subscribed'
