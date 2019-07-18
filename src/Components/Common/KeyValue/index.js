@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import Tooltip from '../Tooltip'
 
 const KeyValueStyled = styled.div`
   border-top: 1px solid ${props => props.theme.colors.borderColor};
@@ -28,26 +29,35 @@ const Value = styled.p`
   line-height: 1.3;
   margin: 0;
   text-align: center;
+  white-space: nowrap;
 `
 
 const Title = styled.h3`
+  align-items: center;
   color: ${props => props.theme.colors.darkGray};
+  display: flex;
   font-size: 13px;
   font-weight: 700;
+  justify-content: center;
   line-height: 1.38;
   margin: 0;
   text-align: center;
+  white-space: nowrap;
 `
 
 const KeyValue = props => {
   const { items, ...restProps } = props
+
   return (
     <KeyValueStyled {...restProps}>
       {items.map((item, index) => {
         return (
           <Item key={index}>
             <Value>{item.data}</Value>
-            <Title>{item.text}</Title>
+            <Title>
+              {item.text}
+              {item.tooltip ? <Tooltip description={item.tooltip} /> : null}
+            </Title>
           </Item>
         )
       })}

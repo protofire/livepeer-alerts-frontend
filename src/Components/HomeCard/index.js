@@ -17,12 +17,11 @@ const CardHome = styled(Card)`
 
 const Title = styled.h1`
   font-size: 30px;
-  font-weight: 400;
+  font-weight: 500;
   line-height: 1.2;
   margin: 0 0 35px;
   padding-top: 10px;
   text-align: center;
-  font-weight: 500;
 `
 
 const TextContainer = styled.div`

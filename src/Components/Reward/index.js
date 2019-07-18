@@ -2,6 +2,14 @@ import React from 'react'
 import RewardDescriptionDelegator from './RewardDescriptionDelegator'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
 import RewardDescriptionDelegate from './RewardDescriptionDelegate'
+import Card from '../Common/Card'
+import styled from 'styled-components'
+
+const AccountSummaryHomeContainer = styled.div`
+  margin: 0 auto;
+  max-width: 100%;
+  width: 574px;
+`
 
 const Reward = props => {
   const { userData, summary } = props
@@ -30,43 +38,36 @@ const Reward = props => {
   const openTelegramLink = () => {
     window.open(telegramLink, '_blank')
   }
-
-  let rewardDescription = <RewardDescriptionDelegator {...props} />
-  /** If the user is a delegate we show the delegate component, otherwise we show the delegator component **/
-  if (props.summary && props.summary.role && props.summary.role.toLowerCase() === 'transcoder') {
-    rewardDescription = <RewardDescriptionDelegate {...props} />
-  }
+  const isDelegate = props.summary && props.summary.role && props.summary.role.toLowerCase() === 'transcoder'
 
   return (
-    <>
-      <div>{rewardDescription}</div>
-      {disableOrHide ? null : (
-        <>
-          <div>
-            <CopyToClipboard text={telegramLink}>
-              <button onClick={openTelegramLink} disabled={disableOrHide}>
-                Telegram
-              </button>
-            </CopyToClipboard>
-            {subscriptionBtn}
-          </div>
-          <div>
-            <p>
-              Don't miss your
-              <a
-                href="https://forum.livepeer.org/t/why-you-should-bond-your-new-livepeer-tokens-lpt-detailed-version/418"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                {' '}
-                LPT reward.{' '}
-              </a>
-              Subscribe now!
-            </p>
-          </div>
-        </>
-      )}
-    </>
+    <Card>{isDelegate ? <RewardDescriptionDelegate {...props} /> : <RewardDescriptionDelegator {...props} />}</Card>
+    // {disableOrHide ? null : (
+    //   <>
+    //     <div>
+    //       <CopyToClipboard text={telegramLink}>
+    //         <button onClick={openTelegramLink} disabled={disableOrHide}>
+    //           Telegram
+    //         </button>
+    //       </CopyToClipboard>
+    //       {subscriptionBtn}
+    //     </div>
+    //     <div>
+    //       <p>
+    //         Don't miss your
+    //         <a
+    //           href="https://forum.livepeer.org/t/why-you-should-bond-your-new-livepeer-tokens-lpt-detailed-version/418"
+    //           target="_blank"
+    //           rel="noopener noreferrer"
+    //         >
+    //           {' '}
+    //           LPT reward.{' '}
+    //         </a>
+    //         Subscribe now!
+    //       </p>
+    //     </div>
+    //   </>
+    // )}
   )
 }
 
