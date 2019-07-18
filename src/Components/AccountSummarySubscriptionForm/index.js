@@ -1,13 +1,13 @@
-import * as displayTexts from '../AccountSummaryTexts'
-import AccountSummarySubscriptionFormDisplay from './AccountSummaryFormDisplay/AccountSummarySubscriptionFormDisplay'
+import * as displayTexts from '../../Texts/AccountSummary'
+import AccountSummarySubscriptionFormDisplay from '../AccountSummaryFormDisplay'
 import React, { Component } from 'react'
 import axios from 'axios'
 import validator from 'validator'
 import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
-import AccountSummaryModalEmail from './AccountSummaryFormDisplay/AccountSummaryModalEmail/AccountSummaryModalEmail'
+import AccountSummaryModalEmail from '../AccountSummaryModalEmail'
 import ReactGA from 'react-ga'
-import FullLoading from '../../Common/FullLoading/FullLoading'
+import FullLoading from '../Common/FullLoading/ndex'
 
 const logger = logdown('Livepeer:AccountSummarySubscriptionForm')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'

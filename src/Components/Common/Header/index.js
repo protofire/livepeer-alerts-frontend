@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import Logo from '../Logo/Logo'
-import MainMenu from '../MainMenu/MainMenu'
-import MenuButton from '../MenuButton/MenuButton'
+import Logo from '../Logo'
+import MainMenu from '../MainMenu'
+import MenuButton from '../MenuButton'
 
 const HeaderStyled = styled.div`
   background-color: ${props => props.theme.header.backgroundColor};

@@ -42,10 +42,8 @@ const RewardDescriptionDelegate = props => {
 
   return (
     <>
-      <div>
-        <h3>{title(props)}</h3>
-        <div>{description(props)}</div>
-      </div>
+      <h3>{title(props)}</h3>
+      <div>{description(props)}</div>
     </>
   )
 }

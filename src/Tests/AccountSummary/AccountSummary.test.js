@@ -3,7 +3,7 @@ import { configure, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import * as jest from 'jest'
 import axios from 'axios'
-import { AccountSummary } from '../../Components/AccountSummary/AccountSummary'
+import { AccountSummary } from '../../Components/AccountSummary'
 import render from 'react-test-renderer'
 
 configure({ adapter: new Adapter() })

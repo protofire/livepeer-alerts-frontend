@@ -1,7 +1,7 @@
 import React from 'react'
 import { configure, mount, shallow } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
-import * as displayTexts from '../../../Components/AccountSummary/AccountSummaryTexts'
+import * as displayTexts from '../../../Texts/AccountSummary'
 import * as jest from 'jest'
 import axios from 'axios'
 import { AccountSummarySubscriptionForm } from '../../../Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummarySubscriptionForm'

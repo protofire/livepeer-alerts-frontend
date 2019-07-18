@@ -11,6 +11,8 @@ const theme = {
     borderRadius: '3px',
   },
   colors: {
+    borderColor: '#d9d9d9',
+    darkGray: '#333',
     lightText: '#999',
     mainText: '#000',
     primary: '#9c27b0',
@@ -24,6 +26,7 @@ const theme = {
     boxShadow: '0 0 6px 0 rgba(0, 0, 0, 0.25)',
     paddingHorizontal: '14px',
     paddingVertical: '10px',
+    textColor: '#000',
     titleColor: '#000',
   },
   header: {

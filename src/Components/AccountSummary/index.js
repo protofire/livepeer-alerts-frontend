@@ -1,11 +1,11 @@
-import * as displayTexts from './AccountSummaryTexts'
-import AccountSummaryHome from '../AccountSummaryHome/AccountSummaryHome'
+import * as displayTexts from '../../Texts/AccountSummary'
+import AccountSummaryHome from '../AccountSummaryHome'
 import React, { Component } from 'react'
 import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
 import ReactGA from 'react-ga'
-import FullLoading from '../Common/FullLoading/FullLoading'
+import FullLoading from '../Common/FullLoading/ndex'
 
 const logger = logdown('Livepeer:AccountSummary')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'

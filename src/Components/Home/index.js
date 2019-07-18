@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import HomeCard from '../HomeCard/HomeCard'
+import HomeCard from '../HomeCard'
 import { toast, ToastContainer } from 'react-toastify'
 import { withRouter } from 'react-router-dom'
 import logdown from 'logdown'

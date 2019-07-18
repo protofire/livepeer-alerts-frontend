@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-import Footer from './Components/Common/Footer/Footer'
-import Header from './Components/Common/Header/Header'
-import MainWrapper from './Components/Common/Layout/MainWrapper'
-import MainScroll from './Components/Common/Layout/MainScroll'
-import FullLoading from './Components/Common/FullLoading/FullLoading'
-import PrivateRoute from './Components/Common/Hoc/PrivateRoute/PrivateRoute'
+import Footer from './Components/Common/Footer'
+import Header from './Components/Common/Header'
+import MainWrapper from './Components/Common/MainWrapper'
+import MainScroll from './Components/Common/MainScroll'
+import FullLoading from './Components/Common/FullLoading/ndex'
+import PrivateRoute from './Components/Common/Hoc/PrivateRoute'
 import PropTypes from 'prop-types'
 import ReactGA from 'react-ga'
-import Web3Provider, { Web3ContextConsumer } from './Components/Common/Hoc/Web3Provider/Web3Provider'
+import Web3Provider, { Web3ContextConsumer } from './Components/Common/Hoc/Web3Provider'
 import logdown from 'logdown'
 import { ThemeProvider } from 'styled-components'
 import theme from './Theme'
-import { AccountSummarySubscriptionForm } from './Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummarySubscriptionForm'
+import { AccountSummarySubscriptionForm } from './Components/AccountSummarySubscriptionForm'
 import { BrowserRouter as Router } from 'react-router-dom'
 import { HomeComponent, AccountSummary } from './Components'
 import { Redirect } from 'react-router'
@@ -59,47 +59,6 @@ export class App extends Component {
   render() {
     const { classes, ...restProps } = this.props
 
-    const routes = (
-      <Switch>
-        <Route
-          exact
-          path="/"
-          render={routeProps => <HomeComponent {...this.state} {...this.props} {...routeProps} />}
-        />
-        <Web3Provider>
-          <Web3ContextConsumer>
-            {({ web3, userData, authenticated, error, displayMsg }) => {
-              return (
-                <Switch>
-                  <PrivateRoute
-                    authenticated={authenticated}
-                    component={AccountSummary}
-                    displayMsg={displayMsg}
-                    error={error}
-                    exact
-                    path="/(account|account/demo)/"
-                    userData={userData}
-                    web3={web3}
-                  />
-                  <PrivateRoute
-                    authenticated={authenticated}
-                    component={AccountSummarySubscriptionForm}
-                    displayMsg={displayMsg}
-                    error={error}
-                    exact
-                    path="/account/subscription"
-                    userData={userData}
-                    web3={web3}
-                  />
-                  <Redirect to="/" />
-                </Switch>
-              )
-            }}
-          </Web3ContextConsumer>
-        </Web3Provider>
-      </Switch>
-    )
-
     return (
       <Router>
         <ThemeProvider theme={theme}>
@@ -108,7 +67,44 @@ export class App extends Component {
             <MainWrapper {...restProps}>
               <Header />
               <MainScroll>
-                {routes}
+                <Switch>
+                  <Route
+                    exact
+                    path="/"
+                    render={routeProps => <HomeComponent {...this.state} {...this.props} {...routeProps} />}
+                  />
+                  <Web3Provider>
+                    <Web3ContextConsumer>
+                      {({ web3, userData, authenticated, error, displayMsg }) => {
+                        return (
+                          <Switch>
+                            <PrivateRoute
+                              authenticated={authenticated}
+                              component={AccountSummary}
+                              displayMsg={displayMsg}
+                              error={error}
+                              exact
+                              path="/(account|account/demo)/"
+                              userData={userData}
+                              web3={web3}
+                            />
+                            <PrivateRoute
+                              authenticated={authenticated}
+                              component={AccountSummarySubscriptionForm}
+                              displayMsg={displayMsg}
+                              error={error}
+                              exact
+                              path="/account/subscription"
+                              userData={userData}
+                              web3={web3}
+                            />
+                            <Redirect to="/" />
+                          </Switch>
+                        )
+                      }}
+                    </Web3ContextConsumer>
+                  </Web3Provider>
+                </Switch>
                 <Footer />
               </MainScroll>
             </MainWrapper>

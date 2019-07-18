@@ -1,13 +1,13 @@
 import React from 'react'
 import ReactDOM from 'react-dom'
 import { NavLink } from 'react-router-dom'
-import Spinner from '../Spinner/Spinner'
+import Spinner from '../Spinner'
 import styled from 'styled-components'
 import { rgba } from 'polished'
 
 const FullLoadingStyled = styled.div`
   align-items: center;
-  background-color: ${props => rgba(props.theme.colors.primary, 0.75)};
+  background-color: ${props => rgba(props.theme.colors.primary, 0.5)};
   display: flex;
   flex-direction: column;
   height: 100vh;

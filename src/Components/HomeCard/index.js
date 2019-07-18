@@ -1,10 +1,9 @@
-import PropTypes from 'prop-types'
 import React from 'react'
-import Card from '../Common/Card/Card'
+import Card from '../Common/Card'
 import styled from 'styled-components'
 import IconAlert from './icons/IconAlert'
 import IconGroup from './icons/IconGroup'
-import Button from '../Common/Button/Button'
+import Button from '../Common/Button'
 
 const CardHome = styled(Card)`
   margin: 0 auto;
@@ -147,10 +146,6 @@ class HomeCard extends React.Component {
       </CardHome>
     )
   }
-}
-
-HomeCard.propTypes = {
-  classes: PropTypes.object.isRequired,
 }
 
 export default HomeCard

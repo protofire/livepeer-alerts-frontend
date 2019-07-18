@@ -1,5 +1,5 @@
 import React from 'react'
-import { truncateStringInTheMiddle } from '../../../../utils'
+import { truncateStringInTheMiddle } from '../../Utils'
 import { Emoji } from 'emoji-mart'
 
 const RewardDescriptionDelegator = props => {

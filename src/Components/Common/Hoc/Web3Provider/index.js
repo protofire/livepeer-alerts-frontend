@@ -1,9 +1,9 @@
 import * as failReasons from './Web3FailReasons'
-import * as texts from '../../Texts/Texts'
+import * as texts from '../../Texts'
 import React, { Component } from 'react'
 import Web3 from 'web3'
 import logdown from 'logdown'
-import FullLoading from '../../../Common/FullLoading/FullLoading'
+import FullLoading from '../../FullLoading/ndex'
 
 const logger = logdown('Livepeer:Web3Provider')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'

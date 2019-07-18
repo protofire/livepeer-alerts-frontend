@@ -5,6 +5,8 @@ const CardStyled = styled.div`
   border-radius: ${props => props.theme.cards.borderRadius};
   box-shadow: ${props => props.theme.cards.boxShadow};
   background-color: ${props => props.theme.cards.backgroundColor};
+  display: flex;
+  flex-direction: column;
   padding: ${props => props.theme.cards.paddingVertical} ${props => props.theme.cards.paddingHorizontal};
 `
 
@@ -17,7 +19,12 @@ const Title = styled.h2`
   text-align: left;
 `
 
-const Body = styled.div``
+const Body = styled.div`
+  color: ${props => props.theme.cards.textColor};
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+`
 
 const Card = props => {
   const { title, children, ...restProps } = props
