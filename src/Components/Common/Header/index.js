@@ -80,7 +80,7 @@ class Header extends Component {
         <HeaderInner>
           <LogoStyled />
           <MenuButtonStyled onClick={this.toggleMenu} />
-          <MainMenuStyled isOpen={this.state.menuOpen} />
+          <MainMenuStyled isOpen={this.state.menuOpen} {...this.props} />
         </HeaderInner>
       </HeaderStyled>
     )

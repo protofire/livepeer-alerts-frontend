@@ -56,15 +56,13 @@ export class App extends Component {
   }
 
   render() {
-    const { classes, ...restProps } = this.props
-
     return (
       <Router>
         <ThemeProvider theme={theme}>
           <>
             <FullLoading show={!this.state.render} />
-            <MainWrapper {...restProps}>
-              <Header />
+            <MainWrapper>
+              <Header userData={{ address: '0x1234567', authenticated: true, isSubscribed: false }} />
               <MainScroll>
                 <Switch>
                   <Route

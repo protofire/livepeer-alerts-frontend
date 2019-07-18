@@ -6,6 +6,7 @@ import IconGroup from './icons/IconGroup'
 import Button from '../Common/Button'
 
 const CardHome = styled(Card)`
+  flex-shrink: 0;
   margin: 0 auto;
   max-width: 100%;
   width: 480px;
@@ -19,13 +20,13 @@ const Title = styled.h1`
   font-size: 30px;
   font-weight: 500;
   line-height: 1.2;
-  margin: 0 0 35px;
+  margin: 0 0 30px;
   padding-top: 10px;
   text-align: center;
 `
 
 const TextContainer = styled.div`
-  margin: 0 0 30px;
+  margin: 0 0 25px;
   padding: 0 5px;
 
   @media (min-width: ${props => props.theme.themeBreakPoints.xl}) {
@@ -36,7 +37,7 @@ const TextContainer = styled.div`
 const SubTitleContainer = styled.div`
   display: flex;
   align-items: center;
-  margin: 0 0 15px;
+  margin: 0 0 12px;
 
   > svg {
     flex-shrink: 0;
@@ -69,7 +70,7 @@ const ButtonsContainer = styled.div`
   display: grid;
   grid-row-gap: 5px;
   grid-template-columns: 1fr;
-  padding: 15px 0 0;
+  padding: 10px 0 0;
 
   @media (min-width: ${props => props.theme.themeBreakPoints.xl}) {
     grid-auto-columns: 1fr 1fr;

@@ -2,6 +2,9 @@ import React from 'react'
 import styled from 'styled-components'
 
 const MainScrollStyled = styled.div`
+  align-items: center;
+  display: flex;
+  flex-direction: column;
   flex-grow: 1;
   overflow: auto;
   padding-bottom: 30px;

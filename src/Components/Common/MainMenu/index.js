@@ -49,38 +49,48 @@ const ItemText = styled.span`
   color: #fff;
 `
 
-const menuItems = [
-  {
-    color: 'secondary',
-    icon: <IconRanking />,
-    onClick: null,
-    text: 'ROI Ranking',
-  },
-  {
-    color: 'tertiary',
-    icon: <IconTelegram />,
-    onClick: null,
-    text: 'Telegram',
-  },
-  {
-    color: 'primary',
-    icon: <IconEmail />,
-    onClick: null,
-    text: 'Subscribe',
-  },
-]
-
 const MainMenu = props => {
-  const { isOpen, ...restProps } = props
+  const { userData, isOpen, ...restProps } = props
+  const isUserValid = userData && userData.address
+
+  const openTelegramLink = () => {
+    if (!userData && userData.address) return
+
+    window.open(`${process.env.REACT_APP_LIVEPEER_TELEGRAM_BOT_URL}?start=${userData.address}`, '_blank')
+  }
+
+  const menuItems = [
+    {
+      active: true,
+      color: 'secondary',
+      icon: <IconRanking />,
+      onClick: null,
+      text: 'ROI Ranking',
+    },
+    {
+      active: isUserValid,
+      color: 'tertiary',
+      icon: <IconTelegram />,
+      onClick: openTelegramLink,
+      text: 'Telegram',
+    },
+    {
+      active: isUserValid,
+      color: 'primary',
+      icon: <IconEmail />,
+      onClick: null,
+      text: userData.isSubscribed ? 'Subscription' : 'Subscribe',
+    },
+  ]
 
   return (
     <MainMenuStyled isOpen={isOpen} {...restProps}>
       {menuItems.map((item, index) => {
-        return (
+        return item.active ? (
           <Item onClick={item.onClick} key={index} borderColor={item.color}>
             {item.icon} <ItemText>{item.text}</ItemText>
           </Item>
-        )
+        ) : null
       })}
     </MainMenuStyled>
   )

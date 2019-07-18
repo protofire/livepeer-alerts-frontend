@@ -57,6 +57,9 @@ const theme = {
   paddings: {
     mainPadding: '15px',
   },
+  footer: {
+    textColor: '#fff',
+  },
 }
 
 export default theme
