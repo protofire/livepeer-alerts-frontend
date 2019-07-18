@@ -7,14 +7,13 @@ const MainScrollStyled = styled.div`
   padding-bottom: 30px;
   padding-left: 10px;
   padding-right: 10px;
-  padding-top: 30px;
+  padding-top: 50px;
   position: relative;
   z-index: 5;
 
   @media (min-width: ${props => props.theme.themeBreakPoints.xl}) {
     padding-left: ${props => props.theme.paddings.mainPadding};
     padding-right: ${props => props.theme.paddings.mainPadding};
-    padding-top: 50px;
   }
 `
 
