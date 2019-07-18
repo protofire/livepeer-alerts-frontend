@@ -40,11 +40,11 @@ const Wallet = props => {
   const { address, ethBalance } = userData
   const tableData = [
     {
-      currency: 'LPT',
+      text: 'LPT',
       data: lpBalance,
     },
     {
-      currency: 'ETH',
+      text: 'ETH',
       data: decimalPlaces(ethBalance),
     },
   ]
