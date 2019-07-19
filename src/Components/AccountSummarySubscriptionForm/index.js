@@ -7,7 +7,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
 import AccountSummaryModalEmail from '../AccountSummaryModalEmail'
 import ReactGA from 'react-ga'
-import FullLoading from '../Common/FullLoading/ndex'
+import FullLoading from '../Common/FullLoading'
 
 const logger = logdown('Livepeer:AccountSummarySubscriptionForm')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
@@ -219,9 +219,9 @@ export class AccountSummarySubscriptionForm extends Component {
         content = (
           <AccountSummarySubscriptionFormDisplay
             form={this.state.form}
-            onSubmitBtnHandler={this.onSubmitBtnHandler}
-            onCancelBtnHandler={this.onCancelBtnHandler}
             inputChangedHandler={this.inputChangedHandler}
+            onCancelBtnHandler={this.onCancelBtnHandler}
+            onSubmitBtnHandler={this.onSubmitBtnHandler}
           />
         )
       }

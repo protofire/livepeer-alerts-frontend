@@ -5,7 +5,7 @@ import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
 import ReactGA from 'react-ga'
-import FullLoading from '../Common/FullLoading/ndex'
+import FullLoading from '../Common/FullLoading'
 
 const logger = logdown('Livepeer:AccountSummary')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'

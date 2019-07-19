@@ -3,7 +3,7 @@ import * as texts from '../../Texts'
 import React, { Component } from 'react'
 import Web3 from 'web3'
 import logdown from 'logdown'
-import FullLoading from '../../FullLoading/ndex'
+import FullLoading from '../../FullLoading'
 
 const logger = logdown('Livepeer:Web3Provider')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
