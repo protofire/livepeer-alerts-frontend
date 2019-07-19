@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { NavLink } from 'react-router-dom'
 import styled from 'styled-components'
 import Logo from '../Logo'
 import MainMenu from '../MainMenu'
@@ -35,7 +36,7 @@ const HeaderInner = styled.div`
   }
 `
 
-const LogoStyled = styled(Logo)`
+const NavLinkStyled = styled(NavLink)`
   margin-left: ${props => props.theme.paddings.mainPadding};
 
   @media (min-width: ${props => props.theme.themeBreakPoints.xl}) {
@@ -73,12 +74,14 @@ class Header extends Component {
   }
 
   render = () => {
-    const { ...restProps } = this.props
+    const { userData, ...restProps } = this.props
 
     return (
       <HeaderStyled {...restProps}>
         <HeaderInner>
-          <LogoStyled />
+          <NavLinkStyled to={userData.authenticated ? '/account' : '/'}>
+            <Logo />
+          </NavLinkStyled>
           <MenuButtonStyled onClick={this.toggleMenu} />
           <MainMenuStyled isOpen={this.state.menuOpen} {...this.props} />
         </HeaderInner>

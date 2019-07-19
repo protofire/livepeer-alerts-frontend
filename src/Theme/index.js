@@ -11,6 +11,7 @@ const theme = {
     borderRadius: '3px',
   },
   colors: {
+    alert: '#de5454',
     borderColor: '#d9d9d9',
     darkGray: '#333',
     lightText: '#999',
@@ -27,6 +28,7 @@ const theme = {
     paddingHorizontal: '14px',
     paddingVertical: '10px',
     textColor: '#000',
+    textColorSecondary: '#333',
     titleColor: '#000',
   },
   header: {
@@ -59,6 +61,13 @@ const theme = {
   },
   footer: {
     textColor: '#fff',
+  },
+  textfield: {
+    borderColor: '#d9d9d9',
+    color: '#333',
+    fontSize: '15px',
+    fontWeight: '500',
+    placeholderColor: '#666',
   },
 }
 

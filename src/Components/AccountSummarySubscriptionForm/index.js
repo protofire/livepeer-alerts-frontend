@@ -1,5 +1,5 @@
 import * as displayTexts from '../../Texts/AccountSummary'
-import AccountSummarySubscriptionFormDisplay from '../AccountSummaryFormDisplay'
+import AccountSummaryFormDisplay from '../AccountSummaryFormDisplay'
 import React, { Component } from 'react'
 import axios from 'axios'
 import validator from 'validator'
@@ -209,29 +209,19 @@ export class AccountSummarySubscriptionForm extends Component {
   }
 
   render() {
-    let content = <FullLoading show={true} message={this.state.displayMsg} />
-
-    if (this.state.render) {
-      if (this.state.userData && this.state.userData.isSubscribed) {
-        content = <AccountSummaryModalEmail onEmailModalClosed={this.onEmailModalClosed} />
-        content = ''
-      } else {
-        content = (
-          <AccountSummarySubscriptionFormDisplay
+    return (
+      <>
+        {this.state.userData && this.state.userData.isSubscribed ? (
+          <AccountSummaryModalEmail onEmailModalClosed={this.onEmailModalClosed} />
+        ) : (
+          <AccountSummaryFormDisplay
             form={this.state.form}
             inputChangedHandler={this.inputChangedHandler}
             onCancelBtnHandler={this.onCancelBtnHandler}
             onSubmitBtnHandler={this.onSubmitBtnHandler}
           />
-        )
-      }
-      content = ''
-    }
-
-    return (
-      <>
-        {content}
-        <ToastContainer autoClose={2000} />
+        )}
+        <ToastContainer autoClose={5000} />
       </>
     )
   }
