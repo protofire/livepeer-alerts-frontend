@@ -103,7 +103,7 @@ class HomeCard extends React.Component {
 
     if (!demoBtnDisabled && demoAddress) {
       demoAddress.split(',').forEach(element => {
-        /** Checks if the address length is ok **/
+        // Checks if the address length is ok
         demoBtnDisabled = !(element.length % 42 === 0)
       })
     }

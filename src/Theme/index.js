@@ -59,9 +59,6 @@ const theme = {
   paddings: {
     mainPadding: '15px',
   },
-  footer: {
-    textColor: '#fff',
-  },
   textfield: {
     borderColor: '#d9d9d9',
     color: '#333',
