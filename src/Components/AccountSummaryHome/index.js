@@ -1,10 +1,15 @@
 import React from 'react'
-import Reward from '../Reward'
 import RewardSubscribeText from '../RewardSubscribeText'
 import StatusDelegate from '../StatusDelegate'
 import StatusDelegator from '../StatusDelegator'
 import Wallet from '../Wallet'
+import PageTitle from '../Common/PageTitle'
+import TranscoderInfo from '../TranscoderInfo'
+import EarnedRewards from '../EarnedRewards'
 import styled from 'styled-components'
+import LPTRewards from '../LPTRewards'
+
+// import Reward from '../Reward'
 
 const AccountSummaryHomeContainer = styled.div`
   margin: 0 auto;
@@ -23,16 +28,26 @@ const MultiBlocksRow = styled.div`
   }
 `
 
+const MultiBlocksRowTop = styled(MultiBlocksRow)`
+  margin-bottom: 40px;
+`
+
 const AccountSummaryHome = props => {
   const isDelegate = props.summary && props.summary.role && props.summary.role.toLowerCase() === 'transcoder'
 
   return (
     <AccountSummaryHomeContainer>
-      <MultiBlocksRow>
+      <MultiBlocksRowTop>
         <Wallet {...props} />
         {isDelegate ? <StatusDelegate {...props} /> : <StatusDelegator {...props} />}
+      </MultiBlocksRowTop>
+      <PageTitle>My Transcoder</PageTitle>
+      <MultiBlocksRow>
+        <TranscoderInfo />
+        <EarnedRewards />
       </MultiBlocksRow>
-      <Reward {...props} />
+      <LPTRewards {...props} />
+      {/* <Reward {...props} /> */}
       <RewardSubscribeText {...props} />
     </AccountSummaryHomeContainer>
   )

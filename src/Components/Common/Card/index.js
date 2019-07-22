@@ -16,7 +16,7 @@ const Title = styled.h2`
   font-weight: 700;
   line-height: 1.31;
   margin: 0;
-  text-align: left;
+  text-align: ${props => props.titleAlign};
 `
 
 const Body = styled.div`
@@ -27,10 +27,10 @@ const Body = styled.div`
 `
 
 const Card = props => {
-  const { title, children, ...restProps } = props
+  const { title, children, titleAlign = 'left', ...restProps } = props
   return (
     <CardStyled {...restProps}>
-      {title ? <Title>{title}</Title> : null}
+      {title ? <Title titleAlign={titleAlign}>{title}</Title> : null}
       <Body>{children}</Body>
     </CardStyled>
   )
