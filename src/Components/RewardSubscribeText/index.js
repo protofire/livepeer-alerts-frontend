@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 
 const RewardSubscribeTextStyled = styled.div`
   color: #fff;
@@ -41,13 +42,13 @@ const RewardSubscribeText = props => {
       </a>{' '}
       -{' '}
       {isSubscribed ? (
-        <a disabled={disableOrHide} onClick={disableOrHide ? null : props.onUnSubscribeBtnHandler}>
+        <a href="#" disabled={disableOrHide} onClick={disableOrHide ? null : props.onUnSubscribeBtnHandler}>
           You can unsubscribe here.
         </a>
       ) : (
-        <a disabled={disableOrHide} onClick={disableOrHide ? null : props.onSubscribeBtnHandler}>
+        <Link disabled={disableOrHide} to="/account/subscription">
           Subscribe now!
-        </a>
+        </Link>
       )}
     </RewardSubscribeTextStyled>
   )
