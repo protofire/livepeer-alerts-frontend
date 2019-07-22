@@ -2,7 +2,7 @@ import React from 'react'
 import { configure, mount } from 'enzyme'
 import Adapter from 'enzyme-adapter-react-16'
 import AccountSummarySubscriptionFormDisplay from '../../../../Components/AccountSummary/AccountSummarySubscriptionForm/AccountSummaryFormDisplay/AccountSummarySubscriptionFormDisplay'
-import * as displayTexts from '../../../../Components/AccountSummary/AccountSummaryTexts'
+import * as displayTexts from '../../../../Texts/AccountSummary'
 import render from 'react-test-renderer'
 
 configure({ adapter: new Adapter() })

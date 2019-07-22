@@ -1,0 +1,44 @@
+body {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  background-color: #fff;
+  font-family: 'Roboto', 'Helvetica Neue', 'Segoe UI', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  font-size: 15px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+body,
+html,
+#root {
+  height: 100vh;
+}
+
+/*********************/
+/* Remove this later */
+.AccountSummaryGridContainer {
+  margin: 0!important;
+  position: relative;
+  width: 100%!important;
+  z-index: 12;
+}
+
+.AccountSummaryCard {
+  align-items: center;
+  box-sizing: border-box;
+  justify-content: center;
+  margin: 0!important;
+  max-height: 200px;
+  max-width: 200px!important;
+  min-height: 200px;
+  min-width: 200px!important;
+  padding: 10px;
+}
+
+.AccountSummaryCard h3 {
+  font-size: 20px;
+  line-height: 1.2;
+  margin: 0 0 15px;
+}
