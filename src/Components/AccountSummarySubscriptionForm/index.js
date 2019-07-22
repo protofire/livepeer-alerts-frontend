@@ -7,7 +7,6 @@ import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
 import AccountSummaryModalEmail from '../AccountSummaryModalEmail'
 import ReactGA from 'react-ga'
-import FullLoading from '../Common/FullLoading'
 
 const logger = logdown('Livepeer:AccountSummarySubscriptionForm')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
