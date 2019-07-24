@@ -1,6 +1,5 @@
 import React from 'react'
 import Card from '../Common/Card'
-import IconDown from './img/IconDown'
 import IconUp from './img/IconUp'
 import IconActive from './img/IconActive'
 import IconInactive from './img/IconInactive'
