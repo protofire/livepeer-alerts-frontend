@@ -31,7 +31,7 @@ const A = styled.span`
 `
 
 const RewardSubscribeText = props => {
-  const { userData, summary } = props
+  const { userData, summary, onUnSubscribeBtnHandler } = props
   const { isSubscribed } = userData
   const { status } = summary
 
@@ -50,7 +50,7 @@ const RewardSubscribeText = props => {
       </a>{' '}
       -{' '}
       {isSubscribed ? (
-        <A onClick={disableOrHide ? null : props.onUnSubscribeBtnHandler}>You can unsubscribe here.</A>
+        <A onClick={disableOrHide ? null : onUnSubscribeBtnHandler}>You can unsubscribe here.</A>
       ) : (
         <Link disabled={disableOrHide} to="/account/subscription">
           Subscribe now!
