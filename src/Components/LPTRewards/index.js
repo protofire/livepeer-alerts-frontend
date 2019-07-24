@@ -3,7 +3,8 @@ import Card from '../Common/Card'
 import Image from './img/graph.png'
 
 const LPTRewards = props => {
-  const { ...restProps } = props
+  // Need it to discard value
+  const { onUnSubscribeBtnHandler, ...restProps } = props
 
   return (
     <Card title="LPT Rewards" {...restProps}>
