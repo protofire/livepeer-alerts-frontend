@@ -66,6 +66,10 @@ const theme = {
     fontWeight: '500',
     placeholderColor: '#666',
   },
+  pageTitle: {
+    color: '#fff',
+    textShadow: '0 0 4px rgba(0, 0, 0, 0.5)',
+  },
 }
 
 export default theme
