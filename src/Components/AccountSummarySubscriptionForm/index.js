@@ -48,7 +48,7 @@ export class AccountSummarySubscriptionForm extends Component {
 
   componentDidMount() {
     logger.log('Fire event componentDidMount')
-    /** Google analytics **/
+    // Google analytics
     if (this.props.location && this.props.location.pathname) {
       logger.log('Google analytics: ', this.props.location.pathname)
       ReactGA.pageview(this.props.location.pathname)
@@ -64,7 +64,7 @@ export class AccountSummarySubscriptionForm extends Component {
     logger.log('Submit btnHandler')
     let data = {
       address: this.state.address,
-      frequency: this.state.frequency,
+      emailFrequency: this.state.frequency,
       email: this.state.form.email.value,
     }
     this.setState(
@@ -72,11 +72,7 @@ export class AccountSummarySubscriptionForm extends Component {
         render: false,
         displayMsg: displayTexts.GENERATING_SUBSCRIPTION,
       },
-      async () => {
-        await this.generateSubscription(data, () => {
-          //    this.props.history.push('/account')
-        })
-      },
+      async () => await this.generateSubscription(data),
     )
   }
 
@@ -117,7 +113,7 @@ export class AccountSummarySubscriptionForm extends Component {
       logger.log('Exception on postSubscription')
       let responseMsg = exception.response.data.message
       let displayMsg
-      /** Email already exists **/
+      // Email already exists
       if (
         (responseMsg && responseMsg === displayTexts.FAIL_EMAIL_ALREADY_EXISTS_RESPONSE) ||
         exception.response.status === 422
