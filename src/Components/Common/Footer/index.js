@@ -8,15 +8,15 @@ const FooterStyled = styled.footer`
 `
 
 const Text = styled.p`
-  color: ${props => props.theme.footer.textColor};
-  font-size: 11px;
+  color: ${props => props.theme.footer.color};
+  font-size: ${props => props.theme.footer.fontSize};
   line-height: 1.2;
   margin: 0;
   text-align: center;
   text-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
 
   > a {
-    color: ${props => props.theme.footer.textColor};
+    color: ${props => props.theme.footer.color};
     text-decoration: none;
 
     &:hover {

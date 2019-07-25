@@ -1,5 +1,16 @@
 import React from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
+import { Link } from 'react-router-dom'
+
+const aCSS = css`
+  color: #fff;
+  cursor: pointer;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+`
 
 const RewardSubscribeTextStyled = styled.div`
   color: #fff;
@@ -11,14 +22,12 @@ const RewardSubscribeTextStyled = styled.div`
   text-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
 
   a {
-    color: #fff;
-    cursor: pointer;
-    text-decoration: underline;
-
-    &:hover {
-      text-decoration: none;
-    }
+    ${aCSS}
   }
+`
+
+const A = styled.span`
+  ${aCSS}
 `
 
 const RewardSubscribeText = props => {
@@ -41,13 +50,11 @@ const RewardSubscribeText = props => {
       </a>{' '}
       -{' '}
       {isSubscribed ? (
-        <a disabled={disableOrHide} onClick={disableOrHide ? null : props.onUnSubscribeBtnHandler}>
-          You can unsubscribe here.
-        </a>
+        <A onClick={disableOrHide ? null : props.onUnSubscribeBtnHandler}>You can unsubscribe here.</A>
       ) : (
-        <a disabled={disableOrHide} onClick={disableOrHide ? null : props.onSubscribeBtnHandler}>
+        <Link disabled={disableOrHide} to="/account/subscription">
           Subscribe now!
-        </a>
+        </Link>
       )}
     </RewardSubscribeTextStyled>
   )

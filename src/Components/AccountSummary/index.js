@@ -263,10 +263,6 @@ export class AccountSummary extends Component {
     }
   }
 
-  onSubscribeBtnHandler = async () => {
-    this.props.history.push('/account/subscription')
-  }
-
   onUnSubscribeBtnHandler = async () => {
     logger.log('Unsubscribe btnHandler')
     this.setState({
@@ -332,7 +328,6 @@ export class AccountSummary extends Component {
       content = (
         <AccountSummaryHome
           lpBalance={this.state.summary.lpBalance}
-          onSubscribeBtnHandler={this.onSubscribeBtnHandler}
           onUnSubscribeBtnHandler={this.onUnSubscribeBtnHandler}
           summary={summaryProps}
           userData={this.state.userData}
