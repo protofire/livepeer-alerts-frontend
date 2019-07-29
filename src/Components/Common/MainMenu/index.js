@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import IconEmail from './icons/IconEmail'
 import IconTelegram from './icons/IconTelegram'
 import IconRanking from './icons/IconRanking'
+import { withRouter } from 'react-router-dom'
 
 const MainMenuStyled = styled.div`
   display: ${props => (props.isOpen ? 'flex' : 'none')};
@@ -59,6 +60,10 @@ const MainMenu = props => {
     window.open(`${process.env.REACT_APP_LIVEPEER_TELEGRAM_BOT_URL}?start=${userData.address}`, '_blank')
   }
 
+  const goToSubscribe = () => {
+    props.history.push('/account/subscription')
+  }
+
   const menuItems = [
     {
       active: true,
@@ -78,7 +83,7 @@ const MainMenu = props => {
       active: isUserValid,
       color: 'primary',
       icon: <IconEmail />,
-      onClick: null,
+      onClick: goToSubscribe,
       text: userData.isSubscribed ? 'Subscription' : 'Subscribe',
     },
   ]
@@ -96,4 +101,6 @@ const MainMenu = props => {
   )
 }
 
-export default MainMenu
+const MainMenuContainer = withRouter(MainMenu)
+
+export default MainMenuContainer
