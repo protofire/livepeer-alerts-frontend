@@ -7,6 +7,7 @@ import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
 import AccountSummaryModalEmail from '../AccountSummaryModalEmail'
 import ReactGA from 'react-ga'
+import { isFrequencySupported } from '../../Utils'
 
 const logger = logdown('Livepeer:AccountSummarySubscriptionForm')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
@@ -35,7 +36,6 @@ export class AccountSummarySubscriptionForm extends Component {
     render: false,
     toastId: '1',
     displayMsg: displayTexts.LOADING_SUBSCRIPTION_DATA,
-    userSubscribed: false,
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
@@ -203,8 +203,18 @@ export class AccountSummarySubscriptionForm extends Component {
     this.setState({ form: updatedForm })
   }
 
+  frequencyChangedHandler = newFrequency => {
+    // Validates that the new frequency is supported
+    if (isFrequencySupported(newFrequency)) {
+      this.setState({
+        frequency: newFrequency,
+      })
+    }
+  }
+
   render() {
-    const { userData, form } = this.state
+    const { form } = this.state
+    const { userData } = this.props
     return (
       <>
         {userData && userData.isSubscribed ? (
@@ -215,6 +225,7 @@ export class AccountSummarySubscriptionForm extends Component {
             inputChangedHandler={this.inputChangedHandler}
             onCancelBtnHandler={this.onCancelBtnHandler}
             onSubmitBtnHandler={this.onSubmitBtnHandler}
+            frequencyChangedHandler={this.frequencyChangedHandler}
             isSubscribed={userData && userData.isSubscribed}
           />
         )}

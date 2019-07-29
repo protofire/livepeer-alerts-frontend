@@ -98,7 +98,9 @@ class AccountSummaryFormDisplay extends React.Component {
   }
 
   setOption = option => {
+    const { frequencyChangedHandler } = this.props
     this.setState({ option: option })
+    frequencyChangedHandler(option)
   }
 
   render = () => {
