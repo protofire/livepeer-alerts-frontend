@@ -9,8 +9,6 @@ import EarnedRewards from '../EarnedRewards'
 import styled from 'styled-components'
 import LPTRewards from '../LPTRewards'
 
-// import Reward from '../Reward'
-
 const AccountSummaryHomeContainer = styled.div`
   margin: 0 auto;
   max-width: 100%;

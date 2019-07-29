@@ -204,16 +204,18 @@ export class AccountSummarySubscriptionForm extends Component {
   }
 
   render() {
+    const { userData, form } = this.state
     return (
       <>
-        {this.state.userData && this.state.userData.isSubscribed ? (
+        {userData && userData.isSubscribed ? (
           <AccountSummaryModalEmail onEmailModalClosed={this.onEmailModalClosed} />
         ) : (
           <AccountSummaryFormDisplay
-            form={this.state.form}
+            form={form}
             inputChangedHandler={this.inputChangedHandler}
             onCancelBtnHandler={this.onCancelBtnHandler}
             onSubmitBtnHandler={this.onSubmitBtnHandler}
+            isSubscribed={userData && userData.isSubscribed}
           />
         )}
         <ToastContainer autoClose={5000} />
