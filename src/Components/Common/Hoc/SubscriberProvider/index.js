@@ -128,7 +128,7 @@ class SubscriberProvider extends Component {
         loadingSubscriber: true,
       })
       logger.log('[SubscriberProvider] - Retrieving subscription for address ', subscriberAddress)
-      let userData = await axios.get('/address/' + subscriberAddress)
+      let userData = await axios.get(`/address/${subscriberAddress}`)
       await this.setStateAsync({
         subscriberData: {
           ...this.state.userData,
@@ -163,7 +163,7 @@ class SubscriberProvider extends Component {
 
   fetchAccountSummaryData = async subscriberAddress => {
     try {
-      let summaryData = await axios.get('/summary/' + subscriberAddress)
+      let summaryData = await axios.get(`/summary/${subscriberAddress}`)
       this.setStateAsync({
         summary: {
           loadingSummary: false,
