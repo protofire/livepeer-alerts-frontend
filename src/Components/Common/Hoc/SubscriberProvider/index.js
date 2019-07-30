@@ -108,6 +108,10 @@ class SubscriberProvider extends Component {
         ...this.state.summary,
         loadingSummary: true,
       },
+      earnedRewardData: {
+        ...this.state.earnedRewardData,
+        loadingEarnedRewardData: true,
+      },
     })
     // Loads subscriber data, account summary data
     await Promise.all([
