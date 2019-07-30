@@ -51,11 +51,15 @@ const AccountSummaryHome = props => {
         {wallet}
         {subscriberStatusCard}
       </MultiBlocksRowTop>
-      <PageTitle>My Transcoder</PageTitle>
-      <MultiBlocksRow>
-        <TranscoderInfo />
-        <EarnedRewards />
-      </MultiBlocksRow>
+      {!isDelegate && (
+        <>
+          <PageTitle>My Transcoder</PageTitle>
+          <MultiBlocksRow>
+            <TranscoderInfo />
+            <EarnedRewards earnedRewardData={earnedRewardData} />
+          </MultiBlocksRow>
+        </>
+      )}
       {/*<LPTRewards {...props} />*/}
       {/* <Reward {...props} /> */}
       <RewardSubscribeText {...props} />
