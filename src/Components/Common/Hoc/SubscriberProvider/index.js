@@ -193,7 +193,8 @@ class SubscriberProvider extends Component {
         loadingEarnedRewardData: true,
       })
       logger.log('[SubscriberProvider] - Retrieving earned rewards for address ', subscriberAddress)
-      let earnedRewardData = await axios.get(`/delegators/last-rewards/${subscriberAddress}`)
+      const { data } = await axios.get(`/delegators/last-rewards/${subscriberAddress}`)
+      const earnedRewardData = data && data.summary
       await this.setStateAsync({
         earnedRewardData: {
           ...earnedRewardData,
