@@ -56,7 +56,7 @@ const AccountSummaryHome = props => {
         <TranscoderInfo />
         <EarnedRewards />
       </MultiBlocksRow>
-      <LPTRewards {...props} />
+      {/*<LPTRewards {...props} />*/}
       {/* <Reward {...props} /> */}
       <RewardSubscribeText {...props} />
     </AccountSummaryHomeContainer>
