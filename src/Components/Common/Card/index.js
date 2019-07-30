@@ -24,14 +24,15 @@ const Body = styled.div`
   display: flex;
   flex-direction: column;
   flex-grow: 1;
+  align-items: ${props => props.bodyAlign};
 `
 
 const Card = props => {
-  const { title, children, titleAlign = 'left', ...restProps } = props
+  const { title, children, titleAlign = 'left', bodyAlign, ...restProps } = props
   return (
     <CardStyled {...restProps}>
       {title ? <Title titleAlign={titleAlign}>{title}</Title> : null}
-      <Body>{children}</Body>
+      <Body bodyAlign={bodyAlign}>{children}</Body>
     </CardStyled>
   )
 }

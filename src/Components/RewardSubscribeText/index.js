@@ -31,13 +31,12 @@ const A = styled.span`
 `
 
 const RewardSubscribeText = props => {
-  const { userData, summary, onUnSubscribeBtnHandler } = props
-  const { isSubscribed } = userData
+  const { subscriberData, summary, onUnSubscribeBtnHandler } = props
+  const { isSubscribed } = subscriberData
   const { status } = summary
 
   let statusCheck = status.toUpperCase()
   let disableOrHide = !['REGISTERED', 'BONDED', 'UNBONDING', 'UNBONDED'].includes(statusCheck)
-
   return disableOrHide ? null : (
     <RewardSubscribeTextStyled>
       Don't miss your{' '}

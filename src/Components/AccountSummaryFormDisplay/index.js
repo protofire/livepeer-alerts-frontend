@@ -98,15 +98,14 @@ class AccountSummaryFormDisplay extends React.Component {
   }
 
   setOption = option => {
+    const { frequencyChangedHandler } = this.props
     this.setState({ option: option })
+    frequencyChangedHandler(option)
   }
 
   render = () => {
-    const { form, inputChangedHandler, onCancelBtnHandler, onSubmitBtnHandler, ...restProps } = this.props
+    const { form, inputChangedHandler, onCancelBtnHandler, onSubmitBtnHandler, isSubscribed, ...restProps } = this.props
     const { option } = this.state
-
-    // this is just for testing purposes
-    const isSubscribed = true
 
     return (
       <CardSubscriptionForm title="Subscribe" {...restProps}>

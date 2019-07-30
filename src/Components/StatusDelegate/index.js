@@ -4,6 +4,7 @@ import Card from '../Common/Card'
 import KeyValue from '../Common/KeyValue'
 import styled from 'styled-components'
 import Tooltip from '../Common/Tooltip'
+import SmallLoadingCard from '../Common/SmallLoadingCard'
 
 const Title = styled.h3`
   align-items: center;
@@ -46,7 +47,9 @@ const StatusDelegate = props => {
   const statusUppercase = status.toUpperCase()
   const statusToolTip = toolTips[statusUppercase]
 
-  return (
+  let content = summary.loadingSummary ? (
+    <SmallLoadingCard show={true} message={'Loading user status...'} />
+  ) : (
     <Card title="Status">
       <Title>
         {statusUppercase} <Tooltip description={statusToolTip} />
@@ -54,6 +57,7 @@ const StatusDelegate = props => {
       <KeyValueStyled items={tableData} />
     </Card>
   )
+  return content
 }
 
 export default StatusDelegate

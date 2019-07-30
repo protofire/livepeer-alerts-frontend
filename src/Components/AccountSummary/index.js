@@ -12,100 +12,10 @@ logger.state.isEnabled = process.env.NODE_ENV !== 'production'
 
 export class AccountSummary extends Component {
   state = {
-    userData: {
-      address: null,
-      isSubscribed: false,
-      activated: null,
-      id: null,
-      email: '',
-      frequency: 'daily',
-      activatedCode: null,
-      createdAt: null,
-    },
-    summary: {
-      role: '',
-      lpBalance: '',
-      delegator: {
-        address: '',
-        allowance: '0',
-        bondedAmount: '0',
-        delegateAddress: '',
-        delegatedAmount: '0',
-        fees: '0',
-        lastClaimRound: '0',
-        pendingFees: '0',
-        pendingStake: '0',
-        startRound: '0',
-        status: '',
-        withdrawRound: '0',
-        withdrawAmount: '0',
-        nextUnbondingLockId: '0',
-        totalStake: '0',
-        delegateCalledReward: false,
-        totalStakeInLPT: '0',
-        bondedAmountInLPT: '0',
-      },
-      delegate: {
-        active: true,
-        address: '',
-        feeShare: '',
-        lastRewardRound: '',
-        pricePerSegment: '',
-        pendingRewardCut: '',
-        pendingFeeShare: '',
-        pendingPricePerSegment: '',
-        rewardCut: '',
-        status: '',
-        totalStake: '',
-        delegateCalledReward: false,
-        totalStakeInLPT: '',
-      },
-    },
     render: false,
     displayMsg: displayTexts.LOADING_USER_DATA,
     toastId: 1,
     error: false,
-  }
-
-  componentWillReceiveProps(nextProps, nextContext) {
-    logger.log('Fire event componentWillReceiveProps', nextProps)
-    let propsChanged =
-      this.props.render !== nextProps.render ||
-      this.props.userData.authenticated !== nextProps.userData.authenticated ||
-      this.props.userData.address !== nextProps.userData.address ||
-      this.props.userData.currentNetwork !== nextProps.userData.currentNetwork
-    if (propsChanged) {
-      this.setState(
-        {
-          ...this.state,
-          ...nextProps,
-          render: false,
-        },
-        async () => {
-          await this.loadUserData()
-        },
-      )
-    }
-  }
-
-  loadUserData = async () => {
-    let userDataPromise, summaryPromise
-
-    userDataPromise = this.fetchSubscriptionData()
-    summaryPromise = this.fetchAccountSummaryData()
-    try {
-      await Promise.all([userDataPromise, summaryPromise])
-      this.setState(
-        {
-          ...this.state,
-          render: true,
-          displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email,
-        },
-        () => logger.log('Loading userData finished', this.state),
-      )
-    } catch (exception) {
-      logger.log('exception ', exception)
-    }
   }
 
   initState = callback => {
@@ -142,97 +52,6 @@ export class AccountSummary extends Component {
       logger.log('Google analytics: ', this.props.location.pathname)
       ReactGA.pageview(this.props.location.pathname)
     }
-
-    let userDataPromise, summaryPromise
-
-    this.initState(async () => {
-      userDataPromise = this.fetchSubscriptionData()
-      summaryPromise = this.fetchAccountSummaryData()
-
-      try {
-        await Promise.all([userDataPromise, summaryPromise])
-        this.setState(
-          {
-            ...this.state,
-            render: true,
-            displayMsg: displayTexts.WELCOME_AGAIN + this.state.userData.email,
-          },
-          () => logger.log('ComponentDidMountFinished '),
-        )
-      } catch (exception) {
-        logger.log('Exception ', exception)
-        this.setState(
-          {
-            ...this.state,
-            render: true,
-            error: true,
-            displayMsg: displayTexts.FAIL_NO_REASON_REDIRECT,
-          },
-          () => {
-            this.sendToast(1500, () => this.props.history.push('/'))
-          },
-        )
-      }
-    })
-  }
-
-  fetchSubscriptionData = async () => {
-    return new Promise(async (resolve, reject) => {
-      let userData
-      try {
-        logger.log('Retrieving subscription for address ', this.state.userData.address)
-        userData = await axios.get('/address/' + this.state.userData.address)
-        this.setState(
-          {
-            userData: {
-              ...this.state.userData,
-              isSubscribed: true,
-              id: userData.data._id,
-              ...userData.data,
-            },
-          },
-          () => {
-            resolve(this.state)
-          },
-        )
-      } catch (error) {
-        // Subscription not found
-        if (error.response && error.response.status === 404) {
-          logger.log('Subscription not found for ', this.state.userData.address)
-          this.setState(
-            {
-              ...this.state,
-              isSubscribed: false,
-            },
-            () => resolve(this.state),
-          )
-        } else {
-          // Another network problem
-          reject(error)
-        }
-      }
-    })
-  }
-
-  fetchAccountSummaryData = async () => {
-    return new Promise(async (resolve, reject) => {
-      try {
-        let summaryData = await axios.get('/summary/' + this.state.userData.address)
-        this.setState(
-          {
-            summary: {
-              role: summaryData.data.role,
-              lpBalance: summaryData.data.balance,
-              delegate: summaryData.data.transcoder ? { ...summaryData.data.transcoder } : null,
-              delegator: summaryData.data.delegator ? { ...summaryData.data.delegator } : null,
-            },
-          },
-          () => resolve(summaryData.data),
-        )
-      } catch (exception) {
-        reject(exception)
-      }
-    })
   }
 
   sendToast = (toastTime, callback) => {
@@ -315,22 +134,25 @@ export class AccountSummary extends Component {
 
   render() {
     let content = <FullLoading show={true} message={this.state.displayMsg} />
-
+    const { subscriberData, summaryData, userData } = this.props
     // Shows only summary information according the role (delegate or delegator)
-    let summaryForRole = this.state.summary.delegate ? this.state.summary.delegate : this.state.summary.delegator
+    let summaryForRole = summaryData.delegate ? summaryData.delegate : summaryData.delegator
+
     let summaryProps = {
       ...summaryForRole,
-      role: this.state.summary.role,
-      balance: this.state.summary.lpBalance,
+      role: summaryData.role,
+      balance: summaryData.lpBalance,
+      loadingSummary: summaryData.loadingSummary,
     }
 
-    if (this.state.render && !this.state.error) {
+    if (!this.state.error) {
       content = (
         <AccountSummaryHome
-          lpBalance={this.state.summary.lpBalance}
+          lpBalance={summaryData.lpBalance}
           onUnSubscribeBtnHandler={this.onUnSubscribeBtnHandler}
           summary={summaryProps}
-          userData={this.state.userData}
+          userData={userData}
+          subscriberData={subscriberData}
           web3={this.props.web3}
         />
       )

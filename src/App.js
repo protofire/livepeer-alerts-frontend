@@ -7,6 +7,7 @@ import FullLoading from './Components/Common/FullLoading'
 import PrivateRoute from './Components/Common/Hoc/PrivateRoute'
 import ReactGA from 'react-ga'
 import Web3Provider, { Web3ContextConsumer } from './Components/Common/Hoc/Web3Provider'
+import SubscriberProvider, { SubscriberContextConsumer } from './Components/Common/Hoc/SubscriberProvider'
 import logdown from 'logdown'
 import { ThemeProvider } from 'styled-components'
 import theme from './Theme'
@@ -25,7 +26,7 @@ export class App extends Component {
   }
 
   onRouteChanged = () => {
-    /** Google analytics **/
+    // Google analytics
     if (this.props.location && this.props.location.pathname) {
       logger.log('Google analytics: ', this.props.location.pathname)
       ReactGA.pageview(this.props.location.pathname)
@@ -74,29 +75,41 @@ export class App extends Component {
                     <Web3ContextConsumer>
                       {({ web3, userData, authenticated, error, displayMsg }) => {
                         return (
-                          <Switch>
-                            <PrivateRoute
-                              authenticated={authenticated}
-                              component={AccountSummary}
-                              displayMsg={displayMsg}
-                              error={error}
-                              exact
-                              path="/(account|account/demo)/"
-                              userData={userData}
-                              web3={web3}
-                            />
-                            <PrivateRoute
-                              authenticated={authenticated}
-                              component={AccountSummarySubscriptionForm}
-                              displayMsg={displayMsg}
-                              error={error}
-                              exact
-                              path="/account/subscription"
-                              userData={userData}
-                              web3={web3}
-                            />
-                            <Redirect to="/" />
-                          </Switch>
+                          <SubscriberProvider subscriberAddress={userData.address}>
+                            <SubscriberContextConsumer>
+                              {({ subscriberData, summaryData }) => {
+                                return (
+                                  <Switch>
+                                    <PrivateRoute
+                                      authenticated={authenticated}
+                                      component={AccountSummary}
+                                      displayMsg={displayMsg}
+                                      error={error}
+                                      exact
+                                      path="/(account|account/demo)/"
+                                      userData={userData}
+                                      subscriberData={subscriberData}
+                                      summaryData={summaryData}
+                                      web3={web3}
+                                    />
+                                    <PrivateRoute
+                                      authenticated={authenticated}
+                                      component={AccountSummarySubscriptionForm}
+                                      displayMsg={displayMsg}
+                                      error={error}
+                                      exact
+                                      path="/account/subscription"
+                                      userData={userData}
+                                      summaryData={summaryData}
+                                      subscriberData={subscriberData}
+                                      web3={web3}
+                                    />
+                                    <Redirect to="/" />
+                                  </Switch>
+                                )
+                              }}
+                            </SubscriberContextConsumer>
+                          </SubscriberProvider>
                         )
                       }}
                     </Web3ContextConsumer>
