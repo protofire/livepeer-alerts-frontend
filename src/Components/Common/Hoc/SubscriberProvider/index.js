@@ -109,10 +109,12 @@ class SubscriberProvider extends Component {
         loadingSummary: true,
       },
     })
-    // Loads subscriber data
-    await this.loadSubscriberData(subscriberAddress)
-    // Loads account summary data
-    await this.fetchAccountSummaryData(subscriberAddress)
+    // Loads subscriber data, account summary data
+    await Promise.all([
+      this.loadSubscriberData(subscriberAddress),
+      this.fetchAccountSummaryData(subscriberAddress),
+      this.loadEarnedRewardData(subscriberAddress),
+    ])
 
     logger.log('[SubscriberProvider] - Loading subscriber provider finished')
   }
@@ -130,7 +132,7 @@ class SubscriberProvider extends Component {
         loadingSubscriber: true,
       })
       logger.log('[SubscriberProvider] - Retrieving subscription for address ', subscriberAddress)
-      let userData = await axios.get(`/address/${subscriberAddress}`)
+      let userData = await axios.get(`/subscribers/address/${subscriberAddress}`)
       await this.setStateAsync({
         subscriberData: {
           ...this.state.userData,
@@ -165,7 +167,7 @@ class SubscriberProvider extends Component {
 
   fetchAccountSummaryData = async subscriberAddress => {
     try {
-      let summaryData = await axios.get(`/summary/${subscriberAddress}`)
+      let summaryData = await axios.get(`/subscribers/summary/${subscriberAddress}`)
       this.setStateAsync({
         summary: {
           loadingSummary: false,

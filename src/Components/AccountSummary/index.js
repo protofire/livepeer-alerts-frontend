@@ -90,7 +90,7 @@ export class AccountSummary extends Component {
     })
     try {
       logger.log('Unsubscribing user with id ', this.state.userData)
-      await axios.delete('/' + this.state.userData.id)
+      await axios.delete(`/subscribers/${this.state.userData.id}`)
       this.setState(
         {
           render: true,

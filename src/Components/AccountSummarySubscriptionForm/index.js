@@ -93,7 +93,7 @@ export class AccountSummarySubscriptionForm extends Component {
     let response
     try {
       logger.log('Creating new subscriber with data: ', data)
-      response = await axios.post('', data)
+      response = await axios.post('/subscribers', data)
       this.setState(
         {
           userData: {
