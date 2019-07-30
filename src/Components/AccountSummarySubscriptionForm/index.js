@@ -36,6 +36,7 @@ export class AccountSummarySubscriptionForm extends Component {
     render: false,
     toastId: '1',
     displayMsg: displayTexts.LOADING_SUBSCRIPTION_DATA,
+    displaySubscriptionModal: false,
   }
 
   componentWillReceiveProps(nextProps, nextContext) {
@@ -48,13 +49,14 @@ export class AccountSummarySubscriptionForm extends Component {
 
   componentDidMount() {
     logger.log('Fire event componentDidMount')
+    const { userData, location } = this.props
     // Google analytics
-    if (this.props.location && this.props.location.pathname) {
-      logger.log('Google analytics: ', this.props.location.pathname)
-      ReactGA.pageview(this.props.location.pathname)
+    if (location && location.pathname) {
+      logger.log('Google analytics: ', location.pathname)
+      ReactGA.pageview(location.pathname)
     }
     this.setState({
-      address: this.props.userData.address,
+      address: userData.address,
       render: true,
     })
   }
@@ -62,10 +64,11 @@ export class AccountSummarySubscriptionForm extends Component {
   onSubmitBtnHandler = async event => {
     event.preventDefault()
     logger.log('Submit btnHandler')
+    const { address, frequency, form } = this.state
     let data = {
-      address: this.state.address,
-      emailFrequency: this.state.frequency,
-      email: this.state.form.email.value,
+      address: address,
+      emailFrequency: frequency,
+      email: form.email.value,
     }
     this.setState(
       {
@@ -104,6 +107,7 @@ export class AccountSummarySubscriptionForm extends Component {
           render: true,
           error: false,
           displayMsg: displayTexts.WELCOME_NEW_SUBSCRIBER,
+          displaySubscriptionModal: false,
         },
         () => {
           setTimeout(callback, 1000)
@@ -127,6 +131,7 @@ export class AccountSummarySubscriptionForm extends Component {
           render: true,
           displayMsg: displayMsg,
           error: true,
+          displaySubscriptionModal: false,
         },
         () => {
           this.sendToast()
@@ -213,11 +218,11 @@ export class AccountSummarySubscriptionForm extends Component {
   }
 
   render() {
-    const { form } = this.state
+    const { form, displaySubscriptionModal } = this.state
     const { subscriberData } = this.props
     return (
       <>
-        {subscriberData && subscriberData.isSubscribed ? (
+        {displaySubscriptionModal ? (
           <AccountSummaryModalEmail onEmailModalClosed={this.onEmailModalClosed} />
         ) : (
           <AccountSummaryFormDisplay
