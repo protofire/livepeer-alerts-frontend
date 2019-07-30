@@ -62,6 +62,7 @@ const defaultState = {
       totalStakeInLPT: '',
     },
   },
+  earnedRewardData: null,
   displayMsg: displayTexts.LOADING_USER_DATA,
 }
 
@@ -112,6 +113,7 @@ class SubscriberProvider extends Component {
     await this.loadSubscriberData(subscriberAddress)
     // Loads account summary data
     await this.fetchAccountSummaryData(subscriberAddress)
+
     logger.log('[SubscriberProvider] - Loading subscriber provider finished')
   }
 
@@ -178,12 +180,45 @@ class SubscriberProvider extends Component {
     }
   }
 
+  loadEarnedRewardData = async subscriberAddress => {
+    try {
+      await this.setStateAsync({
+        ...this.state,
+        loadingEarnedRewardData: true,
+      })
+      logger.log('[SubscriberProvider] - Retrieving earned rewards for address ', subscriberAddress)
+      let earnedRewardData = await axios.get(`/delegators/last-rewards/${subscriberAddress}`)
+      await this.setStateAsync({
+        earnedRewardData: {
+          ...earnedRewardData,
+        },
+      })
+      return this.state
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        // Earned reward not found
+        logger.log('[SubscriberProvider] - Earned reward not found for ', subscriberAddress)
+      } else {
+        // Another network problem
+        logger.error('[SubscriberProvider] - error on loadEarnedRewards(): ', error)
+      }
+    } finally {
+      this.setState({
+        earnedRewardData: {
+          ...this.state.earnedRewardData,
+          loadingEarnedRewardData: false,
+        },
+      })
+    }
+  }
+
   render = () => {
     const content = (
       <SubscriberContext.Provider
         value={{
           subscriberData: this.state.subscriberData,
           summaryData: this.state.summary,
+          earnedRewardData: this.state.earnedRewardData,
         }}
       >
         {this.props.children}
