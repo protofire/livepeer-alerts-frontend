@@ -7,7 +7,6 @@ import PageTitle from '../Common/PageTitle'
 import TranscoderInfo from '../TranscoderInfo'
 import EarnedRewards from '../EarnedRewards'
 import styled from 'styled-components'
-// import LPTRewards from '../LPTRewards'
 import SmallLoadingCard from '../Common/SmallLoadingCard'
 
 const AccountSummaryHomeContainer = styled.div`
@@ -60,8 +59,6 @@ const AccountSummaryHome = props => {
           </MultiBlocksRow>
         </>
       )}
-      {/*<LPTRewards {...props} />*/}
-      {/* <Reward {...props} /> */}
       <RewardSubscribeText {...props} />
     </AccountSummaryHomeContainer>
   )
