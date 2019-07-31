@@ -134,7 +134,7 @@ export class AccountSummary extends Component {
 
   render() {
     let content = <FullLoading show={true} message={this.state.displayMsg} />
-    const { subscriberData, summaryData, userData, earnedRewardData } = this.props
+    const { subscriberData, summaryData, userData, earnedRewardData, myDelegateData } = this.props
     // Shows only summary information according the role (delegate or delegator)
     let summaryForRole = summaryData.delegate ? summaryData.delegate : summaryData.delegator
 
@@ -154,6 +154,8 @@ export class AccountSummary extends Component {
           userData={userData}
           subscriberData={subscriberData}
           earnedRewardData={earnedRewardData}
+          myDelegateData={myDelegateData}
+          summaryData={summaryData}
           web3={this.props.web3}
         />
       )

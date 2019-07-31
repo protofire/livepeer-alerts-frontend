@@ -63,6 +63,7 @@ const defaultState = {
     },
   },
   earnedRewardData: null,
+  myDelegateData: null,
   displayMsg: displayTexts.LOADING_USER_DATA,
 }
 
@@ -112,6 +113,10 @@ class SubscriberProvider extends Component {
         ...this.state.earnedRewardData,
         loadingEarnedRewardData: true,
       },
+      myDelegateData: {
+        ...this.state.myDelegateData,
+        loadingMyDelegateData: true,
+      },
     })
     // Loads subscriber data, account summary data
     await Promise.all([
@@ -119,6 +124,9 @@ class SubscriberProvider extends Component {
       this.fetchAccountSummaryData(subscriberAddress),
       this.loadEarnedRewardData(subscriberAddress),
     ])
+
+    // Needs to await loadSubscriberData finish properly
+    await this.loadMyDelegateData()
 
     logger.log('[SubscriberProvider] - Loading subscriber provider finished')
   }
@@ -133,7 +141,6 @@ class SubscriberProvider extends Component {
     try {
       await this.setStateAsync({
         ...this.state,
-        loadingSubscriber: true,
       })
       logger.log('[SubscriberProvider] - Retrieving subscription for address ', subscriberAddress)
       let userData = await axios.get(`/subscribers/address/${subscriberAddress}`)
@@ -190,7 +197,6 @@ class SubscriberProvider extends Component {
     try {
       await this.setStateAsync({
         ...this.state,
-        loadingEarnedRewardData: true,
       })
       logger.log('[SubscriberProvider] - Retrieving earned rewards for address ', subscriberAddress)
       const { data } = await axios.get(`/delegators/last-rewards/${subscriberAddress}`)
@@ -219,6 +225,43 @@ class SubscriberProvider extends Component {
     }
   }
 
+  loadMyDelegateData = async () => {
+    const delegateAddress =
+      this.state.summary && this.state.summary.delegator && this.state.summary.delegator.delegateAddress
+    try {
+      await this.setStateAsync({
+        ...this.state,
+      })
+
+      logger.log('[SubscriberProvider] - Retrieving my delegate data for address ', delegateAddress)
+      const { data } = await axios.get(`/delegates/reward-status/${delegateAddress}`)
+      const myDelegateData = data && data.summary
+
+      await this.setStateAsync({
+        myDelegateData: {
+          ...myDelegateData,
+        },
+      })
+
+      return this.state
+    } catch (error) {
+      if (error.response && error.response.status === 404) {
+        // Earned reward not found
+        logger.log('[SubscriberProvider] - My delegate data not found for ', delegateAddress)
+      } else {
+        // Another network problem
+        logger.error('[SubscriberProvider] - error on loadMyDelegateData(): ', error)
+      }
+    } finally {
+      this.setState({
+        myDelegateData: {
+          ...this.state.myDelegateData,
+          loadingMyDelegateData: false,
+        },
+      })
+    }
+  }
+
   render = () => {
     const content = (
       <SubscriberContext.Provider
@@ -226,6 +269,7 @@ class SubscriberProvider extends Component {
           subscriberData: this.state.subscriberData,
           summaryData: this.state.summary,
           earnedRewardData: this.state.earnedRewardData,
+          myDelegateData: this.state.myDelegateData,
         }}
       >
         {this.props.children}

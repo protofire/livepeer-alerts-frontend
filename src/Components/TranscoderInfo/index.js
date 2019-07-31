@@ -1,10 +1,11 @@
 import React from 'react'
 import Card from '../Common/Card'
-import IconUp from './img/IconUp'
 import IconActive from './img/IconActive'
 import IconInactive from './img/IconInactive'
 import StrippedList, { TR, TD } from '../Common/StrippedList'
 import styled from 'styled-components'
+import SmallLoadingCard from '../Common/SmallLoadingCard'
+import { decimalPlaces } from '../../Utils'
 
 const Status = styled.h3`
   align-items: center;
@@ -36,40 +37,48 @@ const TDData = styled(TD)`
 `
 
 const TranscoderInfo = props => {
-  const { ...restProps } = props
+  const { myDelegateData, summaryData, ...restProps } = props
+
+  const totalStake = (myDelegateData && myDelegateData.totalStake) || 0
+  const delegatorStake = (summaryData && summaryData.delegator && summaryData.delegator.totalStakeInLPT) || 0
+  const participationInStake = totalStake > 0 ? (delegatorStake * 100) / totalStake : 0
+
+  const address = summaryData && summaryData.delegator && summaryData.delegator.delegateAddress
+  const missedRewardCalls = (myDelegateData && myDelegateData.last30RoundsMissedRewardCalls) || 0
+  const rewardCut = (myDelegateData && myDelegateData.rewardCut) || 0
+
+  const roi = (myDelegateData && myDelegateData.roiAbs) || 0
+  const roiEvery1000 = (myDelegateData && myDelegateData.roiPercent) || 0
+
   const isActive = true
-  const transcoderData = {
-    address: '0x12345678…9abcdef',
+  const delegateData = {
+    address: address,
     data: [
       {
         title: 'Your Participation In Stake',
-        data: '0.50%',
-      },
-      {
-        title: 'Position in Ranking',
-        data: (
-          <>
-            <IconUp /> #12
-          </>
-        ),
+        data: `${decimalPlaces(participationInStake)}%`,
       },
       {
         title: 'Reward Cut',
-        data: '5%',
+        data: `${decimalPlaces(rewardCut)}%`,
       },
       {
         title: 'Missed Reward Calls',
-        data: '2/5000',
+        data: `${missedRewardCalls}/30`,
       },
       {
-        title: 'Return Compared To #1',
-        data: '0.75 (-14%)',
+        title: 'Return of investment',
+        data: `${decimalPlaces(roi)}`,
+      },
+      {
+        title: 'Return of investment (%)',
+        data: `${decimalPlaces(roiEvery1000)}`,
       },
     ],
   }
 
-  return (
-    <Card title={transcoderData.address} titleAlign="center" {...restProps}>
+  const card = (
+    <Card title={delegateData.address} titleAlign="center" {...restProps}>
       <Status>
         {isActive ? (
           <>
@@ -82,7 +91,7 @@ const TranscoderInfo = props => {
         )}
       </Status>
       <StrippedListStyled>
-        {transcoderData.data.map((item, index) => {
+        {delegateData.data.map((item, index) => {
           return (
             <TR key={index}>
               <TDTitle>{item.title}</TDTitle>
@@ -93,6 +102,15 @@ const TranscoderInfo = props => {
       </StrippedListStyled>
     </Card>
   )
+
+  const myDelegateDataCard =
+    myDelegateData && myDelegateData.loadingMyDelegateData ? (
+      <SmallLoadingCard show={true} message={'Loading my delegate data...'} />
+    ) : (
+      card
+    )
+
+  return myDelegateDataCard
 }
 
 export default TranscoderInfo
