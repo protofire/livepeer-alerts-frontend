@@ -71,7 +71,7 @@ const TranscoderInfo = props => {
         data: `${decimalPlaces(roi)}`,
       },
       {
-        title: 'Return of investment every 1000 LPT',
+        title: 'Return of investment (%)',
         data: `${decimalPlaces(roiEvery1000)}`,
       },
     ],
