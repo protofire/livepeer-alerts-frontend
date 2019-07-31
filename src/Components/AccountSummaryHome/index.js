@@ -7,7 +7,6 @@ import PageTitle from '../Common/PageTitle'
 import TranscoderInfo from '../TranscoderInfo'
 import EarnedRewards from '../EarnedRewards'
 import styled from 'styled-components'
-import LPTRewards from '../LPTRewards'
 import SmallLoadingCard from '../Common/SmallLoadingCard'
 
 const AccountSummaryHomeContainer = styled.div`
@@ -32,7 +31,7 @@ const MultiBlocksRowTop = styled(MultiBlocksRow)`
 `
 
 const AccountSummaryHome = props => {
-  const { summary } = props
+  const { summary, earnedRewardData } = props
   const isDelegate = summary && summary.role && summary.role.toLowerCase() === 'transcoder'
   const wallet = summary.loadingSummary ? (
     <SmallLoadingCard show={true} message={'Loading user wallet...'} />
@@ -51,13 +50,15 @@ const AccountSummaryHome = props => {
         {wallet}
         {subscriberStatusCard}
       </MultiBlocksRowTop>
-      <PageTitle>My Transcoder</PageTitle>
-      <MultiBlocksRow>
-        <TranscoderInfo />
-        <EarnedRewards />
-      </MultiBlocksRow>
-      <LPTRewards {...props} />
-      {/* <Reward {...props} /> */}
+      {!isDelegate && (
+        <>
+          <PageTitle>My Transcoder</PageTitle>
+          <MultiBlocksRow>
+            <TranscoderInfo />
+            <EarnedRewards earnedRewardData={earnedRewardData} />
+          </MultiBlocksRow>
+        </>
+      )}
       <RewardSubscribeText {...props} />
     </AccountSummaryHomeContainer>
   )

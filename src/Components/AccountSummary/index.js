@@ -90,7 +90,7 @@ export class AccountSummary extends Component {
     })
     try {
       logger.log('Unsubscribing user with id ', this.state.userData)
-      await axios.delete('/' + this.state.userData.id)
+      await axios.delete(`/subscribers/${this.state.userData.id}`)
       this.setState(
         {
           render: true,
@@ -134,7 +134,7 @@ export class AccountSummary extends Component {
 
   render() {
     let content = <FullLoading show={true} message={this.state.displayMsg} />
-    const { subscriberData, summaryData, userData } = this.props
+    const { subscriberData, summaryData, userData, earnedRewardData } = this.props
     // Shows only summary information according the role (delegate or delegator)
     let summaryForRole = summaryData.delegate ? summaryData.delegate : summaryData.delegator
 
@@ -153,6 +153,7 @@ export class AccountSummary extends Component {
           summary={summaryProps}
           userData={userData}
           subscriberData={subscriberData}
+          earnedRewardData={earnedRewardData}
           web3={this.props.web3}
         />
       )

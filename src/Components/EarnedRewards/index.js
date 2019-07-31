@@ -2,6 +2,8 @@ import React from 'react'
 import Card from '../Common/Card'
 import StrippedList, { TR, TD, TH } from '../Common/StrippedList'
 import styled from 'styled-components'
+import SmallLoadingCard from '../Common/SmallLoadingCard'
+import { decimalPlaces } from '../../Utils'
 
 const Description = styled.h3`
   color: ${props => props.theme.colors.lightText};
@@ -28,27 +30,42 @@ const THData = styled(TH)`
 `
 
 const EarnedRewards = props => {
-  const { ...restProps } = props
+  const { earnedRewardData, ...restProps } = props
+
   const earnedData = [
     {
       round: 'Next',
-      lpt: '1000',
-      cut: '10.00',
+      lpt: decimalPlaces(earnedRewardData && earnedRewardData.nextReward && earnedRewardData.nextReward.delegateReward),
+      cut: decimalPlaces(
+        earnedRewardData && earnedRewardData.nextReward && earnedRewardData.nextReward.delegatorReward,
+      ),
     },
     {
       round: 'Last',
-      lpt: '500',
-      cut: '9.50',
+      lpt: decimalPlaces(
+        earnedRewardData && earnedRewardData.lastRoundReward && earnedRewardData.lastRoundReward.delegateReward,
+      ),
+      cut: decimalPlaces(
+        earnedRewardData && earnedRewardData.lastRoundReward && earnedRewardData.lastRoundReward.delegatorReward,
+      ),
     },
     {
       round: 'Last 7',
-      lpt: '8961',
-      cut: '7.25',
+      lpt: decimalPlaces(
+        earnedRewardData && earnedRewardData.last7RoundsReward && earnedRewardData.last7RoundsReward.delegateReward,
+      ),
+      cut: decimalPlaces(
+        earnedRewardData && earnedRewardData.last7RoundsReward && earnedRewardData.last7RoundsReward.delegatorReward,
+      ),
     },
     {
       round: 'Last 30',
-      lpt: '50000',
-      cut: '30.00',
+      lpt: decimalPlaces(
+        earnedRewardData && earnedRewardData.last30RoundsReward && earnedRewardData.last30RoundsReward.delegateReward,
+      ),
+      cut: decimalPlaces(
+        earnedRewardData && earnedRewardData.last30RoundsReward && earnedRewardData.last30RoundsReward.delegatorReward,
+      ),
     },
   ]
 
@@ -60,7 +77,7 @@ const EarnedRewards = props => {
     </TR>
   )
 
-  return (
+  const card = (
     <Card title="Earned Rewards" {...restProps}>
       <Description>Newly minted LPT claimed.</Description>
       <StrippedListStyled tableHead={tableHead}>
@@ -76,6 +93,15 @@ const EarnedRewards = props => {
       </StrippedListStyled>
     </Card>
   )
+
+  const earnedRewardCard =
+    earnedRewardData && earnedRewardData.loadingEarnedRewardData ? (
+      <SmallLoadingCard show={true} message={'Loading earned reward data...'} />
+    ) : (
+      card
+    )
+
+  return earnedRewardCard
 }
 
 export default EarnedRewards
