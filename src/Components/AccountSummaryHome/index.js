@@ -32,7 +32,7 @@ const MultiBlocksRowTop = styled(MultiBlocksRow)`
 `
 
 const AccountSummaryHome = props => {
-  const { summary, earnedRewardData } = props
+  const { summary, subscriberData, earnedRewardData, myDelegateData, summaryData } = props
   const isDelegate = summary && summary.role && summary.role.toLowerCase() === 'transcoder'
   const wallet = summary.loadingSummary ? (
     <SmallLoadingCard show={true} message={'Loading user wallet...'} />
@@ -53,9 +53,9 @@ const AccountSummaryHome = props => {
       </MultiBlocksRowTop>
       {!isDelegate && (
         <>
-          <PageTitle>My Transcoder</PageTitle>
+          <PageTitle>My Delegate</PageTitle>
           <MultiBlocksRow>
-            <TranscoderInfo />
+            <TranscoderInfo myDelegateData={myDelegateData} subscriberData={subscriberData} summaryData={summaryData} />
             <EarnedRewards earnedRewardData={earnedRewardData} />
           </MultiBlocksRow>
         </>
