@@ -28,10 +28,14 @@ const Body = styled.div`
 `
 
 const Card = props => {
-  const { title, children, titleAlign = 'left', bodyAlign, ...restProps } = props
+  const { title, children, titleAlign = 'left', bodyAlign, tooltip, ...restProps } = props
   return (
     <CardStyled {...restProps}>
-      {title ? <Title titleAlign={titleAlign}>{title}</Title> : null}
+      {title ? (
+        <Title title={tooltip ? tooltip : ''} titleAlign={titleAlign}>
+          {title}
+        </Title>
+      ) : null}
       <Body bodyAlign={bodyAlign}>{children}</Body>
     </CardStyled>
   )
