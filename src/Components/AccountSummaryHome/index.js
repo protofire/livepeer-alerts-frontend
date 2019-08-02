@@ -55,7 +55,7 @@ const AccountSummaryHome = props => {
           <PageTitle>My Delegate</PageTitle>
           <MultiBlocksRow>
             <TranscoderInfo myDelegateData={myDelegateData} subscriberData={subscriberData} summaryData={summaryData} />
-            <EarnedRewards earnedRewardData={earnedRewardData} {...props} />
+            <EarnedRewards earnedRewardData={earnedRewardData} />
           </MultiBlocksRow>
         </>
       )}
