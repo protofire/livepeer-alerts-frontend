@@ -2,7 +2,6 @@ import React from 'react'
 import styled from 'styled-components'
 import IconEmail from './icons/IconEmail'
 import IconTelegram from './icons/IconTelegram'
-import IconRanking from './icons/IconRanking'
 import { withRouter } from 'react-router-dom'
 
 const MainMenuStyled = styled.div`
