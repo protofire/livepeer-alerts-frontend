@@ -63,64 +63,85 @@ export class App extends Component {
           <>
             <FullLoading show={!this.state.render} />
             <MainWrapper>
-              <Header userData={{ address: '0x1234567', authenticated: true, isSubscribed: false }} />
-              <MainScroll>
-                <Switch>
-                  <Route
-                    exact
-                    path="/"
-                    render={routeProps => <HomeComponent {...this.state} {...this.props} {...routeProps} />}
-                  />
-                  <Web3Provider>
-                    <Web3ContextConsumer>
-                      {({ web3, userData, authenticated, error, displayMsg }) => {
-                        return (
-                          <SubscriberProvider subscriberAddress={userData.address}>
-                            <SubscriberContextConsumer>
-                              {({ subscriberData, summaryData, earnedRewardData, myDelegateData }) => {
-                                return (
-                                  <Switch>
-                                    <PrivateRoute
-                                      authenticated={authenticated}
-                                      component={AccountSummary}
-                                      displayMsg={displayMsg}
-                                      error={error}
-                                      exact
-                                      path="/(account|account/demo)/"
-                                      userData={userData}
-                                      subscriberData={subscriberData}
-                                      summaryData={summaryData}
-                                      earnedRewardData={earnedRewardData}
-                                      myDelegateData={myDelegateData}
-                                      web3={web3}
-                                    />
-                                    <PrivateRoute
-                                      authenticated={authenticated}
-                                      component={AccountSummarySubscriptionForm}
-                                      displayMsg={displayMsg}
-                                      error={error}
-                                      exact
-                                      path="/account/subscription"
-                                      userData={userData}
-                                      summaryData={summaryData}
-                                      subscriberData={subscriberData}
-                                      earnedRewardData={earnedRewardData}
-                                      myDelegateData={myDelegateData}
-                                      web3={web3}
-                                    />
-                                    <Redirect to="/" />
-                                  </Switch>
-                                )
-                              }}
-                            </SubscriberContextConsumer>
-                          </SubscriberProvider>
-                        )
-                      }}
-                    </Web3ContextConsumer>
-                  </Web3Provider>
-                </Switch>
-                <Footer />
-              </MainScroll>
+              <Web3Provider>
+                <Web3ContextConsumer>
+                  {({ web3, userData, connectWeb3, authenticated, error, displayMsg }) => {
+                    return (
+                      <>
+                        <Header userData={userData} />
+                        <MainScroll>
+                          <Switch>
+                            <Route
+                              exact
+                              path="/"
+                              render={routeProps => (
+                                <HomeComponent
+                                  {...this.state}
+                                  {...this.props}
+                                  {...routeProps}
+                                  connectWeb3={connectWeb3}
+                                  userData={userData}
+                                />
+                              )}
+                            />
+                            <SubscriberProvider subscriberAddress={userData.address}>
+                              <SubscriberContextConsumer>
+                                {({
+                                  subscriberData,
+                                  summaryData,
+                                  earnedRewardData,
+                                  myDelegateData,
+                                  unsubscribeUser,
+                                  subscriberUser,
+                                  updateUserSubscription,
+                                }) => {
+                                  return (
+                                    <Switch>
+                                      <PrivateRoute
+                                        authenticated={authenticated}
+                                        component={AccountSummary}
+                                        displayMsg={displayMsg}
+                                        error={error}
+                                        exact
+                                        path="/(account|account/demo)/"
+                                        userData={userData}
+                                        subscriberData={subscriberData}
+                                        summaryData={summaryData}
+                                        earnedRewardData={earnedRewardData}
+                                        myDelegateData={myDelegateData}
+                                        web3={web3}
+                                        unsubscribeUser={unsubscribeUser}
+                                      />
+                                      <PrivateRoute
+                                        authenticated={authenticated}
+                                        component={AccountSummarySubscriptionForm}
+                                        displayMsg={displayMsg}
+                                        error={error}
+                                        exact
+                                        path="/account/subscription"
+                                        userData={userData}
+                                        summaryData={summaryData}
+                                        subscriberData={subscriberData}
+                                        earnedRewardData={earnedRewardData}
+                                        myDelegateData={myDelegateData}
+                                        web3={web3}
+                                        subscriberUser={subscriberUser}
+                                        updateUserSubscription={updateUserSubscription}
+                                      />
+                                      <Redirect to="/" />
+                                    </Switch>
+                                  )
+                                }}
+                              </SubscriberContextConsumer>
+                            </SubscriberProvider>
+                          </Switch>
+                          <Footer />
+                        </MainScroll>
+                      </>
+                    )
+                  }}
+                </Web3ContextConsumer>
+              </Web3Provider>
             </MainWrapper>
           </>
         </ThemeProvider>
