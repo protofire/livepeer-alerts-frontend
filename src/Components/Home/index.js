@@ -14,9 +14,24 @@ export class HomeComponent extends Component {
     error: false,
   }
 
-  onGetStartedBtnHandler = () => {
+  onGetStartedBtnHandler = async () => {
     logger.log('Fire event getStartedBtnHandler')
-    this.props.history.push('/account')
+    const { connectWeb3, history } = this.props
+    if (connectWeb3) {
+      try {
+        await connectWeb3()
+        history.push('/account')
+      } catch (err) {
+        const msg = err.message
+        this.setState(
+          {
+            displayMsg: msg,
+            error: true,
+          },
+          () => this.sendToast(),
+        )
+      }
+    }
   }
 
   onDemoBtnHandler = () => {
@@ -58,18 +73,6 @@ export class HomeComponent extends Component {
 
   componentDidMount() {
     logger.log('Fire event componentDidMount')
-    // If we get redirected with an error msg, we should display it
-    if (this.props.location && this.props.location.state && this.props.location.state.error) {
-      this.setState(
-        {
-          error: this.props.location.state.error,
-          displayMsg: this.props.location.state.displayMsg,
-        },
-        () => {
-          this.sendToast()
-        },
-      )
-    }
   }
 
   render() {
