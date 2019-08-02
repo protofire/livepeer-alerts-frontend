@@ -10,7 +10,7 @@ const Reward = props => {
 
   const rewardCard =
     summary && summary.loadingSummary ? (
-      <SmallLoadingCard show={true} message={'Loading reward data...'} />
+      <SmallLoadingCard show={true} message={'Loading reward calling status...'} />
     ) : (
       <Card>{isDelegate ? <RewardDescriptionDelegate {...props} /> : <RewardDescriptionDelegator {...props} />}</Card>
     )
