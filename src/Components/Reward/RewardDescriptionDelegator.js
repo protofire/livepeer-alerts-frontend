@@ -4,6 +4,7 @@ import { Emoji } from 'emoji-mart'
 import styled from 'styled-components'
 
 const Title = styled.h2`
+  text-align: center;
   font-size: 18px;
   font-weight: 500;
   line-height: 1.2;
@@ -12,6 +13,7 @@ const Title = styled.h2`
 `
 
 const Paragraph = styled.p`
+  text-align: center;
   color: #333;
   font-size: 15px;
   font-weight: 400;
@@ -22,6 +24,9 @@ const Paragraph = styled.p`
   &:last-child {
     margin-bottom: 0;
   }
+`
+const A = styled.a`
+  color: black;
 `
 
 const RewardDescriptionDelegator = props => {
@@ -44,9 +49,9 @@ const RewardDescriptionDelegator = props => {
       Bonded: (
         <>
           You are bonded to delegate{' '}
-          <a href={delegateAddressUrl} target="_blank" rel="noopener noreferrer">
+          <A href={delegateAddressUrl} title={delegateAddress} target="_blank" rel="noopener noreferrer">
             {delegateAddressTruncated}
-          </a>{' '}
+          </A>{' '}
           since round #{startRound}.<br />
           {bondedDescription}
         </>
@@ -60,9 +65,9 @@ const RewardDescriptionDelegator = props => {
         <>
           You are not bonded to any delegate, therefore you are not earning LPT from the token inflation. Go ahead and
           delegate your LPT{' '}
-          <a href="https://explorer.livepeer.org/transcoders" target="_blank" rel="noopener noreferrer">
+          <A href="https://explorer.livepeer.org/transcoders" target="_blank" rel="noopener noreferrer">
             here
-          </a>
+          </A>
         </>
       ),
       //  Unbonded: `As a delegator you are in the Unbounded state if you are not bonded to any delegate yet or if you have unbonded your tokens completely.`

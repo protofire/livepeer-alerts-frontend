@@ -11,6 +11,7 @@ const Title = styled.h2`
 `
 
 const Paragraph = styled.p`
+  text-align: center;
   color: #333;
   font-size: 15px;
   font-weight: 400;

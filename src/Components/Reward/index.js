@@ -2,13 +2,20 @@ import React from 'react'
 import RewardDescriptionDelegator from './RewardDescriptionDelegator'
 import RewardDescriptionDelegate from './RewardDescriptionDelegate'
 import Card from '../Common/Card'
+import SmallLoadingCard from '../Common/SmallLoadingCard'
 
 const Reward = props => {
-  const isDelegate = props.summary && props.summary.role && props.summary.role.toLowerCase() === 'transcoder'
+  const { summary } = props
+  const isDelegate = summary && summary.role && summary.role.toLowerCase() === 'transcoder'
 
-  return (
-    <Card>{isDelegate ? <RewardDescriptionDelegate {...props} /> : <RewardDescriptionDelegator {...props} />}</Card>
-  )
+  const rewardCard =
+    summary && summary.loadingSummary ? (
+      <SmallLoadingCard show={true} message={'Loading reward calling status...'} />
+    ) : (
+      <Card>{isDelegate ? <RewardDescriptionDelegate {...props} /> : <RewardDescriptionDelegator {...props} />}</Card>
+    )
+
+  return rewardCard
 }
 
 export default Reward
