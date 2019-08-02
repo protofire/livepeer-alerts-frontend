@@ -175,6 +175,7 @@ class SubscriberProvider extends Component {
 
   updateSubscriberData = subscriberData => {
     if (!subscriberData) {
+      logger.error('Missing subscription data on updateSubscriberData(), skipping')
       return
     }
     this.setStateAsync({
@@ -196,6 +197,8 @@ class SubscriberProvider extends Component {
 
   subscriberUser = async subscriptionData => {
     if (!subscriptionData) {
+      logger.error('Missing subscription data on subscriberUser(), skipping')
+      return
     }
     try {
       logger.log('Creating new subscriber with data: ', subscriptionData)
