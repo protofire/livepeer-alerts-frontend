@@ -50,12 +50,12 @@ const AccountSummaryHome = props => {
         {wallet}
         {subscriberStatusCard}
       </MultiBlocksRowTop>
-      {!isDelegate && (
+      {!isDelegate && summary.status === 'Bonded' && (
         <>
           <PageTitle>My Delegate</PageTitle>
           <MultiBlocksRow>
             <TranscoderInfo myDelegateData={myDelegateData} subscriberData={subscriberData} summaryData={summaryData} />
-            <EarnedRewards earnedRewardData={earnedRewardData} />
+            <EarnedRewards earnedRewardData={earnedRewardData} {...props} />
           </MultiBlocksRow>
         </>
       )}
