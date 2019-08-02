@@ -77,7 +77,15 @@ export class App extends Component {
                         return (
                           <SubscriberProvider subscriberAddress={userData.address}>
                             <SubscriberContextConsumer>
-                              {({ subscriberData, summaryData, earnedRewardData, myDelegateData }) => {
+                              {({
+                                subscriberData,
+                                summaryData,
+                                earnedRewardData,
+                                myDelegateData,
+                                unsubscribeUser,
+                                subscriberUser,
+                                updateUserSubscription,
+                              }) => {
                                 return (
                                   <Switch>
                                     <PrivateRoute
@@ -93,6 +101,7 @@ export class App extends Component {
                                       earnedRewardData={earnedRewardData}
                                       myDelegateData={myDelegateData}
                                       web3={web3}
+                                      unsubscribeUser={unsubscribeUser}
                                     />
                                     <PrivateRoute
                                       authenticated={authenticated}
@@ -107,6 +116,8 @@ export class App extends Component {
                                       earnedRewardData={earnedRewardData}
                                       myDelegateData={myDelegateData}
                                       web3={web3}
+                                      subscriberUser={subscriberUser}
+                                      updateUserSubscription={updateUserSubscription}
                                     />
                                     <Redirect to="/" />
                                   </Switch>

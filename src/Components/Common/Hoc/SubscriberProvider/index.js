@@ -144,13 +144,10 @@ class SubscriberProvider extends Component {
       })
       logger.log('[SubscriberProvider] - Retrieving subscription for address ', subscriberAddress)
       let userData = await axios.get(`/subscribers/address/${subscriberAddress}`)
-      await this.setStateAsync({
-        subscriberData: {
-          ...this.state.userData,
-          isSubscribed: true,
-          id: userData.data._id,
-          ...userData.data,
-        },
+      await this.updateSubscriberData({
+        isSubscribed: true,
+        id: userData.data._id,
+        ...userData.data,
       })
       return this.state
     } catch (error) {
@@ -173,6 +170,73 @@ class SubscriberProvider extends Component {
           loadingSubscriberData: false,
         },
       })
+    }
+  }
+
+  updateSubscriberData = subscriberData => {
+    if (!subscriberData) {
+      logger.error('Missing subscription data on updateSubscriberData(), skipping')
+      return
+    }
+    this.setStateAsync({
+      subscriberData: {
+        ...this.state.subscriberData,
+        ...subscriberData,
+      },
+    })
+  }
+
+  unsubscribeUser = async () => {
+    const { subscriberData } = this.state
+    logger.log('Unsubscribing user with id ', subscriberData)
+    await axios.delete(`/subscribers/${subscriberData.id}`)
+    this.updateSubscriberData({
+      ...defaultState.subscriberData,
+    })
+  }
+
+  subscriberUser = async subscriptionData => {
+    if (!subscriptionData) {
+      logger.error('Missing subscription data on subscriberUser(), skipping')
+      return
+    }
+    try {
+      logger.log('Creating new subscriber with data: ', subscriptionData)
+      const response = await axios.post('/subscribers', subscriptionData)
+      const { activated, _id, activatedCode, createdAt } = response.data
+      this.updateSubscriberData({
+        activated,
+        id: _id,
+        activatedCode: activatedCode,
+        createdAt: createdAt,
+        isSubscribed: true,
+      })
+    } catch (exception) {
+      logger.log('Exception on postSubscription')
+      let responseMsg = exception.response.data.message
+      let displayMsg
+      // Email already exists
+      if (
+        (responseMsg && responseMsg === displayTexts.FAIL_EMAIL_ALREADY_EXISTS_RESPONSE) ||
+        exception.response.status === 422
+      ) {
+        displayMsg = displayTexts.EMAIL_ALREADY_EXISTS
+      } else {
+        displayMsg = displayTexts.FAIL_NO_REASON
+      }
+      exception.displayMsg = displayMsg
+      throw exception
+    }
+  }
+
+  updateUserSubscription = async subscriptionData => {
+    try {
+      logger.log('Updating subscriber with data: ', subscriptionData)
+      const subscriberId = subscriptionData.id
+      await axios.put(`/subscribers/${subscriberId}`, subscriptionData)
+    } catch (err) {
+      logger.log('Exception on updateUserSubscription')
+      throw err
     }
   }
 
@@ -270,6 +334,9 @@ class SubscriberProvider extends Component {
           summaryData: this.state.summary,
           earnedRewardData: this.state.earnedRewardData,
           myDelegateData: this.state.myDelegateData,
+          unsubscribeUser: this.unsubscribeUser,
+          subscriberUser: this.subscriberUser,
+          updateUserSubscription: this.updateUserSubscription,
         }}
       >
         {this.props.children}
