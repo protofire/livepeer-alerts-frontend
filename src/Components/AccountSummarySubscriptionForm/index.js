@@ -132,7 +132,7 @@ export class AccountSummarySubscriptionForm extends Component {
 
   updateSubscription = async data => {
     try {
-      const { subscriberData, updateUserSubscription } = this.props
+      const { updateUserSubscription } = this.props
       const displayMsg = displayTexts.SUBSCRIPTION_UPDATED
       await updateUserSubscription(data)
       this.setState({
