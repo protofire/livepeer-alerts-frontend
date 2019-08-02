@@ -66,13 +66,6 @@ const MainMenu = props => {
 
   const menuItems = [
     {
-      active: true,
-      color: 'secondary',
-      icon: <IconRanking />,
-      onClick: null,
-      text: 'ROI Ranking',
-    },
-    {
       active: isUserValid,
       color: 'tertiary',
       icon: <IconTelegram />,

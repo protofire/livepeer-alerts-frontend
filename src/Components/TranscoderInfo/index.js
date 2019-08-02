@@ -5,7 +5,7 @@ import IconInactive from './img/IconInactive'
 import StrippedList, { TR, TD } from '../Common/StrippedList'
 import styled from 'styled-components'
 import SmallLoadingCard from '../Common/SmallLoadingCard'
-import { decimalPlaces } from '../../Utils'
+import { truncateStringInTheMiddle, decimalPlaces } from '../../Utils'
 
 const Status = styled.h3`
   align-items: center;
@@ -34,6 +34,9 @@ const TDTitle = styled(TD)`
 
 const TDData = styled(TD)`
   text-align: right;
+`
+const A = styled.a`
+  color: black;
 `
 
 const TranscoderInfo = props => {
@@ -77,8 +80,16 @@ const TranscoderInfo = props => {
     ],
   }
 
+  const delegateAddressUrl = `https://explorer.livepeer.org/accounts/${delegateData.address}/transcoding`
+
+  const title = (
+    <A href={delegateAddressUrl} target="_blank" rel="noopener noreferrer">
+      {truncateStringInTheMiddle(delegateData.address)}
+    </A>
+  )
+
   const card = (
-    <Card title={delegateData.address} titleAlign="center" {...restProps}>
+    <Card title={title} tooltip={delegateData.address} titleAlign="center" {...restProps}>
       <Status>
         {isActive ? (
           <>
