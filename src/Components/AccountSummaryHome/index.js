@@ -8,6 +8,7 @@ import TranscoderInfo from '../TranscoderInfo'
 import EarnedRewards from '../EarnedRewards'
 import styled from 'styled-components'
 import SmallLoadingCard from '../Common/SmallLoadingCard'
+import Reward from '../Reward'
 
 const AccountSummaryHomeContainer = styled.div`
   margin: 0 auto;
@@ -59,6 +60,7 @@ const AccountSummaryHome = props => {
           </MultiBlocksRow>
         </>
       )}
+      <Reward {...props} />
       <RewardSubscribeText {...props} />
     </AccountSummaryHomeContainer>
   )
