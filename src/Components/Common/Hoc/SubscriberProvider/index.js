@@ -226,8 +226,12 @@ class SubscriberProvider extends Component {
   }
 
   loadMyDelegateData = async () => {
-    const delegateAddress =
-      this.state.summary && this.state.summary.delegator && this.state.summary.delegator.delegateAddress
+    const { summary } = this.state
+    const delegateAddress = summary && summary.delegator && summary.delegator.delegateAddress
+    if (!delegateAddress) {
+      logger.log('No delegateAddress for the user on loadMyDelegateData()')
+      return
+    }
     try {
       await this.setStateAsync({
         ...this.state,
