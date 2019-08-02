@@ -1,11 +1,13 @@
 import React from 'react'
 import Card from '../Common/Card'
 import StrippedList, { TR, TD, TH } from '../Common/StrippedList'
+import Tooltip from '../Common/Tooltip'
 import styled from 'styled-components'
 import SmallLoadingCard from '../Common/SmallLoadingCard'
 import { decimalPlaces } from '../../Utils'
 
 const Description = styled.h3`
+  display: flex;
   color: ${props => props.theme.colors.lightText};
   font-size: 13px;
   font-weight: 500;
@@ -79,7 +81,10 @@ const EarnedRewards = props => {
 
   const card = (
     <Card title="Earned Rewards" {...restProps}>
-      <Description>Newly minted LPT claimed.</Description>
+      <Description>
+        Newly minted LPT claimed.{' '}
+        <Tooltip description={'Livepeer.tools will update the reward data in the next rounds.'} />
+      </Description>
       <StrippedListStyled tableHead={tableHead}>
         {earnedData.map((item, index) => {
           return (
