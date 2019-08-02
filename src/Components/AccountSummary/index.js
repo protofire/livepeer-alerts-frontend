@@ -1,7 +1,6 @@
 import * as displayTexts from '../../Texts/AccountSummary'
 import AccountSummaryHome from '../AccountSummaryHome'
 import React, { Component } from 'react'
-import axios from 'axios'
 import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
 import ReactGA from 'react-ga'
@@ -89,27 +88,18 @@ export class AccountSummary extends Component {
       displayMsg: displayTexts.LOADING_UNSUBSCRIPTION,
     })
     try {
-      logger.log('Unsubscribing user with id ', this.state.userData)
-      await axios.delete(`/subscribers/${this.state.userData.id}`)
+      const { unsubscribeUser } = this.props
+      await unsubscribeUser()
       this.setState(
         {
           render: true,
           displayMsg: displayTexts.UNSUBSCRIPTION_SUCCESSFUL,
-          userData: {
-            ...this.state.userData,
-            isSubscribed: false,
-            activated: null,
-            id: null,
-            activatedCode: null,
-            createdAt: null,
-            error: false,
-          },
         },
         () => this.sendToast(),
       )
     } catch (exception) {
       logger.log('Exception on deleteSubscription')
-      if (exception.response.status === 404) {
+      if (exception && exception.response && exception.response.status === 404) {
         // User with that id not found
         this.setState(
           {
@@ -126,7 +116,9 @@ export class AccountSummary extends Component {
             displayMsg: displayTexts.FAIL_NO_REASON,
             error: true,
           },
-          () => this.sendToast(),
+          () => {
+            this.sendToast()
+          },
         )
       }
     }
@@ -144,22 +136,19 @@ export class AccountSummary extends Component {
       balance: summaryData.lpBalance,
       loadingSummary: summaryData.loadingSummary,
     }
-
-    if (!this.state.error) {
-      content = (
-        <AccountSummaryHome
-          lpBalance={summaryData.lpBalance}
-          onUnSubscribeBtnHandler={this.onUnSubscribeBtnHandler}
-          summary={summaryProps}
-          userData={userData}
-          subscriberData={subscriberData}
-          earnedRewardData={earnedRewardData}
-          myDelegateData={myDelegateData}
-          summaryData={summaryData}
-          web3={this.props.web3}
-        />
-      )
-    }
+    content = (
+      <AccountSummaryHome
+        lpBalance={summaryData.lpBalance}
+        onUnSubscribeBtnHandler={this.onUnSubscribeBtnHandler}
+        summary={summaryProps}
+        userData={userData}
+        subscriberData={subscriberData}
+        earnedRewardData={earnedRewardData}
+        myDelegateData={myDelegateData}
+        summaryData={summaryData}
+        web3={this.props.web3}
+      />
+    )
 
     return (
       <>
