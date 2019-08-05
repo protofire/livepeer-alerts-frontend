@@ -96,7 +96,7 @@ const ButtonStyled = styled(Button)`
 
 class HomeCard extends React.Component {
   render() {
-    const { onClick, onDemoClick } = this.props
+    const { onClick } = this.props
     const demoAddress = process.env.REACT_APP_DEMO_ADDRESS
 
     let demoBtnDisabled = typeof demoAddress === 'undefined' || demoAddress.length === 0
@@ -138,9 +138,6 @@ class HomeCard extends React.Component {
         <ButtonsContainer>
           <ButtonStyled onClick={onClick} type="primary">
             Get started
-          </ButtonStyled>
-          <ButtonStyled onClick={onDemoClick} disabled={demoBtnDisabled} type="secondary">
-            Demo
           </ButtonStyled>
         </ButtonsContainer>
       </CardHome>
