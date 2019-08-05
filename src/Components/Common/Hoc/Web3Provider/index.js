@@ -167,7 +167,7 @@ class Web3Provider extends Component {
 
     // We subscribe to the event that detects if the user has changed the account
     window.ethereum.on('accountsChanged', accounts => {
-      return this.accountChangedCallback(web3Instance, accounts)
+      window.location.reload()
     })
     // We subscribe to the event that detects if the user has changed the network
     window.ethereum.on('networkChanged', network => {
