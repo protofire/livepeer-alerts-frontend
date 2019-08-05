@@ -49,6 +49,7 @@ const TranscoderInfo = props => {
   const address = summaryData && summaryData.delegator && summaryData.delegator.delegateAddress
   const missedRewardCalls = (myDelegateData && myDelegateData.last30RoundsMissedRewardCalls) || 0
   const rewardCut = (myDelegateData && myDelegateData.rewardCut) || 0
+  const rewardCutPercentage = rewardCut / 10000
 
   const roi = (myDelegateData && myDelegateData.roiAbs) || 0
   const roiEvery1000 = (myDelegateData && myDelegateData.roiPercent) || 0
@@ -63,19 +64,19 @@ const TranscoderInfo = props => {
       },
       {
         title: 'Reward Cut',
-        data: `${decimalPlaces(rewardCut)}%`,
+        data: `${decimalPlaces(rewardCutPercentage)}%`,
       },
       {
         title: 'Missed Reward Calls',
         data: `${missedRewardCalls}/30`,
       },
       {
-        title: 'Return of investment',
+        title: 'ROI / round for 1000 LPT',
         data: `${decimalPlaces(roi)}`,
       },
       {
-        title: 'Return of investment (%)',
-        data: `${decimalPlaces(roiEvery1000)}`,
+        title: 'ROI (%)',
+        data: `${decimalPlaces(roiEvery1000)}%`,
       },
     ],
   }
