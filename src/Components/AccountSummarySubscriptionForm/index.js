@@ -28,6 +28,9 @@ export class AccountSummarySubscriptionForm extends Component {
         touched: false,
         valid: false,
       },
+      checkbox: {
+        option: 'daily',
+      },
       formIsValid: false,
     },
     address: null,
@@ -48,16 +51,33 @@ export class AccountSummarySubscriptionForm extends Component {
 
   componentDidMount() {
     logger.log('Fire event componentDidMount')
-    const { userData, location } = this.props
+    const { userData, subscriberData, location } = this.props
     // Google analytics
     if (location && location.pathname) {
       logger.log('Google analytics: ', location.pathname)
       ReactGA.pageview(location.pathname)
     }
-    this.setState({
-      address: userData.address,
-      render: true,
-    })
+    // If the user is subscribed, displays the current subscription data on the form
+    const { email, emailFrequency, isSubscribed } = subscriberData
+    if (isSubscribed) {
+      this.setState({
+        address: userData.address,
+        render: true,
+        frequency: emailFrequency,
+        email,
+        form: {
+          ...this.state.form,
+          email: {
+            ...this.state.email,
+            value: email,
+          },
+          checkbox: {
+            option: emailFrequency,
+          },
+          formIsValid: true,
+        },
+      })
+    }
   }
 
   redirectToAccountSummary = () => {
@@ -85,15 +105,14 @@ export class AccountSummarySubscriptionForm extends Component {
         if (subscriberData && subscriberData.isSubscribed) {
           // Updates subscription
           await this.updateSubscription(data)
-          this.sendToast()
         }
         if (subscriberData && !subscriberData.isSubscribed) {
           // Creates subscription
           await this.generateSubscription(data)
-          this.sendToast(null, () => {
-            this.redirectToAccountSummary()
-          })
         }
+        this.sendToast(null, () => {
+          this.redirectToAccountSummary()
+        })
       },
     )
   }
@@ -217,10 +236,16 @@ export class AccountSummarySubscriptionForm extends Component {
   }
 
   frequencyChangedHandler = newFrequency => {
-    // Validates that the new frequency is supported
+    // Validates that the new frequency is supported and updates the form
     if (isFrequencySupported(newFrequency)) {
       this.setState({
         frequency: newFrequency,
+        form: {
+          ...this.state.form,
+          checkbox: {
+            option: newFrequency,
+          },
+        },
       })
     }
   }

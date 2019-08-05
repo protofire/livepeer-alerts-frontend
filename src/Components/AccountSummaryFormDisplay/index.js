@@ -93,19 +93,17 @@ const StopNotifications = styled.span`
 `
 
 class AccountSummaryFormDisplay extends React.Component {
-  state = {
-    option: 'daily',
-  }
-
-  setOption = option => {
-    const { frequencyChangedHandler } = this.props
-    this.setState({ option: option })
-    frequencyChangedHandler(option)
-  }
-
   render = () => {
-    const { form, inputChangedHandler, onCancelBtnHandler, onSubmitBtnHandler, isSubscribed, ...restProps } = this.props
-    const { option } = this.state
+    const {
+      form,
+      inputChangedHandler,
+      frequencyChangedHandler,
+      onCancelBtnHandler,
+      onSubmitBtnHandler,
+      isSubscribed,
+      ...restProps
+    } = this.props
+    const { option } = form.checkbox
 
     return (
       <CardSubscriptionForm title="Subscribe" {...restProps}>
@@ -121,11 +119,11 @@ class AccountSummaryFormDisplay extends React.Component {
         />
         <SubTitle>How Often?</SubTitle>
         <Options>
-          <Option onClick={() => this.setOption('daily')}>
+          <Option onClick={() => frequencyChangedHandler('daily')}>
             <RadioInput checked={option === 'daily'} />
             <OptionText>Daily</OptionText>
           </Option>
-          <Option onClick={() => this.setOption('weekly')}>
+          <Option onClick={() => frequencyChangedHandler('weekly')}>
             <RadioInput checked={option === 'weekly'} />
             <OptionText>Weekly</OptionText>
           </Option>
