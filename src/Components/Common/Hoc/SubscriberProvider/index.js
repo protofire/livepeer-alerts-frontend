@@ -385,6 +385,10 @@ class SubscriberProvider extends Component {
       logger.log('Updating subscriber with data: ', subscriptionData)
       const subscriberId = subscriptionData.id
       await axios.put(`/subscribers/${subscriberId}`, subscriptionData)
+      const newSubscriptionData = {
+        ...subscriptionData,
+      }
+      this.updateSubscriberData(newSubscriptionData)
     } catch (err) {
       logger.log('Exception on updateUserSubscription')
       throw err
