@@ -1,5 +1,4 @@
 import React from 'react'
-import { truncateStringInTheMiddle } from '../../Utils'
 import { Emoji } from 'emoji-mart'
 import styled from 'styled-components'
 
@@ -32,10 +31,7 @@ const A = styled.a`
 const RewardDescriptionDelegator = props => {
   const description = props => {
     const { summary } = props
-    let { status, delegateCalledReward, delegateAddress, startRound, roundsUntilUnbonded } = summary
-
-    const delegateAddressUrl = `https://explorer.livepeer.org/accounts/${delegateAddress}/transcoding`
-    const delegateAddressTruncated = truncateStringInTheMiddle(delegateAddress)
+    let { status, delegateCalledReward, roundsUntilUnbonded } = summary
 
     let bondedDescription
 
@@ -46,16 +42,7 @@ const RewardDescriptionDelegator = props => {
     }
 
     return {
-      Bonded: (
-        <>
-          You are bonded to delegate{' '}
-          <A href={delegateAddressUrl} title={delegateAddress} target="_blank" rel="noopener noreferrer">
-            {delegateAddressTruncated}
-          </A>{' '}
-          since round #{startRound}.<br />
-          {bondedDescription}
-        </>
-      ),
+      Bonded: <>{bondedDescription}</>,
       Pending: `A delegator enters the Pending state when it bonds from the Unbonded state.`,
       Unbonding:
         `You still have ` +
