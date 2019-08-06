@@ -88,7 +88,7 @@ const RewardDescriptionDelegator = props => {
 
   const title = props => {
     const { summary } = props
-    const { status, delegateCalledReward } = summary
+    const { status } = summary
 
     return {
       Bonded: null,
