@@ -11,13 +11,12 @@ const Status = styled.h3`
   align-items: center;
   color: ${props => props.theme.colors.lightText};
   display: flex;
-  font-size: 10px;
+  font-size: 13px;
   font-weight: 500;
   justify-content: center;
   line-height: 1.3;
   margin: 0 0 15px;
   text-align: center;
-  text-transform: uppercase;
 
   > svg {
     margin: 0 5px 0 0;
@@ -36,7 +35,14 @@ const TDData = styled(TD)`
   text-align: right;
 `
 const A = styled.a`
-  color: black;
+  color: ${props => props.theme.colors.lightText};
+  font-size: 13px;
+  font-weight: 500;
+`
+
+const SpanPipe = styled.span`
+  padding-right: 5px;
+  padding-left: 5px;
 `
 
 const TranscoderInfo = props => {
@@ -83,25 +89,33 @@ const TranscoderInfo = props => {
 
   const delegateAddressUrl = `https://explorer.livepeer.org/accounts/${delegateData.address}/transcoding`
 
-  const title = (
-    <A href={delegateAddressUrl} target="_blank" rel="noopener noreferrer">
+  const delegateAddress = (
+    <A href={delegateAddressUrl} title={delegateData.address} target="_blank" rel="noopener noreferrer">
       {truncateStringInTheMiddle(delegateData.address)}
     </A>
   )
 
+  const pipe = <SpanPipe>|</SpanPipe>
+
   const card = (
-    <Card title={title} tooltip={delegateData.address} titleAlign="center" {...restProps}>
-      <Status>
-        {isActive ? (
-          <>
-            <IconActive /> Active
-          </>
-        ) : (
-          <>
-            <IconInactive /> Inactive
-          </>
-        )}
-      </Status>
+    <Card title="Your delegate" titleAlign="center" {...restProps}>
+      <div>
+        <Status>
+          {isActive ? (
+            <>
+              <IconActive /> Active
+              {pipe}
+              {delegateAddress}
+            </>
+          ) : (
+            <>
+              <IconInactive /> Inactive
+              {pipe}
+              {delegateAddress}
+            </>
+          )}
+        </Status>
+      </div>
       <StrippedListStyled>
         {delegateData.data.map((item, index) => {
           return (
