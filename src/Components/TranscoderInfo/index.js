@@ -54,7 +54,7 @@ const TranscoderInfo = props => {
   const roi = (myDelegateData && myDelegateData.roiAbs) || 0
   const roiEvery1000 = (myDelegateData && myDelegateData.roiPercent) || 0
 
-  const isActive = true
+  const isActive = (summaryData && summaryData.delegator && summaryData.delegator.delegateIsActive) || true
   const delegateData = {
     address: address,
     data: [
