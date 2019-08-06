@@ -33,25 +33,15 @@ export class AccountSummarySubscriptionForm extends Component {
       },
       formIsValid: false,
     },
-    address: null,
     frequency: 'daily',
-    render: false,
     toastId: '1',
     displayMsg: displayTexts.LOADING_SUBSCRIPTION_DATA,
     displaySubscriptionModal: false,
   }
 
-  componentWillReceiveProps(nextProps, nextContext) {
-    logger.log('Fire event componentWillReceiveProps')
-    this.setState({
-      ...this.state,
-      address: nextProps.userData.address,
-    })
-  }
-
   componentDidMount() {
     logger.log('Fire event componentDidMount')
-    const { userData, subscriberData, location } = this.props
+    const { subscriberData, location } = this.props
     // Google analytics
     if (location && location.pathname) {
       logger.log('Google analytics: ', location.pathname)
@@ -61,8 +51,6 @@ export class AccountSummarySubscriptionForm extends Component {
     const { email, emailFrequency, isSubscribed } = subscriberData
     if (isSubscribed) {
       this.setState({
-        address: userData.address,
-        render: true,
         frequency: emailFrequency,
         email,
         form: {
@@ -87,18 +75,17 @@ export class AccountSummarySubscriptionForm extends Component {
   onSubmitBtnHandler = async event => {
     event.preventDefault()
     logger.log('Submit btnHandler')
-    const { subscriberData } = this.props
-
-    const { address, frequency, form } = this.state
+    const { subscriberData, userData } = this.props
+    const { frequency, form } = this.state
     let data = {
-      address: address,
+      address: userData.address,
       emailFrequency: frequency,
       email: form.email.value,
       id: subscriberData._id,
     }
+
     this.setState(
       {
-        render: false,
         displayMsg: displayTexts.GENERATING_SUBSCRIPTION,
       },
       async () => {
@@ -133,7 +120,6 @@ export class AccountSummarySubscriptionForm extends Component {
       const displayMsg = displayTexts.WELCOME_NEW_SUBSCRIBER
       await subscriberUser(data)
       this.setState({
-        render: true,
         error: false,
         displayMsg,
         displaySubscriptionModal: false,
@@ -141,7 +127,6 @@ export class AccountSummarySubscriptionForm extends Component {
     } catch (exception) {
       const displayMsg = exception.displayMsg || displayTexts.FAIL_NO_REASON
       this.setState({
-        render: true,
         displayMsg,
         error: true,
         displaySubscriptionModal: false,
@@ -155,7 +140,6 @@ export class AccountSummarySubscriptionForm extends Component {
       const displayMsg = displayTexts.SUBSCRIPTION_UPDATED
       await updateUserSubscription(data)
       this.setState({
-        render: true,
         error: false,
         displayMsg,
         displaySubscriptionModal: false,
@@ -163,7 +147,6 @@ export class AccountSummarySubscriptionForm extends Component {
     } catch (exception) {
       const displayMsg = exception.displayMsg || displayTexts.FAIL_NO_REASON
       this.setState({
-        render: true,
         displayMsg,
         error: true,
         displaySubscriptionModal: false,

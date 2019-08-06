@@ -5,15 +5,20 @@ import StatusDelegator from '../StatusDelegator'
 import Wallet from '../Wallet'
 import TranscoderInfo from '../TranscoderInfo'
 import EarnedRewards from '../EarnedRewards'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import SmallLoadingCard from '../Common/SmallLoadingCard'
 import Reward from '../Reward'
+import Button from '../Common/Button'
+import IconEmail from '../Common/MainMenu/icons/IconEmail'
+import IconTelegram from '../Common/MainMenu/icons/IconTelegram'
+import { Link } from 'react-router-dom'
 
 const AccountSummaryHomeContainer = styled.div`
   margin: 0 auto;
   max-width: 100%;
   width: 574px;
 `
+
 const MultiBlocksRow = styled.div`
   display: grid;
   grid-row-gap: ${props => props.theme.margins.blockSeparation};
@@ -25,10 +30,98 @@ const MultiBlocksRow = styled.div`
     grid-template-columns: 1fr 1fr;
   }
 `
-
 const MultiBlocksRowTop = styled(MultiBlocksRow)`
   margin-bottom: 40px;
 `
+
+const SingleBlockRow = styled(MultiBlocksRow)`
+  display: inline;
+  margin-bottom: ${props => props.theme.margins.blockSeparation};
+`
+
+const RoundedBtn = styled(Button)`
+  height: 50px;
+  > svg {
+    margin-right: 4px;
+  }
+`
+
+const TelegramBtn = styled(RoundedBtn)`
+  background-color: #55acee;
+`
+
+const EmailBtn = styled(RoundedBtn)`
+  background-color: #ff9800;
+`
+
+const aCSS = css`
+  color: #fff;
+  cursor: pointer;
+  text-decoration: underline;
+
+  &:hover {
+    text-decoration: none;
+  }
+`
+
+const A = styled.span`
+  ${aCSS}
+`
+
+const RewardSubscribeTextStyled = styled.div`
+  color: #fff;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.2;
+  padding: 25px 0 0 0;
+  text-align: center;
+  text-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
+
+  a {
+    ${aCSS}
+  }
+`
+
+const getSubscriptionBtns = props => {
+  const { subscriberData, onSubscribeBtnHandler, onTelegramBtnHandler, summary } = props
+  const { isSubscribed } = subscriberData
+  const { status } = summary
+  const statusCheck = status.toUpperCase()
+  const showBtns = !['REGISTERED', 'BONDED', 'UNBONDING', 'UNBONDED'].includes(statusCheck)
+  const content = isSubscribed ? (
+    <EmailBtn onClick={onSubscribeBtnHandler}>
+      <IconEmail />
+      Email
+    </EmailBtn>
+  ) : (
+    <EmailBtn onClick={onSubscribeBtnHandler}>
+      <IconEmail />
+      Email
+    </EmailBtn>
+  )
+  return showBtns ? null : (
+    <>
+      <TelegramBtn onClick={onTelegramBtnHandler}>
+        <IconTelegram />
+        Telegram
+      </TelegramBtn>
+      {content}
+    </>
+  )
+}
+
+const getSubscriberFooterTexts = props => {
+  const { subscriberData, onUnSubscribeBtnHandler, summary } = props
+  const { isSubscribed } = subscriberData
+  const { status } = summary
+  const statusCheck = status.toUpperCase()
+  const showBtns = !['REGISTERED', 'BONDED', 'UNBONDING', 'UNBONDED'].includes(statusCheck)
+  return showBtns ? null : (
+    <RewardSubscribeTextStyled>
+      {isSubscribed ? <A onClick={showBtns ? null : onUnSubscribeBtnHandler}>Unsubscribe</A> : null}
+    </RewardSubscribeTextStyled>
+  )
+}
 
 const AccountSummaryHome = props => {
   const { summary, subscriberData, earnedRewardData, myDelegateData, summaryData } = props
@@ -44,6 +137,8 @@ const AccountSummaryHome = props => {
   ) : (
     subscriberStatus
   )
+  const subscriberBtns = getSubscriptionBtns(props)
+  const subscriberFooterTexts = getSubscriberFooterTexts(props)
   return (
     <AccountSummaryHomeContainer>
       <MultiBlocksRowTop>
@@ -58,9 +153,16 @@ const AccountSummaryHome = props => {
           </MultiBlocksRow>
         </>
       )}
-      <Reward {...props} />
-      <RewardSubscribeText {...props} />
+      <SingleBlockRow>
+        <Reward {...props} />
+      </SingleBlockRow>
+      <SingleBlockRow>
+        <RewardSubscribeText {...props} />
+      </SingleBlockRow>
+      <MultiBlocksRow>{subscriberBtns}</MultiBlocksRow>
+      <SingleBlockRow>{subscriberFooterTexts}</SingleBlockRow>
     </AccountSummaryHomeContainer>
   )
 }
+
 export default AccountSummaryHome

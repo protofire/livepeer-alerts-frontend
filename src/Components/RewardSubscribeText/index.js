@@ -1,6 +1,5 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import { Link } from 'react-router-dom'
 
 const aCSS = css`
   color: #fff;
@@ -11,51 +10,37 @@ const aCSS = css`
     text-decoration: none;
   }
 `
-
-const RewardSubscribeTextStyled = styled.div`
-  color: #fff;
-  font-size: 12px;
-  font-weight: 500;
-  line-height: 1.2;
-  padding: 25px 0 0 0;
+const Title = styled.h2`
+  margin-top: 25px;
+  font-size: 16px;
+  font-weight: 700;
+  color: ${props => props.theme.pageTitle.color};
+  text-shadow: ${props => props.theme.pageTitle.textShadow};
+  position: relative;
   text-align: center;
-  text-shadow: 0 0 4px rgba(0, 0, 0, 0.9);
-
   a {
     ${aCSS}
   }
 `
 
-const A = styled.span`
-  ${aCSS}
-`
-
 const RewardSubscribeText = props => {
-  const { subscriberData, summary, onUnSubscribeBtnHandler } = props
-  const { isSubscribed } = subscriberData
+  const { summary } = props
   const { status } = summary
-
   let statusCheck = status.toUpperCase()
   let disableOrHide = !['REGISTERED', 'BONDED', 'UNBONDING', 'UNBONDED'].includes(statusCheck)
   return disableOrHide ? null : (
-    <RewardSubscribeTextStyled>
+    <Title>
+      {' '}
       Don't miss your{' '}
       <a
         href="https://forum.livepeer.org/t/why-you-should-bond-your-new-livepeer-tokens-lpt-detailed-version/418"
         target="_blank"
         rel="noopener noreferrer"
       >
-        LPT rewards
+        LPT rewards.
       </a>{' '}
-      -{' '}
-      {isSubscribed ? (
-        <A onClick={disableOrHide ? null : onUnSubscribeBtnHandler}>You can unsubscribe here.</A>
-      ) : (
-        <Link disabled={disableOrHide} to="/account/subscription">
-          Subscribe now!
-        </Link>
-      )}
-    </RewardSubscribeTextStyled>
+      Get pro-active alert notifications
+    </Title>
   )
 }
 
