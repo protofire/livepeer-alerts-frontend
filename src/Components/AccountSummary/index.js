@@ -150,8 +150,8 @@ export class AccountSummary extends Component {
     content = (
       <AccountSummaryHome
         lpBalance={summaryData.lpBalance}
-        onUnSubscribeBtnHandler={this.onUnSubscribeBtnHandler}
         onSubscribeBtnHandler={this.onSubscribeBtnHandler}
+        onUnSubscribeBtnHandler={this.onUnSubscribeBtnHandler}
         onTelegramBtnHandler={this.onTelegramBtnHandler}
         summary={summaryProps}
         userData={userData}
