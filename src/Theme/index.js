@@ -55,6 +55,7 @@ const theme = {
   },
   margins: {
     blockSeparation: '10px',
+    btnBlocksSeparation: '30px',
   },
   paddings: {
     mainPadding: '15px',
