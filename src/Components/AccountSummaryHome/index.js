@@ -11,7 +11,6 @@ import Reward from '../Reward'
 import Button from '../Common/Button'
 import IconEmail from '../Common/MainMenu/icons/IconEmail'
 import IconTelegram from '../Common/MainMenu/icons/IconTelegram'
-import { Link } from 'react-router-dom'
 
 const AccountSummaryHomeContainer = styled.div`
   margin: 0 auto;
