@@ -4,7 +4,7 @@ import StrippedList, { TR, TD, TH } from '../Common/StrippedList'
 import Tooltip from '../Common/Tooltip'
 import styled from 'styled-components'
 import SmallLoadingCard from '../Common/SmallLoadingCard'
-import { decimalPlaces } from '../../Utils'
+import { toFixedDecimals } from '../../Utils'
 
 const Description = styled.h3`
   display: flex;
@@ -33,39 +33,40 @@ const THData = styled(TH)`
 
 const EarnedRewards = props => {
   const { earnedRewardData, ...restProps } = props
-
   const earnedData = [
     {
       round: 'Next',
-      lpt: decimalPlaces(earnedRewardData && earnedRewardData.nextReward && earnedRewardData.nextReward.delegateReward),
-      cut: decimalPlaces(
+      lpt: toFixedDecimals(
+        earnedRewardData && earnedRewardData.nextReward && earnedRewardData.nextReward.delegateReward,
+      ),
+      cut: toFixedDecimals(
         earnedRewardData && earnedRewardData.nextReward && earnedRewardData.nextReward.delegatorReward,
       ),
     },
     {
       round: 'Last',
-      lpt: decimalPlaces(
+      lpt: toFixedDecimals(
         earnedRewardData && earnedRewardData.lastRoundReward && earnedRewardData.lastRoundReward.delegateReward,
       ),
-      cut: decimalPlaces(
+      cut: toFixedDecimals(
         earnedRewardData && earnedRewardData.lastRoundReward && earnedRewardData.lastRoundReward.delegatorReward,
       ),
     },
     {
       round: 'Last 7',
-      lpt: decimalPlaces(
+      lpt: toFixedDecimals(
         earnedRewardData && earnedRewardData.last7RoundsReward && earnedRewardData.last7RoundsReward.delegateReward,
       ),
-      cut: decimalPlaces(
+      cut: toFixedDecimals(
         earnedRewardData && earnedRewardData.last7RoundsReward && earnedRewardData.last7RoundsReward.delegatorReward,
       ),
     },
     {
       round: 'Last 30',
-      lpt: decimalPlaces(
+      lpt: toFixedDecimals(
         earnedRewardData && earnedRewardData.last30RoundsReward && earnedRewardData.last30RoundsReward.delegateReward,
       ),
-      cut: decimalPlaces(
+      cut: toFixedDecimals(
         earnedRewardData && earnedRewardData.last30RoundsReward && earnedRewardData.last30RoundsReward.delegatorReward,
       ),
     },
@@ -74,7 +75,7 @@ const EarnedRewards = props => {
   const tableHead = (
     <TR>
       <TH>Round</TH>
-      <THData>LPT</THData>
+      <THData>Delegate</THData>
       <THData>Your Cut</THData>
     </TR>
   )

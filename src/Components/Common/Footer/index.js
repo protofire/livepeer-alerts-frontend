@@ -33,7 +33,7 @@ function Footer({ ...props }) {
   return (
     <FooterStyled>
       <Text>
-        {1900 + new Date().getYear()} <a href="https://www.protofire.io">Protofire.io.</a>
+        {1900 + new Date().getYear()} <a href="https://www.protofire.io">Built by Protofire.io.</a>
         <a href="https://github.com/protofire/livepeer-alerts-frontend">
           <IconGithub />
         </a>

@@ -8,6 +8,10 @@ const truncateStringInTheMiddle = (str, strLength = 41, strPositionStart = 8, st
   return str
 }
 
+const toFixedDecimals = (x = 0, decimals = 4) => {
+  return new BigNumber(x).toFixed(decimals)
+}
+
 const decimalPlaces = (x = 0, decimals = 4) => {
   return new BigNumber(x).decimalPlaces(decimals).toString()
 }
@@ -19,4 +23,4 @@ const isFrequencySupported = newFrequency => {
   return SUPPORTED_FREQUENCIES.includes(newFrequency)
 }
 
-export { truncateStringInTheMiddle, decimalPlaces, isFrequencySupported }
+export { truncateStringInTheMiddle, decimalPlaces, isFrequencySupported, toFixedDecimals }

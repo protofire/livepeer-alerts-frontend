@@ -52,7 +52,7 @@ const StatusDelegator = props => {
   let content = summary.loadingSummary ? (
     <SmallLoadingCard show={true} message={'Loading user status...'} />
   ) : (
-    <Card title="Status">
+    <Card title="Your Status">
       <Title>
         {statusUppercase} <Tooltip description={statusToolTip} />
       </Title>

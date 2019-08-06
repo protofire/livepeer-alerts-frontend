@@ -3,7 +3,6 @@ import RewardSubscribeText from '../RewardSubscribeText'
 import StatusDelegate from '../StatusDelegate'
 import StatusDelegator from '../StatusDelegator'
 import Wallet from '../Wallet'
-import PageTitle from '../Common/PageTitle'
 import TranscoderInfo from '../TranscoderInfo'
 import EarnedRewards from '../EarnedRewards'
 import styled from 'styled-components'
@@ -53,7 +52,6 @@ const AccountSummaryHome = props => {
       </MultiBlocksRowTop>
       {!isDelegate && summary.status === 'Bonded' && (
         <>
-          <PageTitle>My Delegate</PageTitle>
           <MultiBlocksRow>
             <TranscoderInfo myDelegateData={myDelegateData} subscriberData={subscriberData} summaryData={summaryData} />
             <EarnedRewards earnedRewardData={earnedRewardData} />
