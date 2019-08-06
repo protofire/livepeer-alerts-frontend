@@ -124,6 +124,17 @@ export class AccountSummary extends Component {
     }
   }
 
+  onSubscribeBtnHandler = async () => {
+    this.props.history.push('/account/subscription')
+  }
+
+  onTelegramBtnHandler = async () => {
+    const { userData } = this.props
+    if (!userData && userData.address) return
+
+    window.open(`${process.env.REACT_APP_LIVEPEER_TELEGRAM_BOT_URL}?start=${userData.address}`, '_blank')
+  }
+
   render() {
     let content = <FullLoading show={true} message={this.state.displayMsg} />
     const { subscriberData, summaryData, userData, earnedRewardData, myDelegateData } = this.props
@@ -140,6 +151,8 @@ export class AccountSummary extends Component {
       <AccountSummaryHome
         lpBalance={summaryData.lpBalance}
         onUnSubscribeBtnHandler={this.onUnSubscribeBtnHandler}
+        onSubscribeBtnHandler={this.onSubscribeBtnHandler}
+        onTelegramBtnHandler={this.onTelegramBtnHandler}
         summary={summaryProps}
         userData={userData}
         subscriberData={subscriberData}
