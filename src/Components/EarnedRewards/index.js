@@ -81,7 +81,7 @@ const EarnedRewards = props => {
   )
 
   const card = (
-    <Card title="Earned Rewards" {...restProps}>
+    <Card title="Rewards, LPT" {...restProps}>
       <Description>
         Newly minted LPT claimed.{' '}
         <Tooltip description={'Livepeer.tools will update the reward data in the next rounds.'} />
