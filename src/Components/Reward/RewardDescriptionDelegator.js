@@ -1,6 +1,6 @@
 import React from 'react'
-import { Emoji } from 'emoji-mart'
 import styled from 'styled-components'
+import { MdCheckCircle, MdCancel } from 'react-icons/md'
 
 const Title = styled.h2`
   text-align: center;
@@ -24,6 +24,23 @@ const Paragraph = styled.p`
     margin-bottom: 0;
   }
 `
+const Subtitle = styled.h2`
+  color: ${props => props.theme.cards.titleColor};
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.31;
+  margin: 0;
+  text-align: ${props => props.titleAlign};
+`
+
+const RedIcon = styled(MdCancel)`
+  color: red;
+`
+
+const GreenIcon = styled(MdCheckCircle)`
+  color: green;
+`
+
 const A = styled.a`
   color: black;
 `
@@ -36,9 +53,17 @@ const RewardDescriptionDelegator = props => {
     let bondedDescription
 
     if (delegateCalledReward) {
-      bondedDescription = 'The delegate has successfully claimed the last inflationary token rewards.'
+      bondedDescription = (
+        <Subtitle>
+          <GreenIcon /> The delegate has successfully claimed the last inflationary token rewards.
+        </Subtitle>
+      )
     } else {
-      bondedDescription = 'Unfortunately the delegate has not claimed the last inflationary token rewards.'
+      bondedDescription = (
+        <Subtitle>
+          <RedIcon /> Unfortunately the delegate has not claimed the last inflationary token rewards.
+        </Subtitle>
+      )
     }
 
     return {
@@ -47,7 +72,7 @@ const RewardDescriptionDelegator = props => {
       Unbonding:
         `You still have ` +
         roundsUntilUnbonded +
-        ` round(s) left in the unbonding period. Each round lasts roughly one day.`,
+        MdCancel` round(s) left in the unbonding period. Each round lasts roughly one day.`,
       Unbonded: (
         <>
           You are not bonded to any delegate, therefore you are not earning LPT from the token inflation. Go ahead and
@@ -66,16 +91,7 @@ const RewardDescriptionDelegator = props => {
     const { status, delegateCalledReward } = summary
 
     return {
-      Bonded: (
-        <>
-          {delegateCalledReward ? (
-            <Emoji emoji={{ id: 'thumbsup', skin: 3 }} size={18} />
-          ) : (
-            <Emoji emoji={{ id: 'thumbsdown', skin: 3 }} size={18} />
-          )}{' '}
-          Delegate reward calling status
-        </>
-      ),
+      Bonded: null,
       Pending: `You are currently in the Pending state`,
       Unbonding: `You are currently in the Unbonding state`,
       Unbonded: `Your current status is: Unbonded`,
@@ -85,7 +101,7 @@ const RewardDescriptionDelegator = props => {
   return (
     <>
       <Title>{title(props)}</Title>
-      <Paragraph>{description(props)} </Paragraph>
+      <Paragraph>{description(props)}</Paragraph>
     </>
   )
 }
