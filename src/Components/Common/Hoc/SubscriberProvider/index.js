@@ -350,6 +350,7 @@ class SubscriberProvider extends Component {
 
   subscriberUser = async subscriptionData => {
     if (!subscriptionData) {
+      return
     }
     try {
       logger.log('Creating new subscriber with data: ', subscriptionData)
