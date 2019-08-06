@@ -1,7 +1,5 @@
 import React from 'react'
 import styled from 'styled-components'
-import IconEmail from './icons/IconEmail'
-import IconTelegram from './icons/IconTelegram'
 import { withRouter } from 'react-router-dom'
 
 const MainMenuStyled = styled.div`
@@ -50,35 +48,9 @@ const ItemText = styled.span`
 `
 
 const MainMenu = props => {
-  const { userData, isOpen, ...restProps } = props
-  const isUserValid = userData && userData.address
+  const { isOpen, ...restProps } = props
 
-  const openTelegramLink = () => {
-    if (!userData && userData.address) return
-
-    window.open(`${process.env.REACT_APP_LIVEPEER_TELEGRAM_BOT_URL}?start=${userData.address}`, '_blank')
-  }
-
-  const goToSubscribe = () => {
-    props.history.push('/account/subscription')
-  }
-
-  const menuItems = [
-    {
-      active: isUserValid,
-      color: 'tertiary',
-      icon: <IconTelegram />,
-      onClick: openTelegramLink,
-      text: 'Telegram',
-    },
-    {
-      active: isUserValid,
-      color: 'primary',
-      icon: <IconEmail />,
-      onClick: goToSubscribe,
-      text: userData.isSubscribed ? 'Subscription' : 'Subscribe',
-    },
-  ]
+  const menuItems = []
 
   return (
     <MainMenuStyled isOpen={isOpen} {...restProps}>

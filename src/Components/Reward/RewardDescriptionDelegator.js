@@ -11,7 +11,7 @@ const Title = styled.h2`
   padding: 5px 0 0 0;
 `
 
-const Paragraph = styled.p`
+const Paragraph = styled.div`
   text-align: center;
   color: #333;
   font-size: 15px;
