@@ -71,6 +71,10 @@ const theme = {
     color: '#fff',
     textShadow: '0 0 4px rgba(0, 0, 0, 0.5)',
   },
+  icons: {
+    height: '50px',
+    width: '50px',
+  },
 }
 
 export default theme

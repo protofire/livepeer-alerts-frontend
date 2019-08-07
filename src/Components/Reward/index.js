@@ -3,6 +3,12 @@ import RewardDescriptionDelegator from './RewardDescriptionDelegator'
 import RewardDescriptionDelegate from './RewardDescriptionDelegate'
 import Card from '../Common/Card'
 import SmallLoadingCard from '../Common/SmallLoadingCard'
+import styled from 'styled-components'
+
+const PaddedCard = styled(Card)`
+  padding-bottom: 15px;
+  padding-top: 15px;
+`
 
 const Reward = props => {
   const { summary } = props
@@ -12,7 +18,9 @@ const Reward = props => {
     summary && summary.loadingSummary ? (
       <SmallLoadingCard show={true} message={'Loading reward calling status...'} />
     ) : (
-      <Card>{isDelegate ? <RewardDescriptionDelegate {...props} /> : <RewardDescriptionDelegator {...props} />}</Card>
+      <PaddedCard>
+        {isDelegate ? <RewardDescriptionDelegate {...props} /> : <RewardDescriptionDelegator {...props} />}
+      </PaddedCard>
     )
 
   return rewardCard

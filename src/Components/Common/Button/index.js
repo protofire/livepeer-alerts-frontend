@@ -3,20 +3,27 @@ import styled from 'styled-components'
 import { darken } from 'polished'
 
 const ButtonStyled = styled.button`
+  align-items: center;
   background-color: ${props => props.theme.colors[props.type]};
   border-radius: ${props => props.theme.buttons.borderRadius};
   border: none;
   box-shadow: 0 0 6px 0 rgba(0, 0, 0, 0.12);
   color: ${props => props.theme.buttons.color};
   cursor: pointer;
-  display: block;
+  display: flex;
   font-size: ${props => props.theme.buttons.fontSize};
   font-weight: ${props => props.theme.buttons.fontWeight};
   height: ${props => props.theme.buttons.height};
+  justify-content: center;
   margin: 0;
   outline: none;
   padding: 0 20px;
   text-transform: uppercase;
+  transition: background-color 0.15s linear;
+
+  > svg {
+    margin-right: 10px;
+  }
 
   &:hover,
   &:active {
