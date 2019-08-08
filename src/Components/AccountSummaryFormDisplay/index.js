@@ -100,6 +100,7 @@ class AccountSummaryFormDisplay extends React.Component {
       frequencyChangedHandler,
       onCancelBtnHandler,
       onSubmitBtnHandler,
+      onUnsubscribeBtnHandler,
       isSubscribed,
       ...restProps
     } = this.props
@@ -133,7 +134,7 @@ class AccountSummaryFormDisplay extends React.Component {
             <SubTitle>Unsubscribe</SubTitle>
             <DescriptionTextExtra>
               You can turn off notifications simply clicking{' '}
-              <StopNotifications>Stop Receiving Notifications.</StopNotifications>
+              <StopNotifications onClick={onUnsubscribeBtnHandler}>Stop Receiving Notifications.</StopNotifications>
             </DescriptionTextExtra>
           </>
         ) : null}
