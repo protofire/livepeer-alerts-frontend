@@ -33,42 +33,52 @@ const THData = styled(TH)`
 
 const EarnedRewards = props => {
   const { earnedRewardData, ...restProps } = props
+
+  // Next rewards
+  const earnedRewardNextLpt =
+    earnedRewardData && earnedRewardData.nextReward && earnedRewardData.nextReward.delegateReward
+  const earnedRewardNextCut =
+    earnedRewardData && earnedRewardData.nextReward && earnedRewardData.nextReward.delegatorReward
+
+  // Last rewards
+  const earnedRewardLastLpt =
+    earnedRewardData && earnedRewardData.lastRoundReward && earnedRewardData.lastRoundReward.delegateReward
+  const earnedRewardLastCut =
+    earnedRewardData && earnedRewardData.lastRoundReward && earnedRewardData.lastRoundReward.delegatorReward
+
+  // 7 rewards
+  const earnedReward7Lpt =
+    earnedRewardData && earnedRewardData.last7RoundsReward && earnedRewardData.last7RoundsReward.delegateReward
+  const earnedReward7Cut =
+    earnedRewardData && earnedRewardData.last7RoundsReward && earnedRewardData.last7RoundsReward.delegatorReward
+
+  // 30 rewards
+  const earnedReward30Lpt =
+    earnedRewardData && earnedRewardData.last30RoundsReward && earnedRewardData.last30RoundsReward.delegateReward
+  const earnedReward30Cut =
+    earnedRewardData && earnedRewardData.last30RoundsReward && earnedRewardData.last30RoundsReward.delegatorReward
+
+  console.log(earnedRewardData)
   const earnedData = [
     {
       round: 'Next',
-      lpt: toFixedDecimals(
-        earnedRewardData && earnedRewardData.nextReward && earnedRewardData.nextReward.delegateReward,
-      ),
-      cut: toFixedDecimals(
-        earnedRewardData && earnedRewardData.nextReward && earnedRewardData.nextReward.delegatorReward,
-      ),
+      lpt: +earnedRewardNextLpt > 0 ? toFixedDecimals(earnedRewardNextLpt) : '-',
+      cut: +earnedRewardNextCut > 0 ? toFixedDecimals(earnedRewardNextCut) : '-',
     },
     {
       round: 'Last',
-      lpt: toFixedDecimals(
-        earnedRewardData && earnedRewardData.lastRoundReward && earnedRewardData.lastRoundReward.delegateReward,
-      ),
-      cut: toFixedDecimals(
-        earnedRewardData && earnedRewardData.lastRoundReward && earnedRewardData.lastRoundReward.delegatorReward,
-      ),
+      lpt: +earnedRewardLastLpt > 0 ? toFixedDecimals(earnedRewardLastLpt) : '-',
+      cut: +earnedRewardLastCut > 0 ? toFixedDecimals(earnedRewardLastCut) : '-',
     },
     {
       round: 'Last 7',
-      lpt: toFixedDecimals(
-        earnedRewardData && earnedRewardData.last7RoundsReward && earnedRewardData.last7RoundsReward.delegateReward,
-      ),
-      cut: toFixedDecimals(
-        earnedRewardData && earnedRewardData.last7RoundsReward && earnedRewardData.last7RoundsReward.delegatorReward,
-      ),
+      lpt: +earnedReward7Lpt > 0 ? toFixedDecimals(earnedReward7Lpt) : '-',
+      cut: +earnedReward7Cut > 0 ? toFixedDecimals(earnedReward7Cut) : '-',
     },
     {
       round: 'Last 30',
-      lpt: toFixedDecimals(
-        earnedRewardData && earnedRewardData.last30RoundsReward && earnedRewardData.last30RoundsReward.delegateReward,
-      ),
-      cut: toFixedDecimals(
-        earnedRewardData && earnedRewardData.last30RoundsReward && earnedRewardData.last30RoundsReward.delegatorReward,
-      ),
+      lpt: +earnedReward30Lpt > 0 ? toFixedDecimals(earnedReward30Lpt) : '-',
+      cut: +earnedReward30Cut > 0 ? toFixedDecimals(earnedReward30Cut) : '-',
     },
   ]
 
