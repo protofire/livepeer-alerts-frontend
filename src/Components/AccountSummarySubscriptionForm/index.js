@@ -81,7 +81,7 @@ export class AccountSummarySubscriptionForm extends Component {
       address: userData.address,
       emailFrequency: frequency,
       email: form.email.value,
-      id: subscriberData._id,
+      id: subscriberData.id,
     }
 
     this.setState(
