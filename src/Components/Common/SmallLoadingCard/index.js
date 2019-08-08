@@ -1,31 +1,38 @@
 import React from 'react'
 import Card from '../Card'
-import styled from 'styled-components'
+import styled, { withTheme } from 'styled-components'
 import Spinner from '../Spinner'
 
+const CenteredContentsCard = styled(Card)`
+  min-height: 157px;
+
+  > div {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+  }
+`
+
 const Title = styled.h4`
-  align-items: center;
   color: ${props => props.theme.cards.titleColor};
-  display: flex;
-  font-size: 20px;
-  font-weight: 700;
-  justify-content: center;
+  font-size: 17px;
+  font-weight: 500;
   line-height: 1.2;
-  margin: 0 0 22px;
-  padding: 10px 0 0 0;
+  margin: 0 0 15px;
+  padding: 0;
   text-align: center;
   white-space: nowrap;
 `
 
 const SmallLoadingCard = props => {
-  const { message = 'Loading...', show = false } = props
+  const { message = 'Loading...', show = false, theme } = props
 
   return show ? (
-    <Card bodyAlign={'center'}>
+    <CenteredContentsCard bodyAlign={'center'}>
       <Title>{message}</Title>
-      <Spinner color={'blue'} />
-    </Card>
+      <Spinner color={theme.colors.primary} />
+    </CenteredContentsCard>
   ) : null
 }
 
-export default SmallLoadingCard
+export default withTheme(SmallLoadingCard)

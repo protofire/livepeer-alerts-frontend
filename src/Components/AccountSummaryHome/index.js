@@ -33,24 +33,14 @@ const MultiBlocksRowTop = styled(MultiBlocksRow)`
   margin-bottom: 40px;
 `
 
-const SingleBlockRow = styled(MultiBlocksRow)`
-  display: inline;
+const SingleBlockRow = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
   margin-bottom: ${props => props.theme.margins.blockSeparation};
 `
 
 const RoundedBtn = styled(Button)`
-  height: 50px;
-  > svg {
-    margin-right: 4px;
-  }
-`
-
-const TelegramBtn = styled(RoundedBtn)`
-  background-color: #55acee;
-`
-
-const EmailBtn = styled(RoundedBtn)`
-  background-color: #ff9800;
+  height: 44px;
 `
 
 const aCSS = css`
@@ -86,25 +76,18 @@ const getSubscriptionBtns = props => {
   const { isSubscribed } = subscriberData
   const { status } = summary
   const statusCheck = status.toUpperCase()
-  const showBtns = !['REGISTERED', 'BONDED', 'UNBONDING', 'UNBONDED'].includes(statusCheck)
-  const content = isSubscribed ? (
-    <EmailBtn onClick={onSubscribeBtnHandler}>
-      <IconEmail />
-      Email
-    </EmailBtn>
-  ) : (
-    <EmailBtn onClick={onSubscribeBtnHandler}>
-      <IconEmail />
-      Email
-    </EmailBtn>
-  )
-  return showBtns ? null : (
+  const hideButtons = !['REGISTERED', 'BONDED', 'UNBONDING', 'UNBONDED'].includes(statusCheck)
+
+  return hideButtons ? null : (
     <>
-      <TelegramBtn onClick={onTelegramBtnHandler}>
+      <RoundedBtn type="tertiary" onClick={onTelegramBtnHandler}>
         <IconTelegram />
         Telegram
-      </TelegramBtn>
-      {content}
+      </RoundedBtn>
+      <RoundedBtn type="primary" onClick={onSubscribeBtnHandler}>
+        <IconEmail />
+        {isSubscribed ? 'Subscription' : 'Subscribe'}
+      </RoundedBtn>
     </>
   )
 }
@@ -115,6 +98,7 @@ const getSubscriberFooterTexts = props => {
   const { status } = summary
   const statusCheck = status.toUpperCase()
   const showBtns = !['REGISTERED', 'BONDED', 'UNBONDING', 'UNBONDED'].includes(statusCheck)
+
   return showBtns ? null : (
     <RewardSubscribeTextStyled>
       {isSubscribed ? <A onClick={showBtns ? null : onUnSubscribeBtnHandler}>Unsubscribe</A> : null}
@@ -138,6 +122,7 @@ const AccountSummaryHome = props => {
   )
   const subscriberBtns = getSubscriptionBtns(props)
   const subscriberFooterTexts = getSubscriberFooterTexts(props)
+
   return (
     <AccountSummaryHomeContainer>
       <MultiBlocksRowTop>

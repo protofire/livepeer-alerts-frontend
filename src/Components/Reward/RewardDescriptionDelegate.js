@@ -2,35 +2,45 @@ import React from 'react'
 import styled from 'styled-components'
 import { MdCheckCircle, MdCancel } from 'react-icons/md'
 
-const Paragraph = styled.p`
-  text-align: center;
+const Paragraph = styled.div`
   color: #333;
   font-size: 15px;
   font-weight: 400;
   line-height: 1.5;
   margin: 0 0 10px;
   padding: 0;
+  text-align: center;
 
   &:last-child {
     margin-bottom: 0;
   }
 `
 
-const Subtitle = styled.h2`
+const InfoTextContainer = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+`
+
+const InfoText = styled.p`
   color: ${props => props.theme.cards.titleColor};
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.31;
-  margin: 0;
-  text-align: ${props => props.titleAlign};
+  margin: 0 0 0 15px;
+  text-align: left;
 `
 
 const RedIcon = styled(MdCancel)`
-  color: red;
+  color: ${props => props.theme.colors.alert};
+  height: ${props => props.theme.icons.height};
+  width: ${props => props.theme.icons.width};
 `
 
 const GreenIcon = styled(MdCheckCircle)`
-  color: green;
+  color: ${props => props.theme.colors.secondary};
+  height: ${props => props.theme.icons.height};
+  width: ${props => props.theme.icons.width};
 `
 
 const RewardDescriptionDelegate = props => {
@@ -41,16 +51,19 @@ const RewardDescriptionDelegate = props => {
     let bondedDescription
     if (delegateCalledReward) {
       bondedDescription = (
-        <Subtitle>
-          <GreenIcon /> Your node has successfully made the last round’s inflationary tokens reward call
-        </Subtitle>
+        <InfoTextContainer>
+          <GreenIcon />{' '}
+          <InfoText>Your node has successfully made the last round’s inflationary tokens reward call</InfoText>
+        </InfoTextContainer>
       )
     } else {
       bondedDescription = (
-        <Subtitle>
+        <InfoTextContainer>
           <RedIcon />
-          There might be something wrong with your node given that the last round reward call was not made yet.
-        </Subtitle>
+          <InfoText>
+            There might be something wrong with your node given that the last round reward call was not made yet.
+          </InfoText>
+        </InfoTextContainer>
       )
     }
 

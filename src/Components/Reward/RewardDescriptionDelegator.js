@@ -7,42 +7,52 @@ const Title = styled.h2`
   font-size: 18px;
   font-weight: 500;
   line-height: 1.2;
-  margin: 0 0 15px;
-  padding: 5px 0 0 0;
+  margin: 0 0 10px;
+  padding: 0;
 `
 
 const Paragraph = styled.div`
-  text-align: center;
   color: #333;
   font-size: 15px;
   font-weight: 400;
   line-height: 1.5;
   margin: 0 0 10px;
   padding: 0;
+  text-align: center;
 
   &:last-child {
     margin-bottom: 0;
   }
 `
-const Subtitle = styled.h2`
+const InfoTextContainer = styled.div`
+  align-items: center;
+  display: flex;
+  justify-content: flex-start;
+`
+
+const InfoText = styled.p`
   color: ${props => props.theme.cards.titleColor};
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.31;
-  margin: 0;
-  text-align: ${props => props.titleAlign};
+  margin: 0 0 0 15px;
+  text-align: left;
 `
 
 const RedIcon = styled(MdCancel)`
-  color: red;
+  color: ${props => props.theme.colors.alert};
+  height: ${props => props.theme.icons.height};
+  width: ${props => props.theme.icons.width};
 `
 
 const GreenIcon = styled(MdCheckCircle)`
-  color: green;
+  color: ${props => props.theme.colors.secondary};
+  height: ${props => props.theme.icons.height};
+  width: ${props => props.theme.icons.width};
 `
 
 const A = styled.a`
-  color: black;
+  color: #000;
 `
 
 const RewardDescriptionDelegator = props => {
@@ -54,15 +64,17 @@ const RewardDescriptionDelegator = props => {
 
     if (delegateCalledReward) {
       bondedDescription = (
-        <Subtitle>
-          <GreenIcon /> The delegate has successfully claimed the last inflationary token rewards.
-        </Subtitle>
+        <InfoTextContainer>
+          <GreenIcon />
+          <InfoText>The delegate has successfully claimed the last inflationary token rewards.</InfoText>
+        </InfoTextContainer>
       )
     } else {
       bondedDescription = (
-        <Subtitle>
-          <RedIcon /> Unfortunately the delegate has not claimed the last inflationary token rewards.
-        </Subtitle>
+        <InfoTextContainer>
+          <RedIcon />
+          <InfoText>Unfortunately the delegate has not claimed the last inflationary token rewards.</InfoText>
+        </InfoTextContainer>
       )
     }
 
