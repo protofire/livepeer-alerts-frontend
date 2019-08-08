@@ -14,7 +14,6 @@ const Status = styled.h3`
   display: flex;
   font-size: 13px;
   font-weight: 500;
-  justify-content: center;
   line-height: 1.3;
   margin: 0 0 15px;
   text-align: center;
@@ -119,7 +118,7 @@ const TranscoderInfo = props => {
   const pipe = <SpanPipe>|</SpanPipe>
 
   const card = (
-    <Card title="Your delegate" titleAlign="center" {...restProps}>
+    <Card title="Your delegate" {...restProps}>
       <div>
         <Status>
           {isActive ? (
