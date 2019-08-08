@@ -2,14 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 import { MdCheckCircle, MdCancel } from 'react-icons/md'
 
-const Paragraph = styled.p`
-  text-align: center;
+const Paragraph = styled.div`
   color: #333;
   font-size: 15px;
   font-weight: 400;
   line-height: 1.5;
   margin: 0 0 10px;
   padding: 0;
+  text-align: center;
 
   &:last-child {
     margin-bottom: 0;
@@ -25,10 +25,10 @@ const InfoTextContainer = styled.div`
 const InfoText = styled.p`
   color: ${props => props.theme.cards.titleColor};
   font-size: 16px;
-  font-weight: 700;
+  font-weight: 400;
   line-height: 1.31;
   margin: 0 0 0 15px;
-  text-align: ${props => props.titleAlign};
+  text-align: left;
 `
 
 const RedIcon = styled(MdCancel)`
