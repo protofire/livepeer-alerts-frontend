@@ -327,11 +327,11 @@ class SubscriberProvider extends Component {
     }
   }
 
-  updateSubscriberData = subscriberData => {
+  updateSubscriberData = async subscriberData => {
     if (!subscriberData) {
       return
     }
-    this.setStateAsync({
+    await this.setStateAsync({
       subscriberData: {
         ...this.state.subscriberData,
         ...subscriberData,
@@ -355,13 +355,15 @@ class SubscriberProvider extends Component {
     try {
       logger.log('Creating new subscriber with data: ', subscriptionData)
       const response = await axios.post('/subscribers', subscriptionData)
-      const { activated, _id, activatedCode, createdAt } = response.data
-      this.updateSubscriberData({
+      const { activated, _id, activatedCode, createdAt, email, emailFrequency } = response.data
+      await this.updateSubscriberData({
         activated,
         id: _id,
         activatedCode: activatedCode,
         createdAt: createdAt,
         isSubscribed: true,
+        email,
+        emailFrequency,
       })
     } catch (exception) {
       logger.log('Exception on postSubscription')
@@ -389,7 +391,7 @@ class SubscriberProvider extends Component {
       const newSubscriptionData = {
         ...subscriptionData,
       }
-      this.updateSubscriberData(newSubscriptionData)
+      await this.updateSubscriberData(newSubscriptionData)
     } catch (err) {
       logger.log('Exception on updateUserSubscription')
       throw err
