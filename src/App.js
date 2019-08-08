@@ -124,6 +124,7 @@ export class App extends Component {
                                         subscriberData={subscriberData}
                                         earnedRewardData={earnedRewardData}
                                         myDelegateData={myDelegateData}
+                                        unsubscribeUser={unsubscribeUser}
                                         web3={web3}
                                         subscriberUser={subscriberUser}
                                         updateUserSubscription={updateUserSubscription}

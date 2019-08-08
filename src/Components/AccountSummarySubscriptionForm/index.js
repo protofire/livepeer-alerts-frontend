@@ -154,6 +154,47 @@ export class AccountSummarySubscriptionForm extends Component {
     }
   }
 
+  onUnsubscribeBtnHandler = async () => {
+    try {
+      const { unsubscribeUser } = this.props
+      const displayMsg = displayTexts.UNSUBSCRIPTION_SUCCESSFUL
+      await unsubscribeUser()
+      this.setState(
+        {
+          error: false,
+          displayMsg,
+          displaySubscriptionModal: false,
+        },
+        () =>
+          this.sendToast(1000, () => {
+            window.location.reload()
+          }),
+      )
+    } catch (exception) {
+      logger.log('Exception on deleteSubscription', exception)
+      if (exception && exception.response && exception.response.status === 404) {
+        // User with that id not found
+        this.setState(
+          {
+            error: true,
+            displayMsg: displayTexts.WELCOME_NOT_SUBSCRIBED,
+            displaySubscriptionModal: false,
+          },
+          () => this.sendToast(),
+        )
+      } else {
+        this.setState(
+          {
+            error: true,
+            displayMsg: displayTexts.FAIL_NO_REASON,
+            displaySubscriptionModal: false,
+          },
+          () => this.sendToast(),
+        )
+      }
+    }
+  }
+
   sendToast = (toastTime = 2000, callback) => {
     let displayMsg = this.state.displayMsg
 
@@ -246,6 +287,7 @@ export class AccountSummarySubscriptionForm extends Component {
             inputChangedHandler={this.inputChangedHandler}
             onCancelBtnHandler={this.onCancelBtnHandler}
             onSubmitBtnHandler={this.onSubmitBtnHandler}
+            onUnsubscribeBtnHandler={this.onUnsubscribeBtnHandler}
             frequencyChangedHandler={this.frequencyChangedHandler}
             isSubscribed={subscriberData && subscriberData.isSubscribed}
           />
