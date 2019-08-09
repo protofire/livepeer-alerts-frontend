@@ -58,7 +58,6 @@ const EarnedRewards = props => {
   const earnedReward30Cut =
     earnedRewardData && earnedRewardData.last30RoundsReward && earnedRewardData.last30RoundsReward.delegatorReward
 
-  console.log(earnedRewardData)
   const earnedData = [
     {
       round: 'Next',
