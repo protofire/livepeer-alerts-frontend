@@ -31,6 +31,12 @@ const Text = styled.p`
 const LetsConnectText = styled(Text)`
   padding-bottom: 20px;
   font-size: ${props => props.theme.footer.telegramLinkFontSize};
+  > a {
+    text-decoration: underline;
+    &:hover {
+      text-decoration: none;
+    }
+  }
 `
 
 function Footer({ ...props }) {
