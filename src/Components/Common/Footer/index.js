@@ -43,16 +43,20 @@ function Footer({ ...props }) {
   return (
     <FooterStyled>
       <LetsConnectText>
-        <a href={TELEGRAM_CHAT_URL} target="_blank">
+        <a href={TELEGRAM_CHAT_URL} rel="noopener noreferrer" target="_blank">
           Lets connect!
         </a>
       </LetsConnectText>
       <Text>
         {1900 + new Date().getYear()} <a href="https://www.protofire.io">Built by Protofire.io.</a>
-        <a href="https://github.com/protofire/livepeer-alerts-frontend" target="_blank">
+        <a href="https://github.com/protofire/livepeer-alerts-frontend" rel="noopener noreferrer" target="_blank">
           <IconGithub />
         </a>
-        <a href="https://github.com/protofire/livepeer-alerts-frontend/issues/new" target="_blank">
+        <a
+          href="https://github.com/protofire/livepeer-alerts-frontend/issues/new"
+          rel="noopener noreferrer"
+          target="_blank"
+        >
           Report a bug
         </a>
       </Text>
