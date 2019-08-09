@@ -167,7 +167,7 @@ export class AccountSummarySubscriptionForm extends Component {
         },
         () =>
           this.sendToast(1000, () => {
-            window.location.reload()
+            this.redirectToAccountSummary()
           }),
       )
     } catch (exception) {
