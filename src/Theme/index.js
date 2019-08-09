@@ -40,6 +40,7 @@ const theme = {
   footer: {
     color: '#fff',
     fontSize: '11px',
+    telegramLinkFontSize: '15px',
   },
   themeBreakPoints: {
     lg: '992px',
