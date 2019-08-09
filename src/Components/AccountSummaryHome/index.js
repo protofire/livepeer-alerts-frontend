@@ -76,7 +76,7 @@ const getSubscriptionBtns = props => {
   const { isSubscribed } = subscriberData
   const { status } = summary
   const statusCheck = status.toUpperCase()
-  const hideButtons = !['REGISTERED', 'BONDED', 'UNBONDING', 'UNBONDED'].includes(statusCheck)
+  const hideButtons = !['REGISTERED', 'BONDED', 'UNBONDING', 'PENDING', 'UNBONDED'].includes(statusCheck)
 
   return hideButtons ? null : (
     <>
