@@ -7,6 +7,7 @@ import styled from 'styled-components'
 import Status from '../Common/Status'
 import ArrowUp from '../Common/ArrowUp'
 import ArrowDown from '../Common/ArrowDown'
+import { rgba } from 'polished'
 
 const ROICard = styled(Card)`
   max-width: 100%;
@@ -51,6 +52,22 @@ const A = styled.a`
 
 const ABlurred = styled(A)`
   filter: blur(2px);
+`
+
+const TempTitle = styled.span`
+  align-items: center;
+  display: flex;
+`
+
+const TempTitleStyled = styled.span`
+  background-color: ${props => rgba(props.theme.colors.primary, 0.8)};
+  border-radius: 3px;
+  color: #fff;
+  display: block;
+  font-size: 14px;
+  font-weight: 500;
+  margin-left: 15px;
+  padding: 5px 10px;
 `
 
 const data = [
@@ -235,7 +252,11 @@ export class ROIRanking extends Component {
 
     return (
       <>
-        <PageTitle>ROI Ranking</PageTitle>
+        <PageTitle>
+          <TempTitle>
+            ROI Ranking <TempTitleStyled>Coming Soon</TempTitleStyled>
+          </TempTitle>
+        </PageTitle>
         {content}
       </>
     )
