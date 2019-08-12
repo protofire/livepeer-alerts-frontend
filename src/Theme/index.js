@@ -12,7 +12,7 @@ const theme = {
   },
   colors: {
     alert: '#de5454',
-    borderColor: '#d9d9d9',
+    borderColor: '#efefef',
     darkGray: '#333',
     lightText: '#999',
     mainText: '#000',

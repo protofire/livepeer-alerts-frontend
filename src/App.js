@@ -13,7 +13,7 @@ import { ThemeProvider } from 'styled-components'
 import theme from './Theme'
 import { AccountSummarySubscriptionForm } from './Components/AccountSummarySubscriptionForm'
 import { BrowserRouter as Router } from 'react-router-dom'
-import { HomeComponent, AccountSummary } from './Components'
+import { HomeComponent, AccountSummary, ROIRanking } from './Components'
 import { Redirect } from 'react-router'
 import { Route, Switch } from 'react-router-dom'
 
@@ -82,6 +82,13 @@ export class App extends Component {
                                   connectWeb3={connectWeb3}
                                   userData={userData}
                                 />
+                              )}
+                            />
+                            <Route
+                              exact
+                              path="/roi-ranking"
+                              render={routeProps => (
+                                <ROIRanking {...this.state} {...this.props} {...routeProps} connectWeb3={connectWeb3} />
                               )}
                             />
                             <SubscriberProvider subscriberAddress={userData.address}>
