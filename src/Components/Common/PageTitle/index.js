@@ -7,9 +7,11 @@ const PageTitleStyled = styled.h2`
   font-weight: 700;
   line-height: 1.3;
   margin: 0 0 20px;
+  max-width: 100%;
   padding: 0 0 5px;
-  text-shadow: ${props => props.theme.pageTitle.textShadow};
   position: relative;
+  text-shadow: ${props => props.theme.pageTitle.textShadow};
+  width: ${props => props.theme.themeBreakPoints.xxl};
 
   &::after {
     background-color: #fff;

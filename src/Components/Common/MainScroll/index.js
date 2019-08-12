@@ -10,7 +10,7 @@ const MainScrollStyled = styled.div`
   padding-bottom: 30px;
   padding-left: 10px;
   padding-right: 10px;
-  padding-top: 50px;
+  padding-top: 30px;
   position: relative;
   z-index: 5;
 

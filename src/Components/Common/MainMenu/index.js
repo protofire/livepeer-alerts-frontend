@@ -1,6 +1,7 @@
 import React from 'react'
-import styled from 'styled-components'
 import { withRouter } from 'react-router-dom'
+import styled from 'styled-components'
+import IconRanking from './icons/IconRanking'
 
 const MainMenuStyled = styled.div`
   display: ${props => (props.isOpen ? 'flex' : 'none')};
@@ -41,16 +42,26 @@ const Item = styled.div`
 `
 
 const ItemText = styled.span`
+  color: #fff;
   font-size: 15px;
   font-weight: 500;
   line-height: 1.2;
-  color: #fff;
 `
 
 const MainMenu = props => {
-  const { isOpen, ...restProps } = props
+  const { userData, isOpen, ...restProps } = props
 
-  const menuItems = []
+  const menuItems = [
+    {
+      active: true,
+      color: 'secondary',
+      icon: <IconRanking />,
+      onClick: () => {
+        props.history.push('/roi-ranking')
+      },
+      text: 'ROI Ranking',
+    },
+  ]
 
   return (
     <MainMenuStyled isOpen={isOpen} {...restProps}>
@@ -65,6 +76,4 @@ const MainMenu = props => {
   )
 }
 
-const MainMenuContainer = withRouter(MainMenu)
-
-export default MainMenuContainer
+export default withRouter(MainMenu)
