@@ -3,7 +3,7 @@ import Card from '../Common/Card'
 import PageTitle from '../Common/PageTitle'
 import Table, { TR, TH, TD } from '../Common/Table'
 import { truncateStringInTheMiddle } from '../../Utils'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import Status from '../Common/Status'
 import ArrowUp from '../Common/ArrowUp'
 import ArrowDown from '../Common/ArrowDown'
@@ -377,6 +377,29 @@ const data = [
   },
 ]
 
+const FooterWrapper = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: ${props => props.theme.cards.paddingVertical};
+  padding-left: ${props => props.theme.cards.paddingHorizontal};
+  padding-right: ${props => props.theme.cards.paddingHorizontal};
+  padding-top: ${props => props.theme.cards.paddingVertical};
+  margin-left: auto;
+`
+
+const Text = styled.span`
+  color: #666;
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 1.2;
+  margin-right: 10px;
+
+  &:last-child {
+    margin: 0;
+  }
+`
+
 export class ROIRanking extends Component {
   componentDidMount = async () => {
     logger.log('Fire event componentDidMount')
@@ -425,6 +448,9 @@ export class ROIRanking extends Component {
             </TR>
           ))}
         </TableStyled>
+        <FooterWrapper {...this.props}>
+          <Text>25 active transcoders</Text>
+        </FooterWrapper>
       </ROICard>
     )
 
