@@ -313,7 +313,7 @@ const data = [
     efficiency: '3.33 %',
     activeRounds: 30,
     roiPer100LPT: 2.7448,
-    trend: 'up',
+    trend: 'down',
   },
   {
     rank: 21,
