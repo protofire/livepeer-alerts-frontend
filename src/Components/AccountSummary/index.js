@@ -47,10 +47,8 @@ export class AccountSummary extends Component {
   componentDidMount = async () => {
     logger.log('Fire event componentDidMount')
 
-    if (this.props.location && this.props.location.pathname) {
-      logger.log('Google analytics: ', this.props.location.pathname)
-      ReactGA.pageview(this.props.location.pathname)
-    }
+    logger.log('Google analytics: ', '/account')
+    ReactGA.pageview('/account')
   }
 
   sendToast = (toastTime, callback) => {

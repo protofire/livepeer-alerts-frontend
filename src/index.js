@@ -14,11 +14,14 @@ const logger = logdown('Livepeer:Index')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
 /** Axios default cfg **/
 axios.defaults.baseURL = process.env.REACT_APP_API_BASE_URL
-const googleAnalyticsURL = process.env.REACT_APP_GOOGLE_ANALYTICS_UID
-/** Google analytics **/
-if (process.env && process.env.NODE_ENV === 'production' && googleAnalyticsURL) {
-  logger.log('Initialization of google analytics with UID: ', googleAnalyticsURL)
-  ReactGA.initialize(googleAnalyticsURL)
+const googleAnalyticsUID = process.env.REACT_APP_GOOGLE_ANALYTICS_UID
+
+let isCorrectEnviroment = ['production', 'staging'].includes(process.env.NODE_ENV)
+
+if (isCorrectEnviroment && googleAnalyticsUID) {
+  logger.log('Initialization of google analytics with UID: ', googleAnalyticsUID)
+  ReactGA.initialize(googleAnalyticsUID)
+  logger.log('Google analytics: ', '/')
   ReactGA.pageview('/')
 }
 

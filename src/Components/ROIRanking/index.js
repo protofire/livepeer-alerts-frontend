@@ -8,6 +8,10 @@ import Status from '../Common/Status'
 import ArrowUp from '../Common/ArrowUp'
 import ArrowDown from '../Common/ArrowDown'
 import { rgba } from 'polished'
+import ReactGA from 'react-ga'
+import logdown from 'logdown'
+
+const logger = logdown('Livepeer:RoiRanking')
 
 const ROICard = styled(Card)`
   max-width: 100%;
@@ -204,6 +208,13 @@ const data = [
 ]
 
 export class ROIRanking extends Component {
+  componentDidMount = async () => {
+    logger.log('Fire event componentDidMount')
+
+    logger.log('Google analytics: ', '/roi-ranking')
+    ReactGA.pageview('/roi-ranking')
+  }
+
   render = () => {
     let content = null
     const tableHead = (
