@@ -2,7 +2,6 @@
 
 Provide pro-active alert notifications that will help LPT token holders to be updated and understand how the transcoders they are delegating the tokens to are performing in near real time
 
-[![Build Status](https://api.travis-ci.org/protofire/livepeer-alerts-frontend.svg?branch=master)](https://travis-ci.org/protofire/livepeer-alerts-frontend)
 [![Coverage Status](https://coveralls.io/repos/github/protofire/livepeer-alerts-frontend/badge.svg?branch=master)](https://coveralls.io/github/protofire/livepeer-alerts-frontend?branch=master)
 ![](https://img.shields.io/github/issues/protofire/livepeer-alerts-frontend.svg)
 [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/protofire/livepeer-alerts-frontend/issues)
@@ -51,6 +50,8 @@ Clone this repository and install npm dependencies:
 If you want to deploy the project on heroku for example,
 once you finished the heroku configuration you need to put the deployment URL on the .ENV file as explained in the installation step
 
+## Backend
+You can take a look at the backend right [here](https://github.com/protofire/livepeer-alerts-backend)
 
 ## Built With
 
