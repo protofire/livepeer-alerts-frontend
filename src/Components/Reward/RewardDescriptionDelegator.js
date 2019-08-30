@@ -84,7 +84,7 @@ const RewardDescriptionDelegator = props => {
       Unbonding:
         `You still have ` +
         roundsUntilUnbonded +
-        MdCancel` round(s) left in the unbonding period. Each round lasts roughly one day.`,
+        ` round(s) left in the unbonding period. Each round lasts roughly one day.`,
       Unbonded: (
         <>
           You are not bonded to any delegate, therefore you are not earning LPT from the token inflation. Go ahead and
