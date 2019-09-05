@@ -84,13 +84,6 @@ export class App extends Component {
                                 />
                               )}
                             />
-                            <Route
-                              exact
-                              path="/roi-ranking"
-                              render={routeProps => (
-                                <ROIRanking {...this.state} {...this.props} {...routeProps} connectWeb3={connectWeb3} />
-                              )}
-                            />
                             <SubscriberProvider subscriberAddress={userData.address}>
                               <SubscriberContextConsumer>
                                 {({
@@ -104,6 +97,14 @@ export class App extends Component {
                                 }) => {
                                   return (
                                     <Switch>
+                                      <PrivateRoute
+                                        authenticated={authenticated}
+                                        component={ROIRanking}
+                                        displayMsg={displayMsg}
+                                        error={error}
+                                        exact
+                                        path="/roi-ranking"
+                                      />
                                       <PrivateRoute
                                         authenticated={authenticated}
                                         component={AccountSummary}
