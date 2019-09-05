@@ -141,9 +141,9 @@ class HomeCard extends React.Component {
             <SubTitle>Privacy and cookie notice</SubTitle>
           </SubTitleContainer>
           <Paragraph>
-            Clicking on 'Get started' button you are accepting this site uses cookies and other tracking technologies to
-            assist with navigation and your ability to provide feedback, analyze your use of our products and services,
-            assist with our promotional and marketing efforts, and provide content from third parties.
+            By clicking on 'Get started' button you are accepting this site uses cookies and other tracking technologies
+            to assist with navigation and your ability to provide feedback, analyze your use of our products and
+            services, assist with our promotional and marketing efforts, and provide content from third parties.
           </Paragraph>
         </TextContainer>
         <ButtonsContainer>
