@@ -2,13 +2,12 @@ import React, { Component } from 'react'
 import Card from '../Common/Card'
 import PageTitle from '../Common/PageTitle'
 import Table, { TR, TH, TD } from '../Common/Table'
-import { truncateStringInTheMiddle } from '../../Utils'
+import { truncateStringInTheMiddle, trackGoogleAnalyticPage } from '../../Utils'
 import styled from 'styled-components'
 import Status from '../Common/Status'
 import ArrowUp from '../Common/ArrowUp'
 import ArrowDown from '../Common/ArrowDown'
 import { rgba } from 'polished'
-import ReactGA from 'react-ga'
 import logdown from 'logdown'
 
 const logger = logdown('Livepeer:RoiRanking')
@@ -221,14 +220,13 @@ const data = [
 ]
 
 export class ROIRanking extends Component {
-  componentDidMount = async () => {
+  componentDidMount() {
     logger.log('Fire event componentDidMount')
-
     logger.log('Google analytics: ', '/roi-ranking')
-    ReactGA.pageview('/roi-ranking')
+    trackGoogleAnalyticPage('/roi-ranking')
   }
 
-  render = () => {
+  render() {
     let content = null
     const tableHead = (
       <TR>

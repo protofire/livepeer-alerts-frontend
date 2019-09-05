@@ -3,8 +3,8 @@ import AccountSummaryHome from '../AccountSummaryHome'
 import React, { Component } from 'react'
 import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
-import ReactGA from 'react-ga'
 import FullLoading from '../Common/FullLoading'
+import { trackGoogleAnalyticPage } from '../../Utils'
 
 const logger = logdown('Livepeer:AccountSummary')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
@@ -48,7 +48,7 @@ export class AccountSummary extends Component {
     logger.log('Fire event componentDidMount')
 
     logger.log('Google analytics: ', '/account')
-    ReactGA.pageview('/account')
+    trackGoogleAnalyticPage('/account')
   }
 
   sendToast = (toastTime, callback) => {

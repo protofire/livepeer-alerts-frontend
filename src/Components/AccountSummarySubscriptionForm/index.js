@@ -5,8 +5,7 @@ import validator from 'validator'
 import { toast, ToastContainer } from 'react-toastify'
 import logdown from 'logdown'
 import AccountSummaryModalEmail from '../AccountSummaryModalEmail'
-import ReactGA from 'react-ga'
-import { isFrequencySupported } from '../../Utils'
+import { isFrequencySupported, trackGoogleAnalyticPage } from '../../Utils'
 
 const logger = logdown('Livepeer:AccountSummarySubscriptionForm')
 logger.state.isEnabled = process.env.NODE_ENV !== 'production'
@@ -41,12 +40,11 @@ export class AccountSummarySubscriptionForm extends Component {
 
   componentDidMount() {
     logger.log('Fire event componentDidMount')
-    const { subscriberData, location } = this.props
+    const { subscriberData } = this.props
     // Google analytics
-    if (location && location.pathname) {
-      logger.log('Google analytics: ', location.pathname)
-      ReactGA.pageview(location.pathname)
-    }
+    logger.log('Google analytics: ', '/account/subscription')
+    trackGoogleAnalyticPage('/account/subscription')
+
     // If the user is subscribed, displays the current subscription data on the form
     const { email, emailFrequency, isSubscribed } = subscriberData
     if (isSubscribed) {
