@@ -4,50 +4,46 @@ import styled from 'styled-components'
 import IconAlert from './icons/IconAlert'
 import IconGroup from './icons/IconGroup'
 import Button from '../Common/Button'
+import Checkbox from '../Common/Checkbox'
+import Tooltip from '../Common/Tooltip'
 
 const CardHome = styled(Card)`
   flex-shrink: 0;
   margin: 0 auto;
   max-width: 100%;
-  width: 480px;
+  width: 430px;
 
   @media (min-width: ${props => props.theme.themeBreakPoints.xl}) {
-    padding: 25px;
+    padding: 20px;
   }
 `
 
 const Title = styled.h1`
-  font-size: 30px;
+  font-size: 24px;
   font-weight: 500;
   line-height: 1.2;
-  margin: 0 0 30px;
-  padding-top: 10px;
-  text-align: center;
+  margin: 0 0 25px;
+  text-align: left;
 `
 
 const TextContainer = styled.div`
   margin: 0 0 25px;
-  padding: 0 5px;
-
-  @media (min-width: ${props => props.theme.themeBreakPoints.xl}) {
-    padding: 0 10px;
-  }
 `
 
 const SubTitleContainer = styled.div`
   display: flex;
   align-items: center;
-  margin: 0 0 12px;
+  margin: 0 0 8px;
 
   > svg {
     flex-shrink: 0;
-    margin-right: 15px;
+    margin-right: 10px;
   }
 `
 
 const SubTitle = styled.h2`
   flex-grow: 1;
-  font-size: 24px;
+  font-size: 21px;
   font-weight: 500;
   line-height: 1.2;
   margin: 0;
@@ -55,11 +51,10 @@ const SubTitle = styled.h2`
 
 const Paragraph = styled.p`
   color: #333;
-  font-size: 17px;
+  font-size: 16px;
   font-weight: 400;
-  line-height: 1.5;
+  line-height: 1.35;
   margin: 0 0 10px;
-  padding: 0 0 0 10px;
 
   &:last-child {
     margin-bottom: 0;
@@ -67,34 +62,46 @@ const Paragraph = styled.p`
 `
 
 const ButtonsContainer = styled.div`
-  display: grid;
-  grid-row-gap: 5px;
-  grid-template-columns: 1fr;
-  padding: 10px 0 0;
-
-  @media (min-width: ${props => props.theme.themeBreakPoints.xl}) {
-    grid-auto-columns: 1fr 1fr;
-    grid-column-gap: 10px;
-    grid-template-columns: none;
-  }
+  padding: 15px 0 0;
 `
 
 const ButtonStyled = styled(Button)`
   font-size: 18px;
   height: 44px;
+  width: 100%;
+`
 
-  @media (min-width: ${props => props.theme.themeBreakPoints.xl}) {
-    &:first-child {
-      grid-column: 1;
-    }
+const WarningContainer = styled.div`
+  display: flex;
+  margin: 0 0 15px;
+`
 
-    &:nth-child(2) {
-      grid-column: 2;
-    }
-  }
+const CheckboxStyled = styled(Checkbox)`
+  margin: 0 10px 0 0;
+`
+
+const WarningText = styled.p`
+  color: #333;
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.33;
+  margin: 0;
+  text-align: left;
+`
+
+const TooltipStyled = styled(Tooltip)`
+  display: inline;
 `
 
 class HomeCard extends React.Component {
+  state = {
+    acceptedCookies: false,
+  }
+
+  toggleAcceptCookies = () => {
+    this.setState({ acceptedCookies: !this.state.acceptedCookies })
+  }
+
   render() {
     const { onClick } = this.props
     const demoAddress = process.env.REACT_APP_DEMO_ADDRESS
@@ -135,19 +142,15 @@ class HomeCard extends React.Component {
             to improve your earnings.
           </Paragraph>
         </TextContainer>
-        <TextContainer>
-          <SubTitleContainer>
-            <IconGroup />
-            <SubTitle>Privacy and cookie notice</SubTitle>
-          </SubTitleContainer>
-          <Paragraph>
-            By clicking on 'Get started' button you are accepting this site uses cookies and other tracking technologies
-            to assist with navigation and your ability to provide feedback, analyze your use of our products and
-            services, assist with our promotional and marketing efforts, and provide content from third parties.
-          </Paragraph>
-        </TextContainer>
         <ButtonsContainer>
-          <ButtonStyled onClick={onClick} type="primary">
+          <WarningContainer>
+            <CheckboxStyled checked={this.state.acceptedCookies} onChange={this.toggleAcceptCookies} />
+            <WarningText>
+              You accept the use of cookies and other tracking technologies on this site.
+              <TooltipStyled description="This data will be used to assist users with navigation and their ability to provide feedback, analyze use of our products and services, assist with our promotional and marketing efforts, and provide content from third parties." />
+            </WarningText>
+          </WarningContainer>
+          <ButtonStyled disabled={!this.state.acceptedCookies} onClick={onClick} type="primary">
             Get started
           </ButtonStyled>
         </ButtonsContainer>
