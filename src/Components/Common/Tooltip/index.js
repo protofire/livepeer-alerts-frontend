@@ -28,7 +28,7 @@ const TooltipPopup = styled.div`
   .reactTooltip {
     background-color: #000;
     color: #fff;
-    max-width: 250px;
+    max-width: 280px;
     opacity: 1;
     text-align: left;
 
