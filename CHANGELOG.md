@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [2.1.0] - 2019-09-10
 ### Added
-- Add accept cookies feature [#118](https://github.com/protofire/livepeer-alerts-frontend/pull/118)
+- Add validation for users to accept cookies and analytics [#118](https://github.com/protofire/livepeer-alerts-frontend/pull/118)
 
 ## [2.0.0] - 2019-08-14
 ### Added
