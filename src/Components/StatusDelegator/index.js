@@ -30,11 +30,9 @@ const StatusDelegator = props => {
   const { totalStakeInLPT, fees, status } = summary
   let feesInETH = 0
   // Formats fees from wei to ETH
-  if(fees) {
+  if (fees) {
     feesInETH = web3.utils.fromWei(fees.toString(), 'ether')
-    feesInETH = toFixedDecimals(feesInETH, 2)
   }
-
 
   const tableData = [
     {
@@ -43,10 +41,10 @@ const StatusDelegator = props => {
       tooltip: toolTipsTexts.TOTAL_STAKE_TOOLTIP,
     },
     {
-      data: feesInETH,
+      data: toFixedDecimals(feesInETH, 2),
       text: 'ETH Earning fees',
       tooltip: toolTipsTexts.EARNING_FEES_TOOLTIP,
-      tooltipDataText: fees,
+      tooltipDataText: feesInETH,
     },
   ]
   const toolTips = {
