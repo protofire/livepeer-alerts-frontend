@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import Tooltip from '../Tooltip'
+import KeyValueToolTiped from './KeyValueToolTiped'
 
 const KeyValueStyled = styled.div`
   border-top: 1px solid ${props => props.theme.colors.borderColor};
@@ -53,7 +54,13 @@ const KeyValue = props => {
       {items.map((item, index) => {
         return (
           <Item key={index}>
-            <Value>{item.data}</Value>
+            <Value>
+              {item.tooltipDataText ? (
+                <KeyValueToolTiped value={item.data} tooltipText={item.tooltipDataText} />
+              ) : (
+                item.data
+              )}
+            </Value>
             <Title>
               {item.text}
               {item.tooltip ? <Tooltip description={item.tooltip} /> : null}
