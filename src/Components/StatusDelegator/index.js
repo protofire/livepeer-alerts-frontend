@@ -5,6 +5,7 @@ import KeyValue from '../Common/KeyValue'
 import styled from 'styled-components'
 import Tooltip from '../Common/Tooltip'
 import SmallLoadingCard from '../Common/SmallLoadingCard'
+import { toFixedDecimals } from '../../Utils'
 
 const Title = styled.h3`
   align-items: center;
@@ -25,18 +26,29 @@ const KeyValueStyled = styled(KeyValue)`
 `
 
 const StatusDelegator = props => {
-  const { summary } = props
+  const { summary, web3 } = props
   const { totalStakeInLPT, fees, status } = summary
+  let feesInETH = 0
+  // Formats fees from wei to ETH
+  if (fees) {
+    feesInETH = web3.utils.fromWei(fees.toString(), 'ether')
+  }
+
   const tableData = [
     {
       data: totalStakeInLPT,
       text: 'LPT Staked',
-      tooltip: toolTipsTexts.TOTAL_STAKE_TOOLTIP,
+      tooltip: {
+        text: toolTipsTexts.TOTAL_STAKE_TOOLTIP,
+      },
     },
     {
-      data: fees,
+      data: toFixedDecimals(feesInETH, 2),
       text: 'ETH Earning fees',
-      tooltip: toolTipsTexts.EARNING_FEES_TOOLTIP,
+      tooltip: {
+        text: toolTipsTexts.EARNING_FEES_TOOLTIP,
+        value: `${feesInETH} ETH`,
+      },
     },
   ]
   const toolTips = {
@@ -48,7 +60,6 @@ const StatusDelegator = props => {
 
   const statusUppercase = status.toUpperCase()
   const statusToolTip = toolTips[statusUppercase]
-
   let content = summary.loadingSummary ? (
     <SmallLoadingCard show={true} message={'Loading user status...'} />
   ) : (
