@@ -80,7 +80,7 @@ const CheckboxStyled = styled(Checkbox)`
   margin: 0 10px 0 0;
 `
 
-const WarningText = styled.p`
+const WarningText = styled.div`
   color: #333;
   font-size: 12px;
   font-weight: 500;

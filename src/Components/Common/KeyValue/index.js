@@ -23,7 +23,7 @@ const Item = styled.div`
   }
 `
 
-const Value = styled.p`
+const Value = styled.div`
   color: ${props => props.theme.colors.secondaryText};
   font-size: 20px;
   font-weight: 400;
