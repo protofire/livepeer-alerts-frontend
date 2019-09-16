@@ -38,13 +38,17 @@ const StatusDelegator = props => {
     {
       data: totalStakeInLPT,
       text: 'LPT Staked',
-      tooltip: toolTipsTexts.TOTAL_STAKE_TOOLTIP,
+      tooltip: {
+        text: toolTipsTexts.TOTAL_STAKE_TOOLTIP,
+      },
     },
     {
       data: toFixedDecimals(feesInETH, 2),
       text: 'ETH Earning fees',
-      tooltip: toolTipsTexts.EARNING_FEES_TOOLTIP,
-      tooltipDataText: feesInETH,
+      tooltip: {
+        text: toolTipsTexts.EARNING_FEES_TOOLTIP,
+        value: `${feesInETH} ETH`,
+      },
     },
   ]
   const toolTips = {

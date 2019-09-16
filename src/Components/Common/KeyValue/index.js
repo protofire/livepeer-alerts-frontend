@@ -55,15 +55,15 @@ const KeyValue = props => {
         return (
           <Item key={index}>
             <Value>
-              {item.tooltipDataText ? (
-                <KeyValueToolTiped value={item.data} tooltipText={item.tooltipDataText} />
+              {item.tooltip && item.tooltip.value ? (
+                <KeyValueToolTiped value={item.data} tooltipText={item.tooltip.value} />
               ) : (
                 item.data
               )}
             </Value>
             <Title>
               {item.text}
-              {item.tooltip ? <Tooltip description={item.tooltip} /> : null}
+              {item.tooltip ? <Tooltip description={item.tooltip.text} /> : null}
             </Title>
           </Item>
         )
